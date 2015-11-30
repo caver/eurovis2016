@@ -66,8 +66,44 @@ The proposed method was tested on the simulations captured by the biochemists wh
 
 %-------------------------------------------------------------------------
 \section{Introduction}
+Studying possible reactions between different types of molecules forms an interesting research problem already for decades.
+Proper understanding of all processes occurring when two or more molecules react helps in the design of new chemical matters, e.g., in drug design or protein engineering.
+Namely in these fields the researchers are aiming to combine a protein with a given ligand in order to design new drug or to change the protein properties and function.
+In this particular case the ligand has to be transported from the outer solvent to the protein active site where the chemical reaction between the ligand and the amino acids surrounding the active site can undergo.
+The consecutive reaction then changes the constitution and properties of both molecules. 
+In protein engineering, for example, the goal is to change the protein properties so the new protein is, e.g., more stable and resistant to organic cosolvents \cite{koudelakova}.
+
+The complexity of the design of such described reaction lies namely in the transportation of the ligand to the protein active site.
+As the active site is usually buried deeply in the protein structure and thus inaccessible directly from its surface, the ligand has to find a suitable transportation path through the protein structure.
+This process, called molecular docking, is very complex, lengthy, and costly. 
+Therefore, researchers are searching for solutions how to simplify and ease the search for proper ligand binding.
+Currently available solutions are often focusing on the detection of possible ligand transportation paths through the protein, called tunnels.
+They are mostly based on the geometric analysis and detection of such tunnels (e.g., CAVER \cite{Chovancova2012}, MOLE \cite{Sehnal2013}, or MolAxis \cite{Yaffe2008}).
+Other approaches, such as MoMA-LigPath \cite{Devaurs}, are aiming to simulate the ligand transportation itself.
+Simulating the ligand docking using current computational approaches is still a challenging problem.
+There are several available variants of molecular simulation methods devised specifically to this problem. 
+Among them belong the Steered Molecular Dynamics \cite{Isralewitz} and Random Acceleration Molecular Dynamics \cite{Ludemann} which are able to simulate the ligand binding. 
+Such simulations produce large amount of data containing the ligand movements which have to be subsequently explored by the domain expert.
+As the length of these simulation currently can reach to hundreds of thousands of time steps and this amount is increasing thanks to the available computational resources, it becomes impossible for the domain expert to observe the ligand movement step by step.
+But the simulation length is not the only problem. 
+Simulations often contain movements which are irrelevant with respect to the ligand binding.
+For example, a significant portion of the simulation the ligand usually spends outside the protein searching for a proper tunnel gorge to enter the molecule. 
+Often it also happens that the ligand enters the molecule using a wrong tunnel and is evicted from the molecule and searches for the entrance repeatedly.
+So the real ligand entering to the active site can be in fact captured in a smaller subset of the original sequence.
+
+These problems are addressed by our novel approach for visual analysis of ligand transportation to the active site which we introduce in this paper.
+Our aim is to provide the domain experts with a tool for intuitive and interactive exploration of already captured molecular dynamics simulation containing the process of ligand binding. 
+Using our proposed method the users are able to filter out parts of the simulation which do not lead the ligand to the active site.
+In the filtered data we provide the users with our newly introduced concept of so called temporal tunnel which shows the ligand transportation to the active site on different levels of detail.
+In the most abstracted view the temporal tunnel shows only the significant shifts of the ligand towards the active site and the user can interactively explore selected time portions in more and more detail.
+This abstracted representation is interactively linked with the 3D visualization window where the exact shape of the temporal tunnel on a given level is visualized.
+Except for the temporal tunnel itself, our tool enables to explore the amino acids surrounding the ligand along its path to the active site as well.
+
+Our proposed solution was thoroughly tested and evaluated by the domain experts from protein engineering.
+They performed the evaluation on their own simulations and their feedback is mentioned in Section \ref{discussion}.
 
 %-------------------------------------------------------------------------
+
 \section{Related Work}
 \cite{bidmon2008}, \cite{lampe2011}, \cite{turkay2011}
 
@@ -82,7 +118,7 @@ The proposed method was tested on the simulations captured by the biochemists wh
 The results will be demonstrated on one or two case studies.
 
 %-------------------------------------------------------------------------
-\section{Discussion}
+\section{Discussion} \label{discussion}
 Here will be the summary of feedback from biochemists.
 
 %-------------------------------------------------------------------------
