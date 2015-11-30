@@ -58,7 +58,15 @@ Abstract here
 
 %-------------------------------------------------------------------------
 \section{Related Work}
-\cite{bidmon2008}, \cite{lampe2011}, \cite{turkay2011}
+The interactive exploration of ligand paths through protein structures is a complex problem that requires elaborate analysis of existing and suitable approaches to its subtasks.
+Namely, it can be divided into trajectory analysis, simplification and visualization, temporal representation of tunnels, and visualization of protein residues' properties along the ligand path.
+
+
+Bidmon et al. \cite{bidmon2008} presented an abstract way of identification and visualization of solvent molecules' pathways within a molecular dynamics. 
+In comparison to the previous solutions, their approach preserves valuable information on the directions and velocities of water molecules routing along these paths. 
+
+
+%\cite{bidmon2008}, \cite{lampe2011}, \cite{turkay2011}, and this is new \cite{andrienko2013}
 
 %-------------------------------------------------------------------------
 \section{Problem Description and Input Data}
