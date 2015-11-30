@@ -71,7 +71,7 @@ Proper understanding of all processes occurring when two or more molecules react
 Namely in these fields the researchers are aiming to combine a protein with a given ligand in order to design new drug or to change the protein properties and function.
 In this particular case the ligand has to be transported from the outer solvent to the protein active site where the chemical reaction between the ligand and the amino acids surrounding the active site can undergo.
 The consecutive reaction then changes the constitution and properties of both molecules. 
-In protein engineering, for example, the goal is to change the protein properties so the new protein is, e.g., more stable and resistant to organic cosolvents \cite{koudelakova}.
+In protein engineering, for example, the goal is to change the protein properties so the new protein is, e.g., more stable and resistant to organic cosolvents \cite{Koudelakova2013}.
 
 The complexity of the design of such described reaction lies namely in the transportation of the ligand to the protein active site.
 As the active site is usually buried deeply in the protein structure and thus inaccessible directly from its surface, the ligand has to find a suitable transportation path through the protein structure.
