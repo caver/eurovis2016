@@ -52,7 +52,7 @@ As the path of the ligand is usually very jittered and full of impasses, we come
 In our representation we introduce a concept of so called temporal tunnel and show its main properties and its surrounding amino acids.
 By interacting with this representation of the user can explore the overall appearance of the temporal tunnel as well as selected interesting portions of the original ligand movement.
 These interesting time sequences are revealed by interacting with our representation.
-This approach helps select only the time sequences containing the interesting ligand movements. 
+This approach helps select only the time sequences containing the interesting ligand movements which guide the ligand to the active site. 
 It dramatically decreases the length of the molecular dynamics simulation which is worthwile to scrutinize as well as the time spent on this exploration.
 The proposed method was tested on the simulations captured by the biochemists who also evaluated the method.
 
@@ -122,6 +122,38 @@ When studying long molecular dynamics simulations, the researchers have to face 
 \item Detect the part of the simulation where the ligand enters the protein and finally reaches the active site.
 \item Explore this route in detail and detect its bottlenecks.
 \end{itemize}
+In consequence, these steps are performed in order to reveal the parts of the trajectory where the ligand gets stuck.
+It fact it means that in such parts there are some obstacles made by the surrounding amino acids.
+These obstacles can be geometric (the empty space between these amino acids is too narrow) or physico-chemical (the properties of the amino acids are incompatible with the ligand properties), or their combination.
+The geometric obstacles can be detected by using an algorithm for tunnel computation in molecular dynamics (e.g., CAVER \cite{Chovancova2012} or MOLE \cite{Sehnal2013}).
+These tools are able to produce the information about time evolution of individual tunnels and for each tunnel detect its bottleneck -- the narrowest part limiting the size of the ligand aiming to pass through this tunnel.
+Figure \ref{fig:tunnel} shows an example of small ligand passing through a tunnel computed by CAVER algorithm and visualized using CAVER Analyst \cite{Kozlikova2014}. 
+The tunnel is colored with respect to the hydrophobicity of the surrounding amino acids and the geometric bottleneck of the tunnel is clearly visible.
+
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=1\linewidth]{img/tunnel.png}
+  \caption{\label{fig:tunnel} Small ligand (green) passing through a tunnel represented by the transparent surface. The surface encloses the available empty space along the tunnel centerline and is colored with respect to the hydrophobicity of the surrounding amino acids (hydrophobic -- red, hydrophylic -- blue, neutral -- violet). The active site is located in the left ending of the tunnel.}
+\end{figure}
+
+However, this bottleneck can be to some extent influenced by the passing ligand and this influence is also determined by the physico-chemical properties of the ligand and the bottleneck-lining amino acids (e.g., hydrophobicity or partial charges of individual atoms).
+To reveal such dependencies, it requires the involvement and experience of the domain expert who has to study the ligand trajectory captured in the molecular dynamics simulation.
+And for such task a proper visual representation and guidance through such large data is substantial.
+
+All these effort can finally lead to the detection of amino acids along the ligand trajectory which caused problems, i.e., were the key players in situations when the ligand got stuck.
+Such amino acids are then the best candidates for subsequent mutation of the protein chain when these amino acids are replaced by more suitable ones wrt. their size and properties.
+
+\subsection{Input Data}
+As already mentioned, the input data are formed by the simulations of molecular dynamics which contains the movements of the protein and one or more ligands.
+Ligands can follow two main routes -- they can be transported from the outside environment to the protein active site or vice versa (after the desired reaction the product leaves the protein).
+But for our purposes the direction of these routes is irrelevant, the proposed tool is suitable for both cases.
+
+The length of the simulations may vary from few hundreds to hundreds of thousands of timesteps.  
+This depends namely on the ligand speed and its ability to reveal the proper path to the active site.
+The long simulations can often contain many timesteps when the ligand followed an impasse -- it tried to find the proper entrance point to the protein (tunnel gorge) or got stuck in the middle of a tunnel and had to return.
+Such parts of the simulation can be of less interest so the user should be provided with a possibility to filter them out.
+
+
 
 
 
