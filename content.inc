@@ -117,6 +117,13 @@ In comparison to the previous solutions, their approach preserves valuable infor
 
 %-------------------------------------------------------------------------
 \section{Problem Description and Input Data}
+When studying long molecular dynamics simulations, the researchers have to face namely the following high-level tasks:
+\begin{itemize}
+\item Detect the part of the simulation where the ligand enters the protein and finally reaches the active site.
+\item Explore this route in detail and detect its bottlenecks.
+\end{itemize}
+
+
 
 %-------------------------------------------------------------------------
 \section{LigAnalyst Design and Implementation}
