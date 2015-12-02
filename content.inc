@@ -140,8 +140,9 @@ However, this bottleneck can be to some extent influenced by the passing ligand 
 To reveal such dependencies, it requires the involvement and experience of the domain expert who has to study the ligand trajectory captured in the molecular dynamics simulation.
 And for such task a proper visual representation and guidance through such large data is substantial.
 
-All these effort can finally lead to the detection of amino acids along the ligand trajectory which caused problems, i.e., were the key players in situations when the ligand got stuck.
+In protein engineering, all these effort can finally lead to the detection of amino acids along the ligand trajectory which caused problems, i.e., were the key players in situations when the ligand got stuck.
 Such amino acids are then the best candidates for subsequent mutation of the protein chain when these amino acids are replaced by more suitable ones wrt. their size and properties.
+On the other hand, in drug design the aim is to propose modifications of the ligand to increase its binding and so design a better drug produced from this ligand.
 
 \subsection{Input Data}
 As already mentioned, the input data are formed by the simulations of molecular dynamics which contains the movements of the protein and one or more ligands.
