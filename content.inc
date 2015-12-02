@@ -43,18 +43,16 @@
 \maketitle
 
 \begin{abstract}
-Protein structures and their interaction with ligands has been in the scope of biochemistry and structural biology research for decades.
-In the most complex situation the ligand has to follow a path (tunnel) from the outer solvent to the active site where it can react.
-This transportation can be very lengthy and complex process which is influenced by both geometric and physico-chemical properties of the ligand and the amino acids surrounding the tunnel.
+Protein structures and their interaction with ligands have been in the focus of biochemistry and structural biology research for decades.
+Traditionally the interaction is represented by a ligand that follows a path (tunnel) from the outer solvent to the active site where it can react.
+This transportation can be very lengthy and complex process that is influenced and driven by both geometric and physico-chemical properties of the ligand and the amino acids surrounding the tunnel.
 When studying this process in molecular dynamics simulations, proper understanding of ligand behavior inside the tunnel is crucial.
-For this purpose we proposed a novel method for the interactive exploration of ligand transportation to the active site.
-As the path of the ligand is usually very jittered and full of impasses, we come with the path simplification model which stresses the main direction of movement of the ligand.
-In our representation we introduce a concept of so called temporal tunnel and show its main properties and its surrounding amino acids.
-By interacting with this representation of the user can explore the overall appearance of the temporal tunnel as well as selected interesting portions of the original ligand movement.
-These interesting time sequences are revealed by interacting with our representation.
-This approach helps select only the time sequences containing the interesting ligand movements which guide the ligand to the active site. 
-It dramatically decreases the length of the molecular dynamics simulation which is worthwile to scrutinize as well as the time spent on this exploration.
-The proposed method was tested on the simulations captured by the biochemists who also evaluated the method.
+Therefore, in this paper, we propose a novel method for interactive exploration of ligand transportation to the active site.
+As the path of the ligand is usually very jittered and full of impasses, we introduce a path simplification model that emphasizes the main direction of ligand motion. We propose a new conceptual representation, so-called temporal tunnel, and show its main properties that include description of surrounding amino acids.
+By interacting with this representation, a user can explore the overall characteristics of the temporal tunnel as well as selected  portions of the original ligand movement.
+%These interesting time sequences are revealed by interacting with our representation.
+This approach could easily guide users to choose simulation frames containing important ligand movements that drive the ligand to the active site. Additionally, our simplified representation decreases the length of the molecular dynamics simulation, which reduces the time spent on this analysis.
+The proposed method was applied on the simulations captured by the biochemists who also evaluated the method.
 
 \begin{classification} % according to http://www.acm.org/class/1998/
 \CCScat{Computer Graphics}{I.3.3}{Picture/Image Generation}{Line and curve generation}
