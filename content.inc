@@ -3,8 +3,8 @@
 % D.Fellner, v1.17, Sep 23, 2010
 
 
-\title[LigAnalyst: Interactive Exploration of Ligand Paths through Protein Structures]%
-      {LigAnalyst: Interactive Exploration of Ligand Paths through Protein Structures}
+\title[Interactive Exploration of Ligand Movements through Multiscale Temporal Tunnels]%
+      {Interactive Exploration of Ligand Movements through Multiscale Temporal Tunnels}
 
 % for anonymous conference submission please enter your SUBMISSION ID
 % instead of the author's name (and leave the affiliation blank) !!
@@ -48,11 +48,11 @@ Traditionally the interaction is represented by a ligand that follows a path (tu
 This transportation can be very lengthy and complex process that is influenced and driven by both geometric and physico-chemical properties of the ligand and the amino acids surrounding the tunnel.
 When studying this process in molecular dynamics simulations, proper understanding of ligand behavior inside the tunnel is crucial.
 Therefore, in this paper, we propose a novel method for interactive exploration of ligand transportation to the active site.
-As the path of the ligand is usually very jittered and full of impasses, we introduce a path simplification model that emphasizes the main direction of ligand motion. We propose a new conceptual representation, so-called temporal tunnel, and show its main properties that include description of surrounding amino acids.
+As the path of the ligand is usually very jittered and full of impasses, we introduce a path simplification model that emphasizes the main direction of ligand motion. We propose a new conceptual representation, so-called temporal tunnel, and show its main properties that include the description of surrounding amino acids.
 By interacting with this representation, a user can explore the overall characteristics of the temporal tunnel as well as selected  portions of the original ligand movement.
 %These interesting time sequences are revealed by interacting with our representation.
 This approach could easily guide users to choose simulation frames containing important ligand movements that drive the ligand to the active site. Additionally, our simplified representation decreases the length of the molecular dynamics simulation, which reduces the time spent on this analysis.
-The proposed method was applied on the simulations captured by the biochemists who also evaluated the method.
+The proposed method was applied to the simulations captured by the biochemists who also evaluated the method.
 
 \begin{classification} % according to http://www.acm.org/class/1998/
 \CCScat{Computer Graphics}{I.3.3}{Picture/Image Generation}{Line and curve generation}
