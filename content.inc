@@ -45,12 +45,8 @@
 \begin{abstract}
 Protein structures and their interaction with ligands have been in the focus of biochemistry and structural biology research for decades.
 %Traditionally the interaction is represented by a ligand that follows a path (tunnel) from the outer solvent to the active site where it can react.
-The transportation of ligand into the protein active site where it can react can be very lengthy and complex process that is influenced and driven by both geometric and physico-chemical properties of the ligand and the amino acids surrounding its path.
-%When studying this process in molecular dynamics simulations, proper understanding of ligand behavior inside the tunnel is crucial.
-%Therefore, in this paper, we propose a novel method for interactive exploration of ligand transportation to the active site.
-The path of the ligand is usually very jittered and full of impasses, therefore we introduce a path simplification model that emphasizes the main direction of the ligand motion. 
-We propose a new conceptual representation, so-called temporal tunnel, and show its main properties that include the description of surrounding amino acids.
-By interacting with this representation, a user can explore the overall characteristics of the temporal tunnel as well as selected portions of the original ligand movement.
+%The transportation of ligand into the protein active site where it can react can be very lengthy and complex process that is influenced and driven by both geometric and physico-chemical properties of the ligand and the amino acids surrounding its path.
+The transportation of ligand into the protein active site is often complex process, driven by geometric and physico-chemical properties, which renders the ligand path full of jitter and impasses. Therefore, answering also the domain expert needs, we design a explorative visualization solution based on a multi-scale simplification model. This allows to emphasize the main direction of the ligand motion while providing geometric and physico-chemical descriptors available at each hierarchical level by user interaction.  
 %These interesting time sequences are revealed by interacting with our representation.
 This approach could easily guide users to choose simulation frames containing important ligand movements that drive the ligand to the active site. 
 Additionally, our simplified representation decreases the length of molecular dynamics simulation, which reduces the time spent on this analysis.
