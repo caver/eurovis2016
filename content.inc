@@ -111,7 +111,12 @@ Thus, the first part will cover topic related to the trajectory analysis, simpli
 Then the existing representations of tunnels and their surrounding amino acids will be mentioned.
 
 \subsection{Trajectory Analysis, Simplification, and Visualization}
-When searching for the inspiration in this field, one of the best starting points is the book by Andrienko et al. \cite{andrienko2013}. TODO general methods???
+When searching for the inspiration in this field, one of the best starting points is the book by Andrienko et al. \cite{andrienko2013}.
+Concerning the trajectory simplification, they proposed two different approaches to the data abstraction, which is a necessary step to achieve the reduction of the data and clarity of visualizations.
+First approach is characterized by omitting unnecessary positions and segments.
+The other is based on sampling the data.
+According to Andrienko et al. there are no general methods for sampling trajectories.
+Thus the suitability of particular sampling method is deduced from what information is considered important.
 
 In the field of molecular biology as well as systems biology, there are several examples of methods focusing on the trajectory analysis.
 Bidmon et al.~\cite{bidmon2008} presented an abstract way of identification and visualization of solvent molecules' pathways within a molecular dynamics. 
