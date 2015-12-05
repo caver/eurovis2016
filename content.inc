@@ -115,6 +115,9 @@ First approach is characterized by omitting unnecessary positions and segments.
 The other is based on sampling the data.
 According to Andrienko et al. there are no general methods for sampling trajectories.
 Thus the suitability of particular sampling method is deduced from what information is considered important.
+A recent work of Vroutsou et. al. \cite{Vrotsou2015} introduced a systematic stepwise methodology for trajectory simplification with emphasis on visual analysis.
+Even though they primarily developed the tool to analyze three dimensional trajectories (aircraft flights), it is not limited to them.
+
 
 In the field of molecular biology as well as systems biology, there are several examples of methods focusing on the trajectory analysis.
 Bidmon et al.~\cite{bidmon2008} presented an abstract way of identification and visualization of solvent molecules' pathways within a molecular dynamics. 
