@@ -62,7 +62,7 @@ The proposed method was applied on simulations captured by the biochemists who a
 
 %-------------------------------------------------------------------------
 \section{Introduction}
-Studying possible reactions between different types of molecules forms an interesting research problem already for decades.
+Studying possible reactions between different types of molecules forms an important research problem already for decades.
 Proper understanding of all processes occurring when two or more molecules react helps in the design of new chemical matters, e.g., in drug design or protein engineering.
 Namely in these fields the researchers are aiming to combine a protein with a given ligand in order to design new drug or to change the protein properties and function.
 In this particular case the ligand has to be transported from the outer solvent to the protein active site where the chemical reaction between the ligand and the amino acids surrounding the active site can undergo.
@@ -89,8 +89,12 @@ So the real ligand entering to the active site can be in fact captured in a smal
 
 These problems are addressed by our novel approach for visual analysis of ligand transportation to the active site which we introduce in this paper.
 Our aim is to provide the domain experts with a tool for intuitive and interactive exploration of already captured molecular dynamics simulation containing the process of ligand binding. 
-Using our proposed method the users are able to filter out parts of the simulation which do not lead the ligand to the active site.
-In the filtered data we provide the users with our newly introduced concept of so called temporal tunnel which shows the ligand transportation to the active site on different levels of detail.
+Using our proposed method the users are able to distinguish between the parts of the simulation when the ligand searches for the proper path to the active site (searches the tunnel gorge or enters the wrong tunnel) and the part when the ligand finally leads to and reaches the active site.
+In the part of such annotated data when the ligand travels to the active site we provide the users with our newly introduced concept of so called temporal tunnel.
+The centerline of this tunnel is represented by the ligand trajectory and in the original data is very jittered.
+Thus it is hard to follow determine the time steps when the ligand made a significant shift towards the active site.
+To ease this, we come with two methods for simplification of the original trajectory.
+These methods can simplify the ligand path on several levels of detail.
 In the most abstracted view the temporal tunnel shows only the significant shifts of the ligand towards the active site and the user can interactively explore selected time portions in more and more detail.
 This abstracted representation is interactively linked with the 3D visualization window where the exact shape of the temporal tunnel on a given level is visualized.
 Except for the temporal tunnel itself, our tool enables to explore the amino acids surrounding the ligand along its path to the active site as well.
@@ -101,11 +105,11 @@ They performed the evaluation on their own simulations and their feedback is men
 %-------------------------------------------------------------------------
 
 \section{Related Work}
-In this section we present results we consider to be relevant to our proposed solution. 
-The interactive exploration of ligand paths through protein structures is a complex problem that requires elaborate analysis of existing and suitable approaches to its subtasks.
+Interactive exploration of ligand paths through protein structures is a complex problem that requires elaborate analysis of existing and suitable approaches to its subtasks.
+In this section we present the results we consider to be relevant to our proposed solution. 
 As our tool consists of several parts, this section will be divided with respect to these parts as well. 
 Studying the ligand transport path is tightly related to the analysis of its trajectory.
-Thus, the first part will cover topic related to the trajectory analysis, simplification, and visualization.
+Thus, the first part will cover the topic related to the trajectory analysis, simplification, and visualization.
 Then the existing representations of tunnels and their surrounding amino acids will be mentioned.
 
 \subsection{Trajectory Analysis, Simplification, and Visualization}
@@ -113,8 +117,10 @@ When searching for the inspiration in this field, one of the best starting point
 Concerning the trajectory simplification, they proposed two different approaches to the data abstraction, which is a necessary step to achieve the reduction of the data and clarity of visualizations.
 First approach is characterized by omitting unnecessary positions and segments.
 The other is based on sampling the data.
-According to Andrienko et al. there are no general methods for sampling trajectories.
+Andrienko et al. also claim that there are no general methods for sampling trajectories.
 Thus the suitability of particular sampling method is deduced from what information is considered important.
+A recent work of Vrotsou et. al. \cite{Vrotsou2015} introduced a systematic stepwise methodology for trajectory simplification with emphasis on visual analysis.
+Even though they primarily developed the tool to analyze three dimensional trajectories (aircraft flights), it is not limited to them.
 
 In the field of molecular biology as well as systems biology, there are several examples of methods focusing on the trajectory analysis.
 Bidmon et al.~\cite{bidmon2008} presented an abstract way of identification and visualization of solvent molecules' pathways within a molecular dynamics. 
@@ -125,8 +131,11 @@ Their method was proposed for biochemical reaction networks and aims to provide 
 \subsection{Visualization of Tunnels}
 Our notion about the temporal tunnel in the protein resembles the approach of Lindow et al. \cite{Lindow2013}.
 In this work they focus on the interactive exploration of the dynamics of protein cavities which can form the transportation path for a ligand. 
-They are able to calculate and visualize the cavity volume ...
+They are able to calculate and visualize the cavity volume and to analyze the time-dependent changes of the cavity structure.
+The cavity dynamics is captured by rendering the cavities in a single image. 
+The resulting image is visualized using molecular surface representation colored according to time. 
 
+TODO!!!!!!
 
 %\cite{bidmon2008}, \cite{lampe2011}, \cite{turkay2011}, and this is new 
 
@@ -138,7 +147,7 @@ When studying long molecular dynamics simulations, the researchers have to face 
 \item Explore this route in detail and detect its bottlenecks.
 \end{itemize}
 In consequence, these steps are performed in order to reveal the parts of the trajectory where the ligand gets stuck.
-It fact it means that in such parts there are some obstacles made by the surrounding amino acids.
+It means that in such parts there are some obstacles made by the surrounding amino acids.
 These obstacles can be geometric (the empty space between these amino acids is too narrow) or physico-chemical (the properties of the amino acids are incompatible with the ligand properties), or their combination.
 The geometric obstacles can be detected by using an algorithm for tunnel computation in molecular dynamics (e.g., CAVER~\cite{Chovancova2012} or MOLE~\cite{Sehnal2013}).
 These tools are able to produce the information about time evolution of individual tunnels and for each tunnel detect its bottleneck -- the narrowest part limiting the size of the ligand aiming to pass through this tunnel.
@@ -162,16 +171,73 @@ On the other hand, in drug design the aim is to propose modifications of the lig
 \subsection{Input Data}
 As already mentioned, the input data are formed by the simulations of molecular dynamics which contains the movements of the protein and one or more ligands.
 Ligands can follow two main routes -- they can be transported from the outside environment to the protein active site or vice versa (after the desired reaction the product leaves the protein).
-But for our purposes the direction of these routes is irrelevant, the proposed tool is suitable for both cases.
+Our proposed tool is suitable for both cases.
 
-The length of the simulations may vary from few hundreds to hundreds of thousands of timesteps.  
-This depends namely on the ligand speed and its ability to reveal the proper path to the active site.
-The long simulations can often contain many timesteps when the ligand followed an impasse -- it tried to find the proper entrance point to the protein (tunnel gorge) or got stuck in the middle of a tunnel and had to return.
-Such parts of the simulation can be of less interest so the user should be provided with a possibility to filter them out.
+The length of the simulations may vary from few hundreds to hundreds of thousands of time steps.  
+This depends namely on the ligand speed and its ability to find the proper path to the active site.
+Figure \ref{fig:lig_movement} shows an example of a ligand trajectory consisting of 10.000 time steps. 
 
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=1\linewidth]{img/lig_movement.png}
+  \caption{\label{fig:lig_movement} Ligand trajectory for a simulation containing 10.000 time steps. TODO change image, add molecule}
+\end{figure}
+
+Long simulations can often contain many time steps when the ligand followed an impasse -- it tried to find the proper entrance point to the protein (tunnel gorge) or entered a wrong tunnel and had to return.
+Such parts of the simulation could be of less interest so the user should be provided with a possibility to filter them out and focus only on the interesting parts.
 
 %-------------------------------------------------------------------------
-\section{LigAnalyst Design and Implementation}
+\section{Design and Implementation}
+In this section we describe the design rationale of our proposed approach to interactive exploration of ligand trajectory coming from the above described simulations of molecular dynamics.
+The design is tightly related to the problems posed by the biochemists, namely:
+\begin{itemize}
+\item The length of the simulations and impossibility to distinguish between different parts based on the type of ligand movement (outside protein, inside a wrong or correct tunnel).
+\item The scattered nature of the original movement making impossible to easily follow the overall direction of the ligand movement.
+\end{itemize}
+
+As a solution we come with our novel representation illustrated in Figure~\ref{fig:overview}.
+The first problem is addressed by the simple visualization on the top of the window.
+Its goal is to provide the users with the general overview of the whole simulation and highlighting individual parts of the ligand movement.
+We distinguish between three basic types of ligand movement which are detected in the following way.
+In each time step we check the position of the ligand with respect to the protein solvent excluded surface~\cite{Richards}. 
+If the ligand is outside the protein surface, it means that it is searching for the entrance point to enter the protein through a tunnel gorge on the surface. 
+When the ligand enters the protein inner space, we can distinguish between two cases.
+In the first case the ligand enters a tunnel but there is an obstacle preventing it to get to the active site and the ligand is expelled from the inner space back to the outer environment.
+The second case finally enables the ligand to reach the active site. 
+Very similar solution can be adopted for the opposite direction when the ligand aims to leave the active site and reach the outer solvent.
+
+As a result, we obtain three different types of movements which are highlighted in the overview representation (see Figure \ref{fig:overview} a)).
+Yellow parts represent the ligand movements outside the molecule, red parts show the parts when the ligand entered a wrong tunnel and had to return, and green parts depict the situation when the ligand finally took the correct tunnel and reached the active site.
+The user can interactively select an arbitrary part and the remaining parts of our proposed solution (see Figure~\ref{fig:overview} b)) are interactively updated in order to present only the information for a selected part.
+
+\begin{figure*}[htb]
+	\centering
+  \includegraphics[width=1\linewidth]{img/overview.png}
+  \caption{\label{fig:overview} Illustration of our proposed technique. Section a) gives an overview of the individual parts of the simulation (yellow = ligand is outside the protein, red = ligand entered a wrong tunnel, green = ligand entered a correct tunnel and reached the active site). Section b) shows the detailed information about a selected part. TODO}
+\end{figure*}
+
+\subsection{Temporal Tunnel}
+The bottom part of our visualization consists of three tightly related sections (detailed description in Section~\ref{visualization}) showing the properties of so called \textit{temporal tunnel}. 
+We define the temporal tunnel as a set of spheres positioned onto the centerline representing the trajectory of ligand. 
+The centers of these spheres correspond to the center of gravity of the ligand in each its position and the diameter of the spheres is computed as the maximal empty space around the ligand in a given time step. 
+The main contribution of the temporal tunnel is to give the user the information about the geometric bottlenecks (narrowest parts) along the ligand trajectory.
+However, the temporal tunnel applied to the original data is not meaningful (see Figure \ref{fig:temporal}).
+However, when the ligand trajectory is simplified using one of the methods described below, it gives the user an important overview of the bottlenecks which can be subsequently explored in more detail.
+
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=1\linewidth]{img/temporal.png}
+  \caption{\label{fig:temporal} Left: selected part of the whole trajectory when the ligand enters the active site. Right: visualization of the corresponding temporal tunnel. TODO change images!}
+\end{figure}
+
+\subsection{Trajectory Simplification}
+
+\subsection{Trajectory Visualization} \label{visualization}
+The trajectory is visualized in two manners which are interactively linked together.
+First is the abstracted visualization shown in Figure~\ref{fig:overview} b) where the visualization of the temporal tunnel and its surroundings is divided into three parts. TODO
+
+The second type of visualization shows the trajectory as a tube in 3D. TODO
+
 
 %-------------------------------------------------------------------------
 \section{Results}
