@@ -69,7 +69,7 @@ In this particular case the ligand has to be transported from the outer solvent 
 The consecutive reaction then changes the constitution and properties of both molecules. 
 In protein engineering, for example, the goal is to alter the protein properties so that the new protein is, e.g., more stable and resistant to organic cosolvents~\cite{Koudelakova2013}.
 
-The design complexity of such lies namely in the transportation of the ligand to the protein active site.
+The design complexity of such reactions lies namely in the transportation of the ligand to the protein active site.
 As the active site is usually buried deeply in the protein structure and thus inaccessible directly from its surface, the ligand has to find a suitable transportation path through the protein structure.
 This process, called molecular docking, is very complex, lengthy, and heavy on computational resources. 
 Therefore, researchers aim at solutions that simplify and ease the analysis for proper ligand binding.
