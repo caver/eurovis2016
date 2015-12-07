@@ -49,7 +49,7 @@ Protein structures and their interaction with ligands have been in the focus of 
 The transportation of ligand into the protein active site is often complex process, driven by geometric and physico-chemical properties, which renders the ligand path full of jitter and impasses. Therefore, answering also the domain expert needs, we design an explorative visualization solution based on a multi-scale simplification model. This allows to emphasize the main direction of the ligand motion while providing geometric and physico-chemical descriptors available at each hierarchical level by user interaction.  
 %These interesting time sequences are revealed by interacting with our representation.
 This approach could easily guide users to choose simulation frames containing important ligand movements that drive the ligand to the active site. 
-Additionally, our simplified representation decreases the length of molecular dynamics simulation, which reduces the time spent on this analysis.
+Additionally, our simplified representation decreases the length of molecular dynamics simulation, which significantly reduces the time spent on this analysis.
 The proposed method was applied on simulations captured by the biochemists who also evaluated the method.
 
 \begin{classification} % according to http://www.acm.org/class/1998/
