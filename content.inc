@@ -49,7 +49,7 @@ Protein structures and their interaction with ligands have been in the focus of 
 The transportation of ligand into the protein active site is often complex process, driven by geometric and physico-chemical properties, which renders the ligand path full of jitter and impasses. Therefore, answering also the domain expert needs, we design an explorative visualization solution based on a multi-scale simplification model. This allows to emphasize the main direction of the ligand motion while providing geometric and physico-chemical descriptors available at each hierarchical level by user interaction.  
 %These interesting time sequences are revealed by interacting with our representation.
 This approach could easily guide users to choose simulation frames containing important ligand movements that drive the ligand to the active site. 
-Additionally, our simplified representation decreases the length of molecular dynamics simulation, which reduces the time spent on this analysis.
+Additionally, our simplified representation decreases the length of molecular dynamics simulation, which significantly reduces the time spent on this analysis.
 The proposed method was applied on simulations captured by the biochemists who also evaluated the method.
 
 \begin{classification} % according to http://www.acm.org/class/1998/
@@ -175,13 +175,71 @@ Our proposed tool is suitable for both cases.
 
 The length of the simulations may vary from few hundreds to hundreds of thousands of time steps.  
 This depends namely on the ligand speed and its ability to find the proper path to the active site.
-The long simulations can often contain many time steps when the ligand followed an impasse -- it tried to find the proper entrance point to the protein (tunnel gorge) or entered a wrong tunnel and had to return.
+Figure \ref{fig:lig_movement} shows an example of a ligand trajectory consisting of 10.000 time steps. 
+
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=1\linewidth]{img/lig_movement.png}
+  \caption{\label{fig:lig_movement} Ligand trajectory for a simulation containing 10.000 time steps. TODO change image, add molecule}
+\end{figure}
+
+Long simulations can often contain many time steps when the ligand followed an impasse -- it tried to find the proper entrance point to the protein (tunnel gorge) or entered a wrong tunnel and had to return.
 Such parts of the simulation could be of less interest so the user should be provided with a possibility to filter them out and focus only on the interesting parts.
 
 %-------------------------------------------------------------------------
 \section{Design and Implementation}
-In this section we describe the design rationale of our proposed method.
+In this section we describe the design rationale of our proposed approach to interactive exploration of ligand trajectory coming from the above described simulations of molecular dynamics.
+The design is tightly related to the problems posed by the biochemists, namely:
+\begin{itemize}
+\item The length of the simulations and impossibility to distinguish between different parts based on the type of ligand movement (outside protein, inside a wrong or correct tunnel).
+\item The scattered nature of the original movement making impossible to easily follow the overall direction of the ligand movement.
+\end{itemize}
 
+As a solution we come with our novel representation illustrated in Figure~\ref{fig:overview}.
+The first problem is addressed by the simple visualization on the top of the window.
+Its goal is to provide the users with the general overview of the whole simulation and highlighting individual parts of the ligand movement.
+We distinguish between three basic types of ligand movement which are detected in the following way.
+In each time step we check the position of the ligand with respect to the protein solvent excluded surface~\cite{Richards}. 
+If the ligand is outside the protein surface, it means that it is searching for the entrance point to enter the protein through a tunnel gorge on the surface. 
+When the ligand enters the protein inner space, we can distinguish between two cases.
+In the first case the ligand enters a tunnel but there is an obstacle preventing it to get to the active site and the ligand is expelled from the inner space back to the outer environment.
+The second case finally enables the ligand to reach the active site. 
+Very similar solution can be adopted for the opposite direction when the ligand aims to leave the active site and reach the outer solvent.
+
+As a result, we obtain three different types of movements which are highlighted in the overview representation (see Figure \ref{fig:overview} a)).
+Yellow parts represent the ligand movements outside the molecule, red parts show the parts when the ligand entered a wrong tunnel and had to return, and green parts depict the situation when the ligand finally took the correct tunnel and reached the active site.
+The user can interactively select an arbitrary part and the remaining parts of our proposed solution (see Figure~\ref{fig:overview} b)) are interactively updated in order to present only the information for a selected part.
+
+\begin{figure*}[htb]
+	\centering
+  \includegraphics[width=1\linewidth]{img/overview.png}
+  \caption{\label{fig:overview} Illustration of our proposed technique. Section a) gives an overview of the individual parts of the simulation (yellow = ligand is outside the protein, red = ligand entered a wrong tunnel, green = ligand entered a correct tunnel and reached the active site). Section b) shows the detailed information about a selected part. TODO}
+\end{figure*}
+
+\subsection{Temporal Tunnel}
+The bottom part of our visualization consists of three tightly related sections (detailed description in Section~\ref{visualization}) showing the properties of so called \textit{temporal tunnel}. 
+We define the temporal tunnel as a set of spheres positioned onto the centerline representing the trajectory of ligand. 
+The centers of these spheres correspond to the center of gravity of the ligand in each its position and the diameter of the spheres is computed as the maximal empty space around the ligand in a given time step. 
+The main contribution of the temporal tunnel is to give the user the information about the geometric bottlenecks (narrowest parts) along the ligand trajectory.
+However, the temporal tunnel applied to the original data is not meaningful (see Figure \ref{fig:temporal}).
+However, when the ligand trajectory is simplified using one of the methods described below, it gives the user an important overview of the bottlenecks which can be subsequently explored in more detail.
+
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=1\linewidth]{img/temporal.png}
+  \caption{\label{fig:temporal} Left: selected part of the whole trajectory when the ligand enters the active site. Right: visualization of the corresponding temporal tunnel. TODO change images!}
+\end{figure}
+
+\subsection{Trajectory Simplification}
+
+\subsection{Trajectory Visualization} \label{visualization}
+The trajectory is visualized in two manners which are interactively linked together.
+First is the abstracted visualization shown in Figure~\ref{fig:overview} b) where the visualization of the temporal tunnel and its surroundings is divided into three parts. TODO
+
+The second type of visualization shows the trajectory as a tube in 3D. TODO
+
+
+\subsection{Jan's part, will probably not fit to the current version at all.}
 %General outline of the section:
 % - detection of the ligand entering tunnel
 %   - sphere, problems
@@ -210,27 +268,15 @@ In our approach we suggest to employ the molecular surface as a threshold - i.e.
 
 
 Since the ligand may reenter the molecule more then once during the whole simulation, we obtain several discrete intervals. 
-In order to provide the whole simulation overview we suggest to use simple visualization as shown in Figure \ref{fig:overview}. 
+In order to provide the whole simulation overview we suggest to use simple visualization as shown in Figure \ref{fig:overview}a. 
 On such visualization the size of individual intervals (represented as rectangles) and their positions in simulation can be easily spotted. 
 From here the biochemist can easily navigate to the proper time span they want to explore in more detail.
-
-\begin{figure}[htb]
-	\centering
-  \includegraphics[width=1\linewidth]{img/overview.png}
-  \caption{\label{fig:overview} TODO}
-\end{figure}
 
 Even though the individual intervals are usually much shorter in comparison with the whole simulation it is still nearly impossible to comprehend the whole information. Neither an aggregate information in single image (see Figure \ref{fig:ligand-path-interval}) or watching the whole play-through would work since the amount of data is still too high. 
 Hence we suggest the solution based on a multi-scale simplification model where the already mentioned overview creates its higher level.  
 
-\begin{figure}[htb]
-	\centering
-  \includegraphics[width=1\linewidth]{img/ligand-path-interval.png}
-  \caption{\label{fig:ligand-path-interval} TODO}
-\end{figure}
-
 We developed the following model in order to emphasis multiple important aspects of the simulation such as: the main direction of the ligand motion, parts of the simulation where the ligand get stuck and geometrical and physico-chemical properties of such places. 
-The main source of the clutter (see Figure \ref{fig:ligand-path-interval}) in the data is caused by random Brownian motion of the molecule and ligand.
+The main source of the clutter (see Figure \ref{fig:temporal} left) in the data is caused by random Brownian motion of the molecule and ligand.
 To reduce this jitter the Hermite (or similar) interpolation can be used.
 However, such reduction is not enough since the time difference and hence the spacial distance between two time steps is usually very small (few femtoseconds, picosecond at most). 
 Therefore, the ligand trajectory will still contains great number of loops even though it is smoother.
@@ -288,23 +334,14 @@ The advantage of this approach is its uniformity which allows easily transfer fr
 
 \subsection{Visualization}
 
-\begin{figure}[htb]
-	\centering
-  \includegraphics[width=1\linewidth]{img/method.png}
-  \caption{\label{fig:method} TODO}
-\end{figure}
-
 {\color{red} Just some random sentences I come up with but then in the end did not fit in:}
 
-In order to communicate all the information obtained from previous models to the user we proposed a visualization as shown in Figure \ref{fig:method}.
+In order to communicate all the information obtained from previous models to the user we proposed a visualization as shown in Figure \ref{fig:overview}.
 
 Each cluster is here represented by a single bar where its height corresponds to the amount at which the ligand was stuck.
 
 Each cluster is represented by the last time step it contains.
 This helps to revel the conditions such as tunnel radius which enabled to the ligand proceed further towards the active site.
-
-
-{\color{green}And it is mega cool - and I am totally done for today.}
 
 
 %-------------------------------------------------------------------------
