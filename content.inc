@@ -95,7 +95,7 @@ Using our proposed solution the users are able to distinguish between the parts 
 
 Here, we introduce two dedicated methods for simplification of the original trajectory.
 These methods can simplify the ligand path hierarchically providing thus several levels of detail (LOD), which can be interactively browsed through.
-In the most abstracted view, represented as the top-most LOD, the temporal tunnel shows only the significant shifts of the ligand towards the active site. Here, the user can interactively explore brush time intervals, which automatically reveal and adopt the temporal tunnel to the selected interval.
+In the most abstracted view, represented as the top-most LOD, the temporal tunnel shows only the significant shifts of the ligand towards the active site. Here, the user can interactively brush time intervals, which automatically reveal and adopt the temporal tunnel to the selected interval.
 This abstracted representation, providing the brushing capabilities, is interactively linked with the 3D visualization where the 3D shape of the temporal tunnel for the given temporal window is displayed.
 Further, our tool enables to explore the amino acids surrounding the ligand along its path to the active site as well.
 
