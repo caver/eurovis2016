@@ -180,7 +180,132 @@ Such parts of the simulation could be of less interest so the user should be pro
 
 %-------------------------------------------------------------------------
 \section{Design and Implementation}
-In this section we describe the design rationale of our proposed 
+In this section we describe the design rationale of our proposed method.
+
+%General outline of the section:
+% - detection of the ligand entering tunnel
+%   - sphere, problems
+%	  - surface, computed using LSMS 
+% - results in overview
+%	  - enables select the appropriate time range
+% - once the range is selected the aggregation is done
+%   - why aggregation
+%	 - how it is done
+%      - two or three methods - all?
+%   - bar char + 3D line as the results
+% - what can be important with respect why the tunnel get stuck
+%   - geometrical properties = radius chart
+%	    - how we compute radius
+%	 - biochemical properties = AA chart
+%		  - how we compute surrounding AA
+
+As mentioned in previous section the very first problem the biochemist face, while exploring the input data, is to detect the part of the simulation where the ligand enters the protein. 
+In our approach we suggest to employ the molecular surface as a threshold - i.e., whenever the ligand crosses the borderline of the volume defined by the molecular surface the time in simulation and ligand position is stored as entrance point.
+%The precision of entry point detection higly depends on used alorithm for computation of the molecular surface. In our implementation we used LSMS ({\color{red}cite}) with following settings: TODO. LSMS is currently not the best one neither it is actually implemetend (I guess I will stick with sphere for time reasons), so I don't recommend to mention it.
+
+%Just some ramainings:
+%The positions of the active site enables to detect the exact time when the ligand was presented there. 
+%Using this knowledge, the simulation can be backtracked or followed forward as required. 
+%To detect the exact point of entrance we suggest to used molecular surface as a threshold, i.e., whenever the ligand is outside of the volume defined by the molecular surface the time is stored as entrance point.
+
+
+Since the ligand may reenter the molecule more then once during the whole simulation, we obtain several discrete intervals. 
+In order to provide the whole simulation overview we suggest to use simple visualization as shown in Figure \ref{fig:overview}. 
+On such visualization the size of individual intervals (represented as rectangles) and their positions in simulation can be easily spotted. 
+From here the biochemist can easily navigate to the proper time span they want to explore in more detail.
+
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=1\linewidth]{img/overview.png}
+  \caption{\label{fig:overview} TODO}
+\end{figure}
+
+Even though the individual intervals are usually much shorter in comparison with the whole simulation it is still nearly impossible to comprehend the whole information. Neither an aggregate information in single image (see Figure \ref{fig:ligand-path-interval}) or watching the whole play-through would work since the amount of data is still too high. 
+Hence we suggest the solution based on a multi-scale simplification model where the already mentioned overview creates its higher level.  
+
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=1\linewidth]{img/ligand-path-interval.png}
+  \caption{\label{fig:ligand-path-interval} TODO}
+\end{figure}
+
+We developed the following model in order to emphasis multiple important aspects of the simulation such as: the main direction of the ligand motion, parts of the simulation where the ligand get stuck and geometrical and physico-chemical properties of such places. 
+The main source of the clutter (see Figure \ref{fig:ligand-path-interval}) in the data is caused by random Brownian motion of the molecule and ligand.
+To reduce this jitter the Hermite (or similar) interpolation can be used.
+However, such reduction is not enough since the time difference and hence the spacial distance between two time steps is usually very small (few femtoseconds, picosecond at most). 
+Therefore, the ligand trajectory will still contains great number of loops even though it is smoother.
+{\color{red} Should we define what the loop is? - I mean, I'm using it later quite lot. I did partial defined it in \textbf{Second} but its maybe too late.}
+
+
+Therefore we propose {\color{red}approach / several different approaches}...
+
+\textbf{First:} ... based on comparison of surrounding amino acids. 
+We have already mentioned that the biochemical and geometrical aspects along the ligand path plays an important role during its exploration. 
+Note that both these properties are defined by surrounding amino acids. 
+Therefore we utilize this information and aggregate all the ligand positions into a single cluster if they have similar surroundings. 
+The number of allowed changes in surrounding amino acids directly corresponds to the individual levels in our multi-scale model. 
+{\color{red} Note that these levels are limited to three since for each time step we compute only three closes amino acids.}.
+
+At lowest level (when no amino acids can be changed in single cluster) the model aggregate only the smallest loops in the same area. 
+While all the loops (longer or smaller) on border between two places with different amino acids and hence different properties are preserved.  
+This applies also for higher levels, however, the change there would have to be more significant.
+
+Such model also allows to evaluate how long the ligand was stuck in surroundings of some particular amino acids. 
+Which provides useful hints when detecting which amino acids along the ligand trajectory caused problems and should be possibly replaced.
+
+{\color{red} TODO: reason about / and implement the time flow independence}
+
+
+\textbf{Second:} ... based on number of loops that ligand performs. 
+When exploring the ligand path in more details the biochemist are interested mostly in the parts where the ligand get suck for some reason.
+We suggest to employ the position of active site which can be either user defined or in some cases obtained directly from the simulation.
+{\color{red}(The automatic active site detection is currently supported only for input data in which the ligand is in the active site by the end of the simulation.)}.
+% I guess it could be done for reentry simulation as well using the most distant place from entery point. But here we face the problem how to evalueate whether the ligand go stuck and lefet before actually reaching the active site (ever).  
+In each time step the distance from such active site to the ligand can be evaluated.
+Using this knowledge it is possible to detect places when the ligand movement changes its direction.
+
+The multi-scale model is then build from the the beginning of the evaluated interval and follows the simulation forward in time. 
+Individual time steps are aggregated in the way that the ligand has to make a given number of loops (each loop is defined by two direction changes) before new cluster is created.
+In other words, each resulting cluster contains the given number of loops (except the last one which is allowed to have less).
+{\color{red}TODO I have to think about loops vs. single changes aggregation}
+
+Since there is a constant number of loops before a new cluster is created, it takes more time (time steps) to accumulate such number if the ligand is moving in single direction.
+Hence, counting the time steps in each cluster instantly reveals the parts of the simulation where the ligand was moving mostly in a single direction or it was osculating. 
+This information, however, has to be combined with the actual distance which the ligand crossed in order to avoid misinterpretation of long loops. 
+%This information is visualized using color - or whatever
+
+Even though this multi-scale model enables to switch between individual levels by increasing (or decreasing) the number of loops in cluster by one, we suggest that the current value should be multiplied (or divided) by a natural number. 
+This way clusters will be merged or divided uniformly, e.g, if the current number of loops in cluster is multiplied by two the two adjacent cluster will be merge into the single one and vice versa.
+
+\textbf{Third:} ... based on uniform distribution of time.
+In this model we uniformly divide the whole simulation into the given number of clusters. 
+
+Such model can help to evaluate how much the ligand was stuck for a given amount of time.
+
+The advantage of this approach is its uniformity which allows easily transfer from one level to another.
+
+%\textbf{Fourth:} ... based on threshold for maximum backtracking of the ligand on its path. This is not good approach since I don't even know how to justify it with respect to previous three.
+
+\subsection{Visualization}
+
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=1\linewidth]{img/method.png}
+  \caption{\label{fig:method} TODO}
+\end{figure}
+
+{\color{red} Just some random sentences I come up with but then in the end did not fit in:}
+
+In order to communicate all the information obtained from previous models to the user we proposed a visualization as shown in Figure \ref{fig:method}.
+
+Each cluster is here represented by a single bar where its height corresponds to the amount at which the ligand was stuck.
+
+Each cluster is represented by the last time step it contains.
+This helps to revel the conditions such as tunnel radius which enabled to the ligand proceed further towards the active site.
+
+
+{\color{green}And it is mega cool - and I am totally done for today.}
+
 
 %-------------------------------------------------------------------------
 \section{Results}
