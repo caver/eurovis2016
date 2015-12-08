@@ -106,8 +106,8 @@ They performed the evaluation on their own simulations and their feedback is des
 
 \section{Related Work}
 Interactive exploration of ligand paths through protein structures is a complex problem that requires elaborate analysis of existing and suitable approaches to its subtasks.
-In this section we present the results we consider to be relevant to our proposed solution. 
-As our tool consists of several parts, this section will be divided with respect to these parts as well. 
+%In this section we present the results we consider to be relevant to our proposed solution. 
+As our system addresses several areas, this section will be divided with respect to these areas as well. 
 Studying the ligand transport path is tightly related to the analysis of its trajectory.
 Thus, the first part will cover the topic related to the trajectory analysis, simplification, and visualization.
 Then the existing representations of tunnels and their surrounding amino acids will be mentioned.
@@ -141,6 +141,7 @@ TODO!!!!!!
 
 %-------------------------------------------------------------------------
 \section{Problem Description and Input Data}
+\textcolor[rgb]{1,0,0}{Each section should have at least two subsections or none, some info repeats itself, questions is whether to put it here from intro or reduce this part and move it to intro. let's discuss it on skype.}
 When studying long molecular dynamics simulations, the researchers have to face namely the following high-level tasks:
 \begin{itemize}
 \item Detect the part of the simulation where the ligand enters the protein and finally reaches the active site.
@@ -187,7 +188,8 @@ Long simulations can often contain many time steps when the ligand followed an i
 Such parts of the simulation could be of less interest so the user should be provided with a possibility to filter them out and focus only on the interesting parts.
 
 %-------------------------------------------------------------------------
-\section{Design and Implementation}
+%\section{Design and Implementation}
+\section{Visualization Design}
 In this section we describe the design rationale of our proposed approach to interactive exploration of ligand trajectory coming from the above described simulations of molecular dynamics.
 The design is tightly related to the problems posed by the biochemists, namely:
 \begin{itemize}
@@ -195,20 +197,20 @@ The design is tightly related to the problems posed by the biochemists, namely:
 \item The scattered nature of the original movement making impossible to easily follow the overall direction of the ligand movement.
 \end{itemize}
 
-As a solution we come with our novel representation illustrated in Figure~\ref{fig:overview}.
+To tackle the aforementioned challenges, we propose a visualization system illustrated in Figure~\ref{fig:overview}.
 The first problem is addressed by the simple visualization on the top of the window.
-Its goal is to provide the users with the general overview of the whole simulation and highlighting individual parts of the ligand movement.
-We distinguish between three basic types of ligand movement which are detected in the following way.
+Its goal is to provide the users with the general overview of the whole simulation and highlight individual parts of the ligand movement.
+We classify ligand motion into three basic categories, which are represented in the following way.
 In each time step we check the position of the ligand with respect to the protein solvent excluded surface~\cite{Richards}. 
-If the ligand is outside the protein surface, it means that it is searching for the entrance point to enter the protein through a tunnel gorge on the surface. 
+If the ligand is outside the protein surface, it means that it still tries to look for the entrance point to enter the protein through a tunnel gorge on the surface. 
 When the ligand enters the protein inner space, we can distinguish between two cases.
 In the first case the ligand enters a tunnel but there is an obstacle preventing it to get to the active site and the ligand is expelled from the inner space back to the outer environment.
 The second case finally enables the ligand to reach the active site. 
 Very similar solution can be adopted for the opposite direction when the ligand aims to leave the active site and reach the outer solvent.
 
-As a result, we obtain three different types of movements which are highlighted in the overview representation (see Figure \ref{fig:overview} a)).
+As a result, we obtain three different types of movements which are highlighted in the overview representation (Fig. \ref{fig:overview} a)).
 Yellow parts represent the ligand movements outside the molecule, red parts show the parts when the ligand entered a wrong tunnel and had to return, and green parts depict the situation when the ligand finally took the correct tunnel and reached the active site.
-The user can interactively select an arbitrary part and the remaining parts of our proposed solution (see Figure~\ref{fig:overview} b)) are interactively updated in order to present only the information for a selected part.
+The user can interactively select an arbitrary part and the remaining parts of our proposed solution (Fig.~\ref{fig:overview} b)) are interactively updated in order to present only the information for a selected part.
 
 \begin{figure*}[htb]
 	\centering
