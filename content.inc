@@ -267,25 +267,16 @@ Thus, in each time step $i$ the distance $d_i$ from the active site to the ligan
 T_B=\{t_i:\Delta d_i\cdot \Delta d_{i+1} <0\}. 
 \label{eq:zc}
 \end{equation}
-When referring to each entry of $T_B$ as a zero-crossing, we aggregate the user-defined amount $k$ of zero-crossings to form a temporal block $T_{B_j}$ such that $|T_{B_j}|=k$; i.e., when $k=2$ and $|T_B|=20$ we acquire $10$ temporal blocks. For the given parameter $k$, let us denote first time step of these temporal block as $S_k(j)=\{t_{j_1}:T_{B_j}=\{t_{j_1},\ldots\}\}$. In this manner, we extract a set of time steps $S_k=\{S_k(1),\ldots ,S_k(m)\}$ representing a level of simplification that reflects $k$ parameter. It is important to mention that the corresponding temporal tunnel is formed by means of ligand positions in $S_k$ solely. 
+When referring to each entry of $T_B$ as a zero-crossing, we aggregate the user-defined amount $k$ of zero-crossings to form a temporal block $T_{B_j}$ such that $|T_{B_j}|=k$; i.e., when $k=2$ and $|T_B|=20$ we acquire $10$ temporal blocks. For the given parameter $k$, let us denote first time step of these temporal block as $S_k(j)=\{t_{j_1}:T_{B_j}=\{t_{j_1},\ldots\}\}$. In this manner, we extract a set of time steps $S_k=\{S_k(1),\ldots ,S_k(m)\}$ representing $m$ temporal blocks of a trajectory simplification that reflects $k$ parameter. It is important to mention that the corresponding temporal tunnel is formed by means of ligand positions in $S_k$ solely. 
 %For instance, on the top-most level, the temporal tunnel contains no loops neither.
 %The multi-scale model of the temporal tunnel is then built where on the highest level all loops are omitted.
 %In other words, the top-level temporal tunnel contains only the time steps when the ligand headed towards the active site.
 %The intermediate levels start to contain a certain number of loops with respect to the following rule.
 
-{\color{red} TODO describe more clearly!!!}
- 
-Individual time steps are aggregated in the way that the ligand has to make a given number of loops (each loop is defined by two direction changes) before new cluster is created.
-In other words, each resulting cluster contains the given number of loops (except the last one which is allowed to have less).
-{\color{red}TODO I have to think about loops vs. single changes aggregation}
-
-Since there is a constant number of loops before a new cluster is created, it takes more time (time steps) to accumulate such number if the ligand is moving in single direction.
-Hence, counting the time steps in each cluster instantly reveals the parts of the simulation where the ligand was moving mostly in a single direction or it was osculating. 
-This information, however, has to be combined with the actual distance which the ligand crossed in order to avoid misinterpretation of long loops. 
-%This information is visualized using color - or whatever
-
-Even though this multi-scale model enables to switch between individual levels by increasing (or decreasing) the number of loops in cluster by one, we suggest that the current value should be multiplied (or divided) by a natural number. 
-This way clusters will be merged or divided uniformly, e.g, if the current number of loops in cluster is multiplied by two the two adjacent cluster will be merge into the single one and vice versa.
+Each block represents an aggregated unit for which the ligand has to make a given number of loops (each loop is defined by two zero-crossings) before a new block is created. Note that the last block could potentially contain a less number of zero-crossings.
+As a consequence, if the ligand moves constantly in the same directions, it takes more time steps to accumulate before $k$ number of zero-crossings is reached. Therefore, the number of time steps in each block reveals either the parts of trajectory where the ligand was moving mostly in a single direction or the sections where it was osculating and thus is unable to move on. Nevertheless, this information needs to be combined with the overall distance the ligand crossed within the block to avoid misinterpretation of the longer loops. Additionally, the user has the possibility to alter parameter $k$ to adjust the granularity of block decomposition. Figure~\ref{fig:todo} demonstrates different results for altering the $k$ value.
+%Even though this multi-scale model enables to switch between individual levels by increasing (or decreasing) the number of loops in cluster by one, we suggest that the current value should be multiplied (or divided) by a natural number. 
+%This way clusters will be merged or divided uniformly, e.g, if the current number of loops in cluster is multiplied by two the two adjacent cluster will be merge into the single one and vice versa.
 
 \subsubsection{Simplification Using Uniform Sampling}
 In this model we uniformly divide the whole simulation into the given number of clusters. 
