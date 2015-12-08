@@ -255,19 +255,23 @@ The loop is thought of as a portion of the trajectory in which the ligand got st
 \end{equation}
 where $d$ is a given distance threshold defining the similarity between two ligand positions (experimentally set to {\color{red}TODO}), and $t_i \neq t_j$, $i << j$. 
 
-To handle these problems of the original trajectory, we proposed the following simplification methods.
+To explore the aforementioned patterns of the original trajectory, we proposed two interexchangeable simplification methods, which the user can interactively switch between. Both methods sub-sample the original trajectory and aggregate the protein-ligand interaction in a distinct manner. 
 
 \subsubsection{Simplification Avoiding Loops}
 %When exploring the ligand path in more details the biochemist are interested mostly in the parts where the ligand get suck for some reason.
-In this first method we employ the position of active site which can be either user defined or obtained directly from the simulation (e.g., as the final position of the ligand).
+Here we employ the position of active site that can be either user defined or obtained directly from the simulation; e.g., as the final position of the ligand.
 %{\color{red}(The automatic active site detection is currently supported only for input data in which the ligand is in the active site by the end of the simulation.)}.
 % I guess it could be done for reentry simulation as well using the most distant place from entery point. But here we face the problem how to evalueate whether the ligand go stuck and lefet before actually reaching the active site (ever).  
-In each time step the distance from the active site to the ligand center of mass can be evaluated.
-Using this knowledge, it is possible to detect time steps when the ligand movement changed its direction.
-Such time step defines the starting position of a loop.
-The multi-scale model of the temporal tunnel is then built where on the highest level all loops are omitted.
-In other words, the top-level temporal tunnel contains only the time steps when the ligand headed towards the active site.
-The intermediate levels start to contain a certain number of loops with respect to the following rule.
+Thus, in each time step $i$ the distance $d_i$ from the active site to the ligand center of mass can be evaluated; i.e., we define a set $D=\{d_1,b_2, \ldots, d_n\}$. By means of this distance, one can easily detect time steps when the ligand changes its motion with respect to the active site; i.e., towards to or away from the active site. Using $d$ notation we represent these time steps as follows:
+\begin{equation}
+T_B=\{t_i:\Delta d_i\cdot \Delta d_{i+1} <0\}. 
+\label{eq:zc}
+\end{equation}
+When referring to each entry of $T_B$ as a zero-crossing, we aggregate the user-defined amount $k$ of zero-crossings to form a temporal block $T_{B_j}$ such that $|T_{B_j}|=k$; i.e., when $k=2$ and $|T_B|=20$ we acquire $10$ temporal blocks. For the given parameter $k$, let us denote first time step of these temporal block as $S_k(j)=\{t_{j_1}:T_{B_j}=\{t_{j_1},\ldots\}\}$. In this manner, we extract a set of time steps $S_k=\{S_k(1),\ldots ,S_k(m)\}$ representing a level of simplification. It is important to mention that the corresponding temporal tunnel is formed by means of ligand positions in $S_k$ solely. 
+%For instance, on the top-most level, the temporal tunnel contains no loops neither.
+%The multi-scale model of the temporal tunnel is then built where on the highest level all loops are omitted.
+%In other words, the top-level temporal tunnel contains only the time steps when the ligand headed towards the active site.
+%The intermediate levels start to contain a certain number of loops with respect to the following rule.
 
 {\color{red} TODO describe more clearly!!!}
  
