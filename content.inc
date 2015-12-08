@@ -231,8 +231,8 @@ The bottom part of our visualization consists of three tightly related sections 
 We define the temporal tunnel as a set of spheres positioned onto the centerline representing the trajectory of ligand. 
 The centers of these spheres correspond to the center of mass of the ligand in each of its positions and the diameter of the spheres is computed as the maximal empty space around the ligand in a given time step. 
 The main contribution of the temporal tunnel is to give the user the information about the geometric bottlenecks (narrowest parts) along the ligand trajectory.
-It should be stated that applying the temporal tunnel to the original data is not meaningful (see Figure \ref{fig:temporal}).
-However, when the ligand trajectory is simplified using one of the methods described below, it gives the user an important overview of the bottlenecks which can be subsequently explored in more detail.
+Note that applying the temporal tunnel to the original data provides us only with an approximation of the exact trajectory (Fig. \ref{fig:temporal}).
+Still when the ligand trajectory is simplified using one of the methods described below, it gives the user an important overview of the bottlenecks that can be subsequently explored in more detail.
 
 \begin{figure}[htb]
 	\centering
@@ -241,23 +241,19 @@ However, when the ligand trajectory is simplified using one of the methods descr
 \end{figure}
 
 \subsection{Trajectory Simplification}
-In order to reveal the significant movements of the ligand, we developed the following simplification model.
-It aims to emphasize several important aspects of the simulation, such as: 
-\begin{itemize}
-\item The main direction of the ligand motion.
-\item Parts of the simulation where the ligand got stuck.
-\item Geometrical and physico-chemical properties on sites where the ligand got stuck. 
-\end{itemize}
+In order to reveal significant ligand motion patterns, we introduce a hierarchical simplification model that, in addition, allows us to emphasize several important aspects related to the mutual protein-ligand interaction. These aspects are represented by i) the main direction of the ligand motion, ii) the sections of the simulation where the ligand got stuck and iii) the geometrical and physico-chemical properties on sites where the ligand got stuck. 
 
-As already mentioned, the main source of the visual clutter (see Figure \ref{fig:temporal} a)) is the ligand motion resembling the random Brownian motion.
-To reduce this jittering and simplify the trajectory, the Hermite (or similar) interpolation technique can be used.
-However, such simplification is not sufficient since the spatial distance between two neighboring time steps is usually very small.
-Therefore, the ligand trajectory modified by the Hermite interpolation still contains a lot of jitter.
-{\color{red} TODO so which  interpolation is the best?}
+As already mentioned, the main source of the visual clutter (Fig. \ref{fig:temporal}a) is the ligand motion itself, which resembles the random Brownian motion. Here, the removal of this jittery motion would allow us to reveal more dominant ligand motion patterns. Nevertheless, this also means to approximate the initial trajectory, which on the other hand is a trade-off for providing a good overview of entire ligand motion instead.
+As a standard solution, to reduce this jittering and also to simplify the trajectory, the Hermite (or similar) interpolation technique can be used. However, such an interpolation simplification would still not suffice since the spatial distance between two neighboring time steps is usually very small, thus the interpolation scheme still contains a lot of jitter. {\color{red}(TODO mame obrazok?)}
+{\color{red} TODO so which  interpolation is the best?JP: Nemusime ak ukazeme nejaku interpolation scheme a tiez ukazeme ze vieme lepsie}
 
-Except for a lot of jitter, the trajectory usually contains also many time sequences forming a so called \textit{loop}.
-By loop we mean a portion of the trajectory in which the ligand got stuck in a given position $p$ (time step $t_i$), then had to follow an alternative route which was not heading towards the active site, and finally returned to a similar position $q$ close to $p$ where it got stuck (in time step $t_j$).
-More formally, $dist(p,q) < d$, where $d$ is a given threshold defining the similarity between two ligand positions (experimentally set to {\color{red}TODO}), and $t_i \neq t_j$, $i << j$. 
+Except for a lot of jitter, the trajectory often contains sequences that form the so-called \textit{loops}.
+The loop is thought of as a portion of the trajectory in which the ligand got stuck in a given position $p$ (time step $t_i$), then follows an alternative route; i.e., not heading towards the active site, and finally returns to a position $q$ lying close to $p$ where it got stuck (in time step $t_j$). We define this condition as follows:
+\begin{equation}
+|p,q| < d,
+\label{eq:loop}
+\end{equation}
+where $d$ is a given distance threshold defining the similarity between two ligand positions (experimentally set to {\color{red}TODO}), and $t_i \neq t_j$, $i << j$. 
 
 To handle these problems of the original trajectory, we proposed the following simplification methods.
 
