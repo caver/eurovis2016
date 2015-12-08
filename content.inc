@@ -9,10 +9,9 @@
 % for anonymous conference submission please enter your SUBMISSION ID
 % instead of the author's name (and leave the affiliation blank) !!
 \author[K. Furmanov\'{a} et al.]
-       {Katar\'{i}na Furmanov\'{a}$^{1}$, Miroslava Jare\v{s}ov\'{a}$^{1}$, Jan By\v{s}ka$^{1}$, Adam Jur\v{c}\'{i}k$^{1}$, Julius Parulek$^{2}$, 
-        and Barbora Kozl\'{i}kov\'{a}$^{1}$
+       {K. Furmanov\'{a}$^{1}$, M. Jare\v{s}ov\'{a}$^{1}$, J. By\v{s}ka$^{1,2}$, A. Jur\v{c}\'{i}k$^{1}$, J. Parulek$^{2}$, H. Hauser$^{2}$, and B. Kozl\'{i}kov\'{a}$^{1}$
 %        S. Spencer$^2$\thanks{Chairman Siggraph Publications Board}
-        \\
+        				\\
 % For Computer Graphics Forum: Please use the abbreviation of your first name.
          $^1$Faculty of Informatics, Masaryk University, Czech Republic\\
          $^2$Department of Informatics, University of Bergen, Norway
@@ -65,8 +64,8 @@ The proposed method was applied on simulations captured by the biochemists who a
 The study of reaction processes between different types of molecules has been an important research problem already for decades.
 A proper understanding of the processes occurring when two or more molecules react helps in the design of new chemical matters, e.g., in drug design or protein engineering.
 Here, the researchers aim to combine a protein with a given ligand in order to design a new drug or to change protein properties and their function.
-In this particular case the ligand has to be transported from the outer solvent to the protein active site where the chemical reaction between the ligand and the amino acids surrounding the active site takes place.
-The consecutive reaction then changes the constitution and properties of both molecules. 
+In these particular cases the ligand has to be transported from the outer solvent to the protein active site where the chemical reaction between the ligand and the amino acids surrounding the active site takes place.
+The consecutive reaction then changes the composition and properties of both molecules. 
 In protein engineering, for example, the goal is to alter the protein properties so that the new protein is, e.g., more stable and resistant to organic cosolvents~\cite{Koudelakova2013}.
 
 The design complexity of such reactions lies namely in the transportation of the ligand to the protein active site.
@@ -80,22 +79,23 @@ Nevertheless, simulating the ligand docking using current computational approach
 There are several available variants of molecular simulation methods devised specifically to this problem. 
 Among these Steered Molecular Dynamics~\cite{Isralewitz} and Random Acceleration Molecular Dynamics~\cite{Ludemann} are able to simulate the ligand binding. 
 Such simulations produce a large amount of data containing the ligand movements that are to be explored by the domain expert.
-As the length of these simulation reaches often hundreds of thousands of time steps (additionally this amount increases rapidly due to the available computational resources) it becomes impossible for the domain expert to visualize and observe the ligand movement in a frame-by-frame manner.
-However, the simulation often contains movements that are irrelevant to the ligand binding.
+As the length of these simulations reaches often hundreds of thousands of time steps, it becomes impossible for the domain experts to visualize and observe the ligand movement in a frame-by-frame manner.
+Moreover, the simulation often contains movements that are irrelevant to the ligand binding.
 For example, a significant portion of the simulation the ligand usually spends outside the protein searching for a proper tunnel gorge to enter the molecule. 
-Often it also happens that the ligand enters the molecule via a wrong tunnel and is then evicted from the molecule and searches for the entrance repeatedly.
-Therefore the \"true\" active site entering can be in fact captured in a smaller subset of the original sequence.
+It also often happens that the ligand enters the molecule via a wrong tunnel and is then evicted from the molecule and searches for the entrance repeatedly.
+Therefore, the "true" active site entering can be in fact captured in a smaller subset of the original sequence.
 
 In this paper, we propose a new visual analysis system that addresses the aforementioned challenges; i.e.,  the transportation of a ligand to the active site. 
 We aim to provide the domain experts with a tool for intuitive and interactive exploration of already captured molecular dynamics simulation containing the process of ligand binding. 
-Using our proposed solution the users are able to distinguish between the parts of the simulation when the ligand searches for the proper path to the active site (searches the tunnel gorge or enters the wrong tunnel) and the part when the ligand finally leads to and reaches the active site.
+Using our proposed solution the users are able to distinguish between the parts of the simulation where the ligand searches for the proper path to the active site (searches the tunnel gorge or enters the wrong tunnel) and the part where the ligand finally leads to and reaches the active site.
 %In the part of such annotated data when the ligand travels to the active site we provide the users with our newly introduced concept of so called temporal tunnel.
 %The centerline of this tunnel is represented by the ligand trajectory and in the original data is very jittered.
 %Thus it is hard to follow determine the time steps when the ligand made a significant shift towards the active site.
 
 Here, we introduce two dedicated methods for simplification of the original trajectory.
-These methods can simplify the ligand path hierarchically providing thus several levels of detail (LOD), which can be interactively browsed through.
-In the most abstracted view, represented as the top-most LOD, the temporal tunnel shows only the significant shifts of the ligand towards the active site. Here, the user can interactively brush time intervals, which automatically reveal and adopt the temporal tunnel to the selected interval.
+These methods can simplify the ligand path hierarchically, thus providing several levels of detail (LOD), which can be interactively browsed through.
+In the most abstracted view, represented as the top-most LOD, the temporal tunnel shows only the significant shifts of the ligand towards the active site. 
+Here, the user can interactively brush time intervals, which automatically reveals and adopts the temporal tunnel to the selected interval.
 This abstracted representation, providing the brushing capabilities, is interactively linked with the 3D visualization where the 3D shape of the temporal tunnel for the given temporal window is displayed.
 Further, our tool enables to explore the amino acids surrounding the ligand along its path to the active site as well.
 
@@ -113,7 +113,7 @@ Thus, the first part will cover the topic related to the trajectory analysis, si
 Then the existing representations of tunnels and their surrounding amino acids will be mentioned.
 
 \subsection{Trajectory Analysis, Simplification, and Visualization}
-When searching for the inspiration in this field, one of the best starting points is the book by Andrienko et al. \cite{andrienko2013}.
+When searching for an inspiration in this field, one of the best starting points is the book by Andrienko et al. \cite{andrienko2013}.
 Concerning the trajectory simplification, they proposed two different approaches to the data abstraction, which is a necessary step to achieve the reduction of the data and clarity of visualizations.
 First approach is characterized by omitting unnecessary positions and segments.
 The other is based on sampling the data.
@@ -126,7 +126,7 @@ In the field of molecular biology as well as systems biology, there are several 
 Bidmon et al.~\cite{bidmon2008} presented an abstract way of identification and visualization of solvent molecules' pathways within a molecular dynamics. 
 In comparison to previous solutions, their approach preserves valuable information on the directions and velocities of water molecules routing along these paths. 
 Another approach to the guidance through a complex simulation trajectories in systems biology was presented by Luboschik et al.~\cite{Luboschik2012}. 
-Their method was proposed for biochemical reaction networks and aims to provide the users with the the tool for investigating the overall behavior of a modeled system and subtle, detail behavior at the same time.
+Their method was proposed for biochemical reaction networks and aims to provide the users with a tool for investigating the overall behavior of a modeled system and subtle, detail behavior at the same time.
 
 \subsection{Visualization of Tunnels}
 Our notion about the temporal tunnel in the protein resembles the approach of Lindow et al. \cite{Lindow2013}.
@@ -194,7 +194,7 @@ In this section we describe the design rationale of our proposed approach to int
 The design is tightly related to the problems posed by the biochemists, namely:
 \begin{itemize}
 \item The length of the simulations and impossibility to distinguish between different parts based on the type of ligand movement (outside protein, inside a wrong or correct tunnel).
-\item The scattered nature of the original movement making impossible to easily follow the overall direction of the ligand movement.
+\item The scattered nature of the original movement making it impossible to easily follow the overall direction of the ligand movement.
 \end{itemize}
 
 To tackle the aforementioned challenges, we propose a visualization system illustrated in Figure~\ref{fig:overview}.
@@ -205,11 +205,11 @@ In each time step we check the position of the ligand with respect to the protei
 If the ligand is outside the protein surface, it means that it still tries to look for the entrance point to enter the protein through a tunnel gorge on the surface. 
 When the ligand enters the protein inner space, we can distinguish between two cases.
 In the first case the ligand enters a tunnel but there is an obstacle preventing it to get to the active site and the ligand is expelled from the inner space back to the outer environment.
-The second case finally enables the ligand to reach the active site. 
+The second case enables the ligand to reach the active site. 
 Very similar solution can be adopted for the opposite direction when the ligand aims to leave the active site and reach the outer solvent.
 
 As a result, we obtain three different types of movements which are highlighted in the overview representation (Fig. \ref{fig:overview} a)).
-Yellow parts represent the ligand movements outside the molecule, red parts show the parts when the ligand entered a wrong tunnel and had to return, and green parts depict the situation when the ligand finally took the correct tunnel and reached the active site.
+Yellow parts represent the ligand movements outside the molecule, red parts show the parts where the ligand entered a wrong tunnel and had to return, and green parts depict the situation where the ligand finally took the correct tunnel and reached the active site.
 The user can interactively select an arbitrary part and the remaining parts of our proposed solution (Fig.~\ref{fig:overview} b)) are interactively updated in order to present only the information for a selected part.
 
 \begin{figure*}[htb]
@@ -221,9 +221,9 @@ The user can interactively select an arbitrary part and the remaining parts of o
 \subsection{Temporal Tunnel}
 The bottom part of our visualization consists of three tightly related sections (detailed description in Section~\ref{visualization}) showing the properties of so called \textit{temporal tunnel}. 
 We define the temporal tunnel as a set of spheres positioned onto the centerline representing the trajectory of ligand. 
-The centers of these spheres correspond to the center of gravity of the ligand in each its position and the diameter of the spheres is computed as the maximal empty space around the ligand in a given time step. 
+The centers of these spheres correspond to the center of gravity of the ligand in each of its positions and the diameter of the spheres is computed as the maximal empty space around the ligand in a given time step. 
 The main contribution of the temporal tunnel is to give the user the information about the geometric bottlenecks (narrowest parts) along the ligand trajectory.
-However, the temporal tunnel applied to the original data is not meaningful (see Figure \ref{fig:temporal}).
+It should be stated that applying the temporal tunnel to the original data is not meaningful (see Figure \ref{fig:temporal}).
 However, when the ligand trajectory is simplified using one of the methods described below, it gives the user an important overview of the bottlenecks which can be subsequently explored in more detail.
 
 \begin{figure}[htb]
