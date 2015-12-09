@@ -284,10 +284,9 @@ Such model can help to evaluate how much the ligand was stuck for a given amount
 The advantage of this approach is its uniformity which allows easily transfer from one level to another.
 
 \subsubsection{Simplification Based on Surrounding Amino Acids}
-We have already mentioned that the biochemical and geometrical aspects along the ligand path plays an important role during its exploration. 
+The biochemical and geometrical aspects along the ligand path plays an important role during its exploration. 
 Note that both these properties are defined by surrounding amino acids. 
-Therefore we utilize this information and aggregate all the ligand positions into a single cluster if they have similar surroundings. 
-The number of allowed changes in surrounding amino acids directly corresponds to the individual levels in our multi-scale model. 
+Therefore we utilize this information and aggregate all the ligand positions into a single temporal block if they have similar surroundings regarding the amino acids properties. Naturally, this property cannot be kept as an exact number, therefore, the number of allowed differences in surrounding amino acids directly corresponds to the selected levels in our hierarchical model. 
 {\color{red} Note that these levels are limited to three since for each time step we compute only three closes amino acids.}.
 
 At lowest level (when no amino acids can be changed in single cluster) the model aggregate only the smallest loops in the same area. 
