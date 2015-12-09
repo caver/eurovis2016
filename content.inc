@@ -250,7 +250,7 @@ As a standard solution, to reduce this jittering and also to simplify the trajec
 However, such an interpolation simplification would still not suffice since the spatial distance between two neighboring time steps is usually very small, thus the interpolation scheme still contains a lot of jitter. {\color{red}(TODO mame obrazok?)}
 {\color{red} TODO so which  interpolation is the best?JP: Nemusime ak ukazeme nejaku interpolation scheme a tiez ukazeme ze vieme lepsie}
 
-Except for a lot of jitter, the trajectory often contains sequences that form the so-called \textit{loops}.
+We define ligand trajectory as a set $T = {t_i : 0 < i <=n}$. Except for a lot of jitter, the trajectory often contains sequences that form the so-called \textit{loops}.
 The loop is thought of as a portion of the trajectory in which the ligand got stuck in a given position $p$ (time step $t_i$), then follows an alternative route, i.e., not heading towards the active site, and finally returns to a position $q$ lying close to $p$ where it got stuck (in time step $t_j$). We define this condition as follows:
 \begin{equation}
 |p,q| < d,
@@ -258,8 +258,12 @@ The loop is thought of as a portion of the trajectory in which the ligand got st
 \end{equation}
 where $d$ is a given distance threshold defining the similarity between two ligand positions (experimentally set to {\color{red}TODO}), and $t_i \neq t_j$, $i << j$. 
 
+%\subsubsection{Simplification of the path}
+
+
 To explore the aforementioned patterns of the original trajectory, we proposed two interchangeable simplification methods, which the user can interactively switch between. 
 Both methods sub-sample the original trajectory and aggregate the protein-ligand interaction in a distinct manner. 
+
 
 \subsubsection{Simplification Avoiding Loops}
 Here we employ the position of active site that can be either user defined or obtained directly from the simulation, e.g., as the final position of the ligand.
@@ -271,15 +275,19 @@ T_B=\{t_i:\Delta d_i\cdot \Delta d_{i+1} <0\}.
 \label{eq:zc}
 \end{equation}
 When referring to each entry of $T_B$ as a zero-crossing, we aggregate the user-defined amount $k$ of zero-crossings to form a temporal block $T_{B_j}$ such that $|T_{B_j}|=k$, i.e., when $k=2$ and $|T_B|=20$ we acquire $10$ temporal blocks. 
-For the given parameter $k$, let us denote first time step of this temporal block as $S_k(j)=\{t_{j_1}:T_{B_j}=\{t_{j_1},\ldots\}\}$. 
-In this manner, we extract a set of time steps $S_k=\{S_k(1),\ldots ,S_k(m)\}$ representing $m$ temporal blocks of a trajectory simplification that reflects the $k$parameter. 
-It is important to mention that the corresponding temporal tunnel is formed by means of ligand positions in $S_k$ solely. 
+
+For the given parameter $k$, let us denote last time step of this temporal block as $E_k(j)=\{t_{j_k}:T_{B_j}=\{t_{j_1},\ldots,t_{j_k}\}$. 
+In this manner, we extract a set of time steps $E_k=\{E_k(1),\ldots ,E_k(m)\}$ representing $m$ temporal blocks of a trajectory simplification that reflects the $k$~parameter. 
+It is important to mention that the corresponding temporal tunnel is formed by means of ligand positions in $E_k$ solely. 
+
+%Now, for a given 
+
 %For instance, on the top-most level, the temporal tunnel contains no loops neither.
 %The multi-scale model of the temporal tunnel is then built where on the highest level all loops are omitted.
 %In other words, the top-level temporal tunnel contains only the time steps when the ligand headed towards the active site.
 %The intermediate levels start to contain a certain number of loops with respect to the following rule.
 
-Each block represents an aggregated unit for which the ligand has to make a given number of loops (each loop is defined by two zero-crossings) before a new block is created. 
+Each block $T_{B_j}$ represents an aggregated unit for which the ligand has to make a given number of loops (each loop is defined by two zero-crossings) before a new block is created. 
 Note that the last block could potentially contain a smaller number of zero-crossings.
 As a consequence, if the ligand moves constantly in the same direction, it takes more time steps to accumulate before $k$ number of zero-crossings is reached. Therefore, the number of time steps in each block reveals either the parts of trajectory where the ligand was moving mostly in a single direction or the sections where it got stuck and thus was unable to move on. 
 Nevertheless, this information needs to be combined with the overall distance the ligand crossed within the block to avoid the misinterpretation of longer loops. Additionally, the user has the possibility to alter parameter $k$ to adjust the granularity of block decomposition. 
