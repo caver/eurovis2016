@@ -290,16 +290,28 @@ Figure~\ref{fig:loops} demonstrates different results for altering the $k$ value
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=1\linewidth]{img/loops.png}
-  \caption{\label{fig:loops} Example of resulting trajectories for different values of the parameter $k$ which influences the granularity of block decomposition.}
+  \caption{\label{fig:loops} Example of resulting trajectories for different values of the parameter $k$ which influences the granularity of block decomposition. {\color{red}TODO change images!!! generated in old version}}
 \end{figure}
 
+This type of trajectory simplification was introduces because it prevents the bottlenecks of the temporal tunnel which are the most interesting and important sites of the simulation.
+In these sites the ligand got stuck which automatically defines the parts of the trajectory which is worthwhile to explore in more detail and find out the reason why the ligand was not able to pass through the tunnel. 
+
 \subsubsection{Simplification Using Uniform Sampling}
-Here, we uniformly divide the whole simulation into the given number of time intervals, temporal blocks. Each temporal block is of a fixed length given by the user-defined granularity of time represented by the size of the temporal span.
-In this case, we define $T_i$ as $|T_i|=n$, where $n$ represents the given number of time steps per temporal block. The value represented in this aggregate is the number of zero-crossings in this time interval.
+Here, we uniformly divide the whole simulation into the given number of time intervals, temporal blocks. 
+Each temporal block is of a fixed length given by the user-defined granularity of time represented by the size of the temporal span.
+In this case, we define $T_i$ as $|T_i|=n$, where $n$ represents the given number of time steps per temporal block. 
+The value represented in this aggregate is the number of zero-crossings in this time interval.
+
 Such a model can help to evaluate to which extent the ligand was stuck for a given amount of time.
 The advantage of this approach is its uniformity that allows easily transfer from one level to another.
+Moreover, this concept is commonly used by the biochemists in cases when they have to deal with large amount of data or information, such as in computation of protein cavities and tunnels.
+Here the user selects a sampling step and only in these regularly selected steps the cavities are computed. 
+This gives the user the rough idea of the presence of cavities witing the whole simulation.
+Of course, based on the selected granularity, such method can skip important time steps with respect to the ligand motion. 
+
 
 \subsubsection{Simplification Based on Surrounding Amino Acids}
+{\color{red}TODO BK what to do with this? should we mention this or not? how to justify this approach wrt. to biochemistry? what it should give them?}
 The biochemical and geometrical aspects along the ligand path plays an important role during its exploration. 
 Note that both these properties are defined by surrounding amino acids. 
 Therefore we utilize this information and aggregate all the ligand positions into a single temporal block if they have similar surroundings regarding the amino acids properties. Naturally, this property cannot be kept as an exact number, therefore, the number of allowed differences in surrounding amino acids directly corresponds to the selected levels in our hierarchical model. 
@@ -314,11 +326,23 @@ Which provides useful hints when detecting which amino acids along the ligand tr
 
 {\color{red} TODO: reason about / and implement the time flow independence}
 
-\subsection{Trajectory Visualization} \label{visualization}
-The trajectory is visualized in two manners which are interactively linked together.
-First is the abstracted visualization shown in Figure~\ref{fig:overview} b) where the visualization of the temporal tunnel and its surroundings is divided into three parts. TODO
+\subsection{Visualization} \label{visualization}
+As now we have the information about different simplification models, we can finally describe in detail the bottom part of our proposed visualization (see Figure~\ref{fig:overview} b)).
+It aims to present all necessary information about the temporal tunnel which should help the user to decide about the interesting sites on the ligand trajectory.
+
+
+
+First is the abstracted visualization shown in Figure~\ref{fig:overview} b) where the visualization of the temporal tunnel and its surroundings is further divided into three parts. 
+The top part showing a bar chart representation captures the aggregated information about individual blocks detected by some of the above mentioned simplification methods.
+Each block is represented by a single bar where its height corresponds to the amount at which the ligand was stuck.
+
+Each cluster is represented by the last time step it contains.
+This helps to revel the conditions such as tunnel radius which enabled to the ligand proceed further towards the active site.
+
 
 The second type of visualization shows the trajectory as a tube in 3D. TODO
+
+Both representation are interactively linked together. TODO
 
 %\subsection{Jan's part, will probably not fit to the current version at all.}
 %General outline of the section:
@@ -344,16 +368,8 @@ The second type of visualization shows the trajectory as a tube in 3D. TODO
 
 %\textbf{Fourth:} ... based on threshold for maximum backtracking of the ligand on its path. This is not good approach since I don't even know how to justify it with respect to previous three.
 
-\subsection{Visualization}
 
-{\color{red} Just some random sentences I come up with but then in the end did not fit in:}
 
-In order to communicate all the information obtained from previous models to the user we proposed a visualization as shown in Figure \ref{fig:overview}.
-
-Each cluster is here represented by a single bar where its height corresponds to the amount at which the ligand was stuck.
-
-Each cluster is represented by the last time step it contains.
-This helps to revel the conditions such as tunnel radius which enabled to the ligand proceed further towards the active site.
 
 
 %-------------------------------------------------------------------------
