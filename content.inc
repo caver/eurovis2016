@@ -279,9 +279,10 @@ As a consequence, if the ligand moves constantly in the same directions, it take
 %This way clusters will be merged or divided uniformly, e.g, if the current number of loops in cluster is multiplied by two the two adjacent cluster will be merge into the single one and vice versa.
 
 \subsubsection{Simplification Using Uniform Sampling}
-In this model we uniformly divide the whole simulation into the given number of clusters. 
-Such model can help to evaluate how much the ligand was stuck for a given amount of time.
-The advantage of this approach is its uniformity which allows easily transfer from one level to another.
+Here, we uniformly divide the whole simulation into the given number of time intervals, temporal blocks. Each temporal block is of a fixed length given by the user-defined granularity of time represented by the size of the temporal span.
+In this case, we define $T_i$ as $|T_i|=n$, where $n$ represents the given number of time steps per temporal block. The value represented in this aggregate is the number of zero-crossings in this time interval.
+Such a model can help to evaluate to which extent the ligand was stuck for a given amount of time.
+The advantage of this approach is its uniformity that allows easily transfer from one level to another.
 
 \subsubsection{Simplification Based on Surrounding Amino Acids}
 The biochemical and geometrical aspects along the ligand path plays an important role during its exploration. 
