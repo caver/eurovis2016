@@ -241,42 +241,57 @@ Still when the ligand trajectory is simplified using one of the methods describe
 \end{figure}
 
 \subsection{Trajectory Simplification}
-In order to reveal significant ligand motion patterns, we introduce a hierarchical simplification model that, in addition, allows us to emphasize several important aspects related to the mutual protein-ligand interaction. These aspects are represented by i) the main direction of the ligand motion, ii) the sections of the simulation where the ligand got stuck and iii) the geometrical and physico-chemical properties on sites where the ligand got stuck. 
+In order to reveal significant ligand motion patterns, we introduce a hierarchical simplification model that, in addition, allows us to emphasize several important aspects related to the mutual protein-ligand interaction.
+These aspects are represented by i) the main direction of the ligand motion, ii) the sections of the simulation where the ligand got stuck and iii) the geometrical and physico-chemical properties on sites where the ligand got stuck. 
 
-As already mentioned, the main source of the visual clutter (Fig. \ref{fig:temporal}a) is the ligand motion itself, which resembles the random Brownian motion. Here, the removal of this jittery motion would allow us to reveal more dominant ligand motion patterns. Nevertheless, this also means to approximate the initial trajectory, which on the other hand is a trade-off for providing a good overview of entire ligand motion instead.
-As a standard solution, to reduce this jittering and also to simplify the trajectory, the Hermite (or similar) interpolation technique can be used. However, such an interpolation simplification would still not suffice since the spatial distance between two neighboring time steps is usually very small, thus the interpolation scheme still contains a lot of jitter. {\color{red}(TODO mame obrazok?)}
+As already mentioned, the main source of the visual clutter (Fig. \ref{fig:temporal}a) is the ligand motion itself, which resembles the random Brownian motion. Here, the removal of this jittery motion would allow us to reveal more dominant ligand motion patterns. 
+Nevertheless, this also means to approximate the initial trajectory, which on the other hand is a trade-off for providing a good overview of entire ligand motion instead.
+As a standard solution, to reduce this jittering and also to simplify the trajectory, the Hermite (or similar) interpolation technique can be used. 
+However, such an interpolation simplification would still not suffice since the spatial distance between two neighboring time steps is usually very small, thus the interpolation scheme still contains a lot of jitter. {\color{red}(TODO mame obrazok?)}
 {\color{red} TODO so which  interpolation is the best?JP: Nemusime ak ukazeme nejaku interpolation scheme a tiez ukazeme ze vieme lepsie}
 
 Except for a lot of jitter, the trajectory often contains sequences that form the so-called \textit{loops}.
-The loop is thought of as a portion of the trajectory in which the ligand got stuck in a given position $p$ (time step $t_i$), then follows an alternative route; i.e., not heading towards the active site, and finally returns to a position $q$ lying close to $p$ where it got stuck (in time step $t_j$). We define this condition as follows:
+The loop is thought of as a portion of the trajectory in which the ligand got stuck in a given position $p$ (time step $t_i$), then follows an alternative route, i.e., not heading towards the active site, and finally returns to a position $q$ lying close to $p$ where it got stuck (in time step $t_j$). We define this condition as follows:
 \begin{equation}
 |p,q| < d,
 \label{eq:loop}
 \end{equation}
 where $d$ is a given distance threshold defining the similarity between two ligand positions (experimentally set to {\color{red}TODO}), and $t_i \neq t_j$, $i << j$. 
 
-To explore the aforementioned patterns of the original trajectory, we proposed two interexchangeable simplification methods, which the user can interactively switch between. Both methods sub-sample the original trajectory and aggregate the protein-ligand interaction in a distinct manner. 
+To explore the aforementioned patterns of the original trajectory, we proposed two interchangeable simplification methods, which the user can interactively switch between. 
+Both methods sub-sample the original trajectory and aggregate the protein-ligand interaction in a distinct manner. 
 
 \subsubsection{Simplification Avoiding Loops}
-%When exploring the ligand path in more details the biochemist are interested mostly in the parts where the ligand get suck for some reason.
-Here we employ the position of active site that can be either user defined or obtained directly from the simulation; e.g., as the final position of the ligand.
+Here we employ the position of active site that can be either user defined or obtained directly from the simulation, e.g., as the final position of the ligand.
 %{\color{red}(The automatic active site detection is currently supported only for input data in which the ligand is in the active site by the end of the simulation.)}.
 % I guess it could be done for reentry simulation as well using the most distant place from entery point. But here we face the problem how to evalueate whether the ligand go stuck and lefet before actually reaching the active site (ever).  
-Thus, in each time step $i$ the distance $d_i$ from the active site to the ligand center of mass can be evaluated; i.e., we define a set $D=\{d_1,d_2, \ldots, d_n\}$. By means of this distance, one can easily detect time steps when the ligand changes its motion with respect to the active site; i.e., towards to or away from the active site. Using $d$ notation we represent these time steps as follows:
+Thus, in each time step $i$ the distance $d_i$ from the active site to the ligand center of mass can be evaluated, i.e., we define a set $D=\{d_1,d_2, \ldots, d_n\}$. By means of this distance, one can easily detect time steps when the ligand changes its motion with respect to the active site, i.e., towards to or away from the active site. Using $d$ notation we represent these time steps as follows:
 \begin{equation}
 T_B=\{t_i:\Delta d_i\cdot \Delta d_{i+1} <0\}. 
 \label{eq:zc}
 \end{equation}
-When referring to each entry of $T_B$ as a zero-crossing, we aggregate the user-defined amount $k$ of zero-crossings to form a temporal block $T_{B_j}$ such that $|T_{B_j}|=k$; i.e., when $k=2$ and $|T_B|=20$ we acquire $10$ temporal blocks. For the given parameter $k$, let us denote first time step of these temporal block as $S_k(j)=\{t_{j_1}:T_{B_j}=\{t_{j_1},\ldots\}\}$. In this manner, we extract a set of time steps $S_k=\{S_k(1),\ldots ,S_k(m)\}$ representing $m$ temporal blocks of a trajectory simplification that reflects $k$ parameter. It is important to mention that the corresponding temporal tunnel is formed by means of ligand positions in $S_k$ solely. 
+When referring to each entry of $T_B$ as a zero-crossing, we aggregate the user-defined amount $k$ of zero-crossings to form a temporal block $T_{B_j}$ such that $|T_{B_j}|=k$, i.e., when $k=2$ and $|T_B|=20$ we acquire $10$ temporal blocks. 
+For the given parameter $k$, let us denote first time step of this temporal block as $S_k(j)=\{t_{j_1}:T_{B_j}=\{t_{j_1},\ldots\}\}$. 
+In this manner, we extract a set of time steps $S_k=\{S_k(1),\ldots ,S_k(m)\}$ representing $m$ temporal blocks of a trajectory simplification that reflects the $k$parameter. 
+It is important to mention that the corresponding temporal tunnel is formed by means of ligand positions in $S_k$ solely. 
 %For instance, on the top-most level, the temporal tunnel contains no loops neither.
 %The multi-scale model of the temporal tunnel is then built where on the highest level all loops are omitted.
 %In other words, the top-level temporal tunnel contains only the time steps when the ligand headed towards the active site.
 %The intermediate levels start to contain a certain number of loops with respect to the following rule.
 
-Each block represents an aggregated unit for which the ligand has to make a given number of loops (each loop is defined by two zero-crossings) before a new block is created. Note that the last block could potentially contain a less number of zero-crossings.
-As a consequence, if the ligand moves constantly in the same directions, it takes more time steps to accumulate before $k$ number of zero-crossings is reached. Therefore, the number of time steps in each block reveals either the parts of trajectory where the ligand was moving mostly in a single direction or the sections where it was osculating and thus is unable to move on. Nevertheless, this information needs to be combined with the overall distance the ligand crossed within the block to avoid misinterpretation of the longer loops. Additionally, the user has the possibility to alter parameter $k$ to adjust the granularity of block decomposition. Figure~\ref{fig:todo} demonstrates different results for altering the $k$ value.
+Each block represents an aggregated unit for which the ligand has to make a given number of loops (each loop is defined by two zero-crossings) before a new block is created. 
+Note that the last block could potentially contain a smaller number of zero-crossings.
+As a consequence, if the ligand moves constantly in the same direction, it takes more time steps to accumulate before $k$ number of zero-crossings is reached. Therefore, the number of time steps in each block reveals either the parts of trajectory where the ligand was moving mostly in a single direction or the sections where it got stuck and thus was unable to move on. 
+Nevertheless, this information needs to be combined with the overall distance the ligand crossed within the block to avoid the misinterpretation of longer loops. Additionally, the user has the possibility to alter parameter $k$ to adjust the granularity of block decomposition. 
+Figure~\ref{fig:loops} demonstrates different results for altering the $k$ value.
 %Even though this multi-scale model enables to switch between individual levels by increasing (or decreasing) the number of loops in cluster by one, we suggest that the current value should be multiplied (or divided) by a natural number. 
 %This way clusters will be merged or divided uniformly, e.g, if the current number of loops in cluster is multiplied by two the two adjacent cluster will be merge into the single one and vice versa.
+
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=1\linewidth]{img/loops.png}
+  \caption{\label{fig:loops} Example of resulting trajectories for different values of the parameter $k$ which influences the granularity of block decomposition.}
+\end{figure}
 
 \subsubsection{Simplification Using Uniform Sampling}
 Here, we uniformly divide the whole simulation into the given number of time intervals, temporal blocks. Each temporal block is of a fixed length given by the user-defined granularity of time represented by the size of the temporal span.
