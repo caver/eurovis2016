@@ -350,17 +350,50 @@ It can provide the users with the suggestion of amino acids along the ligand tra
 As now we have the information about different simplification models, we can finally describe in detail the bottom part of our proposed visualization (see Figure~\ref{fig:overview} b)).
 It aims to present all necessary information about the temporal tunnel which should help the user to decide where are the interesting sites on the ligand trajectory.
 The proposed visualization is further divided into three parts.
+
 The top part shows the bar chart representation which captures the aggregated information about individual blocks detected by some of the above mentioned simplification methods.
-Each block is represented by a single bar where its height corresponds to the amount of aggregated time steps.
+Each temporal block is represented by a single bar and its height corresponds to some information about the aggregated time steps (temporal blocks).
+For each simplification model, the user can select from the following properties which can be mapped onto the bar height. 
+\begin{itemize}
+\item Number of aggregated time steps. This option is not meaningful for the uniform sampling.
+\item Number of zero-crossings. Used for the simplification method using this concept.
+\item Total distance the ligand travelled between the first and the last time step of the temporal block. It is the sum of of all distances between the the neighboring time steps of the block.
+\item Relative distance the ligand travelled between the first and the last time step of the temporal block. It corresponds to the distance between the first and the last time step of the block.
+\end{itemize}
 
+The basic coloring scheme of the individual bars encodes the direction of the ligand in the corresponding temporal blocks (see Figure~\ref{fig:bars}). 
+Yellow color denotes the direction towards the active site, red color means that the ligand travelled in the opposite direction.
+{\color{red}TODO what else?}
 
-Each cluster is represented by the last time step it contains.
-This helps to revel the conditions such as tunnel radius which enabled to the ligand proceed further towards the active site.
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=1\linewidth]{img/bars.png}
+  \caption{\label{fig:bars} Coloring scheme used for individual bars which encodes the direction of the ligand with respect to the active site position. Yellow color corresponds to the motion towards the active site, red color corresponds to the opposite direction.}
+\end{figure}
 
+The middle part gives the user the context of the width of the temporal tunnel in a given temporal block.
+The width mapped onto the tunnel profile is taken from the last time step of a given block -- it corresponds to the diameter of the sphere enclosing the empty space around the ligand center of mass.
+This solution comes from the idea that the in the last time step of the block the ligand passed through all the bottlenecks contained in this block and entered the subsequent temporal block. 
+In combination with the information obtained from the bar representation, the user can easily reveal if the bottlenecks detected from the ligand motion correspond to the geometric bottlenecks of the temporal tunnel.
+In other words, such combination gives the user very interesting information about the correspondence between the geometrical bottlenecks and parts, where the ligand got stuck.
+These parts form another type of bottlenecks -- those defined by the physico-chemical properties of the surrounding amino acids. 
+Mostly the geometric and phys-chem bottlenecks are equal but if the tunnel is wide enough but the ligand got stuck anyway, it means that the properties of the ligand were not compatible with the properties of the amino acids interacting with the ligand.
 
-The second type of visualization shows the trajectory as a tube in 3D. TODO
+To explore both types of bottlenecks and their corresponding amino acids in more detail, we propose the third part (bottom) of the proposed visualization (see Figure~\ref{fig:aacids}).
+It contains the list of all amino acids surrounding the temporal tunnel.
+For each amino acid we reserve one line of the representation. 
+The line is colored with respect to a selected physico-chemical property -- our representation supports switching between hydrophobicity, partial charges, and donors and acceptors.
+The interruption in some of these lines is caused by the fact that the given amino acid was not present around the ligand in the corresponding temporal block.
 
-Both representation are interactively linked together. TODO
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=1\linewidth]{img/aacids.png}
+  \caption{\label{fig:aacids} Representation of amino acids surrounding the temporal tunnel and their physico-chemical properties. Coloring corresponds to a selected property, the line interruption means that this amino acid was not detected around the ligand in the corresponding temporal block.{\color{red}TODO change image!!!}}
+\end{figure}
+
+The proposed abstracted visualization is interactively linked with the 3D view where the temporal tunnel is represented in the following way.
+------------------------------
+
 
 %\subsection{Jan's part, will probably not fit to the current version at all.}
 %General outline of the section:
