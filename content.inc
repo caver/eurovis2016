@@ -277,7 +277,7 @@ T_B=\{t_i:\Delta d_i\cdot \Delta d_{i+1} <0\}.
 \label{eq:zc}
 \end{equation}
 The method operates with the concept of zero-crossing by which we mean the situation when the ligand changes its direction.
-It means that, e.g., the ligand heading towards the active site changed its direction and travelled back to the outer solvent.
+It means that, e.g., the ligand heading towards the active site changed its direction and traveled back to the outer solvent.
 With another zero-crossing the ligand starts to approach the active site again.
 So one pair of zero-crossings defines a so-called \textit{loop}.
 These loops emerge when the ligand got stuck.
@@ -343,7 +343,74 @@ The other levels allow some changes in properties of the surroundings, i.e., the
 Such model allows to evaluate how long the ligand was stuck with respect to the surroundings consisting of a particular set of amino acids. 
 It can provide the users with the suggestion of amino acids along the ligand trajectory which caused the problems and should be possibly replaced (mutated).
 
-{\color{red} TODO: reason about / and implement the time flow independence. BK: what do you mean by this?}
+{\color{red} TODO: reason about / and implement the time flow independence. BK: what do you mean by this? JB: that all the time bins would be aggregated without any time correspondence, i.e., all time steps with the same AA woudl be in the single time bin even though they are on the opposite sides (time-wise) of simulation.}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsubsection{Simplification Based on Loop Degradation}
+We define the whole ligand trajectory as a set of time steps $T = \{t_i : 0 < t <= n\}$ where $n$ is the length of the whole simulation.
+As was already mentioned the most of the visual clutter is caused by the small oscillations in the ligand motion.
+In order to correctly simplify the trajectory we need to suppress such insignificant movement while preserving the original positions in the significant once (on contrary to using for instance simplification by wavelets) 
+we utilize the notion of relative distance traveled by the ligand over some period of time.
+We divide the whole trajectory $T$ into the connected temporal blocks $T_{B_j} = \{t_i \in T: k_j <= i < l_j, l_j = k_{j+1}\}$ such that the distance between first points $S_j = \{t_{j_1} : T_{B_j}=\{t_{j_1},\ldots\}$ in two adjacent block $T_{B_j}$ and $T_{B_{j+1}}$ is at least $X$ 
+
+
+
+
+
+\subsubsection{Images}
+
+
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=1\linewidth]{img/loop_degradation.pdf}
+  \caption{loop degradation}
+\end{figure}
+
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=1\linewidth]{img/uniform_degradation.pdf}
+  \caption{uniform degradation}
+\end{figure}
+
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=1\linewidth]{img/zero_degradation.pdf}
+  \caption{zero degradation}
+\end{figure}
+
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=1\linewidth]{img/residue_degradation.pdf}
+  \caption{residue degradation}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \subsection{Temporal Tunnel Compound Views} \label{visualization}
 Each simplification scheme provides a detailed information aggregated within the acquired temporal blocks, which asks for a meaningful visual representation. Therefore, we propose a compound visualization system (Fig.~\ref{fig:overview}b) composed of dedicated charts representing information provided by the corresponding temporal tunnel. 
