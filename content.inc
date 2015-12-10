@@ -345,14 +345,19 @@ It can provide the users with the suggestion of amino acids along the ligand tra
 
 {\color{red} TODO: reason about / and implement the time flow independence. BK: what do you mean by this?}
 
-\subsection{Temporal tunnel compound views} \label{visualization}
-Each simplification scheme provides a detailed information aggregated within the acquired temporal blocks, which asks for a meaningful visual representation. Therefore, we propose a compound visualization system (Fig.~\ref{fig:overview}b) composed of dedicated charts representing information provided by the corresponding temporal tunnel. This information should assist users to quickly explore interesting sites on the ligand trajectory.
+\subsection{Temporal Tunnel Compound Views} \label{visualization}
+Each simplification scheme provides a detailed information aggregated within the acquired temporal blocks, which asks for a meaningful visual representation. Therefore, we propose a compound visualization system (Fig.~\ref{fig:overview}b) composed of dedicated charts representing information provided by the corresponding temporal tunnel. 
+This information should assist users to quickly explore interesting sites on the ligand trajectory.
 Our compound view is divided into three parts.
 
 The top part shows the bar chart that captures the aggregated information about individual blocks obtained via the user-selected simplification method.
-Each temporal block is represented by a single bar and its height corresponds to the actual aggregated value; i.e., either the number of zero-crossings or the number of time steps. Additionally, the user can choose between two ligand-distance related values. First, the total distance the ligand passed through between each neighboring time steps of the temporal block. Secondly, a relative distance the ligand passed between the first and the last time step of the temporal block.  \textcolor[rgb]{1,0,0}{(TODO Figure to compare both)}
+Each temporal block is represented by a single bar and its height corresponds to the actual aggregated value; i.e., either the number of zero-crossings or the number of time steps. 
+Additionally, the user can choose between two ligand-distance related values. 
+First, the total distance the ligand passed through between each neighboring time steps of the temporal block. 
+Secondly, a relative distance the ligand passed between the first and the last time step of the temporal block.  \textcolor[rgb]{1,0,0}{(TODO Figure to compare both)}
 
-The basic coloring scheme of the individual bars encodes the direction of the ligand in the corresponding temporal blocks (Fig.~\ref{fig:bars}). Here, yellow color represents the direction towards the active site, while red color means that the ligand moved in the opposite direction.
+The basic coloring scheme of the individual bars encodes the direction of the ligand in the corresponding temporal blocks (Fig.~\ref{fig:bars}). 
+Here, yellow color represents the direction towards the active site, while red color means that the ligand moved in the opposite direction.
 {\color{red}TODO what else?}
 
 \begin{figure}[htb]
@@ -364,9 +369,10 @@ The basic coloring scheme of the individual bars encodes the direction of the li
 The middle part gives the user the context of the width of the temporal tunnel in a given temporal block.
 The width corresponds to the diameter of the sphere enclosing the empty space around the ligand that is taken from the last time step of a given block. Here, the motivation being that ligand leaves the block in the last time step and enters the subsequent one. 
 In combination with the information obtained from the bar representation, the user can easily reveal if the bottlenecks detected from the ligand motion correspond to the geometric bottlenecks of the temporal tunnel.
-In other words, such a combination provides users to explore the correspondence between the geometrical bottlenecks and parts the ligand got stuck.
+In other words, such a combination provides the users with the possibility to explore the correspondence between the geometrical bottlenecks and parts the ligand got stuck.
 These parts form another type of bottlenecks -- those defined by the physico-chemical properties of the surrounding amino acids. 
-In general, the geometric and phys-chem bottlenecks are considered equal. Nevertheless, a case that the tunnel is relatively wide enough and yet the ligand gets stuck reflects that the properties of the ligand are not compatible with the properties of the amino acids interacting with the ligand.
+In general, the geometric and phys-chem bottlenecks are considered as equal. 
+Nevertheless, a case that the tunnel is relatively wide enough and yet the ligand gets stuck reflects the situation when the properties of the ligand are not compatible with the properties of the amino acids interacting with the ligand.
 
 To explore both types of bottlenecks and their corresponding amino acids in more detail, we propose the third part of the proposed visualization (Fig.~\ref{fig:aacids}).
 Here, we provide visual representation containing the list of all amino acids surrounding the temporal tunnel.
