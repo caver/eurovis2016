@@ -284,7 +284,7 @@ These loops emerge when the ligand got stuck.
 When two zero-crossings forming the loop are located in two time steps which are more distant with respect to time, it means that the ligand got stuck for the time portion between these time steps.
 When referring to each entry of $T_B$ as a zero-crossing, we aggregate the user-defined amount $k$ of zero-crossings to form a temporal block $T_{B_j}$ such that $|T_{B_j}|=k$, i.e., when $k=2$ and $|T_B|=20$ we acquire $10$ temporal blocks. 
 
-For the given parameter $k$, we denote the last time step of this temporal block as $E_k(j)=\{t_{j_k}:T_{B_j}=\{t_{j_1},\ldots,t_{j_k}\}$. 
+For the given parameter $k$, we denote the last time step of this temporal block as $E_k(j)=\{t_{j_k}:T_{B_j}=\{t_{j_1},\ldots,t_{j_k}\}\}$. 
 In this manner, we extract a set of time steps $E_k=\{E_k(1),\ldots ,E_k(m)\}$ representing $m$ temporal blocks of a trajectory simplification that reflects the $k$~parameter. 
 It is important to mention that the corresponding temporal tunnel is formed by ligand positions in $E_k$ solely. 
 
@@ -315,8 +315,8 @@ These sites where the ligand got stuck for a significant portion of time corresp
 \subsubsection{Simplification Using Uniform Sampling}
 Here, we uniformly divide the whole simulation into a given number of time intervals, i.e, temporal blocks. 
 Each temporal block is of a fixed length given by the user-defined granularity of time represented by the size of the temporal span.
-In this case, we define $T_i$ as $|T_i|=n$, where $n$ represents the given number of time steps per temporal block. 
-The value represented in this aggregate is the number of zero-crossings in this time interval.
+In this case, we define $T_i$ as $|T_i|=l$, where $l$ represents the given number of time steps per temporal block. 
+The value represented in this aggregate is the number of zero-crossings in this time interval. This can be seen as an orthogonal simplification strategy to the aforementioned one.
 
 Such a model can help to evaluate to which extent the ligand was stuck for a given amount of time.
 The advantage of this approach is its uniformity that allows easily transfer from one level to another.
@@ -324,8 +324,7 @@ Moreover, this concept is commonly used by the biochemists in cases when they ha
 Here the user selects a sampling step and only in these regularly selected steps the cavities are computed. 
 This gives the user the rough idea of the presence of cavities within the whole simulation.
 
-Of course, based on the selected granularity, such method can skip important time steps with respect to the ligand motion. 
-
+Nevertheless, the given granularity can cause that important time steps with respect to the ligand motion will be skipped \textcolor[rgb]{1,0,0}{(TODO figure and explanation!!!!)}. 
 
 \subsubsection{Simplification Based on Surrounding Amino Acids}
 {\color{red}TODO BK leave it here?}
@@ -346,23 +345,14 @@ It can provide the users with the suggestion of amino acids along the ligand tra
 
 {\color{red} TODO: reason about / and implement the time flow independence. BK: what do you mean by this?}
 
-\subsection{Visualization} \label{visualization}
-As now we have the information about different simplification models, we can finally describe in detail the bottom part of our proposed visualization (see Figure~\ref{fig:overview} b)).
-It aims to present all necessary information about the temporal tunnel which should help the user to decide where are the interesting sites on the ligand trajectory.
-The proposed visualization is further divided into three parts.
+\subsection{Temporal tunnel compound views} \label{visualization}
+Each simplification scheme provides a detailed information aggregated within the acquired temporal blocks, which asks for a meaningful visual representation. Therefore, we propose a compound visualization system (Fig.~\ref{fig:overview}b) composed of dedicated charts representing information provided by the corresponding temporal tunnel. This information should assist users to quickly explore interesting sites on the ligand trajectory.
+Our compound view is divided into three parts.
 
-The top part shows the bar chart representation which captures the aggregated information about individual blocks detected by some of the above mentioned simplification methods.
-Each temporal block is represented by a single bar and its height corresponds to some information about the aggregated time steps (temporal blocks).
-For each simplification model, the user can select from the following properties which can be mapped onto the bar height. 
-\begin{itemize}
-\item Number of aggregated time steps. This option is not meaningful for the uniform sampling.
-\item Number of zero-crossings. Used for the simplification method using this concept.
-\item Total distance the ligand travelled between the first and the last time step of the temporal block. It is the sum of of all distances between the the neighboring time steps of the block.
-\item Relative distance the ligand travelled between the first and the last time step of the temporal block. It corresponds to the distance between the first and the last time step of the block.
-\end{itemize}
+The top part shows the bar chart that captures the aggregated information about individual blocks obtained via the user-selected simplification method.
+Each temporal block is represented by a single bar and its height corresponds to the actual aggregated value; i.e., either the number of zero-crossings or the number of time steps. Additionally, the user can choose between two ligand-distance related values. First, the total distance the ligand passed through between each neighboring time steps of the temporal block. Secondly, a relative distance the ligand passed between the first and the last time step of the temporal block.  \textcolor[rgb]{1,0,0}{(TODO Figure to compare both)}
 
-The basic coloring scheme of the individual bars encodes the direction of the ligand in the corresponding temporal blocks (see Figure~\ref{fig:bars}). 
-Yellow color denotes the direction towards the active site, red color means that the ligand travelled in the opposite direction.
+The basic coloring scheme of the individual bars encodes the direction of the ligand in the corresponding temporal blocks (Fig.~\ref{fig:bars}). Here, yellow color represents the direction towards the active site, while red color means that the ligand moved in the opposite direction.
 {\color{red}TODO what else?}
 
 \begin{figure}[htb]
@@ -372,18 +362,17 @@ Yellow color denotes the direction towards the active site, red color means that
 \end{figure}
 
 The middle part gives the user the context of the width of the temporal tunnel in a given temporal block.
-The width mapped onto the tunnel profile is taken from the last time step of a given block -- it corresponds to the diameter of the sphere enclosing the empty space around the ligand center of mass.
-This solution comes from the idea that the in the last time step of the block the ligand passed through all the bottlenecks contained in this block and entered the subsequent temporal block. 
+The width corresponds to the diameter of the sphere enclosing the empty space around the ligand that is taken from the last time step of a given block. Here, the motivation being that ligand leaves the block in the last time step and enters the subsequent one. 
 In combination with the information obtained from the bar representation, the user can easily reveal if the bottlenecks detected from the ligand motion correspond to the geometric bottlenecks of the temporal tunnel.
-In other words, such combination gives the user very interesting information about the correspondence between the geometrical bottlenecks and parts, where the ligand got stuck.
+In other words, such a combination provides users to explore the correspondence between the geometrical bottlenecks and parts the ligand got stuck.
 These parts form another type of bottlenecks -- those defined by the physico-chemical properties of the surrounding amino acids. 
-Mostly the geometric and phys-chem bottlenecks are equal but if the tunnel is wide enough but the ligand got stuck anyway, it means that the properties of the ligand were not compatible with the properties of the amino acids interacting with the ligand.
+In general, the geometric and phys-chem bottlenecks are considered equal. Nevertheless, a case that the tunnel is relatively wide enough and yet the ligand gets stuck reflects that the properties of the ligand are not compatible with the properties of the amino acids interacting with the ligand.
 
-To explore both types of bottlenecks and their corresponding amino acids in more detail, we propose the third part (bottom) of the proposed visualization (see Figure~\ref{fig:aacids}).
-It contains the list of all amino acids surrounding the temporal tunnel.
-For each amino acid we reserve one line of the representation. 
-The line is colored with respect to a selected physico-chemical property -- our representation supports switching between hydrophobicity, partial charges, and donors and acceptors.
-The interruption in some of these lines is caused by the fact that the given amino acid was not present around the ligand in the corresponding temporal block.
+To explore both types of bottlenecks and their corresponding amino acids in more detail, we propose the third part of the proposed visualization (Fig.~\ref{fig:aacids}).
+Here, we provide visual representation containing the list of all amino acids surrounding the temporal tunnel.
+Each amino acid defines one line in the list. 
+The line is colored with respect to a selected physico-chemical property~---~our representation supports switching between hydrophobicity, partial charges, and donors and acceptors.
+The interruption in some of these lines is caused by the fact that the given amino acid is not present around the ligand in the corresponding temporal block.
 
 \begin{figure}[htb]
 	\centering
@@ -419,6 +408,7 @@ The proposed abstracted visualization is interactively linked with the 3D view w
 
 %\textbf{Fourth:} ... based on threshold for maximum backtracking of the ligand on its path. This is not good approach since I don't even know how to justify it with respect to previous three.
 
+\textcolor[rgb]{0.65,0.16,0}{TODO where are all the figures - For each scheme we need 1) different granurality, selections, comparissons, infographs, 3D trajectories, tunnels?}
 
 
 
