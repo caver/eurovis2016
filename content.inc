@@ -347,26 +347,7 @@ It can provide the users with the suggestion of amino acids along the ligand tra
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 \subsubsection{Simplification Based on Loop Degradation}
-We define the whole ligand trajectory as a set of time steps $T = \{t_i : 0 < t <= n\}$ where $n$ is the length of the whole simulation.
-As was already mentioned the most of the visual clutter is caused by the small oscillations in the ligand motion.
-In order to correctly simplify the trajectory we need to suppress such insignificant movement while preserving the original positions in the significant once (on contrary to using for instance simplification by wavelets) 
-we utilize the notion of relative distance traveled by the ligand over some period of time.
-We divide the whole trajectory $T$ into the connected temporal blocks $T_{B_j} = \{t_i \in T: k_j <= i < l_j, l_j = k_{j+1}\}$ such that the distance between first points $S_j = \{t_{j_1} : T_{B_j}=\{t_{j_1},\ldots\}$ in two adjacent block $T_{B_j}$ and $T_{B_{j+1}}$ is at least $X$ 
-
-{\color{red}
-
 This method is based on a user-defined variable $X$ that divides the whole ligand trajectory into consecutive temporal sections.
 We define the whole ligand trajectory as a set of time steps $T = \{t_i : 0 < i \leq n\}$ where $n$ is the length of the whole simulation.
 Let $S_{r,s}$ be particular temporal section of the trajectory and $(t_r, t_s)$ its boundary points.
@@ -374,9 +355,7 @@ The distance of boundary points of each section is at least $X$.
 The whole section is then defined as $S_{r,s} = \{t_j : r \leq j \leq s \land |t_r, t_j| < X \}$.
 The information about the length of the trajectory in every section is stored and utilized in the visualization.
 
-}
-
-
+{\color{red} TODO: add few sentences about what should be accomplished by this method.}
 
 
 \subsubsection{Images}
