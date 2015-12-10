@@ -92,7 +92,7 @@ Using our proposed solution the users are able to distinguish between the parts 
 %The centerline of this tunnel is represented by the ligand trajectory and in the original data is very jittered.
 %Thus it is hard to follow determine the time steps when the ligand made a significant shift towards the active site.
 
-Here, we introduce two dedicated methods for simplification of the original trajectory.
+Here, we introduce {\color{red}two} dedicated methods for simplification of the original trajectory.
 These methods can simplify the ligand path hierarchically, thus providing several levels of detail (LOD), which can be interactively browsed through.
 In the most abstracted view, represented as the top-most LOD, the temporal tunnel shows only the significant shifts of the ligand towards the active site. 
 Here, the user can interactively brush time intervals, which automatically reveals and adopts the temporal tunnel to the selected interval.
@@ -229,7 +229,12 @@ Hence we suggest the solution based on a multi-scale simplification model which 
 \subsection{Temporal Tunnel}
 The bottom part of our visualization consists of three tightly related sections (detailed description in Section~\ref{visualization}) showing the properties of so called temporal tunnel. 
 We define the temporal tunnel as a set of spheres positioned on the centerline representing the trajectory of ligand. 
-The centers of these spheres correspond to the center of mass of the ligand in each of its positions and the diameter of the spheres is computed as the maximal empty space around the ligand in a given time step. 
+The centers of these spheres correspond to points computed in the following way.
+In each ligand position we find the $N$ closest atoms to the ligand ($N$ was experimentally set to $10$).
+Then we compute the center of mass of these closest atoms which forms the center of the corresponding sphere of the temporal tunnel.
+The diameter of the spheres is then computed as the maximal empty space around the computed center point. 
+This approach was selected because it covers the void space around the ligand sufficiently.
+
 The main contribution of the temporal tunnel is to give the user the information about the geometric bottlenecks (narrowest parts) along the ligand trajectory.
 Note that applying the temporal tunnel to the original data provides us only with an approximation of the exact trajectory (Fig. \ref{fig:temporal}).
 Still when the ligand trajectory is simplified using one of the methods described below, it gives the user an important overview of the bottlenecks that can be subsequently explored in more detail.
@@ -305,8 +310,8 @@ Figure~\ref{fig:loops} demonstrates different results for altering the $k$ value
 
 \begin{figure}[htb]
 	\centering
-  \includegraphics[width=1\linewidth]{img/loops.png}
-  \caption{\label{fig:loops} Example of resulting trajectories for different values of the parameter $k$ which influences the granularity of block decomposition. {\color{red}TODO change images!!! generated in old version}}
+  \includegraphics[width=1\linewidth]{img/zero_degradation.pdf}
+  \caption{\label{fig:loops} Example of resulting trajectories for different values of the parameter $k$ which influences the granularity of block decomposition.}
 \end{figure}
 
 This type of trajectory simplification is beneficial mainly because it prevents the main bottlenecks of the temporal tunnel which are the most interesting and important sites of the simulation.
@@ -326,25 +331,38 @@ This gives the user the rough idea of the presence of cavities within the whole 
 
 Nevertheless, the given granularity can cause that important time steps with respect to the ligand motion will be skipped \textcolor[rgb]{1,0,0}{(TODO figure and explanation!!!!)}. 
 
+Figure~\ref{fig:uniform} shows an example of uniform simplification results on different levels. 
+
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=1\linewidth]{img/uniform_degradation.pdf}
+  \caption{\label{fig:uniform} Example of uniformly sampled trajectories for different values of the parameter $l$ which influences the granularity of block decomposition (number of samples in each level).}
+\end{figure}
+
+
 \subsubsection{Simplification Based on Surrounding Amino Acids}
-{\color{red}TODO BK leave it here?}
+%{\color{red}TODO BK leave it here?}
 The geometric properties of the temporal tunnel are very important mainly because of the presence of geometric bottlenecks.
 However, the physico-chemical properties of the amino acids surrounding the ligand trajectory are similarly important.
 When the properties of the ligand and the amino acids are not compatible, it can prevent the ligand to pass through such site even when the tunnel is wide enough. 
 Therefore we utilize this information and aggregate all the ligand positions into a single temporal block when they are surrounded by given amino acids
 On the lowest level of our hierarchical model, we aggregate the ligand positions where the ligand was surrounded by the same set of amino acids (the set can be defined, e.g., as the three closest amino acids or amino acids in a given distance).
 The other levels allow some changes in properties of the surroundings, i.e., the number of allowed differences in the surrounding amino acids directly corresponds to the selected levels. 
-{\color{red} Note that these levels are limited to three since for each time step we compute only three closes amino acids.}.
+%{\color{red} Note that these levels are limited to three since for each time step we compute only three closest amino acids.}.
+Figure~\ref{fig:aa} shows examples of the resulting trajectories on different levels simplified by this method.
 
 %As a result, on the lowest level the model aggregates only the smallest loops located in the same area. 
 %While all the loops (longer or shorter) on the border between two ligand positions surrounded by different amino acids and hence different properties are preserved.  
 %This applies also for higher levels, however, the change there would have to be more significant.
 
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=1\linewidth]{img/residue_degradation.pdf}
+  \caption{\label{fig:aa} Example of trajectories sampled using the surrounding amino acids.}
+\end{figure}
+
 Such model allows to evaluate how long the ligand was stuck with respect to the surroundings consisting of a particular set of amino acids. 
 It can provide the users with the suggestion of amino acids along the ligand trajectory which caused the problems and should be possibly replaced (mutated).
-
-{\color{red} TODO: reason about / and implement the time flow independence. BK: what do you mean by this? JB: that all the time bins would be aggregated without any time correspondence, i.e., all time steps with the same AA woudl be in the single time bin even though they are on the opposite sides (time-wise) of simulation.}
-
 
 
 \subsubsection{Simplification Based on Loop Degradation}
@@ -356,35 +374,20 @@ The whole block is then defined as $B_{r,s} = \{t_j : r \leq j \leq s \land |t_r
 The information about the length of the trajectory in every block is stored and utilized in the visualization.
 The maximum value of $X$ corresponds to the Euclidean distance between $t_1$ and $t_n$. 
 
-{\color{red} TODO: add few sentences about what should be accomplished by this method.}
+Figure~\ref{fig:ld} shows the results for several different values of $X$.
+
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=1\linewidth]{img/loop_degradation.pdf}
+  \caption{\label{fig:ld} Example of trajectory simplification using the loop degradation approach.  }
+\end{figure}
+
+The reasoning behind this method is based on the idea of removing those parts of the trajectory where the ligand moved only slightly and "shaked" around in a small area (within a sphere of radius $X$). 
+So the method is able to show only the dominant ligand motions.
+%{\color{red} TODO: add few sentences about what should be accomplished by this method.}
 
 
-\subsubsection{Images}
 
-
-%\begin{figure}[htb]
-%	\centering
-%  \includegraphics[width=1\linewidth]{img/loop_degradation.pdf}
-%  \caption{loop degradation}
-%\end{figure}
-
-%\begin{figure}[htb]
-	%\centering
-  %\includegraphics[width=1\linewidth]{img/uniform_degradation.pdf}
-  %\caption{uniform degradation}
-%\end{figure}
-%
-%\begin{figure}[htb]
-	%\centering
-  %\includegraphics[width=1\linewidth]{img/zero_degradation.pdf}
-  %\caption{zero degradation}
-%\end{figure}
-%
-%\begin{figure}[htb]
-	%\centering
-  %\includegraphics[width=1\linewidth]{img/residue_degradation.pdf}
-  %\caption{residue degradation}
-%\end{figure}
 
 
 
