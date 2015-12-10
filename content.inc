@@ -348,12 +348,13 @@ It can provide the users with the suggestion of amino acids along the ligand tra
 
 
 \subsubsection{Simplification Based on Loop Degradation}
-This method is based on a user-defined variable $X$ that divides the whole ligand trajectory into consecutive temporal sections.
-We define the whole ligand trajectory as a set of time steps $T = \{t_i : 0 < i \leq n\}$ where $n$ is the length of the whole simulation.
-Let $S_{r,s}$ be particular temporal section of the trajectory and $(t_r, t_s)$ its boundary points.
-The distance of boundary points of each section is at least $X$.
-The whole section is then defined as $S_{r,s} = \{t_j : r \leq j \leq s \land |t_r, t_j| < X \}$.
-The information about the length of the trajectory in every section is stored and utilized in the visualization.
+This method is based on a user-defined variable $X$ that divides the selected part of ligand trajectory into consecutive temporal blocks.
+We define the whole ligand trajectory as a set of time steps $T = \{t_i : 0 < i \leq n\}$ where $n$ is the length of the selected part.
+Let $B_{r,s}$ be particular temporal block of the trajectory and $(t_r, t_s)$ its boundary points.
+The Euclidean distance of the boundary points of each block is at least $X$.
+The whole block is then defined as $B_{r,s} = \{t_j : r \leq j \leq s \land |t_r, t_j| < X \}$.
+The information about the length of the trajectory in every block is stored and utilized in the visualization.
+The maximum value of $X$ corresponds to the Euclidean distance between $t_1$ and $t_n$. 
 
 {\color{red} TODO: add few sentences about what should be accomplished by this method.}
 
@@ -361,29 +362,29 @@ The information about the length of the trajectory in every section is stored an
 \subsubsection{Images}
 
 
-\begin{figure}[htb]
-	\centering
-  \includegraphics[width=1\linewidth]{img/loop_degradation.pdf}
-  \caption{loop degradation}
-\end{figure}
+%\begin{figure}[htb]
+%	\centering
+%  \includegraphics[width=1\linewidth]{img/loop_degradation.pdf}
+%  \caption{loop degradation}
+%\end{figure}
 
-\begin{figure}[htb]
-	\centering
-  \includegraphics[width=1\linewidth]{img/uniform_degradation.pdf}
-  \caption{uniform degradation}
-\end{figure}
-
-\begin{figure}[htb]
-	\centering
-  \includegraphics[width=1\linewidth]{img/zero_degradation.pdf}
-  \caption{zero degradation}
-\end{figure}
-
-\begin{figure}[htb]
-	\centering
-  \includegraphics[width=1\linewidth]{img/residue_degradation.pdf}
-  \caption{residue degradation}
-\end{figure}
+%\begin{figure}[htb]
+	%\centering
+  %\includegraphics[width=1\linewidth]{img/uniform_degradation.pdf}
+  %\caption{uniform degradation}
+%\end{figure}
+%
+%\begin{figure}[htb]
+	%\centering
+  %\includegraphics[width=1\linewidth]{img/zero_degradation.pdf}
+  %\caption{zero degradation}
+%\end{figure}
+%
+%\begin{figure}[htb]
+	%\centering
+  %\includegraphics[width=1\linewidth]{img/residue_degradation.pdf}
+  %\caption{residue degradation}
+%\end{figure}
 
 
 
