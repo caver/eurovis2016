@@ -481,7 +481,7 @@ The proposed visualization assists the biochemists to immediately distinguish be
 
 In order to show the process of exploration of the selected part in more detail, we describe a case performed on the real data obtained from the biochemists.
 The scrutinized trajectory first captures the ligand movement outside the protein and then its transportation to the active site.
-Our visualization automatically distinguishes between these two states and divides the trajectory to two parts (Fig.~ref{fig:case}).
+Our visualization automatically distinguishes between these two states and divides the trajectory to two parts (Fig.~\ref{fig:case}).
 
 \begin{figure}[htb]
 	\centering
@@ -534,23 +534,30 @@ Each of them detects several interesting spots on the trajectory which gives the
 
 The uniform sampling method nicely showed the progress of the ligand along the trajectory.
 On the higher levels it helps to reveal the overall progress of the ligand divided into uniform blocks. 
-This method clearly showed that the ligand at the end of the trajectory the ligand traveled around the active site for a significant portion of time (traveling forward and backward) before it finally reached the active site.
+This method clearly shows that at the end of the trajectory the ligand travels around the active site for a significant portion of time (traveling forward and backward) before it finally reaches the active site.
 
 The loop degradation method guided the user to the second half of the trajectory. 
-Here the method detected three interesting blocks in which the ligand followed a loop in a backward direction. 
-The neigborhood of one of these bars was rather flat which says that the ligand movement before and after this bar was rather smooth (without significant loops).
-Detailed exploration of this bar revealed that at the beginning of the loop the radius was small and prevented the ligand to proceed towards the active site.
+Here the method detects three interesting blocks in which the ligand follows a loop in a backward direction. 
+The neigborhood of one of these bars was rather flat which says that the ligand movement before and after this block was rather smooth (without significant loops).
+Detailed exploration of this bar reveals that at the beginning of the loop the radius is small and prevents the ligand to proceed towards the active site.
 
 The aggregation with respect to the physico-chemical properties of the surrounding amino acids is the most sophisticated method from the biochemical point of view because it incorporates a non-trivial parameter.
-Therefore, also its interpretation requires can be more complicated.
-In this particular case the method showed that in the first part of the trajectory the ligand was surrounded by very similar amino acids and when started to move faster towards the active site, the amino acids (so the physico-chemical properties of the trajectory) changed significantly as well.
+Therefore, also its interpretation can be more complicated.
+In this particular case the method shows that in the first part of the trajectory the ligand is surrounded by very similar amino acids and when begins to move faster towards the active site, the amino acids (so the physico-chemical properties of the trajectory) change significantly as well.
 
-Of course, these methods is worthwhile to combine in order to reveal the interesting spots in the trajectory taken from different points of view. 
-This combination can be based on changing the methods withing the exploration or the user can perform the exploration individually and then compare the results.
-Some of the spots detected by our proposed methods can overlap which can even strengthen their importance.
+%Naturally, it is worthwhile to combine these methods in order to reveal interesting spots in the trajectory taken from different points of view. 
+%This combination can be based on changing the methods withing the exploration or the user can perform the exploration individually and then compare the results.
+%Some of the spots detected by our proposed methods can overlap which can even strengthen their importance.
 
-\section{Conclusion and Future Work}
+\section{Conclusion}
+In this paper we proposed a method for intuitive and interactive exploration of ligand trajectory when interacting with a protein molecule.
+As the original trajectory is very jittered, we proposed four methods for trajectory simplification which aim at describe and analyze the substantial ligand motion with respect to different criteria.
+Each of them helps to reveal interesting portions of the trajectory, which can be further explored by the interaction with our proposed visualization.
+The visualization consists of several parts conveying the information about the aggregation of time steps, the radius of the temporal tunnel, and different properties of the amino acids surrounding the temporal tunnel and thus interacting with the ligand.
+The simplification methods were tested on several cases and one of them was demonstrated, along with the discussion about their contributions.
 
+In the future it could be interesting to find a way to combine or link the proposed methods to a single one so the user will not be forced to switch between them manually.
+Moreover, it would be interesting to compare the temporal tunnel with tunnels computed by one of the existing geometric approaches, e.g., using CAVER or MOLE.
 
 %-------------------------------------------------------------------------
 
