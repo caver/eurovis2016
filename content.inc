@@ -494,8 +494,8 @@ The overview visualization automatically distinguishes between these two states 
 
 \begin{figure}[htb]
 	\centering
-  \includegraphics[width=1\linewidth]{img/aacids.png}
-  \caption{\label{fig:case} TODO!!!!}
+  \includegraphics[width=1\linewidth]{img/case.png}
+  \caption{\label{fig:case} Overview of the whole trajectory. First part (white) defines the part where the ligand was outside the molecule. Yellow part highlights the part where the ligand entered the molecule and headed towards the active site.}
 \end{figure}
 
 The user can select the part of the trajectory when the ligand entered the molecule and aimed to get to the active site.
@@ -505,7 +505,7 @@ When using the simplification based on zero-crossings, the user should be able t
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=1\linewidth]{img/cross.png}
-  \caption{\label{fig:cross} TODO!!!!}
+  \caption{\label{fig:cross} a) original trajectory of the ligand inside the molecule, b) simplification based on zero-crossings revealing three different parts.}
 \end{figure}
 
 This information is easily readable from the bar chart accumulating the information about the ligand progress (see~Figure\ref{fig:casebar} top).
@@ -516,7 +516,7 @@ This bar further divides the trajectory to three parts which can be further expl
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=1\linewidth]{img/casebar.png}
-  \caption{\label{fig:cross} TODO!!!!}
+  \caption{\label{fig:cross} Bars showing the aggregated temporal blocks. a) The highest yellow block defines the part where the ligand travelled directly towards the active site. b) Example of interactive selection of bars.}
 \end{figure}
 
 Then the user can focus on details of this part of the trajectory by decreasing the level of simplification until reaches the lowest level where all original time steps of this part are displayed.
@@ -527,18 +527,20 @@ So the user can easily reveal the amino acids forming the bottleneck and by sele
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=1\linewidth]{img/radius.png}
-  \caption{\label{fig:radius} TODO!!!!}
+  \caption{\label{fig:radius} Curve representing the radius of the empty sphere around the ligand helps to determine the geometrical bottleneck. The amino acids surrounding the bottleneck are listed below and can be interactively selected.}
 \end{figure}
 
 In all levels, the trajectory in the context of the 3D representation of the molecule can be observed as a tube which gives the user the idea of the spatial orientation of the trajectory with respect to the protein.
-When hovering over individual bars, the corresponding part of the tube is highlighted (red section in Figure\ref{fig:tube} a)).
+When hovering over individual bars, the corresponding part of the tube is highlighted (orange section in Figure\ref{fig:tube} a)).
 By selecting the amino acids surrounding the trajectory the user can observe the interacting atoms from the ligand and the amino acids (Figure\ref{fig:tube} b)).
 
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=1\linewidth]{img/tube.png}
-  \caption{\label{fig:tube} TODO!!!!}
+  \caption{\label{fig:tube} a) The trajectory can be visualized as a tube. The highlighted section corresponds to one selected bar. b) The ligand (red) can be added and its surrounding amino acids (yellow) can be highlighted.}
 \end{figure}
+
+
 
 \section{Conclusion and Future Work}
 
