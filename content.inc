@@ -556,6 +556,9 @@ Each of them helps to reveal interesting portions of the trajectory which can be
 The visualization consists of several parts conveying the information about the aggregation of time steps, the radius of the temporal tunnel, and different properties of the amino acids surrounding the temporal tunnel and thus interacting with the ligand.
 The simplification methods were tested on several cases and one of them was demonstrated, along with the discussion about their contributions.
 
+In the future it could be interesting to find a way to combine or link the proposed methods to a single one so the user will not be forced to switch between them manually.
+Moreover, it would be interesting to compare the temporal tunnel with tunnels computed by one of the existing geometric approaches, e.g., using CAVER or MOLE.
+
 %-------------------------------------------------------------------------
 
 %\bibliographystyle{eg-alpha}
