@@ -313,6 +313,7 @@ This process is repeated until the desired resolution of the trajectory is reach
 In case of ligand trajectory, this method keeps only the extreme points on the trajectory, which unfortunately has no significant meaning from the biochemical point of view.
 Therefore, we propose solutions that sub-sample the original trajectory and aggregate the protein-ligand interaction in a distinct manner. 
 The intention is that the user can interactively switch between different aggregation strategies while the result is visualized instantly.
+In all proposed solutions we employ the position of the active site that can be either user defined or obtained directly from the simulation, e.g., as the final position of the ligand.
 
 %Except for a lot of jitter, the trajectory often contains sequences that form the so-called \textit{loops}.
 %The loop is thought of as a portion of the trajectory in which the ligand got stuck in a given position $p$ (time step $t_i$), then follows an alternative route, i.e., not heading towards the active site, and finally returns to a position $q$ lying close to $p$ where it got stuck (in time step $t_j$). We define this condition as follows:
@@ -326,10 +327,9 @@ The intention is that the user can interactively switch between different aggreg
 
 
 \subsubsection{Zero-Crossings}
-Here we employ the position of the active site that can be either user defined or obtained directly from the simulation, e.g., as the final position of the ligand.
 %{\color{red}(The automatic active site detection is currently supported only for input data in which the ligand is in the active site by the end of the simulation.)}.
 % I guess it could be done for reentry simulation as well using the most distant place from entery point. But here we face the problem how to evalueate whether the ligand go stuck and lefet before actually reaching the active site (ever).  
-Thus, in each time step $i$ the distance $d_i$ from the active site to the ligand center of mass can be evaluated, i.e., we define a set of distances $D=\{d_1,d_2, \ldots, d_n\}$ where $n$ is the number of time steps in the scrutinized part of the simulation. 
+This method is based on the assumption that in each time step $i$ the distance $d_i$ from the active site to the ligand center of mass can be evaluated, i.e., we define a set of distances $D=\{d_1,d_2, \ldots, d_n\}$ where $n$ is the number of time steps in the scrutinized part of the simulation. 
 %We define ligand trajectory as a set $T = {t_i : 0 < i <=n}$ 
 By means of this distance, one can easily detect time steps when the ligand changes its motion with respect to the active site, i.e., towards to or away from the active site. Using $d$ notation we represent these time steps as follows:
 \begin{equation}
