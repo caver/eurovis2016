@@ -70,7 +70,7 @@ In protein engineering, for example, the goal is to alter the protein properties
 
 The design complexity of such reactions lies namely in the transportation of the ligand to the protein active site.
 As the active site is usually buried deeply in the protein structure and thus inaccessible directly from its surface, the ligand has to find a suitable transportation path through the protein structure.
-This process, called molecular docking, is very complex, lengthy, and heavy on computational resources. 
+This process, called molecular docking, is very complex, lengthy, and its analysis is heavy on computational resources. 
 Therefore, researchers aim at solutions that simplify and ease the analysis for proper ligand binding.
 Currently available solutions often focus on detection of possible ligand transportation paths through the protein, called tunnels.
 These solutions are mostly based on the geometric analysis, which lead to the tunnel detection in the end, e.g., CAVER~\cite{Chovancova2012}, MOLE~\cite{Sehnal2013}, or MolAxis~\cite{Yaffe2008}.
@@ -93,7 +93,7 @@ Using our proposed solution the users are able to distinguish between the parts 
 %Thus it is hard to follow determine the time steps when the ligand made a significant shift towards the active site.
 
 Here, we introduce four dedicated methods for simplification of the original trajectory.
-These methods can simplify the ligand path hierarchically, thus providing several levels of detail (LOD), which can be interactively browsed through.
+These methods can simplify the ligand path hierarchically, thus providing several levels of detail (LOD), which can be interactively examined.
 In the most abstracted view, represented as the top-most LOD, the temporal tunnel shows only the significant shifts of the ligand towards the active site. 
 Here, the user can interactively brush time intervals, which automatically reveals and adopts the temporal tunnel to the selected interval.
 This abstracted representation, providing the brushing capabilities, is interactively linked with the 3D visualization where the 3D shape of the temporal tunnel for the given temporal window is displayed.
@@ -105,31 +105,31 @@ They performed the evaluation on their own simulations and their feedback is des
 %-------------------------------------------------------------------------
 
 \section{Related Work}
-Interactive exploration of ligand paths through protein structures is a complex problem that requires elaborate analysis of existing and convenient approaches.
+The interactive exploration of ligand paths through protein structures is a complex problem that requires an elaborate analysis of existing and convenient approaches.
 %In this section we present the results we consider to be relevant to our proposed solution. 
 As our system addresses several areas, this section will be divided with respect to these areas as well. 
 Studying the ligand transport path is tightly related to the analysis of its trajectory.
 Thus, the first part will cover the topic related to the trajectory analysis, simplification, and visualization.
-Then the existing representations of tunnels and their surrounding amino acids will be mentioned.
+Then the existing representations of tunnels and their surrounding amino acids will be addressed.
 
 \subsection{Trajectory Analysis, Simplification, and Visualization}
-When searching for the most appropriate trajectory simplification method, the taxonomy of different movement patterns introduced by Dodge et al.~\cite{Dodge2008} can help to categorize the type of motion of a given data and to propose an appropriate solution for the analysis and simplification.
-Then, Andrienko et al.~\cite{andrienko2013} describe a legacy of tools and approaches to analyze the trajectory data.
+When searching for the most appropriate trajectory simplification method, the taxonomy of different movement patterns introduced by Dodge et al.~\cite{Dodge2008} can help to categorize the type of motion and to propose an appropriate solution for the analysis and simplification.
+Then, Andrienko et al.~\cite{andrienko2013} describe a legacy of tools and approaches to analyze trajectory data.
 With respect to the trajectory simplification, they introduce two approaches to data abstraction representing a necessary step to achieve the reduction of the data in order to achieve informative visualizations.
 The first approach is characterized by omitting unnecessary positions and segments, while the second exploits data subsampling.
 On the other hand, they state that there is no general method to sample trajectories.
 Thus the suitability of particular sampling method is deduced from what information is considered important.
-A recent work of Vrotsou et. al.~\cite{Vrotsou2015} introduce a systematic stepwise methodology for trajectory simplification with emphasis on visual analysis.
+A recent work of Vrotsou et al.~\cite{Vrotsou2015} introduce a systematic stepwise methodology for trajectory simplification with emphasis on visual analysis.
 Even though they primarily developed the tool to analyze three dimensional trajectories, it is not limited to them only.
 
-In the field of molecular biology as well as systems biology, there are several examples of methods focusing on the trajectory analysis.
+In the field of molecular biology as well as systems biology, there are several examples of methods focusing on trajectory analysis.
 Bidmon et al.~\cite{bidmon2008} present an abstract way of identification and visualization of solvent molecules' pathways within molecular dynamics. 
 In comparison to previous solutions, their approach preserves valuable information on the directions and velocities of water molecules routing along these paths. 
 Another approach that describes a guidance through a complex simulation trajectories in systems biology is presented by Luboschik et al.~\cite{Luboschik2012}. 
 The method addresses biochemical reaction networks and aims to provide the users with a tool for investigating the overall behavior of a modeled system and detailed behavior at the same time.
 
 \subsection{Visualization of Cavity and Tunnel Features}
-Phillips et al.~\cite{phillips2010} propose a method to quantitatively estimate the molecular features, e.g., volume and surface areas, via ray-casting technique. This involves computation of cavities.
+Phillips et al.~\cite{phillips2010} propose a method to quantitatively estimate molecular features, e.g., volume and surface areas, via ray-casting technique. This involves computation of cavities.
 Lindow et al.~\cite{LindowBH11} introduce a technique that allows to extract significant paths from the molecules. 
 In their approach the authors utilize Voronoi diagram of spheres. 
 Their final visualization is achieved by means of placing light sources on the extracted paths to enhance the presence of tunnels.
@@ -203,8 +203,8 @@ The design is tightly related to the following problems posed by the biochemists
 \item There is no quick and straightforward way to explore the relation between physico-chemical properties of the protein tunnel and its geometry to assess the ligand bottleneck.
 \end{itemize}
 
-To tackle the aforementioned challenges, we propose a multiscale visualization system (Fig.~\ref{fig:overview}), which integrates visual information-seeking mantra~\cite{shneiderman1996} to protein-ligand interaction simulations. 
-The main idea is to provide a meaningful information at each data abstraction level that is given by the current temporal selection, i.e., the user defined temporal window.
+To tackle the aforementioned challenges, we propose a multiscale visualization system (Fig.~\ref{fig:overview}), which enables visual information-seeking~\cite{shneiderman1996} in protein-ligand interaction simulations. 
+The main idea is to provide meaningful information at each data abstraction level that is given by the current temporal selection, i.e., the user defined temporal window.
 On the highest level, we classify ligand motion into two basic categories: outside the molecular surface (represented as solvent excluded surface~\cite{Richards}) and inside the protein (Fig.~\ref{fig:teaser}-0). 
 The latter one is divided into two sub-cases. 
 In the first case the ligand enters a tunnel but there is an obstacle preventing it to get to the active site and the ligand is expelled from the inner space back to the outer environment.
