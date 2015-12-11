@@ -199,40 +199,46 @@ Such parts of the simulation could be of less interest so the user should be pro
 %\section{Design and Implementation}
 \section{Visualization Design}
 In this section we describe the design rationale of our proposed approach to interactive exploration of ligand trajectory coming from the above described simulations of molecular dynamics.
-The design is tightly related to the problems posed by the biochemists, namely:
+The design is tightly related to the following problems posed by the biochemists:
 \begin{itemize}
-\item The length of the simulations and impossibility to distinguish between different parts based on the type of ligand movement (outside protein, inside a wrong or correct tunnel).
-\item The scattered nature of the original movement making it impossible to easily follow the overall direction of the ligand movement.
+\item Due to the immerse length of the simulations, it is almost impossible to easily separate and navigate through simulation parts given by the ligand position; i.e., whether it is outside the protein, inside a wrong or correct tunnel.
+\item The scattered nature of the ligand motion make it hard to follow the overall ligand direction.
+\item There is no quick and straightforward way to explore relation between physio-chemical properties of the protein tunnel and its geometry to assess the ligand bottleneck.
 \end{itemize}
 
-To tackle the aforementioned challenges, we propose a visualization system illustrated in Figure~\ref{fig:overview}.
-The first problem is addressed by the simple visualization on the top of the window.
-Its goal is to provide the users with the general overview of the whole simulation and highlight individual parts of the ligand movement.
-We classify ligand motion into three basic categories, which are represented in the following way.
-In each time step we check the position of the ligand with respect to the protein solvent excluded surface~\cite{Richards}. 
-Whenever the ligand passes through the surface, we store the corresponding time step and ligand position.
-If the ligand is outside the protein surface, it means that it still tries to find the entrance point to enter the protein through a tunnel gorge on the surface. 
-When the ligand enters the protein inner space, we can distinguish between two cases.
-In the first case the ligand enters a tunnel but there is an obstacle preventing it to get to the active site and the ligand is expelled from the inner space back to the outer environment.
-The second case enables the ligand to reach the active site. 
-Very similar solution can be adopted for the opposite direction when the ligand aims to leave the active site and reach the outer solvent.
+To tackle the aforementioned challenges, we propose a multiscale visualization system (Fig.~\ref{fig:overview}), which integrates visual information-seeking mantra to protein-ligand interaction simulations. The main idea is to provide a meaningful information at each data abstraction level that is given by the current temporal selection; i.e., the user defined temporal window, $T_s=[t_i,i_j]$. On the highest level, we classify ligand motion into two basic categories: outside the molecular surface (represented as solvent excluded surface~\cite{Richards}) and inside the protein (Fig..~\ref{fig:overview}-0). The latter one is divided into two sub-cases. In the first case the ligand enters a tunnel but there is an obstacle preventing it to get to the active site and the ligand is expelled from the inner space back to the outer environment.
+In the second case the ligand reaches the active site. Further, the visualization highlights the most prominent motion patterns that reflect the amount of movement the ligand made towards to or away from the active site. This is tackled by a block-wise aggregation scheme of the ligand trajectory performed automatically in interval $T_s$.
+Here we obtain a list of $m$ sequential blocks, $B=\{b_1,\ldots,b_m\}$ (Fig.~\ref{fig:overview}-1). We propose three different aggregation strategies, where each one suits particular needs of domain specialists. Parallel to set $B$ we form a simplified representation of the ligand trajectory, which we refer to as \textit{temporal tunnel} and is defined, i.e., its controlled points, by the last time-steps of each temporal block $b_i$ (Fig.~\ref{fig:overview}-2). Each temporal block is then described by several features describing the motion, the empty space around the ligand and physi-chemical  properties during the time the ligand spent inside $b_i$ (Fig.~\ref{fig:overview}-3).
+\begin{figure}[h!]
+	%\centering
+  \includegraphics[width=1\linewidth]{img/overview2.png}
+  \caption{\label{fig:overview} Illustration of the proposed solution. The information whether the ligand is outside or inside the molecular surface is depicted as a two color line (0). The bar chart showcases the most prominent motion patterns inside each temporal block (1). Correspondingly, we form a simplified representation of the ligand trajectory that has the same number of control points as is the number of temporal blocks (2). Each temporal block is described by several features that include physi-chemical  properties, the radius of the sphere enclosed void around the ligand (3).}
+\end{figure}
+%The first problem is addressed by the simple visualization on the top of the window.
+%Its goal is to provide the users with the general overview of the whole simulation and highlight individual parts of the ligand movement.
+%In general, we can classify ligand motion into three basic categories, which are represented in the following way.
+%In each time step we check the position of the ligand with respect to the protein solvent excluded surface. 
+%Whenever the ligand passes through the surface, we store the corresponding time step and ligand position.
+%If the ligand is outside the protein surface, it means that it still tries to find the entrance point to enter the protein through a tunnel gorge on the surface. 
+%When the ligand enters the protein inner space, we can distinguish between two cases.
+%Very similar solution can be adopted for the opposite direction when the ligand aims to leave the active site and reach the outer solvent.
 
-As a result, we obtain three different types of movements which are highlighted in the overview representation (Fig. \ref{fig:overview} a)).
-Yellow parts represent the ligand movements outside the molecule, red parts show the parts where the ligand entered a wrong tunnel and had to return, and green parts depict the situation where the ligand finally took the correct tunnel and reached the active site.
-The user can interactively select an arbitrary part and the remaining parts of our proposed solution (Fig.~\ref{fig:overview} b)) are interactively updated in order to present only the information for a selected part.
-So the biochemists are easily navigated to a selected time span they want to explore in more detail.
+%As a result, we obtain three different types of movements which are highlighted in the overview representation (Fig. \ref{fig:overview} a)).
+%Yellow parts represent the ligand movements outside the molecule, red parts show the parts where the ligand entered a wrong tunnel and had to return, and green parts depict the situation where the ligand finally took the correct tunnel and reached the active site.
+%The user can interactively select an arbitrary part and the remaining parts of our proposed solution (Fig.~\ref{fig:overview} b)) are interactively updated in order to present only the information for a selected part.
+%So the biochemists are easily navigated to a selected time span they want to explore in more detail.
+%
+%\begin{figure*}[htb]
+	%\centering
+  %\includegraphics[width=1\linewidth]{img/overview.png}
+  %\caption{\label{fig:overview} Illustration of our proposed technique. Section a) gives an overview of the individual parts of the simulation (yellow = ligand is outside the protein, red = ligand entered a wrong tunnel, green = ligand entered a correct tunnel and reached the active site). Section b) shows the detailed information about a selected part. TODO}
+%\end{figure*}
 
-\begin{figure*}[htb]
-	\centering
-  \includegraphics[width=1\linewidth]{img/overview.png}
-  \caption{\label{fig:overview} Illustration of our proposed technique. Section a) gives an overview of the individual parts of the simulation (yellow = ligand is outside the protein, red = ligand entered a wrong tunnel, green = ligand entered a correct tunnel and reached the active site). Section b) shows the detailed information about a selected part. TODO}
-\end{figure*}
-
-Even though the detected parts are usually much shorter in comparison with the length of the original simulation, it is still nearly impossible to comprehend the ligand movement. 
-This is caused by ligand jittering which makes the perception of the significant ligand movements very hard to follow.
-This is clearly visible in Figure~\ref{fig:temporal} a)) which shows the whole ligand trajectory in case when the ligand entered the solvent excluded surface and entered the active site.
-The same holds true for cases when the user is watching the animated motion of the ligand. 
-Hence we suggest the solution based on a multi-scale simplification model which introduces the concept of so called \textit{temporal tunnel}.  
+%Even though the detected parts are usually much shorter in comparison with the length of the original simulation, it is still nearly impossible to comprehend the ligand movement. 
+%This is caused by ligand jittering which makes the perception of the significant ligand movements very hard to follow.
+%This is clearly visible in Figure~\ref{fig:temporal} a)) which shows the whole ligand trajectory in case when the ligand entered the solvent excluded surface and entered the active site.
+%The same holds true for cases when the user is watching the animated motion of the ligand. 
+%Hence we suggest the solution based on a multi-scale simplification model which introduces the concept of so called \textit{temporal tunnel}.  
 
 \subsection{Temporal Tunnel}
 The bottom part of our visualization consists of three tightly related sections (detailed description in Section~\ref{visualization}) showing the properties of so called temporal tunnel. 
