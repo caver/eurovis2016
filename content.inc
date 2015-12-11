@@ -8,7 +8,7 @@
 
 % for anonymous conference submission please enter your SUBMISSION ID
 % instead of the author's name (and leave the affiliation blank) !!
-\author[K. Furmanov\'{a} et al.]
+\author[Furmanov\'{a} et al.]
        {K. Furmanov\'{a}$^{1}$, M. Jare\v{s}ov\'{a}$^{1}$, J. By\v{s}ka$^{1,2}$, A. Jur\v{c}\'{i}k$^{1}$, J. Parulek$^{2}$, H. Hauser$^{2}$, and B. Kozl\'{i}kov\'{a}$^{1}$
 %        S. Spencer$^2$\thanks{Chairman Siggraph Publications Board}
         				\\
@@ -113,7 +113,8 @@ Thus, the first part will cover the topic related to the trajectory analysis, si
 Then the existing representations of tunnels and their surrounding amino acids will be mentioned.
 
 \subsection{Trajectory Analysis, Simplification, and Visualization}
-Andrienko et al. \cite{andrienko2013} describe a legacy of tools and approaches to analyze the trajectory data.
+When searching for the most appropriate trajectory simplification method, the taxonomy of different movement patterns introduced by Dodge et al.~\cite{Dodge2008} can help to categorize the type of motion of a given data and to propose an appropriate solution for the analysis and simplification.
+Then, Andrienko et al. \cite{andrienko2013} describe a legacy of tools and approaches to analyze the trajectory data.
 With respect to the trajectory simplification, they introduce two approaches to data abstraction representing a necessary step to achieve the reduction of the data in order to achieve informative visualizations.
 The first approach is characterized by omitting unnecessary positions and segments, while the second exploits data subsampling.
 On the other hand, they state that there is no general method to sample trajectories.
@@ -129,9 +130,14 @@ The method addresses biochemical reaction networks and aims to provide the users
 
 \subsection{Visualization of Cavity and Tunnel Features}
 Phillips et al.~\cite{phillips2010} propose a method to quantitatively estimate the molecular features; e.g., volume and surface areas, via ray-casting technique. This involves computation of cavities.
-Lindow et al.~\cite{LindowBH11} introduce a technique that allows to extract significant paths from the molecules. In their approach the authors utilize Voronoi diagram of spheres. Their final visualization is achieved by means of placing light sources on the extracted paths to enhance the presence of tunnels.
-Parulek et al.~\cite{parulek2012} exploit scatterplots to communicate the evolution of protein voids. In their later study~\cite{parulek2013} they also suggest to utilize amino acids physion-chemical propterties related to cavities to help users to navigate through their occurrences. The visualization if then achieved in the focus and context manner.
-Lindow et al. \cite{Lindow2013} present an approach for visualization of temporal evolution of cavities in a temporal graph, which, to a certain extent, resembles our temporal tunnel model. In this work they focus on the interactive exploration of the dynamics of protein cavities that can form the transportation path for a ligand. 
+Lindow et al.~\cite{LindowBH11} introduce a technique that allows to extract significant paths from the molecules. 
+In their approach the authors utilize Voronoi diagram of spheres. 
+Their final visualization is achieved by means of placing light sources on the extracted paths to enhance the presence of tunnels.
+Parulek et al.~\cite{parulek2012} exploit scatterplots to communicate the evolution of protein voids. 
+In their later study~\cite{parulek2013} they also suggest to utilize amino acids physico-chemical properties related to cavities to help users to navigate through their occurrences. 
+The visualization if then achieved in the focus and context manner.
+Lindow et al. \cite{Lindow2013} present an approach for visualization of temporal evolution of cavities in a temporal graph, which, to a certain extent, resembles our temporal tunnel model. 
+In this work they focus on the interactive exploration of the dynamics of protein cavities that can form the transportation path for a ligand. 
 They calculate and visualize the cavity volume and analyze the time-dependent changes of the cavity structure.
 The cavity dynamics is captured by rendering the cavities in a single image. 
 The final visualization is achieved through the molecular surface representation colored according to time. 
