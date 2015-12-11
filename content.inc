@@ -191,12 +191,12 @@ Ligands can follow two main routes -- they can be transported from the outside e
 
 The length of the simulations may vary from few hundreds to hundreds of thousands of time steps.  
 This depends namely on the ligand velocity and its ability to find the proper path to the active site.
-Figure \ref{fig:lig_movement} shows an example of a ligand trajectory consisting of $10.000$ time steps. 
+Figure \ref{fig:lig_movement} shows an example of a ligand trajectory consisting of $50.000$ time steps. 
 
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=1\linewidth]{img/lig_movement.png}
-  \caption{\label{fig:lig_movement} Ligand trajectory for a simulation containing $10.000$ time steps. TODO change image, add molecule}
+  \caption{\label{fig:lig_movement} Ligand trajectory for a simulation containing $50.000$ time steps.}
 \end{figure}
 
 Long simulations can often contain many time steps when the ligand followed an impasse -- it tried to find the proper entrance point to the protein (tunnel gorge) or entered a wrong tunnel and had to return.
