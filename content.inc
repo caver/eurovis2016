@@ -203,16 +203,16 @@ The design is tightly related to the following problems posed by the biochemists
 \item There is no quick and straightforward way to explore the relation between physico-chemical properties of the protein tunnel and its geometry to assess the ligand bottleneck.
 \end{itemize}
 
-To tackle the aforementioned challenges, we propose a multiscale visualization system (Fig.~\ref{fig:overview}), which enables visual information-seeking~\cite{shneiderman1996} in protein-ligand interaction simulations. 
+To tackle the aforementioned challenges, we propose a multiscale visualization system (Fig.~\ref{fig:teaser}), which enables visual information-seeking~\cite{shneiderman1996} in protein-ligand interaction simulations. 
 The main idea is to provide meaningful information at each data abstraction level that is given by the current temporal selection, i.e., the user defined temporal window.
 On the highest level, we classify ligand motion into two basic categories: outside the molecular surface (represented as solvent excluded surface~\cite{Richards}) and inside the protein (Fig.~\ref{fig:teaser}-0). 
 The latter one is divided into two sub-cases. 
 In the first case the ligand enters a tunnel but there is an obstacle preventing it to get to the active site and the ligand is expelled from the inner space back to the outer environment.
 In the second case the ligand reaches the active site. 
 Further, the visualization highlights the most prominent motion patterns that reflect the amount of movement the ligand made towards to or away from the active site. 
-This information is acquired by means of a block-wise aggregation scheme of the ligand trajectory performed automatically in interval $T_s$.
+This information is acquired by means of a block-wise aggregation scheme of the ligand trajectory performed automatically.
 Here we obtain a list of $m$ sequential temporal blocks, $B=\{b_1,\ldots,b_m\}$ (Fig.~\ref{fig:teaser}-1). It is important to mention that the blocks are non-overlapping in time meaning that if $b_i=[t_{100},t_{110}]$ then $b_{i+1}=[t_{111},...]$. For simplicity of explanation we define each temporal block as interval $b_i=[t_a,t_b]$ and the corresponding positions of ligands at time steps $t_a$ and $t_b$ as $P(a)$ and $P(b)$.
-We propose four different aggregation strategies, where each one suits particular needs of domain specialists. Note that the aggregation schemes can be easily extended based on the application needs.
+We propose four different aggregation strategies, where each one suits particular needs of domain specialists. Note that the aggregation schemes can be easily extended based on the application requirements.
 Parallel to set $B$ we form a simplified representation of the ligand trajectory, which we refer to as \textit{temporal tunnel}.
 Control points of the temporal tunnel are represented by ligand positions at the last time-step of each temporal block $b_i$ (Fig.~\ref{fig:teaser}-2).
 We denote the last time step of $b_i$ as $E(i)$. In this manner, we extract a set of time steps $E_B=\{E(1),\ldots ,E(m)\}$ representing $m$ temporal blocks of a trajectory simplification that reflects the set $B$.
@@ -255,8 +255,7 @@ Each temporal block, as well as the corresponding segment within the temporal tu
 Each temporal block and the respective temporal tunnel segment is associated with several features computed interactively.
 
 We provide the information that represents the amount of free space around the ligand when leaving one temporal block and subsequently entering the next one.
-At each exit point $P(b)$, we retrieve the $N$ closest atoms to the ligand, which in our case is set to $N=10$.
-Then we compute the center of mass $C$ of these atoms and a distance $r$ from this center to the closest atom. 
+At each exit point $P(b)$, we retrieve the $N$ closest atoms to the ligand, which in our case is set to $N=10$. Then we compute the center of mass $C$ of these atoms and a distance $r$ from this center to the closest atom. 
 This forms a sphere $(C_b,r_b)$ representing the extent of the free space around the ligand at $P(b)$. 
 The list of radii is then exploited to form the graph (Fig.~\ref{fig:teaser}-3a), which provides the information about the amount of free space around the ligand when leaving the current block. 
 This represents a crucial information when studying the relation between the geometric and physico-chemical bottlenecks.
@@ -302,7 +301,12 @@ In more detail, at each level our visualization provides i) the main direction o
 As already mentioned, the main source of the visual clutter (Fig. \ref{fig:temporal}a) is the ligand motion itself, which resembles the random Brownian motion. Here, the removal of this jittery motion would allow us to reveal more dominant ligand motion patterns. 
 Nevertheless, this also means to approximate the initial trajectory, which on the other hand is a trade-off for providing a good overview of entire ligand motion instead.
 As a standard solution, to reduce this jittering and also to simplify the trajectory, the Hermite (or similar) interpolation technique can be used. 
-However, such an interpolation simplification would still not suffice since the spatial distance between two neighboring time steps is usually very small, thus the interpolation scheme still contains a lot of jitter (Fig.~\ref{fig:temporal}). 
+However, such an interpolation simplification would still not suffice since the spatial distance between two neighboring time steps is usually very small, thus the interpolation scheme still contains a lot of jitter (Fig.~\ref{fig:temporal}b). 
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=1\linewidth]{img/temporal.png}
+  \caption{\label{fig:temporal} Left: selected part of the whole trajectory when the ligand enters the active site. Right: visualization of the corresponding temporal tunnel.}
+\end{figure}
 For completeness, we also tested the Ramer~-~Douglas~-~Peucker algorithm. 
 It reduces the number of points in a curve by starting from the line segment between the first and last point of the trajectory. 
 For each segment it adds a point from the original trajectory which is the furthest one from this segment.
