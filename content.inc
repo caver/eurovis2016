@@ -298,14 +298,14 @@ The main advantage of this representation is its complementarity with respect to
 In order to reveal significant ligand motion patterns, we introduce a hierarchical simplification model that, in addition, allows us to emphasize several important aspects related to the mutual protein-ligand interaction. 
 In more detail, at each level our visualization provides i) the main direction of the ligand motion, ii) the sections of the simulation where the ligand got stuck and iii) the geometrical and physico-chemical properties on sites where the ligand got stuck. 
 
-As already mentioned, the main source of the visual clutter (Fig. \ref{fig:temporal}a) is the ligand motion itself, which resembles the random Brownian motion. Here, the removal of this jittery motion would allow us to reveal more dominant ligand motion patterns. 
+As already mentioned, the main source of the visual clutter (Fig. \ref{fig:temporal}) is the ligand motion itself, which resembles the random Brownian motion. Here, the removal of this jittery motion would allow us to reveal more dominant ligand motion patterns. 
 Nevertheless, this also means to approximate the initial trajectory, which on the other hand is a trade-off for providing a good overview of entire ligand motion instead.
 As a standard solution, to reduce this jittering and also to simplify the trajectory, the Hermite (or similar) interpolation technique can be used. 
-However, such an interpolation simplification would still not suffice since the spatial distance between two neighboring time steps is usually very small, thus the interpolation scheme still contains a lot of jitter (Fig.~\ref{fig:temporal}b). 
+However, such an interpolation simplification would still not suffice since the spatial distance between two neighboring time steps is usually very small, thus the interpolation scheme still contains a lot of jitter (Fig.~\ref{fig:temporal}). 
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=1\linewidth]{img/temporal.png}
-  \caption{\label{fig:temporal} Left: selected part of the whole trajectory when the ligand enters the active site. Right: visualization of the corresponding temporal tunnel.}
+  \caption{\label{fig:temporal} A cut trajectory section shows the ligand entering the active site. The trajectory is obtained using Hermite interpolation, which still contains a lot of jittery motion.}
 \end{figure}
 For completeness, we also tested the Ramer~-~Douglas~-~Peucker algorithm. 
 It reduces the number of points in a curve by starting from the line segment between the first and last point of the trajectory. 
