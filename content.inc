@@ -32,12 +32,12 @@
 %-------------------------------------------------------------------------
 \begin{document}
 
- \teaser{
-  \includegraphics[width=\linewidth]{img/teaser}
-  \centering
-   \caption{Illustration of our proposed solution for interactive exploration of ligand movements. The information whether the ligand is outside or inside the molecular surface is depicted as a two color line (0). The bar chart showcases the most prominent motion patterns inside each detected temporal block (1). Correspondingly, we form a simplified representation of the ligand trajectory that has the same number of control points as is the number of temporal blocks (2). Each temporal block is described by several features that include the radius of the sphere enclosed void around the ligand (3a) and physico-chemical properties of amino acids interacting with the ligand (3b).}
- \label{fig:teaser}
- }
+ %\teaser{
+ % \includegraphics[width=\linewidth]{img/teaser}
+ % \centering
+ %  \caption{Illustration of our proposed solution for interactive exploration of ligand movements. The information whether the ligand is outside or inside the molecular surface is depicted as a two color line (0). The bar chart showcases the most prominent motion patterns inside each detected temporal block (1). Correspondingly, we form a simplified representation of the ligand trajectory that has the same number of control points as is the number of temporal blocks (2). Each temporal block is described by several features that include the radius of the sphere enclosed void around the ligand (3a) and physico-chemical properties of amino acids interacting with the ligand (3b).}
+% \label{fig:teaser}
+% }
 
 \maketitle
 
@@ -68,6 +68,13 @@ In these particular cases the ligand has to be transported from the outer solven
 The consecutive reaction then changes the composition and properties of both molecules. 
 In protein engineering, for example, the goal is to alter the protein properties so that the new protein is, e.g., more stable and resistant to organic cosolvents~\cite{Koudelakova2013}.
 
+
+\begin{figure*}
+  \includegraphics[width=\linewidth]{img/teaser}
+  \caption{\label{fig:teaser}Illustration of our proposed solution for interactive exploration of ligand movements. The information whether the ligand is outside or inside the molecular surface is depicted as a two color line (0). The bar chart showcases the most prominent motion patterns inside each detected temporal block (1). Correspondingly, we form a simplified representation of the ligand trajectory that has the same number of control points as is the number of temporal blocks (2). Each temporal block is described by several features that include the radius of the sphere enclosed void around the ligand (3a) and physico-chemical properties of amino acids interacting with the ligand (3b).}
+\end{figure*}
+
+
 The design complexity of such reactions lies namely in the transportation of the ligand to the protein active site.
 As the active site is usually buried deeply in the protein structure and thus inaccessible directly from its surface, the ligand has to find a suitable transportation path through the protein structure.
 This process, called molecular docking, is very complex, lengthy, and its analysis is heavy on computational resources. 
@@ -84,6 +91,9 @@ Moreover, the simulation often contains movements that are irrelevant to the lig
 For example, a significant portion of the simulation the ligand usually spends outside the protein searching for a proper tunnel gorge to enter the molecule. 
 It also often happens that the ligand enters the molecule via a wrong tunnel and is then evicted from the molecule and searches for the entrance repeatedly.
 Therefore, the "true" active site entering can be in fact captured in a smaller subset of the original sequence.
+
+
+
 
 In this paper, we propose a new visual analysis system that addresses the aforementioned challenges, i.e.,  the transportation of a ligand to the active site. 
 We aim to provide the domain experts with a tool for intuitive and interactive exploration of already captured molecular dynamics simulation containing the process of ligand binding. 
@@ -172,7 +182,7 @@ However, this bottleneck can be to some extent influenced by the passing ligand 
 To reveal such dependencies, it requires the involvement and experience of the domain expert who has to study the ligand trajectory captured in the molecular dynamics simulation.
 And for such task a proper visual representation and guidance through such large data is substantial.
 
-In protein engineering, all these effort can finally lead to the detection of amino acids along the ligand trajectory which caused problems, i.e., were the key players in situations when the ligand got stuck.
+In protein engineering, all these effort can finally lead to the detection of amino acids along the ligand trajectory which caused problems, i.e., were the key players in situations when the ligand gets stuck.
 Such amino acids are then the best candidates for subsequent mutation of the protein chain when these amino acids are replaced by more suitable ones wrt. their size and properties.
 On the other hand, in drug design the aim is to propose modifications of the ligand to increase the binding likelihood in order to design a better drug produced from this ligand.
 
@@ -296,7 +306,7 @@ The main advantage of this representation is its complementarity with respect to
 
 \subsection{Trajectory Simplification}
 In order to reveal significant ligand motion patterns, we introduce a hierarchical simplification model that, in addition, allows us to emphasize several important aspects related to the mutual protein-ligand interaction. 
-In more detail, at each level our visualization provides i) the main direction of the ligand motion, ii) the sections of the simulation where the ligand got stuck and iii) the geometrical and physico-chemical properties on sites where the ligand got stuck. 
+In more detail, at each level our visualization provides i) the main direction of the ligand motion, ii) the sections of the simulation where the ligand gets stuck and iii) the geometrical and physico-chemical properties on sites where the ligand gets stuck. 
 
 As already mentioned, the main source of the visual clutter (Fig. \ref{fig:temporal}) is the ligand motion itself, which resembles the random Brownian motion. Here, the removal of this jittery motion would allow us to reveal more dominant ligand motion patterns. 
 Nevertheless, this also means to approximate the initial trajectory, which on the other hand is a trade-off for providing a good overview of entire ligand motion instead.
@@ -312,7 +322,7 @@ It reduces the number of points in a curve by starting from the line segment bet
 For each segment it adds a point from the original trajectory which is the furthest one from this segment.
 This process is repeated until the desired resolution of the trajectory is reached.
 In case of ligand trajectory, this method keeps only the extreme points on the trajectory, which unfortunately has no significant meaning from the biochemical point of view.
-Therefore, we propose solutions that sub-sample the original trajectory and aggregate the protein-ligand interaction in a distinct manner. 
+Therefore, we propose a solution that sub-sample the original trajectory and aggregate the protein-ligand interaction in a distinct manner. 
 The intention is that the user can interactively switch between different aggregation strategies while the result is visualized instantly.
 In all proposed solutions we employ the position of the active site that can be either user defined or obtained directly from the simulation, e.g., as the final position of the ligand.
 
@@ -339,8 +349,8 @@ Z=\{t_i:\Delta d_i\cdot \Delta d_{i+1} <0\}.
 \end{equation}
 The method operates with the concept of zero-crossing meaning either that the ligand heading towards the active site changed its direction and traveled back to the outer solvent or vice versa. 
 A single pair of zero-crossings then defines the so-called \textit{loop}. 
-The important aspect is that the occurrence of loops corresponds to the locations when the ligand got stuck. 
-In a case that two zero-crossings having a larger temporal gap in between, i.e., $|t_i - t_{i+1}|>1$ and $\{t_i,t_{i+1}\}\in Z$, it reflects the fact that the ligand got stuck somewhere between these two time steps.
+The important aspect is that the occurrence of loops corresponds to the locations when the ligand gets stuck. 
+In a case that two zero-crossings having a larger temporal gap in between, i.e., $|t_i - t_{i+1}|>1$ and $\{t_i,t_{i+1}\}\in Z$, it reflects the fact that the ligand gets stuck somewhere between these two time steps.
 When referring to each entry of $Z$ as a zero-crossing, we aggregate the user-defined amount $k$ of zero-crossings to form a temporal block $b_j$ such that $|b_j|=k$, i.e., when $k=2$ and $|Z|=20$, we acquire $10$ temporal blocks. 
 
 %For the given parameter $k$, we denote the last time step of this temporal block as $E_k(j)=\{t_{j_k}:T_{B_j}=\{t_{j_1},\ldots,t_{j_k}\}\}$. 
@@ -369,7 +379,7 @@ Figure~\ref{fig:loops} demonstrates different results for altering the $k$ value
 \end{figure}
 
 This type of trajectory simplification is beneficial mainly because it prevents the main bottlenecks of the temporal tunnel which are the most interesting and important sites of the simulation.
-These sites where the ligand got stuck for a significant portion of time correspond to parts of the trajectory which is worthwhile to explore in more detail and find out the reason why the ligand was not able to pass through the tunnel. 
+These sites where the ligand gets stuck for a significant portion of time correspond to parts of the trajectory which is worthwhile to explore in more detail and find out the reason why the ligand was not able to pass through the tunnel. 
 
 \subsubsection{Uniform Sampling}
 Here, we uniformly divide the whole simulation into a given number of temporal blocks. 
@@ -481,7 +491,7 @@ Our visualization automatically distinguishes between these two states and divid
 
 The user can select the part of the trajectory when the ligand entered the molecule and aimed to get to the active site.
 As the original trajectory is very scattered (Fig.~\ref{fig:cross} a)), the user exploits one of the simplification methods to see the significant motions of the ligand.
-When using the simplification based on zero-crossings, the user should be able to distinguish between parts where the ligand got stuck and parts where its progress towards the active site was substantial (Fig.~\ref{fig:cross} b)).
+When using the simplification based on zero-crossings, the user should be able to distinguish between parts where the ligand gets stuck and parts where its progress towards the active site was substantial (Fig.~\ref{fig:cross} b)).
 
 \begin{figure}[htb]
 	\centering
