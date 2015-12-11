@@ -114,12 +114,12 @@ Then the existing representations of tunnels and their surrounding amino acids w
 
 \subsection{Trajectory Analysis, Simplification, and Visualization}
 When searching for the most appropriate trajectory simplification method, the taxonomy of different movement patterns introduced by Dodge et al.~\cite{Dodge2008} can help to categorize the type of motion of a given data and to propose an appropriate solution for the analysis and simplification.
-Then, Andrienko et al. \cite{andrienko2013} describe a legacy of tools and approaches to analyze the trajectory data.
+Then, Andrienko et al.~\cite{andrienko2013} describe a legacy of tools and approaches to analyze the trajectory data.
 With respect to the trajectory simplification, they introduce two approaches to data abstraction representing a necessary step to achieve the reduction of the data in order to achieve informative visualizations.
 The first approach is characterized by omitting unnecessary positions and segments, while the second exploits data subsampling.
 On the other hand, they state that there is no general method to sample trajectories.
 Thus the suitability of particular sampling method is deduced from what information is considered important.
-A recent work of Vrotsou et. al. \cite{Vrotsou2015} introduce a systematic stepwise methodology for trajectory simplification with emphasis on visual analysis.
+A recent work of Vrotsou et. al.~\cite{Vrotsou2015} introduce a systematic stepwise methodology for trajectory simplification with emphasis on visual analysis.
 Even though they primarily developed the tool to analyze three dimensional trajectories, it is not limited to them only.
 
 In the field of molecular biology as well as systems biology, there are several examples of methods focusing on the trajectory analysis.
@@ -267,6 +267,11 @@ As already mentioned, the main source of the visual clutter (Fig. \ref{fig:tempo
 Nevertheless, this also means to approximate the initial trajectory, which on the other hand is a trade-off for providing a good overview of entire ligand motion instead.
 As a standard solution, to reduce this jittering and also to simplify the trajectory, the Hermite (or similar) interpolation technique can be used. 
 However, such an interpolation simplification would still not suffice since the spatial distance between two neighboring time steps is usually very small, thus the interpolation scheme still contains a lot of jitter. 
+Another interpolation scheme we tested for ligand trajectory simplification was the Ramer~-~Douglas~-~Peucker algorithm.
+It reduces the number of points in a curve by starting from the line segment between the first and last point of the trajectory. 
+For each segment it adds a point from the original trajectory which is the furthest one from this segment.
+This process is repeated until the desired resolution of the trajectory is reached.
+In case of ligand trajectory, this method keeps only the extreme points on the trajectory which has no significant meaning from the biochemical point of view.
 Therefore we come with other solutions designed specifically for the ligand trajectory simplification.{\color{red}(TODO mame obrazok?)}
 {\color{red} TODO so which  interpolation is the best?JP: Nemusime ak ukazeme nejaku interpolation scheme a tiez ukazeme ze vieme lepsie}
 
@@ -461,32 +466,9 @@ The interruption in some of these lines is caused by the fact that the given ami
 \end{figure}
 
 The proposed abstracted visualization is interactively linked with the 3D view where the temporal tunnel is represented in the following way.
+
+TODO
 ------------------------------
-
-
-%\subsection{Jan's part, will probably not fit to the current version at all.}
-%General outline of the section:
-% - detection of the ligand entering tunnel
-%   - sphere, problems
-%	  - surface, computed using LSMS 
-% - results in overview
-%	  - enables select the appropriate time range
-% - once the range is selected the aggregation is done
-%   - why aggregation
-%	 - how it is done
-%      - two or three methods - all?
-%   - bar char + 3D line as the results
-% - what can be important with respect why the tunnel get stuck
-%   - geometrical properties = radius chart
-%	    - how we compute radius
-%	 - biochemical properties = AA chart
-%		  - how we compute surrounding AA
-
-
-
-
-
-%\textbf{Fourth:} ... based on threshold for maximum backtracking of the ligand on its path. This is not good approach since I don't even know how to justify it with respect to previous three.
 
 \textcolor[rgb]{0.65,0.16,0}{TODO where are all the figures - For each scheme we need 1) different granurality, selections, comparissons, infographs, 3D trajectories, tunnels?}
 
@@ -494,14 +476,76 @@ The proposed abstracted visualization is interactively linked with the 3D view w
 
 
 %-------------------------------------------------------------------------
-\section{Results}
-The results will be demonstrated on one or two case studies.
+\section{Results and Discussion} \label{discussion}
+The proposed techniques were tested on several ligand trajectories with different scenarios -- ligand travelled from the outer solvent to the active site, ligand left the active site as well as the molecule, or ligand entered the active site, then left and reentered the site again.
+The length of the tested trajectories spanned from $50.000$ to $100.000$ time steps.
+Here we describe the integration of our approach to the traditional workflow of biochemists and the contribution of this new approach.
+When exploring the molecular dynamics simulation capturing the ligand motion, the biochemists currently observe the ligand animation using some of the widely used molecular visualization tools.
+Additionally, they often plot line charts showing different properties, such as geometric bottlenecks along the ligand path. 
+The exploration process is iterative so the users are manually selecting interesting parts of the trajectory according to the information extracted from the plotted graphs. 
+These parts are then again plotted.
+This process is repeated and under the best of conditions it helps to reveal the interesting amino acids around the bottlenecks of the trajectory.
+These amino acids are then the best candidates for protein mutations serving for a given purpose, e.g., removing the bottleneck or closing this path completely. 
+This process is usually very lengthy and requires a lot of effort from the user.
 
-%-------------------------------------------------------------------------
-\section{Discussion} \label{discussion}
-Here will be the summary of feedback from biochemists.
+Our proposed tool removes the main limitations of the traditional approach.
+The overview visualization helps the biochemists to immediately distinguish between individual parts of the trajectory -- when ligand was inside and travelled from or towards the active site, or it was outside the molecule. 
+By selecting the part of interest in the overview visualization, the user is automatically navigated to the corresponding time sequence.
 
-%-------------------------------------------------------------------------
+In order to show the process of exploration of the selected part in more detail, we will describe one case performed on the real data obtained from the biochemists.
+It demonstrates how the biochemists can interact with the tool and how it helps them to understand the ligand trajectory much faster and in more comprehensible way than before.
+
+The scrutinized trajectory first captures the ligand movement outside the protein and then its transportation to the active site.
+The overview visualization automatically distinguishes between these two states and divides the trajectory to two parts (see Figure~ref{fig:case}).
+
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=1\linewidth]{img/aacids.png}
+  \caption{\label{fig:case} TODO!!!!}
+\end{figure}
+
+The user can select the part of the trajectory when the ligand entered the molecule and aimed to get to the active site.
+As the original trajectory is very scattered (see Figure~\ref{fig:cross} a)), the user can use one of the simplification methods to see the significant motions of the ligand.
+When using the simplification based on zero-crossings, the user should be able to distinguish between parts where the ligand got stuck and parts where its progress towards the active site was substantial (see Figure~\ref{fig:cross} b)).
+
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=1\linewidth]{img/cross.png}
+  \caption{\label{fig:cross} TODO!!!!}
+\end{figure}
+
+This information is easily readable from the bar chart accumulating the information about the ligand progress (see~Figure\ref{fig:casebar} top).
+The highest bar shows the part of the trajectory when the ligand did not change its direction.
+The yellow color additionally says that the ligand travelled towards the active site. 
+This bar further divides the trajectory to three parts which can be further explored by interactive selection of their corresponding bars (see~Figure\ref{fig:casebar} bottom).
+
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=1\linewidth]{img/casebar.png}
+  \caption{\label{fig:cross} TODO!!!!}
+\end{figure}
+
+Then the user can focus on details of this part of the trajectory by decreasing the level of simplification until reaches the lowest level where all original time steps of this part are displayed.
+At this level we can easily detect the bottleneck from the visualization part showing the radii of empty sphere around in each ligand position (see~Figure\ref{fig:radius}.
+The bottom part of the visualization shows the amino acids in the closest neighborhood for each ligand position.
+So the user can easily reveal the amino acids forming the bottleneck and by selecting them, they are automatically highlighted in the 3D visualization.
+
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=1\linewidth]{img/radius.png}
+  \caption{\label{fig:radius} TODO!!!!}
+\end{figure}
+
+In all levels, the trajectory in the context of the 3D representation of the molecule can be observed as a tube which gives the user the idea of the spatial orientation of the trajectory with respect to the protein.
+When hovering over individual bars, the corresponding part of the tube is highlighted (red section in Figure\ref{fig:tube} a)).
+By selecting the amino acids surrounding the trajectory the user can observe the interacting atoms from the ligand and the amino acids (Figure\ref{fig:tube} b)).
+
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=1\linewidth]{img/tube.png}
+  \caption{\label{fig:tube} TODO!!!!}
+\end{figure}
+
 \section{Conclusion and Future Work}
 
 
