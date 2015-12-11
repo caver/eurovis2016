@@ -73,7 +73,7 @@ As the active site is usually buried deeply in the protein structure and thus in
 This process, called molecular docking, is very complex, lengthy, and heavy on computational resources. 
 Therefore, researchers aim at solutions that simplify and ease the analysis for proper ligand binding.
 Currently available solutions often focus on detection of possible ligand transportation paths through the protein, called tunnels.
-These solutions are mostly based on the geometric analysis, which lead to the tunnel detection in the end; e.g., CAVER~\cite{Chovancova2012}, MOLE~\cite{Sehnal2013}, or MolAxis~\cite{Yaffe2008}.
+These solutions are mostly based on the geometric analysis, which lead to the tunnel detection in the end, e.g., CAVER~\cite{Chovancova2012}, MOLE~\cite{Sehnal2013}, or MolAxis~\cite{Yaffe2008}.
 Other approaches, such as MoMA-LigPath~\cite{Devaurs}, aim at simulating the ligand transportation itself.
 Nevertheless, simulating the ligand docking using current computational approaches is still a challenging problem.
 There are several available variants of molecular simulation methods devised specifically to this problem. 
@@ -85,7 +85,7 @@ For example, a significant portion of the simulation the ligand usually spends o
 It also often happens that the ligand enters the molecule via a wrong tunnel and is then evicted from the molecule and searches for the entrance repeatedly.
 Therefore, the "true" active site entering can be in fact captured in a smaller subset of the original sequence.
 
-In this paper, we propose a new visual analysis system that addresses the aforementioned challenges; i.e.,  the transportation of a ligand to the active site. 
+In this paper, we propose a new visual analysis system that addresses the aforementioned challenges, i.e.,  the transportation of a ligand to the active site. 
 We aim to provide the domain experts with a tool for intuitive and interactive exploration of already captured molecular dynamics simulation containing the process of ligand binding. 
 Using our proposed solution the users are able to distinguish between the parts of the simulation where the ligand searches for the proper path to the active site (searches the tunnel gorge or enters the wrong tunnel) and the part where the ligand finally leads to and reaches the active site.
 %In the part of such annotated data when the ligand travels to the active site we provide the users with our newly introduced concept of so called temporal tunnel.
@@ -129,7 +129,7 @@ Another approach that describes a guidance through a complex simulation trajecto
 The method addresses biochemical reaction networks and aims to provide the users with a tool for investigating the overall behavior of a modeled system and detailed behavior at the same time.
 
 \subsection{Visualization of Cavity and Tunnel Features}
-Phillips et al.~\cite{phillips2010} propose a method to quantitatively estimate the molecular features; e.g., volume and surface areas, via ray-casting technique. This involves computation of cavities.
+Phillips et al.~\cite{phillips2010} propose a method to quantitatively estimate the molecular features, e.g., volume and surface areas, via ray-casting technique. This involves computation of cavities.
 Lindow et al.~\cite{LindowBH11} introduce a technique that allows to extract significant paths from the molecules. 
 In their approach the authors utilize Voronoi diagram of spheres. 
 Their final visualization is achieved by means of placing light sources on the extracted paths to enhance the presence of tunnels.
@@ -366,7 +366,7 @@ These sites where the ligand got stuck for a significant portion of time corresp
 
 \subsubsection{Uniform Sampling}
 Here, we uniformly divide the whole simulation into a given number of temporal blocks. 
-Each temporal block is of a fixed length given by the user-defined granularity of time represented by the size of the temporal span; i.e., $|b_i|=l$, where $l$ represents the given number of time steps per temporal block. The value represented in this aggregate is the number of zero-crossings in this time interval. This can be seen as an orthogonal simplification strategy to the aforementioned one.
+Each temporal block is of a fixed length given by the user-defined granularity of time represented by the size of the temporal span, i.e., $|b_i|=l$, where $l$ represents the given number of time steps per temporal block. The value represented in this aggregate is the number of zero-crossings in this time interval. This can be seen as an orthogonal simplification strategy to the aforementioned one.
 
 Such a model helps to evaluate to which extent the ligand was stuck for a given amount of time.
 The advantage of this approach is its uniformity that allows users to easily perceive transition between different temporal selections.
@@ -403,7 +403,7 @@ Figure~\ref{fig:aa} shows examples of the resulting trajectories with the increa
 \end{figure}
 
 Such model allows us to estimate the time ligand spent stuck with respect to the given set of amino acids. 
-Moreover, it indirectly provides users with the hints of amino acids which caused the ligand being stuck and thus should be potentially replaced; e.g., mutated.
+Moreover, it indirectly provides users with the hints of amino acids which caused the ligand being stuck and thus should be potentially replaced, e.g., mutated.
 
 
 \subsubsection{Loop Degradation}
@@ -428,7 +428,7 @@ The main idea in this method is to remove those parts of the trajectory where th
 %Our compound view is divided into three parts.
 %
 %The top part shows the bar chart that captures the aggregated information about individual blocks obtained via the user-selected simplification method.
-%Each temporal block is represented by a single bar and its height corresponds to the actual aggregated value; i.e., either the number of zero-crossings or the number of time steps. 
+%Each temporal block is represented by a single bar and its height corresponds to the actual aggregated value, i.e., either the number of zero-crossings or the number of time steps. 
 %In other words, such a combination provides the users with the possibility to explore the correspondence between the geometrical bottlenecks and parts the ligand got stuck.
 %These parts form another type of bottlenecks -- those defined by the physico-chemical properties of the surrounding amino acids. 
 %In general, the geometric and phys-chem bottlenecks are considered as equal. 
