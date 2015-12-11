@@ -73,7 +73,7 @@ As the active site is usually buried deeply in the protein structure and thus in
 This process, called molecular docking, is very complex, lengthy, and heavy on computational resources. 
 Therefore, researchers aim at solutions that simplify and ease the analysis for proper ligand binding.
 Currently available solutions often focus on detection of possible ligand transportation paths through the protein, called tunnels.
-These solutions are mostly based on the geometric analysis, which lead to the tunnel detection in the end; e.g., CAVER~\cite{Chovancova2012}, MOLE~\cite{Sehnal2013}, or MolAxis~\cite{Yaffe2008}.
+These solutions are mostly based on the geometric analysis, which lead to the tunnel detection in the end, e.g., CAVER~\cite{Chovancova2012}, MOLE~\cite{Sehnal2013}, or MolAxis~\cite{Yaffe2008}.
 Other approaches, such as MoMA-LigPath~\cite{Devaurs}, aim at simulating the ligand transportation itself.
 Nevertheless, simulating the ligand docking using current computational approaches is still a challenging problem.
 There are several available variants of molecular simulation methods devised specifically to this problem. 
@@ -85,7 +85,7 @@ For example, a significant portion of the simulation the ligand usually spends o
 It also often happens that the ligand enters the molecule via a wrong tunnel and is then evicted from the molecule and searches for the entrance repeatedly.
 Therefore, the "true" active site entering can be in fact captured in a smaller subset of the original sequence.
 
-In this paper, we propose a new visual analysis system that addresses the aforementioned challenges; i.e.,  the transportation of a ligand to the active site. 
+In this paper, we propose a new visual analysis system that addresses the aforementioned challenges, i.e.,  the transportation of a ligand to the active site. 
 We aim to provide the domain experts with a tool for intuitive and interactive exploration of already captured molecular dynamics simulation containing the process of ligand binding. 
 Using our proposed solution the users are able to distinguish between the parts of the simulation where the ligand searches for the proper path to the active site (searches the tunnel gorge or enters the wrong tunnel) and the part where the ligand finally leads to and reaches the active site.
 %In the part of such annotated data when the ligand travels to the active site we provide the users with our newly introduced concept of so called temporal tunnel.
@@ -129,7 +129,7 @@ Another approach that describes a guidance through a complex simulation trajecto
 The method addresses biochemical reaction networks and aims to provide the users with a tool for investigating the overall behavior of a modeled system and detailed behavior at the same time.
 
 \subsection{Visualization of Cavity and Tunnel Features}
-Phillips et al.~\cite{phillips2010} propose a method to quantitatively estimate the molecular features; e.g., volume and surface areas, via ray-casting technique. This involves computation of cavities.
+Phillips et al.~\cite{phillips2010} propose a method to quantitatively estimate the molecular features, e.g., volume and surface areas, via ray-casting technique. This involves computation of cavities.
 Lindow et al.~\cite{LindowBH11} introduce a technique that allows to extract significant paths from the molecules. 
 In their approach the authors utilize Voronoi diagram of spheres. 
 Their final visualization is achieved by means of placing light sources on the extracted paths to enhance the presence of tunnels.
@@ -149,7 +149,6 @@ Byska et al.~\cite{byska2016} introduce an approach to interactively explore the
 
 %-------------------------------------------------------------------------
 \section{Problem Description and Input Data}
-\textcolor[rgb]{1,0,0}{Each section should have at least two subsections or none, some info repeats itself, questions is whether to put it here from intro or reduce this part and move it to intro. let's discuss it on skype.}
 When studying long molecular dynamics simulations, the researchers have to face namely the following high-level tasks:
 \begin{itemize}
 \item Detect the part of the simulation where the ligand enters the protein and finally reaches the active site.
@@ -175,25 +174,23 @@ And for such task a proper visual representation and guidance through such large
 
 In protein engineering, all these effort can finally lead to the detection of amino acids along the ligand trajectory which caused problems, i.e., were the key players in situations when the ligand got stuck.
 Such amino acids are then the best candidates for subsequent mutation of the protein chain when these amino acids are replaced by more suitable ones wrt. their size and properties.
-On the other hand, in drug design the aim is to propose modifications of the ligand to increase its binding and so design a better drug produced from this ligand.
+On the other hand, in drug design the aim is to propose modifications of the ligand to increase the binding likelihood in order to design a better drug produced from this ligand.
 
-\subsection{Input Data}
-As already mentioned, the input data are formed by the simulations of molecular dynamics which contains the movements of the protein and one or more ligands.
+The input data is obtained from the simulations of molecular dynamics which contains the movements of the protein and one or more ligands.
 Ligands can follow two main routes -- they can be transported from the outside environment to the protein active site or vice versa (after the desired reaction the product leaves the protein).
-Our proposed tool is suitable for both cases.
 
 The length of the simulations may vary from few hundreds to hundreds of thousands of time steps.  
-This depends namely on the ligand speed and its ability to find the proper path to the active site.
-Figure \ref{fig:lig_movement} shows an example of a ligand trajectory consisting of 10.000 time steps. 
+This depends namely on the ligand velocity and its ability to find the proper path to the active site.
+Figure \ref{fig:lig_movement} shows an example of a ligand trajectory consisting of $10.000$ time steps. 
 
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=1\linewidth]{img/lig_movement.png}
-  \caption{\label{fig:lig_movement} Ligand trajectory for a simulation containing 10.000 time steps. TODO change image, add molecule}
+  \caption{\label{fig:lig_movement} Ligand trajectory for a simulation containing $10.000$ time steps. TODO change image, add molecule}
 \end{figure}
 
 Long simulations can often contain many time steps when the ligand followed an impasse -- it tried to find the proper entrance point to the protein (tunnel gorge) or entered a wrong tunnel and had to return.
-Such parts of the simulation could be of less interest so the user should be provided with a possibility to filter them out and focus only on the interesting parts.
+Such parts of the simulation could be of less interest so that the user should be provided with a possibility to filter them out and focus only on the interesting parts.
 
 %-------------------------------------------------------------------------
 %\section{Design and Implementation}
@@ -257,32 +254,39 @@ Each temporal block, as well as the corresponding segment within the temporal tu
 \subsection{Temporal Tunnel Features}
 Each temporal block and the respective temporal tunnel segment is associated with several features computed interactively.
 
-We provide the information that represent the amount of free space around the ligand when leaving one temporal block and subsequently entering the next one.
-At each exit point $P(b)$, we retrieve the $N$ closest atoms to the ligand, which in our case we set $N=10$.Then we compute the center of mass, $C$, of these atoms and a distance, $r$, from the center to the closest atom. This forms a sphere $(C_b,r_b)$ representing the extent of the free space around the ligand at $P(b)$. The list of radii is then exploited to form the graph (Fig.~\ref{fig:overview}-3), which provides the information about the amount of free space around the ligand when leaving the current block. This represents a crucial information when studying the relation between the geometric and physio-chemical bottlenecks.
+We provide the information that represents the amount of free space around the ligand when leaving one temporal block and subsequently entering the next one.
+At each exit point $P(b)$, we retrieve the $N$ closest atoms to the ligand, which in our case is set to $N=10$.
+Then we compute the center of mass $C$ of these atoms and a distance $r$ from this center to the closest atom. 
+This forms a sphere $(C_b,r_b)$ representing the extent of the free space around the ligand at $P(b)$. 
+The list of radii is then exploited to form the graph (Fig.~\ref{fig:teaser}-3a), which provides the information about the amount of free space around the ligand when leaving the current block. 
+This represents a crucial information when studying the relation between the geometric and physico-chemical bottlenecks.
 
-The information on surrounding acids is also very crucial for exploring the ligand bottlenecks. For each time-step within the temporal block we compute the three closest amino acids from the ligand. These are then grouped to form a list of amino acids representing the entire block. We provide visual representation of this list (Fig.~\ref{fig:aacids}), where each amino acid defines one line in the list. 
+The information about the surrounding acids is also very crucial when exploring the ligand bottlenecks. 
+For each time step within the temporal block we compute the three closest amino acids from the ligand. 
+These are then grouped to form a list of amino acids representing the entire block. 
+We provide the visual representation of this list (Fig.~\ref{fig:aacids}), where each amino acid defines one line in the list. 
 The line is colored with respect to a selected physico-chemical property~---~our representation supports switching between hydrophobicity, partial charges, and donors and acceptors.
 The interruption in some of these lines is caused by the fact that the given amino acid is not present around the ligand in the corresponding temporal block.
+
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=1\linewidth]{img/aacids.png}
   \caption{\label{fig:aacids} Representation of amino acids surrounding the temporal tunnel and their physico-chemical properties. Coloring corresponds to a selected property, the line interruption means that this amino acid was not detected around the ligand in the corresponding temporal block.}
 \end{figure}
 
-Another feature that we assign to a block is represented by two values related to the distance ligand takes when crossing the block. 
-First, the total distance the ligand passed through between each neighboring time steps of the temporal block, $\sum_i |P(t_i),P(t_i{i+1})|$.
-Secondly, a relative distance the ligand passed between the first and the last time step of the temporal block with respect to the position of the active site $O$, 
-$|P(a),O|-|P(b),O|$. The total distance is mapped as the height of the bar while the relative distance is conveyed via the color (Fig.~\ref{fig:bars}). 
+Another feature that we assign to a block is represented by two values related to the distance the ligand takes when crossing the block. 
+First, the total distance the ligand passed through between the neighboring time steps of the temporal block, is defined as $\sum_i |P(t_i),P(t_{i+1})|$.
+Secondly, a relative distance the ligand passed between the first and the last time step of the temporal block with respect to the position of the active site $O$, is detected as $|P(a),O|-|P(b),O|$. The total distance is mapped onto the height of the bar while the relative distance is conveyed via the color (Fig.~\ref{fig:bars}). 
 Here, yellow color represents the direction towards the active site, while red color means that the ligand moved in the opposite direction.
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=1\linewidth]{img/bars.png}
-  \caption{\label{fig:bars} Coloring scheme used for individual bars which encodes the direction of the ligand with respect to the active site position. Yellow color corresponds to the motion towards the active site, red color corresponds to the opposite direction.}
+  \caption{\label{fig:bars} Coloring scheme used for individual bars which encodes the direction of the ligand with respect to the active site position. Yellow color corresponds to the motion towards the active site, orange color corresponds to the opposite direction.}
 \end{figure}
 
 The abstracted visualization, integrating the computed features, is interactively linked with the 3D view where the temporal tunnel is represented as a system of linked tubes.
 We color code the tubes by time or by the relative distance value.
-The main advantage of this representation is its complementarity with respect to the spatial orientation which is not provided in the bar chart (Fig.~\ref{fig:overview}-2).
+The main advantage of this representation is its complementarity with respect to the spatial orientation which is not provided in the bar chart (Fig.~\ref{fig:teaser}-2).
 
 %
 %\begin{figure}[htb]
@@ -292,19 +296,21 @@ The main advantage of this representation is its complementarity with respect to
 %\end{figure}
 
 \subsection{Trajectory Simplification}
-In order to reveal significant ligand motion patterns, we introduce a hierarchical simplification model that, in addition, allows us to emphasize several important aspects related to the mutual protein-ligand interaction. In more detail, at each level our visualization provides i) the main direction of the ligand motion, ii) the sections of the simulation where the ligand got stuck and iii) the geometrical and physico-chemical properties on sites where the ligand got stuck. 
+In order to reveal significant ligand motion patterns, we introduce a hierarchical simplification model that, in addition, allows us to emphasize several important aspects related to the mutual protein-ligand interaction. 
+In more detail, at each level our visualization provides i) the main direction of the ligand motion, ii) the sections of the simulation where the ligand got stuck and iii) the geometrical and physico-chemical properties on sites where the ligand got stuck. 
 
 As already mentioned, the main source of the visual clutter (Fig. \ref{fig:temporal}a) is the ligand motion itself, which resembles the random Brownian motion. Here, the removal of this jittery motion would allow us to reveal more dominant ligand motion patterns. 
 Nevertheless, this also means to approximate the initial trajectory, which on the other hand is a trade-off for providing a good overview of entire ligand motion instead.
 As a standard solution, to reduce this jittering and also to simplify the trajectory, the Hermite (or similar) interpolation technique can be used. 
-However, such an interpolation simplification would still not suffice since the spatial distance between two neighboring time steps is usually very small, thus the interpolation scheme still contains a lot of jitter  (Fig.~\ref{fig:temporal}). 
+However, such an interpolation simplification would still not suffice since the spatial distance between two neighboring time steps is usually very small, thus the interpolation scheme still contains a lot of jitter (Fig.~\ref{fig:temporal}). 
 For completeness, we also tested the Ramer~-~Douglas~-~Peucker algorithm. 
 It reduces the number of points in a curve by starting from the line segment between the first and last point of the trajectory. 
 For each segment it adds a point from the original trajectory which is the furthest one from this segment.
 This process is repeated until the desired resolution of the trajectory is reached.
 In case of ligand trajectory, this method keeps only the extreme points on the trajectory, which unfortunately has no significant meaning from the biochemical point of view.
-Therefore, we propose solution that sub-sample the original trajectory and aggregate the protein-ligand interaction in a distinct manner. 
+Therefore, we propose solutions that sub-sample the original trajectory and aggregate the protein-ligand interaction in a distinct manner. 
 The intention is that the user can interactively switch between different aggregation strategies while the result is visualized instantly.
+In all proposed solutions we employ the position of the active site that can be either user defined or obtained directly from the simulation, e.g., as the final position of the ligand.
 
 %Except for a lot of jitter, the trajectory often contains sequences that form the so-called \textit{loops}.
 %The loop is thought of as a portion of the trajectory in which the ligand got stuck in a given position $p$ (time step $t_i$), then follows an alternative route, i.e., not heading towards the active site, and finally returns to a position $q$ lying close to $p$ where it got stuck (in time step $t_j$). We define this condition as follows:
@@ -318,10 +324,9 @@ The intention is that the user can interactively switch between different aggreg
 
 
 \subsubsection{Zero-Crossings}
-Here we employ the position of the active site that can be either user defined or obtained directly from the simulation, e.g., as the final position of the ligand.
 %{\color{red}(The automatic active site detection is currently supported only for input data in which the ligand is in the active site by the end of the simulation.)}.
 % I guess it could be done for reentry simulation as well using the most distant place from entery point. But here we face the problem how to evalueate whether the ligand go stuck and lefet before actually reaching the active site (ever).  
-Thus, in each time step $i$ the distance $d_i$ from the active site to the ligand center of mass can be evaluated, i.e., we define a set of distances $D=\{d_1,d_2, \ldots, d_n\}$ where $n$ is the number of time steps in the scrutinized part of the simulation. 
+This method is based on the assumption that in each time step $i$ the distance $d_i$ from the active site to the ligand center of mass can be evaluated, i.e., we define a set of distances $D=\{d_1,d_2, \ldots, d_n\}$ where $n$ is the number of time steps in the scrutinized part of the simulation. 
 %We define ligand trajectory as a set $T = {t_i : 0 < i <=n}$ 
 By means of this distance, one can easily detect time steps when the ligand changes its motion with respect to the active site, i.e., towards to or away from the active site. Using $d$ notation we represent these time steps as follows:
 \begin{equation}
@@ -361,7 +366,7 @@ These sites where the ligand got stuck for a significant portion of time corresp
 
 \subsubsection{Uniform Sampling}
 Here, we uniformly divide the whole simulation into a given number of temporal blocks. 
-Each temporal block is of a fixed length given by the user-defined granularity of time represented by the size of the temporal span; i.e., $|b_i|=l$, where $l$ represents the given number of time steps per temporal block. The value represented in this aggregate is the number of zero-crossings in this time interval. This can be seen as an orthogonal simplification strategy to the aforementioned one.
+Each temporal block is of a fixed length given by the user-defined granularity of time represented by the size of the temporal span, i.e., $|b_i|=l$, where $l$ represents the given number of time steps per temporal block. The value represented in this aggregate is the number of zero-crossings in this time interval. This can be seen as an orthogonal simplification strategy to the aforementioned one.
 
 Such a model helps to evaluate to which extent the ligand was stuck for a given amount of time.
 The advantage of this approach is its uniformity that allows users to easily perceive transition between different temporal selections.
@@ -398,7 +403,7 @@ Figure~\ref{fig:aa} shows examples of the resulting trajectories with the increa
 \end{figure}
 
 Such model allows us to estimate the time ligand spent stuck with respect to the given set of amino acids. 
-Moreover, it indirectly provides users with the hints of amino acids which caused the ligand being stuck and thus should be potentially replaced; e.g., mutated.
+Moreover, it indirectly provides users with the hints of amino acids which caused the ligand being stuck and thus should be potentially replaced, e.g., mutated.
 
 
 \subsubsection{Loop Degradation}
@@ -423,7 +428,7 @@ The main idea in this method is to remove those parts of the trajectory where th
 %Our compound view is divided into three parts.
 %
 %The top part shows the bar chart that captures the aggregated information about individual blocks obtained via the user-selected simplification method.
-%Each temporal block is represented by a single bar and its height corresponds to the actual aggregated value; i.e., either the number of zero-crossings or the number of time steps. 
+%Each temporal block is represented by a single bar and its height corresponds to the actual aggregated value, i.e., either the number of zero-crossings or the number of time steps. 
 %In other words, such a combination provides the users with the possibility to explore the correspondence between the geometrical bottlenecks and parts the ligand got stuck.
 %These parts form another type of bottlenecks -- those defined by the physico-chemical properties of the surrounding amino acids. 
 %In general, the geometric and phys-chem bottlenecks are considered as equal. 
