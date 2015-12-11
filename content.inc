@@ -518,7 +518,26 @@ By selecting the amino acids surrounding the trajectory the user can observe the
   \caption{\label{fig:tube} a) The trajectory can be visualized as a tube. The highlighted section corresponds to one selected bar. b) The ligand (red) can be added and its surrounding amino acids (yellow) can be highlighted.}
 \end{figure}
 
+The same workflow can be followed by using the other simplification methods as well.
+We tested these methods on the same trajectory.
+Each of them detects several interesting spots on the trajectory which gives the biochemist a hint to an interesting spot for further exploration.
 
+The uniform sampling method nicely showed the progress of the ligand along the trajectory.
+On the higher levels it helps to reveal the overall progress of the ligand divided into uniform blocks. 
+This method clearly showed that the ligand at the end of the trajectory the ligand traveled around the active site for a significant portion of time (traveling forward and backward) before it finally reached the active site.
+
+The loop degradation method guided the user to the second half of the trajectory. 
+Here the method detected three interesting blocks in which the ligand followed a loop in a backward direction. 
+The neigborhood of one of these bars was rather flat which says that the ligand movement before and after this bar was rather smooth (without significant loops).
+Detailed exploration of this bar revealed that at the beginning of the loop the radius was small and prevented the ligand to proceed towards the active site.
+
+The aggregation with respect to the physico-chemical properties of the surrounding amino acids is the most sophisticated method from the biochemical point of view because it incorporates a non-trivial parameter.
+Therefore, also its interpretation requires can be more complicated.
+In this particular case the method showed that in the first part of the trajectory the ligand was surrounded by very similar amino acids and when started to move faster towards the active site, the amino acids (so the physico-chemical properties of the trajectory) changed significantly as well.
+
+Of course, these methods is worthwhile to combine in order to reveal the interesting spots in the trajectory taken from different points of view. 
+This combination can be based on changing the methods withing the exploration or the user can perform the exploration individually and then compare the results.
+Some of the spots detected by our proposed methods can overlap which can even strengthen their importance.
 
 \section{Conclusion and Future Work}
 
