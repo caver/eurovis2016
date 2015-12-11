@@ -32,12 +32,12 @@
 %-------------------------------------------------------------------------
 \begin{document}
 
- \teaser{
-  \includegraphics[width=\linewidth]{img/teaser}
-  \centering
-   \caption{Illustration of our proposed solution for interactive exploration of ligand movements. The information whether the ligand is outside or inside the molecular surface is depicted as a two color line (0). The bar chart showcases the most prominent motion patterns inside each detected temporal block (1). Correspondingly, we form a simplified representation of the ligand trajectory that has the same number of control points as is the number of temporal blocks (2). Each temporal block is described by several features that include the radius of the sphere enclosed void around the ligand (3a) and physico-chemical properties of amino acids interacting with the ligand (3b).}
- \label{fig:teaser}
- }
+ %\teaser{
+ % \includegraphics[width=\linewidth]{img/teaser}
+ % \centering
+ %  \caption{Illustration of our proposed solution for interactive exploration of ligand movements. The information whether the ligand is outside or inside the molecular surface is depicted as a two color line (0). The bar chart showcases the most prominent motion patterns inside each detected temporal block (1). Correspondingly, we form a simplified representation of the ligand trajectory that has the same number of control points as is the number of temporal blocks (2). Each temporal block is described by several features that include the radius of the sphere enclosed void around the ligand (3a) and physico-chemical properties of amino acids interacting with the ligand (3b).}
+% \label{fig:teaser}
+% }
 
 \maketitle
 
@@ -68,6 +68,13 @@ In these particular cases the ligand has to be transported from the outer solven
 The consecutive reaction then changes the composition and properties of both molecules. 
 In protein engineering, for example, the goal is to alter the protein properties so that the new protein is, e.g., more stable and resistant to organic cosolvents~\cite{Koudelakova2013}.
 
+\lipsum[1-2]
+\begin{figure*}
+  \includegraphics[width=\linewidth]{img/teaser}
+  \caption{\label{fig:teaser}Illustration of our proposed solution for interactive exploration of ligand movements. The information whether the ligand is outside or inside the molecular surface is depicted as a two color line (0). The bar chart showcases the most prominent motion patterns inside each detected temporal block (1). Correspondingly, we form a simplified representation of the ligand trajectory that has the same number of control points as is the number of temporal blocks (2). Each temporal block is described by several features that include the radius of the sphere enclosed void around the ligand (3a) and physico-chemical properties of amino acids interacting with the ligand (3b).}
+\end{figure*}
+\lipsum[3-10]
+
 The design complexity of such reactions lies namely in the transportation of the ligand to the protein active site.
 As the active site is usually buried deeply in the protein structure and thus inaccessible directly from its surface, the ligand has to find a suitable transportation path through the protein structure.
 This process, called molecular docking, is very complex, lengthy, and its analysis is heavy on computational resources. 
@@ -84,6 +91,9 @@ Moreover, the simulation often contains movements that are irrelevant to the lig
 For example, a significant portion of the simulation the ligand usually spends outside the protein searching for a proper tunnel gorge to enter the molecule. 
 It also often happens that the ligand enters the molecule via a wrong tunnel and is then evicted from the molecule and searches for the entrance repeatedly.
 Therefore, the "true" active site entering can be in fact captured in a smaller subset of the original sequence.
+
+
+
 
 In this paper, we propose a new visual analysis system that addresses the aforementioned challenges, i.e.,  the transportation of a ligand to the active site. 
 We aim to provide the domain experts with a tool for intuitive and interactive exploration of already captured molecular dynamics simulation containing the process of ligand binding. 
