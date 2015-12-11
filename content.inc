@@ -149,7 +149,6 @@ Byska et al.~\cite{byska2016} introduce an approach to interactively explore the
 
 %-------------------------------------------------------------------------
 \section{Problem Description and Input Data}
-\textcolor[rgb]{1,0,0}{Each section should have at least two subsections or none, some info repeats itself, questions is whether to put it here from intro or reduce this part and move it to intro. let's discuss it on skype.}
 When studying long molecular dynamics simulations, the researchers have to face namely the following high-level tasks:
 \begin{itemize}
 \item Detect the part of the simulation where the ligand enters the protein and finally reaches the active site.
@@ -175,25 +174,23 @@ And for such task a proper visual representation and guidance through such large
 
 In protein engineering, all these effort can finally lead to the detection of amino acids along the ligand trajectory which caused problems, i.e., were the key players in situations when the ligand got stuck.
 Such amino acids are then the best candidates for subsequent mutation of the protein chain when these amino acids are replaced by more suitable ones wrt. their size and properties.
-On the other hand, in drug design the aim is to propose modifications of the ligand to increase its binding and so design a better drug produced from this ligand.
+On the other hand, in drug design the aim is to propose modifications of the ligand to increase the binding likelihood in order to design a better drug produced from this ligand.
 
-\subsection{Input Data}
-As already mentioned, the input data are formed by the simulations of molecular dynamics which contains the movements of the protein and one or more ligands.
+The input data is obtained from the simulations of molecular dynamics which contains the movements of the protein and one or more ligands.
 Ligands can follow two main routes -- they can be transported from the outside environment to the protein active site or vice versa (after the desired reaction the product leaves the protein).
-Our proposed tool is suitable for both cases.
 
 The length of the simulations may vary from few hundreds to hundreds of thousands of time steps.  
-This depends namely on the ligand speed and its ability to find the proper path to the active site.
-Figure \ref{fig:lig_movement} shows an example of a ligand trajectory consisting of 10.000 time steps. 
+This depends namely on the ligand velocity and its ability to find the proper path to the active site.
+Figure \ref{fig:lig_movement} shows an example of a ligand trajectory consisting of $10.000$ time steps. 
 
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=1\linewidth]{img/lig_movement.png}
-  \caption{\label{fig:lig_movement} Ligand trajectory for a simulation containing 10.000 time steps. TODO change image, add molecule}
+  \caption{\label{fig:lig_movement} Ligand trajectory for a simulation containing $10.000$ time steps. TODO change image, add molecule}
 \end{figure}
 
 Long simulations can often contain many time steps when the ligand followed an impasse -- it tried to find the proper entrance point to the protein (tunnel gorge) or entered a wrong tunnel and had to return.
-Such parts of the simulation could be of less interest so the user should be provided with a possibility to filter them out and focus only on the interesting parts.
+Such parts of the simulation could be of less interest so that the user should be provided with a possibility to filter them out and focus only on the interesting parts.
 
 %-------------------------------------------------------------------------
 %\section{Design and Implementation}
