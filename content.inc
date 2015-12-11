@@ -8,16 +8,17 @@
 
 % for anonymous conference submission please enter your SUBMISSION ID
 % instead of the author's name (and leave the affiliation blank) !!
-\author[Furmanov\'{a} et al.]
-       {K. Furmanov\'{a}$^{1}$, M. Jare\v{s}ov\'{a}$^{1}$, J. By\v{s}ka$^{1,2}$, A. Jur\v{c}\'{i}k$^{1}$, J. Parulek$^{2}$, H. Hauser$^{2}$, and B. Kozl\'{i}kov\'{a}$^{1}$
+\author[anonym]
+       %{K. Furmanov\'{a}$^{1}$, M. Jare\v{s}ov\'{a}$^{1}$, J. By\v{s}ka$^{1,2}$, A. Jur\v{c}\'{i}k$^{1}$, J. Parulek$^{2}$, H. Hauser$^{2}$, and B. Kozl\'{i}kov\'{a}$^{1}$
+			{********************}
 %        S. Spencer$^2$\thanks{Chairman Siggraph Publications Board}
-        				\\
+        				%\\
 % For Computer Graphics Forum: Please use the abbreviation of your first name.
-         $^1$Faculty of Informatics, Masaryk University, Czech Republic\\
-         $^2$Department of Informatics, University of Bergen, Norway
+         %$^1$Faculty of Informatics, Masaryk University, Czech Republic\\
+         %$^2$Department of Informatics, University of Bergen, Norway
 %        $^2$ Another Department to illustrate the use in papers from authors
 %             with different affiliations
-       }
+       %}
 
 % ------------------------------------------------------------------------
 
