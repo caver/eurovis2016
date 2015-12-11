@@ -191,12 +191,12 @@ Ligands can follow two main routes -- they can be transported from the outside e
 
 The length of the simulations may vary from few hundreds to hundreds of thousands of time steps.  
 This depends namely on the ligand velocity and its ability to find the proper path to the active site.
-Figure \ref{fig:lig_movement} shows an example of a ligand trajectory consisting of $10.000$ time steps. 
+Figure \ref{fig:lig_movement} shows an example of a ligand trajectory consisting of $50.000$ time steps. 
 
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=1\linewidth]{img/lig_movement.png}
-  \caption{\label{fig:lig_movement} Ligand trajectory for a simulation containing $10.000$ time steps. TODO change image, add molecule}
+  \caption{\label{fig:lig_movement} Ligand trajectory for a simulation containing $50.000$ time steps.}
 \end{figure}
 
 Long simulations can often contain many time steps when the ligand followed an impasse -- it tried to find the proper entrance point to the protein (tunnel gorge) or entered a wrong tunnel and had to return.
@@ -314,7 +314,7 @@ As a standard solution, to reduce this jittering and also to simplify the trajec
 However, such an interpolation simplification would still not suffice since the spatial distance between two neighboring time steps is usually very small, thus the interpolation scheme still contains a lot of jitter (Fig.~\ref{fig:temporal}). 
 \begin{figure}[htb]
 	\centering
-  \includegraphics[width=1\linewidth]{img/temporal.png}
+  \includegraphics[width=0.8\linewidth]{img/temporal.png}
   \caption{\label{fig:temporal} A cut trajectory section shows the ligand entering the active site. The trajectory is obtained using Hermite interpolation, which still contains a lot of jittery motion.}
 \end{figure}
 For completeness, we also tested the Ramer~-~Douglas~-~Peucker algorithm. 
