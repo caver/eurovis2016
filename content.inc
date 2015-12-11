@@ -197,7 +197,7 @@ Figure \ref{fig:lig_movement} shows an example of a ligand trajectory consisting
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=1\linewidth]{img/lig_movement.png}
-  \caption{\label{fig:lig_movement} Ligand trajectory for a simulation containing $50.000$ time steps.}
+  \caption{\label{fig:lig_movement} Ligand trajectory (gray) for a simulation containing $50.000$ time steps.}
 \end{figure}
 
 Long simulations can often contain many time steps when the ligand followed an impasse -- it tried to find the proper entrance point to the protein (tunnel gorge) or entered a wrong tunnel and had to return.
@@ -556,9 +556,6 @@ As the original trajectory is very jittered, we proposed four methods for trajec
 Each of them helps to reveal interesting portions of the trajectory, which can be further explored by the interaction with our proposed visualization.
 The visualization consists of several parts conveying the information about the aggregation of time steps, the radius of the temporal tunnel, and different properties of the amino acids surrounding the temporal tunnel and thus interacting with the ligand.
 The simplification methods were tested on several cases and one of them was demonstrated, along with the discussion about their contributions.
-
-In the future it could be interesting to find a way to combine or link the proposed methods to a single one so the user will not be forced to switch between them manually.
-Moreover, it would be interesting to compare the temporal tunnel with tunnels computed by one of the existing geometric approaches, e.g., using CAVER or MOLE.
 
 %-------------------------------------------------------------------------
 
