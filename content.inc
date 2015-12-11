@@ -223,7 +223,7 @@ When denote the last time step of $b_i$ as $E(i)$. In this manner, we extract a 
 Each temporal block, as well as the corresponding segment within the temporal tunnel, is then described by several features representing the ligand motion, the empty space around the ligand, and physico-chemical properties during the time the ligand spent inside $b_i$ (Fig.~\ref{fig:overview}-3).
 \begin{figure}[ht!]
 	%\centering
-  \includegraphics[width=1\linewidth]{img/overview2.png}
+  \includegraphics[width=1\linewidth]{img/teaser.pdf}
   \caption{\label{fig:overview} Illustration of the proposed solution. The information whether the ligand is outside or inside the molecular surface is depicted as a two color line (0). The bar chart showcases the most prominent motion patterns inside each temporal block (1). Correspondingly, we form a simplified representation of the ligand trajectory that has the same number of control points as is the number of temporal blocks (2). Each temporal block is described by several features that include physico-chemical properties, the radius of the sphere enclosed void around the ligand (3).}
 \end{figure}
 %The first problem is addressed by the simple visualization on the top of the window.
