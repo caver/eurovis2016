@@ -32,12 +32,12 @@
 %-------------------------------------------------------------------------
 \begin{document}
 
-% \teaser{
-%  \includegraphics[width=\linewidth]{eg_new}
-%  \centering
-%   \caption{New EG Logo}
-% \label{fig:teaser}
-% }
+ \teaser{
+  \includegraphics[width=\linewidth]{img/teaser}
+  \centering
+   \caption{TODO}
+ \label{fig:teaser}
+ }
 
 \maketitle
 
