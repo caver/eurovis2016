@@ -562,7 +562,7 @@ Moreover, it would be interesting to compare the temporal tunnel with tunnels co
 %-------------------------------------------------------------------------
 
 %\bibliographystyle{eg-alpha}
-\bibliographystyle{eg-alpha-doi}
+\bibliographystyle{eg-alpha}
 
 \bibliography{refs}
 
