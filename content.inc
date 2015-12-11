@@ -92,7 +92,7 @@ Using our proposed solution the users are able to distinguish between the parts 
 %The centerline of this tunnel is represented by the ligand trajectory and in the original data is very jittered.
 %Thus it is hard to follow determine the time steps when the ligand made a significant shift towards the active site.
 
-Here, we introduce {\color{red}two} dedicated methods for simplification of the original trajectory.
+Here, we introduce four dedicated methods for simplification of the original trajectory.
 These methods can simplify the ligand path hierarchically, thus providing several levels of detail (LOD), which can be interactively browsed through.
 In the most abstracted view, represented as the top-most LOD, the temporal tunnel shows only the significant shifts of the ligand towards the active site. 
 Here, the user can interactively brush time intervals, which automatically reveals and adopts the temporal tunnel to the selected interval.
@@ -201,18 +201,28 @@ Such parts of the simulation could be of less interest so the user should be pro
 In this section we describe the design rationale of our proposed approach to interactive exploration of ligand trajectory coming from the above described simulations of molecular dynamics.
 The design is tightly related to the following problems posed by the biochemists:
 \begin{itemize}
-\item Due to the immerse length of the simulations, it is almost impossible to easily separate and navigate through simulation parts given by the ligand position; i.e., whether it is outside the protein, inside a wrong or correct tunnel.
-\item The scattered nature of the ligand motion make it hard to follow the overall ligand direction.
-\item There is no quick and straightforward way to explore relation between physio-chemical properties of the protein tunnel and its geometry to assess the ligand bottleneck.
+\item Due to the immerse length of the simulations, it is almost impossible to easily separate and navigate through simulation parts given by the ligand position, i.e., whether it is outside the protein, inside a wrong or correct tunnel.
+\item The scattered nature of the ligand motion makes it hard to follow the overall ligand direction.
+\item There is no quick and straightforward way to explore the relation between physico-chemical properties of the protein tunnel and its geometry to assess the ligand bottleneck.
 \end{itemize}
 
-To tackle the aforementioned challenges, we propose a multiscale visualization system (Fig.~\ref{fig:overview}), which integrates visual information-seeking mantra to protein-ligand interaction simulations. The main idea is to provide a meaningful information at each data abstraction level that is given by the current temporal selection; i.e., the user defined temporal window, $T_s=[t_i,i_j]$. On the highest level, we classify ligand motion into two basic categories: outside the molecular surface (represented as solvent excluded surface~\cite{Richards}) and inside the protein (Fig..~\ref{fig:overview}-0). The latter one is divided into two sub-cases. In the first case the ligand enters a tunnel but there is an obstacle preventing it to get to the active site and the ligand is expelled from the inner space back to the outer environment.
-In the second case the ligand reaches the active site. Further, the visualization highlights the most prominent motion patterns that reflect the amount of movement the ligand made towards to or away from the active site. This is tackled by a block-wise aggregation scheme of the ligand trajectory performed automatically in interval $T_s$.
-Here we obtain a list of $m$ sequential blocks, $B=\{b_1,\ldots,b_m\}$ (Fig.~\ref{fig:overview}-1). We propose three different aggregation strategies, where each one suits particular needs of domain specialists. Parallel to set $B$ we form a simplified representation of the ligand trajectory, which we refer to as \textit{temporal tunnel} and is defined, i.e., its controlled points, by the last time-steps of each temporal block $b_i$ (Fig.~\ref{fig:overview}-2). Each temporal block is then described by several features describing the motion, the empty space around the ligand and physi-chemical  properties during the time the ligand spent inside $b_i$ (Fig.~\ref{fig:overview}-3).
-\begin{figure}[h!]
+To tackle the aforementioned challenges, we propose a multiscale visualization system (Fig.~\ref{fig:overview}), which integrates visual information-seeking mantra to protein-ligand interaction simulations. 
+The main idea is to provide a meaningful information at each data abstraction level that is given by the current temporal selection, i.e., the user defined temporal window, $T_s=[t_i,t_j]$. 
+On the highest level, we classify ligand motion into two basic categories: outside the molecular surface (represented as solvent excluded surface~\cite{Richards}) and inside the protein (Fig.~\ref{fig:overview}-0). 
+The latter one is divided into two sub-cases. 
+In the first case the ligand enters a tunnel but there is an obstacle preventing it to get to the active site and the ligand is expelled from the inner space back to the outer environment.
+In the second case the ligand reaches the active site. 
+Further, the visualization highlights the most prominent motion patterns that reflect the amount of movement the ligand made towards to or away from the active site. 
+This is tackled by a block-wise aggregation scheme of the ligand trajectory performed automatically in interval $T_s$.
+Here we obtain a list of $m$ sequential blocks, $B=\{b_1,\ldots,b_m\}$ (Fig.~\ref{fig:overview}-1). 
+We propose three different aggregation strategies, where each one suits particular needs of domain specialists. 
+Parallel to set $B$ we form a simplified representation of the ligand trajectory, which we refer to as \textit{temporal tunnel}.
+Control points of the temporal tunnel are represented by ligand positions at the last time-step of each temporal block $b_i$ (Fig.~\ref{fig:overview}-2).
+Each temporal block is then described by several features describing the motion, the empty space around the ligand, and physico-chemical properties during the time the ligand spent inside $b_i$ (Fig.~\ref{fig:overview}-3).
+\begin{figure}[ht!]
 	%\centering
   \includegraphics[width=1\linewidth]{img/overview2.png}
-  \caption{\label{fig:overview} Illustration of the proposed solution. The information whether the ligand is outside or inside the molecular surface is depicted as a two color line (0). The bar chart showcases the most prominent motion patterns inside each temporal block (1). Correspondingly, we form a simplified representation of the ligand trajectory that has the same number of control points as is the number of temporal blocks (2). Each temporal block is described by several features that include physi-chemical  properties, the radius of the sphere enclosed void around the ligand (3).}
+  \caption{\label{fig:overview} Illustration of the proposed solution. The information whether the ligand is outside or inside the molecular surface is depicted as a two color line (0). The bar chart showcases the most prominent motion patterns inside each temporal block (1). Correspondingly, we form a simplified representation of the ligand trajectory that has the same number of control points as is the number of temporal blocks (2). Each temporal block is described by several features that include physico-chemical properties, the radius of the sphere enclosed void around the ligand (3).}
 \end{figure}
 %The first problem is addressed by the simple visualization on the top of the window.
 %Its goal is to provide the users with the general overview of the whole simulation and highlight individual parts of the ligand movement.
@@ -407,23 +417,6 @@ So the method is able to show only the dominant ligand motions.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \subsection{Temporal Tunnel Compound Views} \label{visualization}
 Each simplification scheme provides a detailed information aggregated within the acquired temporal blocks, which asks for a meaningful visual representation. Therefore, we propose a compound visualization system (Fig.~\ref{fig:overview}b) composed of dedicated charts representing information provided by the corresponding temporal tunnel. 
 This information should assist users to quickly explore interesting sites on the ligand trajectory.
@@ -433,11 +426,11 @@ The top part shows the bar chart that captures the aggregated information about 
 Each temporal block is represented by a single bar and its height corresponds to the actual aggregated value; i.e., either the number of zero-crossings or the number of time steps. 
 Additionally, the user can choose between two ligand-distance related values. 
 First, the total distance the ligand passed through between each neighboring time steps of the temporal block. 
-Secondly, a relative distance the ligand passed between the first and the last time step of the temporal block.  \textcolor[rgb]{1,0,0}{(TODO Figure to compare both)}
+Secondly, a relative distance the ligand passed between the first and the last time step of the temporal block.  
+%\textcolor[rgb]{1,0,0}{(TODO Figure to compare both)}
 
 The basic coloring scheme of the individual bars encodes the direction of the ligand in the corresponding temporal blocks (Fig.~\ref{fig:bars}). 
 Here, yellow color represents the direction towards the active site, while red color means that the ligand moved in the opposite direction.
-{\color{red}TODO what else?}
 
 \begin{figure}[htb]
 	\centering
@@ -466,8 +459,10 @@ The interruption in some of these lines is caused by the fact that the given ami
 \end{figure}
 
 The proposed abstracted visualization is interactively linked with the 3D view where the temporal tunnel is represented in the following way.
+Here the tunnel is visualized as a tube (see~Figure\ref{fig:tube} a)) and can be colored according to time or the direction in which the ligand moves in the corresponding bar.
+The main advantages of this representation are the better perception of the spatial orientation (in comparison with Fig.~\ref{fig:overview}-2).
+Moreover, when highlighting the surrounding amino acids in a given position, 
 
-TODO
 ------------------------------
 
 \textcolor[rgb]{0.65,0.16,0}{TODO where are all the figures - For each scheme we need 1) different granurality, selections, comparissons, infographs, 3D trajectories, tunnels?}
@@ -522,7 +517,7 @@ This bar further divides the trajectory to three parts which can be further expl
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=1\linewidth]{img/casebar.png}
-  \caption{\label{fig:cross} Bars showing the aggregated temporal blocks. a) The highest yellow block defines the part where the ligand travelled directly towards the active site. b) Example of interactive selection of bars.}
+  \caption{\label{fig:casebar} Bars showing the aggregated temporal blocks. a) The highest yellow block defines the part where the ligand travelled directly towards the active site. b) Example of interactive selection of bars.}
 \end{figure}
 
 Then the user can focus on details of this part of the trajectory by decreasing the level of simplification until reaches the lowest level where all original time steps of this part are displayed.
