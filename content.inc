@@ -35,7 +35,7 @@
  \teaser{
   \includegraphics[width=\linewidth]{img/teaser}
   \centering
-   \caption{TODO}
+   \caption{Illustration of our proposed solution for interactive exploration of ligand movements. The information whether the ligand is outside or inside the molecular surface is depicted as a two color line (0). The bar chart showcases the most prominent motion patterns inside each detected temporal block (1). Correspondingly, we form a simplified representation of the ligand trajectory that has the same number of control points as is the number of temporal blocks (2). Each temporal block is described by several features that include the radius of the sphere enclosed void around the ligand (3a) and physico-chemical properties of amino acids interacting with the ligand (3b).}
  \label{fig:teaser}
  }
 
@@ -208,24 +208,26 @@ The design is tightly related to the following problems posed by the biochemists
 
 To tackle the aforementioned challenges, we propose a multiscale visualization system (Fig.~\ref{fig:overview}), which integrates visual information-seeking mantra~\cite{shneiderman1996} to protein-ligand interaction simulations. 
 The main idea is to provide a meaningful information at each data abstraction level that is given by the current temporal selection, i.e., the user defined temporal window.
-On the highest level, we classify ligand motion into two basic categories: outside the molecular surface (represented as solvent excluded surface~\cite{Richards}) and inside the protein (Fig.~\ref{fig:overview}-0). 
+On the highest level, we classify ligand motion into two basic categories: outside the molecular surface (represented as solvent excluded surface~\cite{Richards}) and inside the protein (Fig.~\ref{fig:teaser}-0). 
 The latter one is divided into two sub-cases. 
 In the first case the ligand enters a tunnel but there is an obstacle preventing it to get to the active site and the ligand is expelled from the inner space back to the outer environment.
 In the second case the ligand reaches the active site. 
 Further, the visualization highlights the most prominent motion patterns that reflect the amount of movement the ligand made towards to or away from the active site. 
 This information is acquired by means of a block-wise aggregation scheme of the ligand trajectory performed automatically in interval $T_s$.
-Here we obtain a list of $m$ sequential temporal blocks, $B=\{b_1,\ldots,b_m\}$ (Fig.~\ref{fig:overview}-1). It is important to mention that the blocks are non-overlapping in time meaning that if $b_i=[t_{100},t_{110}]$ then $b_{i+1}=[t_{111},...]$. For simplicity of explanation we define each temporal block as interval $b_i=[t_a,t_b]$ and the corresponding positions of ligands at time steps $t_a$ and $t_b$ as $P(a)$ and $P(b)$.
+Here we obtain a list of $m$ sequential temporal blocks, $B=\{b_1,\ldots,b_m\}$ (Fig.~\ref{fig:teaser}-1). It is important to mention that the blocks are non-overlapping in time meaning that if $b_i=[t_{100},t_{110}]$ then $b_{i+1}=[t_{111},...]$. For simplicity of explanation we define each temporal block as interval $b_i=[t_a,t_b]$ and the corresponding positions of ligands at time steps $t_a$ and $t_b$ as $P(a)$ and $P(b)$.
 We propose four different aggregation strategies, where each one suits particular needs of domain specialists. Note that the aggregation schemes can be easily extended based on the application needs.
 Parallel to set $B$ we form a simplified representation of the ligand trajectory, which we refer to as \textit{temporal tunnel}.
-Control points of the temporal tunnel are represented by ligand positions at the last time-step of each temporal block $b_i$ (Fig.~\ref{fig:overview}-2).
-When denote the last time step of $b_i$ as $E(i)$. In this manner, we extract a set of time steps $E_B=\{E(1),\ldots ,E(m)\}$ representing $m$ temporal blocks of a trajectory simplification that reflects set $B$.
+Control points of the temporal tunnel are represented by ligand positions at the last time-step of each temporal block $b_i$ (Fig.~\ref{fig:teaser}-2).
+We denote the last time step of $b_i$ as $E(i)$. In this manner, we extract a set of time steps $E_B=\{E(1),\ldots ,E(m)\}$ representing $m$ temporal blocks of a trajectory simplification that reflects the set $B$.
 
-Each temporal block, as well as the corresponding segment within the temporal tunnel, is then described by several features representing the ligand motion, the empty space around the ligand, and physico-chemical properties during the time the ligand spent inside $b_i$ (Fig.~\ref{fig:overview}-3).
-\begin{figure}[ht!]
-	%\centering
-  \includegraphics[width=1\linewidth]{img/teaser.pdf}
-  \caption{\label{fig:overview} Illustration of the proposed solution. The information whether the ligand is outside or inside the molecular surface is depicted as a two color line (0). The bar chart showcases the most prominent motion patterns inside each temporal block (1). Correspondingly, we form a simplified representation of the ligand trajectory that has the same number of control points as is the number of temporal blocks (2). Each temporal block is described by several features that include physico-chemical properties, the radius of the sphere enclosed void around the ligand (3).}
-\end{figure}
+Each temporal block, as well as the corresponding segment within the temporal tunnel, is then described by several features representing the ligand motion, the empty space around the ligand (Fig.~\ref{fig:teaser}-3a), and physico-chemical properties during the time the ligand spent inside $b_i$ (Fig.~\ref{fig:teaser}-3b).
+
+%\begin{figure}[ht!]
+%	%\centering
+ % \includegraphics[width=1\linewidth]{img/teaser.pdf}
+ % \caption{\label{fig:overview} }
+%\end{figure}
+
 %The first problem is addressed by the simple visualization on the top of the window.
 %Its goal is to provide the users with the general overview of the whole simulation and highlight individual parts of the ligand movement.
 %In general, we can classify ligand motion into three basic categories, which are represented in the following way.
