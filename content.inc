@@ -314,7 +314,7 @@ As a standard solution, to reduce this jittering and also to simplify the trajec
 However, such an interpolation simplification would still not suffice since the spatial distance between two neighboring time steps is usually very small, thus the interpolation scheme still contains a lot of jitter (Fig.~\ref{fig:temporal}). 
 \begin{figure}[htb]
 	\centering
-  \includegraphics[width=1\linewidth]{img/temporal.png}
+  \includegraphics[width=0.8\linewidth]{img/temporal.png}
   \caption{\label{fig:temporal} A cut trajectory section shows the ligand entering the active site. The trajectory is obtained using Hermite interpolation, which still contains a lot of jittery motion.}
 \end{figure}
 For completeness, we also tested the Ramer~-~Douglas~-~Peucker algorithm. 
