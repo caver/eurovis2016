@@ -70,7 +70,7 @@ In protein engineering, for example, the goal is to alter the protein properties
 
 The design complexity of such reactions lies namely in the transportation of the ligand to the protein active site.
 As the active site is usually buried deeply in the protein structure and thus inaccessible directly from its surface, the ligand has to find a suitable transportation path through the protein structure.
-This process, called molecular docking, is very complex, lengthy, and heavy on computational resources. 
+This process, called molecular docking, is very complex, lengthy, and its analysis is heavy on computational resources. 
 Therefore, researchers aim at solutions that simplify and ease the analysis for proper ligand binding.
 Currently available solutions often focus on detection of possible ligand transportation paths through the protein, called tunnels.
 These solutions are mostly based on the geometric analysis, which lead to the tunnel detection in the end, e.g., CAVER~\cite{Chovancova2012}, MOLE~\cite{Sehnal2013}, or MolAxis~\cite{Yaffe2008}.
@@ -93,7 +93,7 @@ Using our proposed solution the users are able to distinguish between the parts 
 %Thus it is hard to follow determine the time steps when the ligand made a significant shift towards the active site.
 
 Here, we introduce four dedicated methods for simplification of the original trajectory.
-These methods can simplify the ligand path hierarchically, thus providing several levels of detail (LOD), which can be interactively browsed through.
+These methods can simplify the ligand path hierarchically, thus providing several levels of detail (LOD), which can be interactively examined.
 In the most abstracted view, represented as the top-most LOD, the temporal tunnel shows only the significant shifts of the ligand towards the active site. 
 Here, the user can interactively brush time intervals, which automatically reveals and adopts the temporal tunnel to the selected interval.
 This abstracted representation, providing the brushing capabilities, is interactively linked with the 3D visualization where the 3D shape of the temporal tunnel for the given temporal window is displayed.
@@ -105,31 +105,31 @@ They performed the evaluation on their own simulations and their feedback is des
 %-------------------------------------------------------------------------
 
 \section{Related Work}
-Interactive exploration of ligand paths through protein structures is a complex problem that requires elaborate analysis of existing and convenient approaches.
+The interactive exploration of ligand paths through protein structures is a complex problem that requires an elaborate analysis of existing and convenient approaches.
 %In this section we present the results we consider to be relevant to our proposed solution. 
 As our system addresses several areas, this section will be divided with respect to these areas as well. 
 Studying the ligand transport path is tightly related to the analysis of its trajectory.
 Thus, the first part will cover the topic related to the trajectory analysis, simplification, and visualization.
-Then the existing representations of tunnels and their surrounding amino acids will be mentioned.
+Then the existing representations of tunnels and their surrounding amino acids will be addressed.
 
 \subsection{Trajectory Analysis, Simplification, and Visualization}
-When searching for the most appropriate trajectory simplification method, the taxonomy of different movement patterns introduced by Dodge et al.~\cite{Dodge2008} can help to categorize the type of motion of a given data and to propose an appropriate solution for the analysis and simplification.
-Then, Andrienko et al.~\cite{andrienko2013} describe a legacy of tools and approaches to analyze the trajectory data.
+When searching for the most appropriate trajectory simplification method, the taxonomy of different movement patterns introduced by Dodge et al.~\cite{Dodge2008} can help to categorize the type of motion and to propose an appropriate solution for the analysis and simplification.
+Then, Andrienko et al.~\cite{andrienko2013} describe a legacy of tools and approaches to analyze trajectory data.
 With respect to the trajectory simplification, they introduce two approaches to data abstraction representing a necessary step to achieve the reduction of the data in order to achieve informative visualizations.
 The first approach is characterized by omitting unnecessary positions and segments, while the second exploits data subsampling.
 On the other hand, they state that there is no general method to sample trajectories.
 Thus the suitability of particular sampling method is deduced from what information is considered important.
-A recent work of Vrotsou et. al.~\cite{Vrotsou2015} introduce a systematic stepwise methodology for trajectory simplification with emphasis on visual analysis.
+A recent work of Vrotsou et al.~\cite{Vrotsou2015} introduce a systematic stepwise methodology for trajectory simplification with emphasis on visual analysis.
 Even though they primarily developed the tool to analyze three dimensional trajectories, it is not limited to them only.
 
-In the field of molecular biology as well as systems biology, there are several examples of methods focusing on the trajectory analysis.
+In the field of molecular biology as well as systems biology, there are several examples of methods focusing on trajectory analysis.
 Bidmon et al.~\cite{bidmon2008} present an abstract way of identification and visualization of solvent molecules' pathways within molecular dynamics. 
 In comparison to previous solutions, their approach preserves valuable information on the directions and velocities of water molecules routing along these paths. 
 Another approach that describes a guidance through a complex simulation trajectories in systems biology is presented by Luboschik et al.~\cite{Luboschik2012}. 
 The method addresses biochemical reaction networks and aims to provide the users with a tool for investigating the overall behavior of a modeled system and detailed behavior at the same time.
 
 \subsection{Visualization of Cavity and Tunnel Features}
-Phillips et al.~\cite{phillips2010} propose a method to quantitatively estimate the molecular features, e.g., volume and surface areas, via ray-casting technique. This involves computation of cavities.
+Phillips et al.~\cite{phillips2010} propose a method to quantitatively estimate molecular features, e.g., volume and surface areas, via ray-casting technique. This involves computation of cavities.
 Lindow et al.~\cite{LindowBH11} introduce a technique that allows to extract significant paths from the molecules. 
 In their approach the authors utilize Voronoi diagram of spheres. 
 Their final visualization is achieved by means of placing light sources on the extracted paths to enhance the presence of tunnels.
@@ -203,8 +203,8 @@ The design is tightly related to the following problems posed by the biochemists
 \item There is no quick and straightforward way to explore the relation between physico-chemical properties of the protein tunnel and its geometry to assess the ligand bottleneck.
 \end{itemize}
 
-To tackle the aforementioned challenges, we propose a multiscale visualization system (Fig.~\ref{fig:overview}), which integrates visual information-seeking mantra~\cite{shneiderman1996} to protein-ligand interaction simulations. 
-The main idea is to provide a meaningful information at each data abstraction level that is given by the current temporal selection, i.e., the user defined temporal window.
+To tackle the aforementioned challenges, we propose a multiscale visualization system (Fig.~\ref{fig:overview}), which enables visual information-seeking~\cite{shneiderman1996} in protein-ligand interaction simulations. 
+The main idea is to provide meaningful information at each data abstraction level that is given by the current temporal selection, i.e., the user defined temporal window.
 On the highest level, we classify ligand motion into two basic categories: outside the molecular surface (represented as solvent excluded surface~\cite{Richards}) and inside the protein (Fig.~\ref{fig:teaser}-0). 
 The latter one is divided into two sub-cases. 
 In the first case the ligand enters a tunnel but there is an obstacle preventing it to get to the active site and the ligand is expelled from the inner space back to the outer environment.
@@ -333,8 +333,11 @@ By means of this distance, one can easily detect time steps when the ligand chan
 Z=\{t_i:\Delta d_i\cdot \Delta d_{i+1} <0\}. 
 \label{eq:zc}
 \end{equation}
-The method operates with the concept of zero-crossing meaning either that the ligand heading towards the active site changed its direction and traveled back to the outer solvent or vice versa. A single pair of zero-crossings then defines the so-called \textit{loop}. The important aspect is that the occurrence of loops corresponds to the locations when the ligand got stuck. In a case that two zero-crossings having a larger temporal gap in between, i.e., $|t_i - t_{i+1}|>1$ and $\{t_i,t_{i+1}\}\in Z$, reflects the fact that the ligand got stuck somewhere between these two time steps.
-When referring to each entry of $Z$ as a zero-crossing, we aggregate the user-defined amount $k$ of zero-crossings to form a temporal block $b_j$ such that $|b_j|=k$, i.e., when $k=2$ and $|Z|=20$ we acquire $10$ temporal blocks. 
+The method operates with the concept of zero-crossing meaning either that the ligand heading towards the active site changed its direction and traveled back to the outer solvent or vice versa. 
+A single pair of zero-crossings then defines the so-called \textit{loop}. 
+The important aspect is that the occurrence of loops corresponds to the locations when the ligand got stuck. 
+In a case that two zero-crossings having a larger temporal gap in between, i.e., $|t_i - t_{i+1}|>1$ and $\{t_i,t_{i+1}\}\in Z$, it reflects the fact that the ligand got stuck somewhere between these two time steps.
+When referring to each entry of $Z$ as a zero-crossing, we aggregate the user-defined amount $k$ of zero-crossings to form a temporal block $b_j$ such that $|b_j|=k$, i.e., when $k=2$ and $|Z|=20$, we acquire $10$ temporal blocks. 
 
 %For the given parameter $k$, we denote the last time step of this temporal block as $E_k(j)=\{t_{j_k}:T_{B_j}=\{t_{j_1},\ldots,t_{j_k}\}\}$. 
 %In this manner, we extract a set of time steps $E_k=\{E_k(1),\ldots ,E_k(m)\}$ representing $m$ temporal blocks of a trajectory simplification that reflects the $k$~parameter. 
@@ -349,7 +352,7 @@ When referring to each entry of $Z$ as a zero-crossing, we aggregate the user-de
 
 Each block $b_j$ represents an interval in which the ligand has to make a given number of loops before a new block is created. 
 Note that the last block could potentially contain a smaller number of zero-crossings.
-As a consequence, if the ligand moves constantly in the same direction, it takes more time steps to accumulate before $k$ number of zero-crossings is reached. Therefore, the number of time steps in each block reveals either the parts of trajectory where the ligand moves mostly in a single direction or the sections where it got stuck and thus is unable to continue towards the active site. 
+As a consequence, if the ligand moves constantly in the same direction, it takes more time steps to accumulate before $k$ number of zero-crossings is reached. Therefore, the number of time steps in each block reveals either the parts of the trajectory where the ligand moves mostly in a single direction or the sections where it got stuck and thus is unable to continue towards the active site. 
 Nevertheless, this information needs to be combined with the overall distance the ligand crossed within the block to avoid the misinterpretation of longer loops. Additionally, the user has the possibility to alter parameter $k$ to adjust the granularity of block decomposition. 
 Figure~\ref{fig:loops} demonstrates different results for altering the $k$ value.
 %Even though this multi-scale model enables to switch between individual levels by increasing (or decreasing) the number of loops in cluster by one, we suggest that the current value should be multiplied (or divided) by a natural number. 
@@ -366,12 +369,17 @@ These sites where the ligand got stuck for a significant portion of time corresp
 
 \subsubsection{Uniform Sampling}
 Here, we uniformly divide the whole simulation into a given number of temporal blocks. 
-Each temporal block is of a fixed length given by the user-defined granularity of time represented by the size of the temporal span, i.e., $|b_i|=l$, where $l$ represents the given number of time steps per temporal block. The value represented in this aggregate is the number of zero-crossings in this time interval. This can be seen as an orthogonal simplification strategy to the aforementioned one.
+Each temporal block is of a fixed length given by the user-defined granularity of time represented by the size of the temporal span, i.e., $|b_i|=l$, where $l$ represents the given number of time steps per temporal block. 
+The value represented in this aggregate is the number of zero-crossings in this time interval. 
+This can be seen as an orthogonal simplification strategy in comparison with the aforementioned one.
 
 Such a model helps to evaluate to which extent the ligand was stuck for a given amount of time.
-The advantage of this approach is its uniformity that allows users to easily perceive transition between different temporal selections.
-Moreover, this concept is commonly used by the biochemists in cases when they deal with a large amount of data or information, such as in computation of protein cavities and tunnels. Here the user chooses a sampling step at which the cavities are computed. This gives the user the rough idea of the presence of cavities within the whole simulation.
+The advantage of this approach is its uniformity that allows users to easily perceive the transition between different temporal selections.
+Moreover, this concept is commonly used by the biochemists in cases when they deal with a large amount of data or information, such as in computation of protein cavities and tunnels. 
+Here the user chooses a sampling step at which the cavities are computed. 
+This gives the user the rough idea of the presence of cavities within the whole simulation.
 %Nevertheless, the given granularity can cause that important time steps with respect to the ligand motion will be skipped. 
+
 Figure~\ref{fig:uniform} shows an example of uniform simplification results on different levels. 
 
 \begin{figure}[htb]
@@ -386,7 +394,7 @@ Figure~\ref{fig:uniform} shows an example of uniform simplification results on d
 The geometric properties of the temporal tunnel are important characteristics mainly due to the ability to reveal the geometric bottlenecks.
 However, the physico-chemical properties of the amino acids surrounding the ligand trajectory are similarly important.
 For instance, when the mutual properties of the ligand and the amino acids are not compatible, it can prevent the ligand to pass through even when the tunnel is wide enough. 
-Therefore we utilize the information contained within the amino acids and aggregate all the ligand positions into a single temporal block when being surrounded by the given selection of amino acids.
+Therefore, we utilize the information contained within the amino acids and aggregate all the ligand positions into a single temporal block when being surrounded by the given selection of amino acids.
 We aggregate the ligand positions where the ligand was surrounded by the same set of amino acids. In our study, we extract the three closest amino acids from the ligand.
 The provided interactivity allows users to change the number of allowed differences in the surrounding amino acids to belong to the same block. 
 %{\color{red} Note that these levels are limited to three since for each time step we compute only three closest amino acids.}.
@@ -399,11 +407,11 @@ Figure~\ref{fig:aa} shows examples of the resulting trajectories with the increa
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=1\linewidth]{img/residue_degradation.pdf}
-  \caption{\label{fig:aa} Example of trajectories sampled using the surrounding amino acids.}
+  \caption{\label{fig:aa} Example of trajectories sampled according to the changes in the surrounding amino acids.}
 \end{figure}
 
 Such model allows us to estimate the time ligand spent stuck with respect to the given set of amino acids. 
-Moreover, it indirectly provides users with the hints of amino acids which caused the ligand being stuck and thus should be potentially replaced, e.g., mutated.
+Moreover, it indirectly provides users with the hints of amino acids which caused the ligand being stuck and thus should be potentially replaced, i.e., mutated.
 
 
 \subsubsection{Loop Degradation}
@@ -413,12 +421,15 @@ b_i = \{t_j : a \leq j \leq b \land |P(a), P(b)| < V \},
 \label{eq:ld}
 \end{equation}
 where $P(a)$ and $P(b)$ denote ligand positions at time steps $t_a$ and $t_b$ respectively. Figure~\ref{fig:ld} shows the results for several different values of $V$.
+
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=1\linewidth]{img/loop_degradation.pdf}
   \caption{\label{fig:ld} Example of trajectory simplification using the loop degradation approach.  }
 \end{figure}
-The main idea in this method is to remove those parts of the trajectory where the ligand moves only slightly while neglecting jittery movements that are within the radius of $V$. Therefore the method allows us to showcase the dominant ligand direction.
+
+The main idea in this method is to remove those parts of the trajectory where the ligand moves only slightly while neglecting the jittery movements that are within the radius of $V$. 
+Therefore, the method allows us to showcase the dominant ligand direction.
 
 
 
@@ -451,7 +462,7 @@ These amino acids are then the best candidates for protein mutations serving for
 This process is usually very lengthy and requires a lot of effort from the user.
 
 %Our proposed tool removes the main limitations of the traditional approach.
-The proposed visualization assists the biochemists to immediately distinguish between individual parts of the trajectory -- when ligand was inside and travelled from or towards the active site, or it was outside the molecule. Then, by selecting a time interval of interests, the user is automatically navigated to the corresponding time sequence.
+The proposed visualization assists the biochemists to immediately distinguish between individual parts of the trajectory -- when ligand was inside and traveled from or towards the active site, or it was outside the molecule. Then, by selecting a time interval of interests, the user is automatically navigated to the corresponding time sequence.
 %It demonstrates how the biochemists can interact with the tool and how it helps them to understand the ligand trajectory much faster and in more comprehensible way than before.
 
 In order to show the process of exploration of the selected part in more detail, we describe a case performed on the real data obtained from the biochemists.
@@ -481,7 +492,7 @@ This bar further divides the trajectory to three parts which can be further expl
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=1\linewidth]{img/casebar.png}
-  \caption{\label{fig:casebar} Bars showing the aggregated temporal blocks. a) The highest yellow block defines the part where the ligand travelled directly towards the active site. b) Example of interactive selection of bars.}
+  \caption{\label{fig:casebar} Bars showing the aggregated temporal blocks. a) The highest yellow block defines the part where the ligand traveled directly towards the active site. b) Example of interactive selection of bars.}
 \end{figure}
 
 Then the user can focus on details of this part of the trajectory by decreasing the level of simplification until it reaches the level of raw data where all original time steps of this part are displayed. At this level we can easily detect the bottleneck from the visualization part showing the radii of empty sphere around in each ligand position (Fig.~\ref{fig:radius}). The bottom part of the visualization shows the amino acids in the closest neighborhood for each ligand position.
