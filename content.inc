@@ -318,7 +318,7 @@ However, such an interpolation simplification would still not suffice since the 
   \includegraphics[width=0.8\linewidth]{img/temporal.png}
   \caption{\label{fig:temporal} A cut trajectory section shows the ligand entering the active site. The trajectory is obtained using Hermite interpolation, which still contains a lot of jittery motion.}
 \end{figure}
-For completeness, we also tested the Ramer~-~Douglas~-~Peucker algorithm. 
+For completeness, we also tested the Ramer~--~Douglas~--~Peucker algorithm. 
 It reduces the number of points in a curve by starting from the line segment between the first and last point of the trajectory. 
 For each segment it adds a point from the original trajectory which is the furthest one from this segment.
 This process is repeated until the desired resolution of the trajectory is reached.
@@ -507,7 +507,7 @@ This bar further divides the trajectory to three parts which can be further expl
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=1\linewidth]{img/casebar.png}
-  \caption{\label{fig:casebar} Bars showing the aggregated temporal blocks. a) The highest yellow block defines the part where the ligand traveled directly towards the active site. b) Example of interactive selection of bars.}
+  \caption{\label{fig:casebar} Bars showing the aggregated temporal blocks. Top: The highest yellow block defines the part where the ligand traveled directly towards the active site. Bottom: Example of interactive selection of bars.}
 \end{figure}
 
 Then the user can focus on details of this part of the trajectory by decreasing the level of simplification until it reaches the level of raw data where all original time steps of this part are displayed. At this level we can easily detect the bottleneck from the visualization part showing the radii of empty sphere around in each ligand position (Fig.~\ref{fig:radius}). The bottom part of the visualization shows the amino acids in the closest neighborhood for each ligand position.
