@@ -461,7 +461,7 @@ The interruption in some of these lines is caused by the fact that the given ami
 The proposed abstracted visualization is interactively linked with the 3D view where the temporal tunnel is represented in the following way.
 Here the tunnel is visualized as a tube (see~Figure\ref{fig:tube} a)) and can be colored according to time or the direction in which the ligand moves in the corresponding bar.
 The main advantages of this representation are the better perception of the spatial orientation (in comparison with Fig.~\ref{fig:overview}-2).
-Moreover, when highlighting the surrounding amino acids in a given position, 
+Moreover, when highlighting the surrounding amino acids in a given position, this representation helps to observe the interactions between the ligand and these amino acids (see~Figure\ref{fig:tube} b)).
 
 ------------------------------
 
