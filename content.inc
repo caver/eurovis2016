@@ -257,32 +257,39 @@ Each temporal block, as well as the corresponding segment within the temporal tu
 \subsection{Temporal Tunnel Features}
 Each temporal block and the respective temporal tunnel segment is associated with several features computed interactively.
 
-We provide the information that represent the amount of free space around the ligand when leaving one temporal block and subsequently entering the next one.
-At each exit point $P(b)$, we retrieve the $N$ closest atoms to the ligand, which in our case we set $N=10$.Then we compute the center of mass, $C$, of these atoms and a distance, $r$, from the center to the closest atom. This forms a sphere $(C_b,r_b)$ representing the extent of the free space around the ligand at $P(b)$. The list of radii is then exploited to form the graph (Fig.~\ref{fig:overview}-3), which provides the information about the amount of free space around the ligand when leaving the current block. This represents a crucial information when studying the relation between the geometric and physio-chemical bottlenecks.
+We provide the information that represents the amount of free space around the ligand when leaving one temporal block and subsequently entering the next one.
+At each exit point $P(b)$, we retrieve the $N$ closest atoms to the ligand, which in our case is set to $N=10$.
+Then we compute the center of mass $C$ of these atoms and a distance $r$ from this center to the closest atom. 
+This forms a sphere $(C_b,r_b)$ representing the extent of the free space around the ligand at $P(b)$. 
+The list of radii is then exploited to form the graph (Fig.~\ref{fig:teaser}-3a), which provides the information about the amount of free space around the ligand when leaving the current block. 
+This represents a crucial information when studying the relation between the geometric and physico-chemical bottlenecks.
 
-The information on surrounding acids is also very crucial for exploring the ligand bottlenecks. For each time-step within the temporal block we compute the three closest amino acids from the ligand. These are then grouped to form a list of amino acids representing the entire block. We provide visual representation of this list (Fig.~\ref{fig:aacids}), where each amino acid defines one line in the list. 
+The information about the surrounding acids is also very crucial when exploring the ligand bottlenecks. 
+For each time step within the temporal block we compute the three closest amino acids from the ligand. 
+These are then grouped to form a list of amino acids representing the entire block. 
+We provide the visual representation of this list (Fig.~\ref{fig:aacids}), where each amino acid defines one line in the list. 
 The line is colored with respect to a selected physico-chemical property~---~our representation supports switching between hydrophobicity, partial charges, and donors and acceptors.
 The interruption in some of these lines is caused by the fact that the given amino acid is not present around the ligand in the corresponding temporal block.
+
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=1\linewidth]{img/aacids.png}
   \caption{\label{fig:aacids} Representation of amino acids surrounding the temporal tunnel and their physico-chemical properties. Coloring corresponds to a selected property, the line interruption means that this amino acid was not detected around the ligand in the corresponding temporal block.}
 \end{figure}
 
-Another feature that we assign to a block is represented by two values related to the distance ligand takes when crossing the block. 
-First, the total distance the ligand passed through between each neighboring time steps of the temporal block, $\sum_i |P(t_i),P(t_i{i+1})|$.
-Secondly, a relative distance the ligand passed between the first and the last time step of the temporal block with respect to the position of the active site $O$, 
-$|P(a),O|-|P(b),O|$. The total distance is mapped as the height of the bar while the relative distance is conveyed via the color (Fig.~\ref{fig:bars}). 
+Another feature that we assign to a block is represented by two values related to the distance the ligand takes when crossing the block. 
+First, the total distance the ligand passed through between the neighboring time steps of the temporal block, is defined as $\sum_i |P(t_i),P(t_{i+1})|$.
+Secondly, a relative distance the ligand passed between the first and the last time step of the temporal block with respect to the position of the active site $O$, is detected as $|P(a),O|-|P(b),O|$. The total distance is mapped onto the height of the bar while the relative distance is conveyed via the color (Fig.~\ref{fig:bars}). 
 Here, yellow color represents the direction towards the active site, while red color means that the ligand moved in the opposite direction.
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=1\linewidth]{img/bars.png}
-  \caption{\label{fig:bars} Coloring scheme used for individual bars which encodes the direction of the ligand with respect to the active site position. Yellow color corresponds to the motion towards the active site, red color corresponds to the opposite direction.}
+  \caption{\label{fig:bars} Coloring scheme used for individual bars which encodes the direction of the ligand with respect to the active site position. Yellow color corresponds to the motion towards the active site, orange color corresponds to the opposite direction.}
 \end{figure}
 
 The abstracted visualization, integrating the computed features, is interactively linked with the 3D view where the temporal tunnel is represented as a system of linked tubes.
 We color code the tubes by time or by the relative distance value.
-The main advantage of this representation is its complementarity with respect to the spatial orientation which is not provided in the bar chart (Fig.~\ref{fig:overview}-2).
+The main advantage of this representation is its complementarity with respect to the spatial orientation which is not provided in the bar chart (Fig.~\ref{fig:teaser}-2).
 
 %
 %\begin{figure}[htb]
@@ -292,18 +299,19 @@ The main advantage of this representation is its complementarity with respect to
 %\end{figure}
 
 \subsection{Trajectory Simplification}
-In order to reveal significant ligand motion patterns, we introduce a hierarchical simplification model that, in addition, allows us to emphasize several important aspects related to the mutual protein-ligand interaction. In more detail, at each level our visualization provides i) the main direction of the ligand motion, ii) the sections of the simulation where the ligand got stuck and iii) the geometrical and physico-chemical properties on sites where the ligand got stuck. 
+In order to reveal significant ligand motion patterns, we introduce a hierarchical simplification model that, in addition, allows us to emphasize several important aspects related to the mutual protein-ligand interaction. 
+In more detail, at each level our visualization provides i) the main direction of the ligand motion, ii) the sections of the simulation where the ligand got stuck and iii) the geometrical and physico-chemical properties on sites where the ligand got stuck. 
 
 As already mentioned, the main source of the visual clutter (Fig. \ref{fig:temporal}a) is the ligand motion itself, which resembles the random Brownian motion. Here, the removal of this jittery motion would allow us to reveal more dominant ligand motion patterns. 
 Nevertheless, this also means to approximate the initial trajectory, which on the other hand is a trade-off for providing a good overview of entire ligand motion instead.
 As a standard solution, to reduce this jittering and also to simplify the trajectory, the Hermite (or similar) interpolation technique can be used. 
-However, such an interpolation simplification would still not suffice since the spatial distance between two neighboring time steps is usually very small, thus the interpolation scheme still contains a lot of jitter  (Fig.~\ref{fig:temporal}). 
+However, such an interpolation simplification would still not suffice since the spatial distance between two neighboring time steps is usually very small, thus the interpolation scheme still contains a lot of jitter (Fig.~\ref{fig:temporal}). 
 For completeness, we also tested the Ramer~-~Douglas~-~Peucker algorithm. 
 It reduces the number of points in a curve by starting from the line segment between the first and last point of the trajectory. 
 For each segment it adds a point from the original trajectory which is the furthest one from this segment.
 This process is repeated until the desired resolution of the trajectory is reached.
 In case of ligand trajectory, this method keeps only the extreme points on the trajectory, which unfortunately has no significant meaning from the biochemical point of view.
-Therefore, we propose solution that sub-sample the original trajectory and aggregate the protein-ligand interaction in a distinct manner. 
+Therefore, we propose solutions that sub-sample the original trajectory and aggregate the protein-ligand interaction in a distinct manner. 
 The intention is that the user can interactively switch between different aggregation strategies while the result is visualized instantly.
 
 %Except for a lot of jitter, the trajectory often contains sequences that form the so-called \textit{loops}.
