@@ -105,7 +105,7 @@ They performed the evaluation on their own simulations and their feedback is des
 %-------------------------------------------------------------------------
 
 \section{Related Work}
-Interactive exploration of ligand paths through protein structures is a complex problem that requires elaborate analysis of existing and suitable approaches to its subtasks.
+Interactive exploration of ligand paths through protein structures is a complex problem that requires elaborate analysis of existing and convenient approaches.
 %In this section we present the results we consider to be relevant to our proposed solution. 
 As our system addresses several areas, this section will be divided with respect to these areas as well. 
 Studying the ligand transport path is tightly related to the analysis of its trajectory.
@@ -113,29 +113,31 @@ Thus, the first part will cover the topic related to the trajectory analysis, si
 Then the existing representations of tunnels and their surrounding amino acids will be mentioned.
 
 \subsection{Trajectory Analysis, Simplification, and Visualization}
-When searching for an inspiration in this field, one of the best starting points is the book by Andrienko et al. \cite{andrienko2013}.
-Concerning the trajectory simplification, they proposed two different approaches to the data abstraction, which is a necessary step to achieve the reduction of the data and clarity of visualizations.
-First approach is characterized by omitting unnecessary positions and segments.
-The other is based on sampling the data.
-Andrienko et al. also claim that there are no general methods for sampling trajectories.
+Andrienko et al. \cite{andrienko2013} describe a legacy of tools and approaches to analyze the trajectory data.
+With respect to the trajectory simplification, they introduce two approaches to data abstraction representing a necessary step to achieve the reduction of the data in order to achieve informative visualizations.
+The first approach is characterized by omitting unnecessary positions and segments, while the second exploits data subsampling.
+On the other hand, they state that there is no general method to sample trajectories.
 Thus the suitability of particular sampling method is deduced from what information is considered important.
-A recent work of Vrotsou et. al. \cite{Vrotsou2015} introduced a systematic stepwise methodology for trajectory simplification with emphasis on visual analysis.
-Even though they primarily developed the tool to analyze three dimensional trajectories (aircraft flights), it is not limited to them.
+A recent work of Vrotsou et. al. \cite{Vrotsou2015} introduce a systematic stepwise methodology for trajectory simplification with emphasis on visual analysis.
+Even though they primarily developed the tool to analyze three dimensional trajectories, it is not limited to them only.
 
 In the field of molecular biology as well as systems biology, there are several examples of methods focusing on the trajectory analysis.
-Bidmon et al.~\cite{bidmon2008} presented an abstract way of identification and visualization of solvent molecules' pathways within a molecular dynamics. 
+Bidmon et al.~\cite{bidmon2008} present an abstract way of identification and visualization of solvent molecules' pathways within molecular dynamics. 
 In comparison to previous solutions, their approach preserves valuable information on the directions and velocities of water molecules routing along these paths. 
-Another approach to the guidance through a complex simulation trajectories in systems biology was presented by Luboschik et al.~\cite{Luboschik2012}. 
-Their method was proposed for biochemical reaction networks and aims to provide the users with a tool for investigating the overall behavior of a modeled system and subtle, detail behavior at the same time.
+Another approach that describes a guidance through a complex simulation trajectories in systems biology is presented by Luboschik et al.~\cite{Luboschik2012}. 
+The method addresses biochemical reaction networks and aims to provide the users with a tool for investigating the overall behavior of a modeled system and detailed behavior at the same time.
 
-\subsection{Visualization of Tunnels}
-Our notion about the temporal tunnel in the protein resembles the approach of Lindow et al. \cite{Lindow2013}.
-In this work they focus on the interactive exploration of the dynamics of protein cavities which can form the transportation path for a ligand. 
-They are able to calculate and visualize the cavity volume and to analyze the time-dependent changes of the cavity structure.
+\subsection{Visualization of Cavity and Tunnel Features}
+Phillips et al.~\cite{phillips2010} propose a method to quantitatively estimate the molecular features; e.g., volume and surface areas, via ray-casting technique. This involves computation of cavities.
+Lindow et al.~\cite{LindowBH11} introduce a technique that allows to extract significant paths from the molecules. In their approach the authors utilize Voronoi diagram of spheres. Their final visualization is achieved by means of placing light sources on the extracted paths to enhance the presence of tunnels.
+Parulek et al.~\cite{parulek2012} exploit scatterplots to communicate the evolution of protein voids. In their later study~\cite{parulek2013} they also suggest to utilize amino acids physion-chemical propterties related to cavities to help users to navigate through their occurrences. The visualization if then achieved in the focus and context manner.
+Lindow et al. \cite{Lindow2013} present an approach for visualization of temporal evolution of cavities in a temporal graph, which, to a certain extent, resembles our temporal tunnel model. In this work they focus on the interactive exploration of the dynamics of protein cavities that can form the transportation path for a ligand. 
+They calculate and visualize the cavity volume and analyze the time-dependent changes of the cavity structure.
 The cavity dynamics is captured by rendering the cavities in a single image. 
-The resulting image is visualized using molecular surface representation colored according to time. 
-
-TODO!!!!!!
+The final visualization is achieved through the molecular surface representation colored according to time. 
+Krone et al.~\cite{krone2013features} present a similar approach, where they extract and track tunnels in MD simulations. They exploit temporal graphs to communicate the evolution of surface areas of tunnels. In our technique, we go one step further, where in addition, we incorporate the ligand-protein interaction information and provide users with the means to navigate through details of this interaction. Moreover, we analyze sequences of several thousands of frames, which is not the case in aforementioned approaches.
+Kozlikova et al.~\cite{kozlikova2014vcbm} propose a way to seamlessly visualize the geometry and shape of tunnels across MD simulation. Here, they aim at 3D visualization solely, which is not suitable way of exploring and understanding of thousands of simulation time-steps.
+Byska et al.~\cite{byska2016} introduce an approach to interactively explore the tunnel objects in MD simulations. Similarly to our approach they visualize the time-varying tunnel as a profile graph that includes information on surrounding amino acids. Nevertheless, they focus on a single tunnel instance and do not provide the means to explore the ligand-protein interaction.
 
 %\cite{bidmon2008}, \cite{lampe2011}, \cite{turkay2011}, and this is new 
 
