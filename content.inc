@@ -549,10 +549,10 @@ In this particular case the method shows that in the first part of the trajector
 %This combination can be based on changing the methods withing the exploration or the user can perform the exploration individually and then compare the results.
 %Some of the spots detected by our proposed methods can overlap which can even strengthen their importance.
 
-\section{Conclusion and Future Work}
+\section{Conclusion}
 In this paper we proposed a method for intuitive and interactive exploration of ligand trajectory when interacting with a protein molecule.
-As the original trajectory is very jittered, we proposed four methods for trajectory simplification which aim to show the substantial ligand motion with respect to different criteria.
-Each of them helps to reveal interesting portions of the trajectory which can be further explored by the interaction with our proposed visualization.
+As the original trajectory is very jittered, we proposed four methods for trajectory simplification which aim at describe and analyze the substantial ligand motion with respect to different criteria.
+Each of them helps to reveal interesting portions of the trajectory, which can be further explored by the interaction with our proposed visualization.
 The visualization consists of several parts conveying the information about the aggregation of time steps, the radius of the temporal tunnel, and different properties of the amino acids surrounding the temporal tunnel and thus interacting with the ligand.
 The simplification methods were tested on several cases and one of them was demonstrated, along with the discussion about their contributions.
 
