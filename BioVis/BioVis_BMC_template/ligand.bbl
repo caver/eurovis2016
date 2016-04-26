@@ -1,6 +1,6 @@
 %% BioMed_Central_Bib_Style_v1.01
 
-\begin{thebibliography}{1}
+\begin{thebibliography}{0}
 % BibTex style file: bmc-mathphys.bst (version 2.0), 2013-07-15
 \ifx \bisbn   \undefined \def \bisbn  #1{ISBN #1}\fi
 \ifx \binits  \undefined \def \binits#1{#1}\fi
@@ -42,24 +42,6 @@
 \ifx \arxivurl  \undefined \def \arxivurl#1{\textsf{#1}}\fi
 \csname PreBibitemsHook\endcsname
 
-%%% 1
-\bibitem{citation1}
-\begin{barticle}
-\bauthor{\bsnm{Kent}, \binits{W.J.}},
-\bauthor{\bsnm{Sugnet}, \binits{C.W.}},
-\bauthor{\bsnm{Furey}, \binits{T.S.}},
-\bauthor{\bsnm{Roskin}, \binits{K.M.}},
-\bauthor{\bsnm{Pringle}, \binits{T.H.}},
-\bauthor{\bsnm{Zahler}, \binits{A.M.}},
-\bauthor{\bsnm{Haussler}, \binits{D.}}:
-\batitle{The human genome browser at ucsc}.
-\bjtitle{Genome Research}
-\bvolume{12}(\bissue{6}),
-\bfpage{996}--\blpage{1006}
-(\byear{2002})
-\end{barticle}
-\endbibitem
-
 \end{thebibliography}
 
 \newcommand{\BMCxmlcomment}[1]{}
@@ -67,25 +49,6 @@
 \BMCxmlcomment{
 
 <refgrp>
-
-<bibl id="B1">
-  <title><p>The Human Genome Browser at UCSC</p></title>
-  <aug>
-    <au><snm>Kent</snm><fnm>W.J.</fnm></au>
-    <au><snm>Sugnet</snm><fnm>C.W.</fnm></au>
-    <au><snm>Furey</snm><fnm>T.S.</fnm></au>
-    <au><snm>Roskin</snm><fnm>K.M.</fnm></au>
-    <au><snm>Pringle</snm><fnm>T.H.</fnm></au>
-    <au><snm>Zahler</snm><fnm>A.M.</fnm></au>
-    <au><snm>Haussler</snm><fnm>D.</fnm></au>
-  </aug>
-  <source>Genome Research</source>
-  <pubdate>2002</pubdate>
-  <volume>12</volume>
-  <issue>6</issue>
-  <fpage>996</fpage>
-  <lpage>1006</lpage>
-</bibl>
 
 </refgrp>
 } % end of \BMCxmlcomment

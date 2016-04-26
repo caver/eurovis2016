@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/W32TeX) (format=pdflatex 2012.9.4)  26 APR 2016 16:18
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/W32TeX) (format=pdflatex 2012.9.4)  26 APR 2016 16:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -435,65 +435,44 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 160.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 160.
+(./ligand.bbl
+
+LaTeX Warning: Empty `thebibliography' environment on input line 45.
+
+) 
+AED: lastpage setting LastPage
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <8> not available
-(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 252.
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 371.
 
 
 [1{c:/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
-]
-Package epstopdf Info: Source file: <placeholder.eps>
-(epstopdf)                    date: 2014-01-24 19:33:25
-(epstopdf)                    size: 24951 bytes
-(epstopdf)             Output file: <placeholder-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-04-26 16:13:22
-(epstopdf)                    size: 7291 bytes
-(epstopdf)             Command: <repstopdf --outfile=placeholder-eps-converted-
-to.pdf placeholder.eps>
-(epstopdf)             \includegraphics on input line 255.
-Package epstopdf Info: Output file is already uptodate.
-
-<placeholder-eps-converted-to.pdf, id=12, 302.12875pt x 251.94125pt>
-File: placeholder-eps-converted-to.pdf Graphic file (type pdf)
-
-<use placeholder-eps-converted-to.pdf>
-Package pdftex.def Info: placeholder-eps-converted-to.pdf used on input line 25
-5.
-(pdftex.def)             Requested size: 303.33585pt x 252.94499pt.
-
-
-LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <7> not available
-(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 280.
-
-
-(./ligand.bbl) 
-AED: lastpage setting LastPage
-[2] [3 <./placeholder-eps-converted-to.pdf>] (./ligand.aux)
+] (./ligand.aux)
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
 
  ) 
 Here is how much of TeX's memory you used:
- 2818 strings out of 493488
- 36817 string characters out of 3144749
- 102804 words of memory out of 3000000
- 6104 multiletter control sequences out of 15000+200000
- 9469 words of font info for 33 fonts, out of 3000000 for 9000
+ 2804 strings out of 493488
+ 36545 string characters out of 3144749
+ 98796 words of memory out of 3000000
+ 6092 multiletter control sequences out of 15000+200000
+ 8824 words of font info for 31 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 37i,9n,37p,1175b,266s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 37i,8n,37p,235b,266s stack positions out of 5000i,500n,10000p,200000b,50000s
 <c:/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texl
 ive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2012/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmss17.pfb><c:/texlive/2012/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmss8.pfb><c:/texlive/2012/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2012/texmf-dist/fonts/type1/pub
 lic/amsfonts/cm/cmssi8.pfb>
-Output written on ligand.pdf (3 pages, 88736 bytes).
+Output written on ligand.pdf (1 page, 73376 bytes).
 PDF statistics:
- 42 PDF objects out of 1000 (max. 8388607)
- 28 compressed objects within 1 object stream
+ 32 PDF objects out of 1000 (max. 8388607)
+ 22 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
