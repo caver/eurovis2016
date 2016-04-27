@@ -1,0 +1,41 @@
+Including mathematical model.
+
+\begin{algorithm}
+  \begin{algorithmic}[1]
+	  \Require $T$ --- trajectory, $I$ --- interval
+	  \Ensure $T$ --- simplified trajectory
+		\Procedure{Simplify}{$T, I$}
+			\State \Return $T$ \Comment{Tohle bude zajimave popsat bo je to docela slozite}
+		\EndProcedure
+  \end{algorithmic}
+	\caption{Trajectory simplification}
+  \label{alg:simplify}
+\end{algorithm}
+
+\begin{algorithm}
+  \begin{algorithmic}[1]
+	  \Require $T$ --- trajectory, $\nu$ --- complexity neighborhood, $\tau$ --- complexity threshold, $\epsilon$ --- improvement threshold
+	  \Ensure $T$ --- simplified trajectory
+		\Procedure{AutoSimplify}{$T, \nu, \tau, \epsilon$}
+			\Repeat
+        \State $c(x) \gets$ \Call{ComputeComplexity}{$T, \nu$}
+			  \State $I \gets$ \Call{FindComplexInterval}{$c, \tau$}
+			  \State
+				\State $\Delta c \gets 0$
+			  \If{$I \neq \emptyset$}
+				  \State $T \gets$ \Call{Simplify}{$T, I$}
+				  \State
+					\State $c'(x) \gets c(x)$ \Comment{$c'(x)$ --- previous complexity}
+				  \State $c(x) \gets$ \Call{ComputeComplexity}{$T, \nu$}
+					\State
+					\State $\Delta c \gets \sum_{x \in s(T)}{max(c(x) - c'(x), 0)}$
+					\State \Comment{$s(T)$ --- snapshots of $T$}
+			  \EndIf
+			\Until{$\Delta c > \epsilon$ \Or $I = \emptyset$}
+			\State
+			\State \Return $T$
+		\EndProcedure
+  \end{algorithmic}
+	\caption{Automatic trajectory simplification}
+  \label{alg:auto-simplify}
+\end{algorithm}

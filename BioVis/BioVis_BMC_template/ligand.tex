@@ -40,6 +40,10 @@
 \usepackage{graphicx}
 \usepackage{color}
 \usepackage[textsize=small,colorinlistoftodos]{todonotes}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{xspace}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                             %%
@@ -63,6 +67,11 @@
 % Defines usefull commands.
 \newcommand{\ie}{i.e.,~}
 \newcommand{\eg}{e.g.,~}
+
+\algrenewcommand\algorithmicrequire{\textbf{Input:}}
+\algrenewcommand\algorithmicensure{\textbf{Output:}}
+\algnewcommand\And{\textbf{and}\xspace}
+\algnewcommand\Or{\textbf{or}\xspace}
 
 %%% Begin ...
 \begin{document}
@@ -272,7 +281,7 @@ When using the pre--computed data we basically obtain a set of spheres defining 
 
 
 \subsection*{Trajectory Simplification - AJ}
-Including mathematical model.
+\input{parts/simplification}
 
 \subsection*{Derivation of Attributes - JB}
 
