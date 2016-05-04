@@ -332,14 +332,16 @@ In order to evaluate free space surrounding the ligand we used the temporal tunn
 The definition of temporal tunnel ensures that each its sphere corresponds exactly to a single time step and the ligand lies inside it. 
 Since each such sphere also corresponds to the empty space in that part of protein in given time step, we can directly use its radius to define this "amount of free space" attribute. \todo{ta poslední věta je na dvě věci, ale nenapadá mě jak jinak}
 
-\item \textbf{Changes of amino acids} and its properties is another very important aspect of ligand trajectory evaluation.
+\item \textbf{Changes of amino acids and its properties} is another very important aspect of ligand trajectory evaluation.
 First, the changes of amino acids can show the parts of the trajectory where the ligand  significantly changed its position w.r.t. the molecule itself. 
 The higher number of different amino acids surrounding the ligand between two time steps means the higher shift inside the protein tunnel.
-Moreover, whether the ligand will be able to pass through the tunnel and reach the active site, is highly depended not only on geometric properties of the tunnel but also on its physico-chemical properties.
+Moreover, whether the ligand will be able to pass through the tunnel and reach the active site, is highly depended not only on geometric properties of the tunnel but also on its physico-chemical properties (\eg hydrophobicity or electric charge).
 \todo{tady to bude chtít nějak lépe napojit}The individual biochemical properties are determined by surrounding amino acids.
-It might be usefull for biochemists to observe such physico-chemical properties and hence evaluate its influence on the ligand stuckness. \todo{AA properties nejsou implementovány} \todo{pokud by jste chtěli, je možno tu dopsat, že hydrophobicita je průměr okolí, el. charge bude normálně podle zákona o sčítání potenionálu, atd.} 
+It might be usefull for biochemists to observe such physico-chemical properties and hence evaluate its influence on the ligand stuckness. \todo{pokud by jste chtěli, je možno tu dopsat, že hydrophobicita je průměr okolí, el. charge bude normálně podle zákona o sčítání potenionálu, atd.} 
 
 {\color{red}\item \textbf{Relative movements and rotations} of ligands není implementováno, takže se nebudu párat zatím s tím, abych to tu popisoval, když ani zatím nevím, jak to implementovat} 
+
+\item \textbf{Straightness} \todo{Adame?}
 
 \end{itemize}
 
