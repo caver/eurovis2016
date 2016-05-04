@@ -271,9 +271,13 @@ TODO BK + JP (Intro + RW)
 We define the temporal tunnel as a set of spheres where the number of spheres corresponds to the number of time steps in the simulation.
 Additionally, each sphere defines the maximum empty space surrounding the ligand, and as the consequence also contains the ligand, in the given time step {\color{red}(see Figure~\ref{XY})}.
 
-In order to compute such temporal tunnel we can either utilize the pre-computed information about protein tunnels (\eg using CAVER~3.0) or approximate information about the empty space surrounding the ligand manually. The first method is more precise but computationally more expensive, while the second approach is faster but {\color{red}can be highly inaccurate} {\color{red}see Section~\ref{XYZ} for experimental comparison)}. Nevertheless, in both cases we need to determine a single sphere which will be part of temporal tunnel for each time step.
+In order to compute such temporal tunnel we can either utilize the pre-computed information about protein tunnels (\eg using CAVER~3.0) or approximate information about the empty space surrounding the ligand manually. 
+The first method is more precise but computationally more expensive, while the second approach is faster but {\color{red}can be highly inaccurate} {\color{red}see Section~\ref{XYZ} for experimental comparison)}. 
+Nevertheless, in both cases we need to determine a single sphere which will be part of temporal tunnel for each time step.
 
-When using the pre--computed data we basically obtain a set of spheres defining the shape of the tunnel in each time step ({\color{red} see Section/Paper about CAVER}). Since we also have a ligand position \todo{někde bude třeba definovat ligand position} in each time step we can utilize the aforementioned information about protein tunnels to determine single tunnel sphere containing the ligand in the given time. The whole temporal tunnel then can be build simply by selecting the closes sphere to the ligand which is also wide enough \todo{wide enough není zprogramováné} to enclose fully it in each time step. \todo{ty poslední dvě věty se asi opakují.}
+When using the pre--computed data we basically obtain a set of spheres defining the shape of the tunnel in each time step ({\color{red} see Section/Paper about CAVER}). 
+Since we also have a ligand position \todo{někde bude třeba definovat ligand position} in each time step we can utilize the aforementioned information about protein tunnels to determine single tunnel sphere containing the ligand in the given time. 
+The whole temporal tunnel then can be build simply by selecting the closest sphere to the ligand which is also wide enough \todo{wide enough není zprogramováné} to enclose fully it in each time step. \todo{ty poslední dvě věty se asi opakují.}
 
 %The closest sphere can be find simply by measuring the distance between the center of mass of ligand and center of each sphere.  
 
@@ -299,16 +303,16 @@ In the rest of this section we discuss usefulness and the way how we derive indi
 
 \item \textbf{Stuckness} is one of the most abstract attributes. Fortunately, it can be easily measured. 
 We consider the ligand to be stuck if it oscillates around specific place inside the protein tunnel (w.r.t. the active site). \todo{to w.r.t. musím doprogramovat - ale myslím, že to dáva smysl ne, počítat to vzheledem k AC??} 
-In order words we need to evaluate the time for which the ligand remained on single spot. 
+In other words we need to evaluate the time for which the ligand remained on single spot. 
 Since the original data are uniformly sampled (\eg we know exact ligand position every two femtoseconds), we can measure the distance between two subsequent time steps and immediately obtain the speed of the ligand movement in that particular area. 
-The higher speed of the ligand the higher distance it can travel and hence it is less stuck. \todo{nevím, zda stuck je to zprávné slovo}
+The higher the speed of the ligand is, the higher distance it can travel and hence it is less stuck. \todo{nevím, zda stuck je to zprávné slovo}
 The importance of the attribute follows from the fact that if the ligand gets stuck for some reason it will not proceed through the protein tunnel and hence it may not reach the active site quick enough for the desired reaction to happen.
 Therefore the biochemists want to explore such cases in more detail in order to either evaluate the functionality of the protein or even change its properties by replacing some amino acids.
 
 
 \item \textbf{Distance} of the ligand from the active site provide the biochemists with the information whether some observed behaviour occurred in vicinity of active site, surface, or somewhere along the path. 
 This can be very helpful in cases when the biochemists, for instance, want to mutate (\ie change) some amino acids along the tunnel in order to lower the "stuckness" of the ligand in that area. 
-In this case is usefull to actually see where exactly the unwanted bahaviour of ligand is happening.
+In this case it is usefull to actually see where exactly the unwanted bahaviour of ligand is happening.
 In order to evaluate the distance of the ligand from active site, we first extract the position of the active site in each time step. 
 Note that the active site is denoted by set of surrounding amino acids. 
 Hence, we can compute the position of the active site as the center of mass of these amino acids. 
@@ -333,7 +337,7 @@ First, the changes of amino acids can show the parts of the trajectory where the
 The higher number of different amino acids surrounding the ligand between two time steps means the higher shift inside the protein tunnel.
 Moreover, whether the ligand will be able to pass through the tunnel and reach the active site, is highly depended not only on geometric properties of the tunnel but also on its physico-chemical properties.
 \todo{tady to bude chtít nějak lépe napojit}The individual biochemical properties are determined by surrounding amino acids.
-It might be usefull for biochemists to observer such physico-chemical properties and hence evaluated its influence on the ligand stuckness. \todo{AA properties nejsou implementovány} \todo{pokud by jste chtěli, je možno tu dopsat, že hydrophobicita je průměr okolí, el. charge bude normálně podle zákona o sčítání potenionálu, atd.} 
+It might be usefull for biochemists to observe such physico-chemical properties and hence evaluate its influence on the ligand stuckness. \todo{AA properties nejsou implementovány} \todo{pokud by jste chtěli, je možno tu dopsat, že hydrophobicita je průměr okolí, el. charge bude normálně podle zákona o sčítání potenionálu, atd.} 
 
 {\color{red}\item \textbf{Relative movements and rotations} of ligands není implementováno, takže se nebudu párat zatím s tím, abych to tu popisoval, když ani zatím nevím, jak to implementovat} 
 
@@ -348,6 +352,46 @@ time evolution, "stuckness" (speed, distance), direction, amount of free space a
 motivation, design
 
 3D, bar charts, scatterplot
+
+\subsubsection*{3D View}
+
+\subsubsection*{Barchart View}
+
+
+The information about the surrounding acids is also very crucial when exploring the ligand bottlenecks. 
+For each time step within the temporal block we compute the three closest amino acids from the ligand. 
+We provide the visual representation of this list (Fig.~\ref{fig:aacids}), where each amino acid defines one line in the list. 
+The line is colored with respect to a selected physico-chemical property~---~our representation supports switching between hydrophobicity, partial charges, and donors and acceptors.
+The interruption in some of these lines is caused by the fact that the given amino acid is not present around the ligand in the corresponding temporal block.
+
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=0.95\linewidth]{img/aacids.png}
+  \caption{\label{fig:aacids} Representation of amino acids surrounding the temporal tunnel and their physico-chemical properties. Coloring corresponds to a selected property, the line interruption means that this amino acid was not detected around the ligand in the corresponding temporal block.}
+\end{figure}
+
+
+\subsubsection*{Scatterplot Matrix}
+For detailed analysis of geometrical and chemico-physical attributes of the ligand trajectory at given time steps, we propose Scatterplot Matrix.
+The axes of one scatterplot represent a pair user-selected attributes.
+Each point in the scatterplot then represents the values of these attributes at one time step.
+As a result the scatterplot can easily reveal trends and relationships between attributes.
+Interactive manipulation with scatterplot, such as selection, zooming and change of displayed attributes provides easy way of manual data filtering. 
+To eliminate the noise in the data caused by ligand jittering, we propose several smoothing and aggregation functions.
+\todo{nechat len sliding window?} 
+The Sliding window function assigns to each time step averaged value of its neighborhood.
+The size of the neighborhood is user regulated. 
+
+The plots can further be stacked, forming a matrix and thus showing relationship between multiple attributes at once.
+The stacked plots are also interactively interconnected.
+The selection in Scatterplot Matrix is interactively linked with Barchart View.
+
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=0.95\linewidth]{img/scatterplot.png}
+  \caption{\label{fig:scatterplot} CHANGE!!! Scatterplot Matrix depicting Time vs. Distance and Time vs Speed property before (up) and after (down) smoothing by Sliding Window Function.}
+\end{figure}
+
 
 \subsection*{Analysis Procedure - BK, JP}
 
