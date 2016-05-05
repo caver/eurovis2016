@@ -412,17 +412,17 @@ In the second case, foe each time-step we firstly retrieve the 10 closest protei
 
 \subsection*{Derivation of Attributes - JB}
 
-In previous section we have described the simplification of the ligand trajectory. 
+In previous section we described the simplification of the ligand trajectory. 
 On one hand, such approximation helps to easily understand the overall ligand movements. 
-On the other hand, it also suppresses vast amount of details that are important for the complete understanding of the ligand movements inside protein.
+On the other hand, it also suppresses vast amount of details that are important for a complete understanding of the ligand movements inside protein.
 
-In order to preserve this information and hence allow the biochemist to explore the ligand behaviour in detail we evaluate various geometrical and chemico-physical attributes of the ligand trajectory on multiple levels. 
+In order to preserve this information and hence allow the biochemist to explore the ligand behavior in detail we evaluate various geometrical and chemico-physical attributes of the ligand trajectory on multiple levels. 
 These attributes are then communicated to the user in various ways (for more details {\color{red}see Section~\ref{XYZ}}).
 
 We arrange the attributes into a table, $T$, where each row represents a time step of the simulation data and columns represent the derived attributes. \todo{Kazdy attribut by mal dostat nejake pismenko}
 
-Among the most important attributes belongs the "stuckenss" of the ligand in one place, its distance from the active site, direction of its movement, amount of surrounding free space, changes of surrounding amino acids and its properties, and relative movements and rotations of the ligand inside the tunnel. 
-In the rest of this section we discuss usefulness and the way how we derive individual attributes them from the original data.    
+Based on several discussions with domain experts, we consider the following attributes as the most significant: "stuckenss" of the ligand in one place, its distance from the active site, direction of its movement, the amount of surrounding free space, changes of surrounding amino acids and its properties, and relative movements and rotations of the ligand inside the tunnel. 
+The remaining part of this section describes and rationalizes usefulness and the way the attributes are derived from the original data.    
 
 \begin{itemize}
 
