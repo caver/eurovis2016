@@ -63,13 +63,15 @@ Moreover, the performance of manual simplification is also enhanced, for example
 			\State $C \gets$ \Call{Interval}{$T_{in}$} \Comment{$C$ --- complex intervals}
 			\State $c(x) \gets$ \Call{Complexity}{$T_{in}, \nu$}
 			\State
+			\State $S \gets$ \Call{Empty}{$T_{in}$} \Comment{$S$ --- simplification}
 			\State $T_{out} \gets T_{in}$
 			\Repeat
-			  \State $S \gets$ \Call{FindSimpleIntervals}{$c, \tau$}
-				\State $C \gets$ \Call{RemoveSimpleIntervals}{$C, S$}
+			  \State $P \gets$ \Call{FindSimplePoints}{$c, \tau$}
+				\State $C \gets$ \Call{RemoveSimplePoints}{$C, P$}
 			  \State
 			  \ForAll{$I \in C$} %\Comment{$I$ --- complex interval}
-					\State $T_{out} \gets$ \Call{Simplify}{$T_{out}, I$}
+				  \State $S \gets$ \Call{Update}{$S, I$}
+					\State $T_{out} \gets$ \Call{Simplify}{$T_{out}, S$}
 			  \EndFor
 				\State
 				\State $c'(x) \gets c(x)$ %\Comment{$c'(x)$ --- previous complexity}
@@ -85,3 +87,22 @@ Moreover, the performance of manual simplification is also enhanced, for example
 	\caption{Automatic trajectory simplification}
   \label{alg:auto-simplify}
 \end{algorithm}
+
+The automatic algorithm (see Algorithm~\ref{alg:auto-simplify}) is iterative and it employs the manual simplification in its iterations.
+Furthermore, it is based on an idea to simplify only parts of the trajectory that are still complex.
+The algorithm starts with considering the whole trajectory as complex, i.e., set of complex intervals $C$ is set to the interval spanning the $T_{in}$.
+Then, complexity of $T_{in}$ is evaluated in all of its points.
+The complexity $c(x)$ is defined as (see Figure~\ref{fig:complexity}):
+\begin{equation}
+  c(x) = \sum_{(u, v) \in loc(T, x, \nu)}{(|u| + |v|)^2 \mathrm{acos}(\frac{u \cdot v}{|u| \cdot |v|})},
+\label{eq:complexity}
+\end{equation}
+where $loc(T, x, \nu)$ is a set of tuples of consecutive segments of trajectory $T$ lying in the neighborhood of $x$.
+The neighborhood of $x$ contains all points $y \in T$ such that $d(x, y) < \nu$ where $d(x, y)$ is distance along $T$.
+Further, simplification $S$ is set to empty at the beginning and the resulting trajectory $T_{out}$ is set to $T_{in}$.
+The iterative simplification then proceeds as follows.
+First, simple points $P$ are found by thresholding $c(x)$ by $\tau$.
+Points in $P$ are then removed from $C$ which prevents further simplification of parts of the trajectory that are simple already.
+Then, $T_{out}$ is simplified in all complex intervals that remained in $C$.
+After the simplification, the complexity is evaluated again and the improvement to previous complexity is computed.
+The iterative simplification ends when the improvement after an iteration ($\Delta c$) drops below a user defined threshold $\epsilon$.
