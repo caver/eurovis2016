@@ -522,29 +522,74 @@ Figure \ref{fig:scatterplot} shows Scatterplot Matrix for a sequence of $500$ ti
   \caption{\label{fig:scatterplot} CHANGE!!! Scatterplot Matrix depicting Time vs. Distance and Time vs Speed property before (up) and after (down) smoothing by Sliding Window function.}
 \end{figure}
 
-
 \subsection*{Analysis Procedure - BK, JP, JB}
+
+\begin{figure*}[htb]
+	\centering
+  \includegraphics[width=0.95\textwidth]{img/case_overview.png}
+  \caption{\label{fig:case_overview} {\color{red}TODO}}
+\end{figure*}
+
 In this section we will describe one of case studies which we have performed using our novel exploration tool.
 In this particular study biochemists explored molecular simulation of Haloalkane dehalogenase protein together with its ligand. 
 Since the simulation consists of 50000 snapshots, it would take an enormous amount of time to analyze it using only common techniques such as 3D animation.
 In this section we will show how this can be significantly improved using our exploration tool.
-After the precomputation stage the user can start to explore individual views described in previous sections.
+After the precomputation stage the user can immediately start to explore individual views described in the previous sections.
 \todo{Chcelo by to obrazok na styl comics kde by sa ukazali najdolezitejsie kroky, napr. 1) overview 2) selection 3) 3D view 4) scatterplot selections}
-We start with the rough analysis of the overall behavior of the ligand using our simulation overview (see Figure \ref{fig:case_overview}).
+We start with the rough analysis of the overall behavior of the ligand using our simulation overview (see Figure~\ref{fig:case_overview}).
+
+
+Utilizing this view the biochemist can immediately see that the whole simulation consist basically from three parts (two long and one relatively short) where ligand was inside the protein (red, blue, and green).
+These parts are divided by orange and white blocks signalizing that ligand was moving near the protein surface (orange) or even entirely left the protein (white). 
+The {\color{red}XZY} \todo{máme pro to nějaké jméno?} view suggests that in this particular simulation the ligand started in the active site, then traveled towards the protein surface and finally left the molecule.
+After spending some time outside it found again its way into a protein tunnel and traveled back to the active side, while the whole process is then again repeated. 
+{\color{red}Should we mention that every interface blue/green actually means that the ligand reached either active site or surface, based on the colors order - blue-green means reaching surface, while green-blue means reaching active site?} 
+
+In this case study the biochemist were interested in evaluating interactions between the ligand and protein in two scenarios. 
+First, they focused on the part where ligand traveled from the active site to the protein surface (see Section~\ref{sec:case1}). 
+The second interesting case is when the ligand is trying to find its way back into the protein (see Section~\ref{sec:case2}).
+Exploration of these two parts of the simulation allows the biochemist to closely evaluate the influence of the protein tunnel and its properties to the ligand movements and it may help to reveal the essence of the interaction between the protein and given ligand.
+
+\todo{tohle možná patří spíš do popsiu toho overview jako takového v předchozích sekcích - až to tam teda  někdo dopíše :D}In order to explore the individual parts of the simulation in more details our tool provides an brushing tool that allows to draw a rectangle over the desired part of the simulation in simulation overview and the corresponding time steps are then displayed and used for further exploration.
+
+From this point the biochemist can continue in more detailed exploration using bruising and linking technique inside other three views -- namely inside the 3D, scatter plot and bar chart view.
+Each of this view provides slightly different view on the data and allows the biochemist to perform different operations.
+
+\subsubsection{Case 1 - ligand traveling from the active site to the protein surface}
+\label{sec:case1}
+For the first case let assume that the biochemist selected 
+
+{\color{red}
+\textbf{Following text is just a set of examples which needs to be put into flow somehow.}} 
+
+Since the selected interval (in this example cca first 17000 of time steps) can still contain multiple parts where the ligand is moving over the whole    
+
+
+The biochemist can use the scatter plot set to show distance over time to pinpoint the exact timesteps  where the 
 
 \begin{figure}[htb]
 	\centering
-  \includegraphics[width=0.95\linewidth]{img/case_overview.png}
+  \includegraphics[width=0.95\linewidth]{img/case_example_1.png}
   \caption{\label{fig:case_overview} {\color{red}TODO}}
 \end{figure}
 
-Utilizing this view the biochemist can immediately see that the whole simulation consist basically from two parts (divided by yellow color signalizing that tunnel was moving near the protein surface).
-
-{\color{red} když na to tak koukám, tak mám pocit, že ten overview je tak trošku na ....dvě věci, asi to krapet předělám....}
 
 
 
+%This allows them to closely evaluate the influence of the protein tunnel and its properties to the ligand movements. 
 
+%Exploration of this part of the simulation may help to reveal the essential conditions needed for this particular ligand to enter the protein.
+
+
+
+%{\color{red}Note that the biochemists can also estimate that the provided data were probably computed using Steered molecular dynamics (SMD) \todo{popsat co je SMD in RW?} simulation since the simulation starts with ligand in the active site (signalized by red color.)}
+ 
+
+
+
+\subsubsection{Case 2 - ligand accessing the protein}
+\label{sec:case2}
+  
 
 
 
