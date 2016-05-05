@@ -423,32 +423,30 @@ We arrange the attributes into a table, $T$, where each row represents a time st
 
 Based on several discussions with domain experts, we consider the following attributes as the most significant: "stuckenss" of the ligand in one place, its distance from the active site, direction of its movement, the amount of surrounding free space, changes of surrounding amino acids and its properties, and relative movements and rotations of the ligand inside the tunnel. 
 The remaining part of this section describes and rationalizes usefulness and the way the attributes are derived from the original data.    
-
+\todo{Obrazok kde je nakresleny ligand, tunel a ilustrovane attributy by bol super!!}
 \begin{itemize}
 
-\item \textbf{Stuckness} is one of the most abstract attributes. Fortunately, it can be easily measured. 
-We consider the ligand to be stuck if it oscillates around specific place inside the protein tunnel (w.r.t. the active site). \todo{to w.r.t. musím doprogramovat - ale myslím, že to dáva smysl ne, počítat to vzheledem k AC??} 
-In other words we need to evaluate the time for which the ligand remained on single spot. 
-Since the original data are uniformly sampled (\eg we know exact ligand position every two femtoseconds), we can measure the distance between two subsequent time steps and immediately obtain the speed of the ligand movement in that particular area. 
-The higher the speed of the ligand is, the higher distance it can travel and hence it is less stuck. \todo{nevím, zda stuck je to zprávné slovo}
+\item \textbf{Stuckness} is one of the most abstract attributes. Fortunately, it can be easily described and estimated in relative terms. 
+We consider the ligand to be stuck if it oscillates around a specific place inside the protein tunnel (w.r.t. the active site). \todo{to w.r.t. musím doprogramovat - ale myslím, že to dáva smysl ne, počítat to vzheledem k AC??} 
+In other words we need to evaluate the time for which the ligand remains on or close to a single spot. 
+Since the original data are uniformly sampled (\eg we know exact ligand position every two femtoseconds), we can measure the distance between two subsequent time steps and thus obtain the speed of the ligand movement in that particular area. 
+The higher the speed, the higher the distance it can travel and hence it is less stuck. \todo{nevím, zda stuck je to zprávné slovo}
 The importance of the attribute follows from the fact that if the ligand gets stuck for some reason it will not proceed through the protein tunnel and hence it may not reach the active site quick enough for the desired reaction to happen.
 Therefore the biochemists want to explore such cases in more detail in order to either evaluate the functionality of the protein or even change its properties by replacing some amino acids.
 
 
-\item \textbf{Distance} of the ligand from the active site provide the biochemists with the information whether some observed behaviour occurred in vicinity of active site, surface, or somewhere along the path. 
+\item \textbf{Distance} of the ligand from the active site provide the biochemists with the information whether some observed behavior occurred in vicinity of the active site, the surface, or somewhere along the path. 
 This can be very helpful in cases when the biochemists, for instance, want to mutate (\ie change) some amino acids along the tunnel in order to lower the "stuckness" of the ligand in that area. 
-In this case it is usefull to actually see where exactly the unwanted bahaviour of ligand is happening.
+In this case it is essential to also see where exactly the unwanted behavior of ligand happens.
 In order to evaluate the distance of the ligand from active site, we first extract the position of the active site in each time step. 
-Note that the active site is denoted by set of surrounding amino acids. 
-Hence, we can compute the position of the active site as the center of mass of these amino acids. 
-Once we have the position of active site, we simply measure its distance from the center of mass of ligand atoms.
+Here the active site is defined by a set of surrounding amino acids, which allows us to compute the position of the active site as the center of mass of these amino acids. 
+Once the position of active site is computed, we evaluate its distance from the center of mass of ligand atoms.
       
-\item \textbf{Direction} of the ligand movement w.r.t. the active site is another very important attribute. 
-During the molecular dynamics simulation the ligand can enter and again leave the protein tunnel multiple times. 
-Therefore, the biochemists are interested in distinguishing between intervals where the ligand was traveling towards the active site and where it was traveling in the opposite side (\ie towards the outer environment). 
-In order to obtains this information we first compute the distance between active site and ligand (computed in aforementioned way) in each time step. 
-Afterwards, we evaluate weather this distance is decreasing in two subsequent time steps -- in such case we consider the ligand to be moving towards the active site. 
-Similarly, if the distance is getting higher we mark the ligand to be moving towards the protein surface.        
+\item \textbf{Direction} of the ligand movement w.r.t. the active site is another very essential attribute. 
+During the molecular dynamics simulation the ligand can enter and exit the protein tunnel repeatedly. 
+Therefore, biochemists are interested in distinguishing between intervals where the ligand was traveling towards the active site and where it was traveling in the opposite direction (\ie towards the outer environment). 
+To compute the direction we take use of the \textbf{Distance} attribute, where in addition we evaluate whether the distance gets higher in two subsequent time steps (moving toward the active site) or lower (moving towards the protein surface). 
+   
 
 \item \textbf{Amount of free space} surrounding the ligand can help the biochemists to evaluate one of the reasons behind the lingad beeing stuck. 
 It was shows in many studies {\color{red}\eg cite some caver?} that the geometrical properties (\eg width) of the protein tunnel play a crucial role when determining reactivity between proteins and ligands. 
