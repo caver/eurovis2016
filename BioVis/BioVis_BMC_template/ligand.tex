@@ -420,6 +420,8 @@ On the other hand, it also suppresses vast amount of details that are important 
 In order to preserve this information and hence allow the biochemist to explore the ligand behaviour in detail we evaluate various geometrical and chemico-physical attributes of the ligand trajectory on multiple levels. 
 These attributes are then communicated to the user in various ways (for more details {\color{red}see Section~\ref{XYZ}}).
 
+We arrange the attributes into a table, $T$, where each row represents a time step of the simulation data and columns represent the derived attributes. \todo{Kazdy attribut by mal dostat nejake pismenko}
+
 Among the most important attributes belongs the "stuckenss" of the ligand in one place, its distance from the active site, direction of its movement, amount of surrounding free space, changes of surrounding amino acids and its properties, and relative movements and rotations of the ligand inside the tunnel. 
 In the rest of this section we discuss usefulness and the way how we derive individual attributes them from the original data.    
 
@@ -527,7 +529,7 @@ In this particular study biochemists explored molecular simulation of Haloalkane
 Since the simulation consists of 50000 snapshots, it would take an enormous amount of time to analyze it using only common techniques such as 3D animation.
 In this section we will show how this can be significantly improved using our exploration tool.
 After the precomputation stage the user can start to explore individual views described in previous sections.
-
+\todo{Chcelo by to obrazok na styl comics kde by sa ukazali najdolezitejsie kroky, napr. 1) overview 2) selection 3) 3D view 4) scatterplot selections}
 We start with the rough analysis of the overall behavior of the ligand using our simulation overview (see Figure \ref{fig:case_overview}).
 
 \begin{figure}[htb]
