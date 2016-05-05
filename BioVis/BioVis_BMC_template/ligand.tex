@@ -541,7 +541,7 @@ Figure \ref{fig:scatterplot} shows Scatterplot Matrix for a sequence of $500$ ti
 
 \begin{figure*}[htb]
 	\centering
-  \includegraphics[width=0.95\textwidth]{img/case_overview.png}
+  \includegraphics[width=0.95\textwidth]{img/case_overview.pdf}
   \caption{\label{fig:case_overview} {\color{red}TODO}}
 \end{figure*}
 
@@ -572,23 +572,25 @@ Exploration of these two parts of the simulation allows the biochemist to closel
 
 \subsubsection{Case 1 - ligand traveling from the active site to the protein surface}
 \label{sec:case1}
-For the first case the biochemist selected the first part of the simulation consisting from circa 17000 time steps. 
-From this point the biochemist can continue in more detailed exploration using bruising and linking technique inside other three views -- namely inside the 3D, scatter plot and bar chart view (see Figure~\ref{fig:case_example1}).
+For the first case the biochemist selected the first part of the simulation consisting from circa 17000 time steps (see Figure~\ref{fig:case_overview} -- Case~1). 
+From this point the biochemist can continue in more detailed exploration using bruising and linking technique inside other three views -- namely using the 3D, scatter plot and bar chart views (see Figure~\ref{fig:case_example1}).
 Each of this view provides slightly different preview on the data and allows the biochemist to perform different operations. 
 
-For instance, using the scatter plot set to show distance from active site over time immediately revealed that the the ligand was actually near the protein surface (represented by high peaks) few additional times during this part of the simulation. \todo{ref for image, maybe}
+For instance, using the scatter plot set to show distance from active site over time (see Figure~\ref{fig:case_example1}--2) immediately revealed that the ligand was actually near the protein surface (represented by high peaks) few additional times during this part of the simulation.
 
 
-The same behavior can be actually seen also from the simulation overview {\color{red} (see Figure~\ref{fig:case_overview} -- look for the slim orange lines in first big green block from left)} but its is much more obvious in the scatter plot view.
-Moreover, the scatter plot view enables to select these time steps (or the opposite) in much more convenient way. 
+The same behavior can be actually seen also in the simulation overview (see Figure~\ref{fig:case_overview} -- Case~1) as slim orange lines. 
+But it is much more obvious in the scatter plot view.
+Moreover, the scatter plot view enables also to select these time steps (or the opposite) for future exploration in much more convenient way. 
 
-Another interesting behavior can be seen with the same setup (see Figure~\ref{fig:case_example1}) is that the movement of the ligand from active site (lover values) to the surface (high values) and back always happens in relatively short period of time.   
+Another interesting behavior can be seen with the same setup (see Figure~\ref{fig:case_example1}--2) is that the movement of the ligand from active site (lower values -- valleys) to the surface (higher values -- peaks) and back always happens in relatively short period of time. 
+{\color{red}While there is a huge part (in the middle) where the ligand is actually stuck oscillating nearby the active site.}
 
 
 \begin{figure}[htb]
 	\centering
-  \includegraphics[width=0.95\linewidth]{img/case_example_1.png}
-  \caption{\label{fig:case_example1} {\color{red}TODO}}
+  \includegraphics[width=0.95\linewidth]{img/case_example_1.pdf}
+  \caption{\label{fig:case_example1} {\color{red}TODO} ... 2] scatterplot set to show distance from the active site (vertical axis) over time (horizontal asix)}
 \end{figure}
 
 
