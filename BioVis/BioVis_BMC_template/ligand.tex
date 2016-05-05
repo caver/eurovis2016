@@ -395,13 +395,12 @@ Such parts of the simulation could be of less interest so that the user should b
 We define the temporal tunnel as a set of spheres where the number of spheres corresponds to the number of time steps in the simulation.
 Additionally, each sphere defines the maximum empty space surrounding the ligand, and as the consequence also contains the ligand, in the given time step {\color{red}(see Figure~\ref{XY})}.
 
-In order to compute such temporal tunnel we can either utilize the pre-computed information about protein tunnels (\eg using CAVER~3.0) or approximate information about the empty space surrounding the ligand manually. 
+In order to compute such temporal tunnel we can either utilize the pre-computed information about protein tunnels (\eg using CAVER~3.0) or approximate information about the empty space surrounding the ligand. Such approximation is possible since ligand positions over time are included in the data.
 The first method is more precise but computationally more expensive, while the second approach is faster but {\color{red}can be highly inaccurate} {\color{red}see Section~\ref{XYZ} for experimental comparison)}. 
-Nevertheless, in both cases we need to determine a single sphere which will be part of temporal tunnel for each time step.
+Nevertheless, in both cases we need to determine a single sphere, being a part of the temporal tunnel, for each time step.
+In the first case, we obtain a set of spheres defining the shape of the tunnel in each time step ({\color{red} see Section/Paper about CAVER}). Then the entire temporal tunnel is formed by the closest sphere to the ligand, which is also wide enough \todo{wide enough není zprogramováné} to fully enclose the ligand in a given time step.
 
-When using the pre--computed data we basically obtain a set of spheres defining the shape of the tunnel in each time step ({\color{red} see Section/Paper about CAVER}). 
-Since we also have a ligand position \todo{někde bude třeba definovat ligand position} in each time step we can utilize the aforementioned information about protein tunnels to determine single tunnel sphere containing the ligand in the given time. 
-The whole temporal tunnel then can be build simply by selecting the closest sphere to the ligand which is also wide enough \todo{wide enough není zprogramováné} to enclose fully it in each time step. \todo{ty poslední dvě věty se asi opakují.}
+In the second case, foe each time-step we firstly retrieve the 10 closest protein atoms to the ligand. Their mean position defines the center of the tunnel sphere while the radius is represented as the minimum distance from the center to the closest atom.
 
 %The closest sphere can be find simply by measuring the distance between the center of mass of ligand and center of each sphere.  
 
