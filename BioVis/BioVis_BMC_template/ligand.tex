@@ -451,16 +451,15 @@ To compute the direction we take use of the \textbf{distance} attribute, where i
 \item \textbf{Amount of free space} surrounding the ligand can assist biochemists to understand values of ligand \textbf{stuckness}. 
 It was described in many studies {\color{red}\eg cite some caver?} that geometrical properties (\eg width) of the protein tunnel play a crucial role when determining reactivity between proteins and ligands. 
 In our case a narrow tunnel, i.e., a low width, may prevent the ligand from progressing through the tunnel, which explains cases when \textbf{stuckness} attribute is relatively high. \todo{tato veta logicky nesedi}
-In order to evaluate free space surrounding the ligand we used the temporal tunnel (see Section~\ref{Sec:TemporalTunnel}\todo{bez cisel se neda odkazovat na sekce!!!}). 
-The definition of temporal tunnel ensures that each its sphere corresponds exactly to a single time step and the ligand lies inside it. 
-Since each such sphere also corresponds to the empty space in that part of protein in given time step, we can directly use its radius to define this "amount of free space" attribute. \todo{ta poslední věta je na dvě věci, ale nenapadá mě jak jinak}
+In order to evaluate free space surrounding the ligand we exploit the temporal tunnel (see Section~\ref{Sec:TemporalTunnel}\todo{bez cisel se neda odkazovat na sekce!!! -> treba dat priamo nazov sekcii}). 
+The representation of the temporal tunnel ensures that each its sphere corresponds exactly to a single time step and the ligand lies inside this sphere. Therefore, we can adopt the sphere radius as the "amount of free space" attribute. \todo{ta poslední věta je na dvě věci, ale nenapadá mě jak jinak}
 
-\item \textbf{Changes of amino acids and its properties} is another very important aspect of ligand trajectory evaluation.
-First, the changes of amino acids can show the parts of the trajectory where the ligand  significantly changed its position w.r.t. the molecule itself. 
-The higher number of different amino acids surrounding the ligand between two time steps means the higher shift inside the protein tunnel.
+\item \textbf{Changes of amino acids and its properties} is a very important aspect of ligand trajectory evaluation.
+First, the changes of amino acids can reveal those parts of the trajectory where the ligand  significantly changes its position w.r.t. the molecule itself. 
+For instance, the higher number of different amino acids surrounding the ligand between two consecutive time steps means also variations inside the protein tunnel.
 Moreover, whether the ligand will be able to pass through the tunnel and reach the active site, is highly depended not only on geometric properties of the tunnel but also on its physico-chemical properties (\eg hydrophobicity or electric charge).
-\todo{tady to bude chtít nějak lépe napojit}The individual biochemical properties are determined by surrounding amino acids.
-It might be usefull for biochemists to observe such physico-chemical properties and hence evaluate its influence on the ligand stuckness. \todo{pokud by jste chtěli, je možno tu dopsat, že hydrophobicita je průměr okolí, el. charge bude normálně podle zákona o sčítání potenionálu, atd.} 
+\todo{tady to bude chtít nějak lépe napojit}These properties, determined by surrounding amino acids, can provide insight into their influence on ligand \textbf{stuckness}.
+\todo{pokud by jste chtěli, je možno tu dopsat, že hydrophobicita je průměr okolí, el. charge bude normálně podle zákona o sčítání potenionálu, atd.} 
 
 {\color{red}\item \textbf{Relative movements and rotations} of ligands není implementováno, takže se nebudu párat zatím s tím, abych to tu popisoval, když ani zatím nevím, jak to implementovat} 
 
