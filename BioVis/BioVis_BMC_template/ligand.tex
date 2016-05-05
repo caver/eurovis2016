@@ -287,8 +287,8 @@ We aim to provide the domain experts with a tool for intuitive and interactive e
 Using our proposed solution the users are able to distinguish between the parts of the simulation where the ligand searches for the proper path to the active site (searches the tunnel gorge or enters the wrong tunnel) and the part where the ligand finally leads to and reaches the active site.
 
 {\color{red} CHANGE
-Here, we introduce four dedicated methods for simplification of the original trajectory.
-These methods can simplify the ligand path hierarchically, thus providing several levels of detail (LOD), which can be interactively examined.
+We introduce a dedicated method for simplification of the original trajectory.
+The methods can simplify the ligand path hierarchically, thus providing several levels of detail (LOD), which can be interactively examined.
 In the most abstracted view, represented as the top-most LOD, the temporal tunnel shows only the significant shifts of the ligand towards the active site. 
 Here, the user can interactively brush time intervals, which automatically reveals and adopts the temporal tunnel to the selected interval.
 This abstracted representation, providing the brushing capabilities, is interactively linked with the 3D visualization where the 3D shape of the temporal tunnel for the given temporal window is displayed.
@@ -482,12 +482,31 @@ motivation, design
 \subsubsection*{3D View}
 
 \subsubsection*{Barchart View}
+The Barchart View provides closer look at the ligand movement with respect to the properties of temporal tunnel.
+It consists of three parts -- Simulation Overview, The Barchart and Amino Acid Plot.
 
+The Simulation Overview is a temporal overview of the whole simulation, that serves as a navigation for closer exploration.
+It is depicted as a bar colored according to the ligand position and movement with respect to the protein surface and active site.
+We assort the ligand movement into four categories: 
+\begin{itemize}
+\item \textbf{Outside} The ligand is moving outside of protein.
+\item \textbf{Surface} The ligand is moving alongside the protein surface.
+\item \textbf{Forward Inside} The ligand is moving within the protein, heading towards the active site.
+\item \textbf{Backward Inside} The ligand is moving within the protein, retreating from the active site.
+\end{itemize}
+This enables quick filtering of irrelevant data (e.g. part of the simulation when the ligand is moving outside the protein), as well as navigation to the potentially important parts.
+The navigation is done via selection of area of interest in the Overview Bar.
+
+The time interval selected in Simulation Overview is then displayed in The Barchart as well as Scatterplot Matrix.
+By default, each bar in The Barchart represents one time step of the simulation, though if needed (e.g. long time sequence is selected) the neighboring bars can be aggregated.
+The bars are selectable, where the selected time steps are highlighted in Scatterplot Matrix as well as in 3D View.
+The height of the bar is set to represent one of the geometrical and chemico-physical attributes described in previous section.
+The color of selected bars corresponds to the coloring of Simulation Overview, indicating the ligand movement at given time step.
 
 The information about the surrounding acids is also very crucial when exploring the ligand bottlenecks. 
 For each time step within the temporal block we compute the three closest amino acids from the ligand. 
 We provide the visual representation of this list (Fig.~\ref{fig:aacids}), where each amino acid defines one line in the list. 
-The line is colored with respect to a selected physico-chemical property~---~our representation supports switching between hydrophobicity, partial charges, and donors and acceptors.
+The line is colored with respect to a selected chemico-physical property~---~our representation supports switching between hydrophobicity, partial charges, and donors and acceptors.
 The interruption in some of these lines is caused by the fact that the given amino acid is not present around the ligand in the corresponding temporal block.
 
 \begin{figure}[htb]
@@ -503,8 +522,7 @@ The axes of one scatterplot represent a pair user-selected attributes.
 Each point in the scatterplot then represents the values of these attributes at one time step.
 As a result the scatterplot can easily reveal trends and relationships between attributes.
 Interactive manipulation with scatterplot, such as selection, zooming and change of displayed attributes provides easy way of manual data filtering. 
-To eliminate the noise in the data caused by ligand jittering, we propose several smoothing and aggregation functions.
-\todo{nechat len sliding window?} 
+To eliminate the noise in the data caused by ligand jittering, we propose the Sliding Window smoothing function.
 The Sliding Window function assigns to each time step averaged value of its neighborhood.
 The size of the neighborhood is user regulated. 
 
