@@ -287,8 +287,8 @@ We aim to provide the domain experts with a tool for intuitive and interactive e
 Using our proposed solution the users are able to distinguish between the parts of the simulation where the ligand searches for the proper path to the active site (searches the tunnel gorge or enters the wrong tunnel) and the part where the ligand finally leads to and reaches the active site.
 
 {\color{red} CHANGE
-Here, we introduce four dedicated methods for simplification of the original trajectory.
-These methods can simplify the ligand path hierarchically, thus providing several levels of detail (LOD), which can be interactively examined.
+We introduce a dedicated method for simplification of the original trajectory.
+The methods can simplify the ligand path hierarchically, thus providing several levels of detail (LOD), which can be interactively examined.
 In the most abstracted view, represented as the top-most LOD, the temporal tunnel shows only the significant shifts of the ligand towards the active site. 
 Here, the user can interactively brush time intervals, which automatically reveals and adopts the temporal tunnel to the selected interval.
 This abstracted representation, providing the brushing capabilities, is interactively linked with the 3D visualization where the 3D shape of the temporal tunnel for the given temporal window is displayed.
@@ -395,13 +395,12 @@ Such parts of the simulation could be of less interest so that the user should b
 We define the temporal tunnel as a set of spheres where the number of spheres corresponds to the number of time steps in the simulation.
 Additionally, each sphere defines the maximum empty space surrounding the ligand, and as the consequence also contains the ligand, in the given time step {\color{red}(see Figure~\ref{XY})}.
 
-In order to compute such temporal tunnel we can either utilize the pre-computed information about protein tunnels (\eg using CAVER~3.0) or approximate information about the empty space surrounding the ligand manually. 
+In order to compute such temporal tunnel we can either utilize the pre-computed information about protein tunnels (\eg using CAVER~3.0) or approximate information about the empty space surrounding the ligand. Such approximation is possible since ligand positions over time are included in the data.
 The first method is more precise but computationally more expensive, while the second approach is faster but {\color{red}can be highly inaccurate} {\color{red}see Section~\ref{XYZ} for experimental comparison)}. 
-Nevertheless, in both cases we need to determine a single sphere which will be part of temporal tunnel for each time step.
+Nevertheless, in both cases we need to determine a single sphere, being a part of the temporal tunnel, for each time step.
+In the first case, we obtain a set of spheres defining the shape of the tunnel in each time step ({\color{red} see Section/Paper about CAVER}). Then the entire temporal tunnel is formed by the closest sphere to the ligand, which is also wide enough \todo{wide enough není zprogramováné} to fully enclose the ligand in a given time step.
 
-When using the pre--computed data we basically obtain a set of spheres defining the shape of the tunnel in each time step ({\color{red} see Section/Paper about CAVER}). 
-Since we also have a ligand position \todo{někde bude třeba definovat ligand position} in each time step we can utilize the aforementioned information about protein tunnels to determine single tunnel sphere containing the ligand in the given time. 
-The whole temporal tunnel then can be build simply by selecting the closest sphere to the ligand which is also wide enough \todo{wide enough není zprogramováné} to enclose fully it in each time step. \todo{ty poslední dvě věty se asi opakují.}
+In the second case, foe each time-step we firstly retrieve the 10 closest protein atoms to the ligand. Their mean position defines the center of the tunnel sphere while the radius is represented as the minimum distance from the center to the closest atom.
 
 %The closest sphere can be find simply by measuring the distance between the center of mass of ligand and center of each sphere.  
 
@@ -413,43 +412,41 @@ The whole temporal tunnel then can be build simply by selecting the closest sphe
 
 \subsection*{Derivation of Attributes - JB}
 
-In previous section we have described the simplification of the ligand trajectory. 
+In previous section we described the simplification of the ligand trajectory. 
 On one hand, such approximation helps to easily understand the overall ligand movements. 
-On the other hand, it also suppresses vast amount of details that are important for the complete understanding of the ligand movements inside protein.
+On the other hand, it also suppresses vast amount of details that are important for a complete understanding of the ligand movements inside protein.
 
-In order to preserve this information and hence allow the biochemist to explore the ligand behaviour in detail we evaluate various geometrical and chemico-physical attributes of the ligand trajectory on multiple levels. 
+In order to preserve this information and hence allow the biochemist to explore the ligand behavior in detail we evaluate various geometrical and chemico-physical attributes of the ligand trajectory on multiple levels. 
 These attributes are then communicated to the user in various ways (for more details {\color{red}see Section~\ref{XYZ}}).
 
 We arrange the attributes into a table, $T$, where each row represents a time step of the simulation data and columns represent the derived attributes. \todo{Kazdy attribut by mal dostat nejake pismenko}
 
-Among the most important attributes belongs the "stuckenss" of the ligand in one place, its distance from the active site, direction of its movement, amount of surrounding free space, changes of surrounding amino acids and its properties, and relative movements and rotations of the ligand inside the tunnel. 
-In the rest of this section we discuss usefulness and the way how we derive individual attributes them from the original data.    
-
+Based on several discussions with domain experts, we consider the following attributes as the most significant: "stuckenss" of the ligand in one place, its distance from the active site, direction of its movement, the amount of surrounding free space, changes of surrounding amino acids and its properties, and relative movements and rotations of the ligand inside the tunnel. 
+The remaining part of this section describes and rationalizes usefulness and the way the attributes are derived from the original data.    
+\todo{Obrazok kde je nakresleny ligand, tunel a ilustrovane attributy by bol super!!}
 \begin{itemize}
 
-\item \textbf{Stuckness} is one of the most abstract attributes. Fortunately, it can be easily measured. 
-We consider the ligand to be stuck if it oscillates around specific place inside the protein tunnel (w.r.t. the active site). \todo{to w.r.t. musím doprogramovat - ale myslím, že to dáva smysl ne, počítat to vzheledem k AC??} 
-In other words we need to evaluate the time for which the ligand remained on single spot. 
-Since the original data are uniformly sampled (\eg we know exact ligand position every two femtoseconds), we can measure the distance between two subsequent time steps and immediately obtain the speed of the ligand movement in that particular area. 
-The higher the speed of the ligand is, the higher distance it can travel and hence it is less stuck. \todo{nevím, zda stuck je to zprávné slovo}
+\item \textbf{Stuckness} is one of the most abstract attributes. Fortunately, it can be easily described and estimated in relative terms. 
+We consider the ligand to be stuck if it oscillates around a specific place inside the protein tunnel (w.r.t. the active site). \todo{to w.r.t. musím doprogramovat - ale myslím, že to dáva smysl ne, počítat to vzheledem k AC??} 
+In other words we need to evaluate the time for which the ligand remains on or close to a single spot. 
+Since the original data are uniformly sampled (\eg we know exact ligand position every two femtoseconds), we can measure the distance between two subsequent time steps and thus obtain the speed of the ligand movement in that particular area. 
+The higher the speed, the higher the distance it can travel and hence it is less stuck. \todo{nevím, zda stuck je to zprávné slovo}
 The importance of the attribute follows from the fact that if the ligand gets stuck for some reason it will not proceed through the protein tunnel and hence it may not reach the active site quick enough for the desired reaction to happen.
 Therefore the biochemists want to explore such cases in more detail in order to either evaluate the functionality of the protein or even change its properties by replacing some amino acids.
 
 
-\item \textbf{Distance} of the ligand from the active site provide the biochemists with the information whether some observed behaviour occurred in vicinity of active site, surface, or somewhere along the path. 
+\item \textbf{Distance} of the ligand from the active site provide the biochemists with the information whether some observed behavior occurred in vicinity of the active site, the surface, or somewhere along the path. 
 This can be very helpful in cases when the biochemists, for instance, want to mutate (\ie change) some amino acids along the tunnel in order to lower the "stuckness" of the ligand in that area. 
-In this case it is usefull to actually see where exactly the unwanted bahaviour of ligand is happening.
+In this case it is essential to also see where exactly the unwanted behavior of ligand happens.
 In order to evaluate the distance of the ligand from active site, we first extract the position of the active site in each time step. 
-Note that the active site is denoted by set of surrounding amino acids. 
-Hence, we can compute the position of the active site as the center of mass of these amino acids. 
-Once we have the position of active site, we simply measure its distance from the center of mass of ligand atoms.
+Here the active site is defined by a set of surrounding amino acids, which allows us to compute the position of the active site as the center of mass of these amino acids. 
+Once the position of active site is computed, we evaluate its distance from the center of mass of ligand atoms.
       
-\item \textbf{Direction} of the ligand movement w.r.t. the active site is another very important attribute. 
-During the molecular dynamics simulation the ligand can enter and again leave the protein tunnel multiple times. 
-Therefore, the biochemists are interested in distinguishing between intervals where the ligand was traveling towards the active site and where it was traveling in the opposite side (\ie towards the outer environment). 
-In order to obtains this information we first compute the distance between active site and ligand (computed in aforementioned way) in each time step. 
-Afterwards, we evaluate weather this distance is decreasing in two subsequent time steps -- in such case we consider the ligand to be moving towards the active site. 
-Similarly, if the distance is getting higher we mark the ligand to be moving towards the protein surface.        
+\item \textbf{Direction} of the ligand movement w.r.t. the active site is another very essential attribute. 
+During the molecular dynamics simulation the ligand can enter and exit the protein tunnel repeatedly. 
+Therefore, biochemists are interested in distinguishing between intervals where the ligand was traveling towards the active site and where it was traveling in the opposite direction (\ie towards the outer environment). 
+To compute the direction we take use of the \textbf{Distance} attribute, where in addition we evaluate whether the distance gets higher in two subsequent time steps (moving toward the active site) or lower (moving towards the protein surface). 
+   
 
 \item \textbf{Amount of free space} surrounding the ligand can help the biochemists to evaluate one of the reasons behind the lingad beeing stuck. 
 It was shows in many studies {\color{red}\eg cite some caver?} that the geometrical properties (\eg width) of the protein tunnel play a crucial role when determining reactivity between proteins and ligands. 
@@ -484,12 +481,31 @@ motivation, design
 \subsubsection*{3D View}
 
 \subsubsection*{Barchart View}
+The Barchart View provides closer look at the ligand movement with respect to the properties of temporal tunnel.
+It consists of three parts -- Simulation Overview, The Barchart and Amino Acid Plot.
 
+The Simulation Overview is a temporal overview of the whole simulation, that serves as a navigation for closer exploration.
+It is depicted as a bar colored according to the ligand position and movement with respect to the protein surface and active site.
+We assort the ligand movement into four categories: 
+\begin{itemize}
+\item \textbf{Outside} The ligand is moving outside of protein.
+\item \textbf{Surface} The ligand is moving alongside the protein surface.
+\item \textbf{Forward Inside} The ligand is moving within the protein, heading towards the active site.
+\item \textbf{Backward Inside} The ligand is moving within the protein, retreating from the active site.
+\end{itemize}
+This enables quick filtering of irrelevant data (e.g. part of the simulation when the ligand is moving outside the protein), as well as navigation to the potentially important parts.
+The navigation is done via selection of area of interest in the Overview Bar.
+
+The time interval selected in Simulation Overview is then displayed in The Barchart as well as Scatterplot Matrix.
+By default, each bar in The Barchart represents one time step of the simulation, though if needed (e.g. long time sequence is selected) the neighboring bars can be aggregated.
+The bars are selectable, where the selected time steps are highlighted in Scatterplot Matrix as well as in 3D View.
+The height of the bar is set to represent one of the geometrical and chemico-physical attributes described in previous section.
+The color of selected bars corresponds to the coloring of Simulation Overview, indicating the ligand movement at given time step.
 
 The information about the surrounding acids is also very crucial when exploring the ligand bottlenecks. 
 For each time step within the temporal block we compute the three closest amino acids from the ligand. 
 We provide the visual representation of this list (Fig.~\ref{fig:aacids}), where each amino acid defines one line in the list. 
-The line is colored with respect to a selected physico-chemical property~---~our representation supports switching between hydrophobicity, partial charges, and donors and acceptors.
+The line is colored with respect to a selected chemico-physical property~---~our representation supports switching between hydrophobicity, partial charges, and donors and acceptors.
 The interruption in some of these lines is caused by the fact that the given amino acid is not present around the ligand in the corresponding temporal block.
 
 \begin{figure}[htb]
@@ -505,8 +521,7 @@ The axes of one scatterplot represent a pair user-selected attributes.
 Each point in the scatterplot then represents the values of these attributes at one time step.
 As a result the scatterplot can easily reveal trends and relationships between attributes.
 Interactive manipulation with scatterplot, such as selection, zooming and change of displayed attributes provides easy way of manual data filtering. 
-To eliminate the noise in the data caused by ligand jittering, we propose several smoothing and aggregation functions.
-\todo{nechat len sliding window?} 
+To eliminate the noise in the data caused by ligand jittering, we propose the Sliding Window smoothing function.
 The Sliding Window function assigns to each time step averaged value of its neighborhood.
 The size of the neighborhood is user regulated. 
 
