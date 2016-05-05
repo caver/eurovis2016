@@ -445,12 +445,12 @@ Once the position of active site is computed, we evaluate its distance from the 
 \item \textbf{Direction} of the ligand movement w.r.t. the active site is another very essential attribute. 
 During the molecular dynamics simulation the ligand can enter and exit the protein tunnel repeatedly. 
 Therefore, biochemists are interested in distinguishing between intervals where the ligand was traveling towards the active site and where it was traveling in the opposite direction (\ie towards the outer environment). 
-To compute the direction we take use of the \textbf{Distance} attribute, where in addition we evaluate whether the distance gets higher in two subsequent time steps (moving toward the active site) or lower (moving towards the protein surface). 
+To compute the direction we take use of the \textbf{distance} attribute, where in addition we evaluate whether the distance gets higher in two subsequent time steps (moving toward the active site) or lower (moving towards the protein surface). 
    
 
-\item \textbf{Amount of free space} surrounding the ligand can help the biochemists to evaluate one of the reasons behind the lingad beeing stuck. 
-It was shows in many studies {\color{red}\eg cite some caver?} that the geometrical properties (\eg width) of the protein tunnel play a crucial role when determining reactivity between proteins and ligands. 
-In our case the low width of the tunnel may prevent the ligand from progressing through the tunnel and hence explain cases when the "stuckness" attribute is high. 
+\item \textbf{Amount of free space} surrounding the ligand can assist biochemists to understand values of ligand \textbf{stuckness}. 
+It was described in many studies {\color{red}\eg cite some caver?} that geometrical properties (\eg width) of the protein tunnel play a crucial role when determining reactivity between proteins and ligands. 
+In our case a narrow tunnel, i.e., a low width, may prevent the ligand from progressing through the tunnel, which explains cases when \textbf{stuckness} attribute is relatively high. \todo{tato veta logicky nesedi}
 In order to evaluate free space surrounding the ligand we used the temporal tunnel (see Section~\ref{Sec:TemporalTunnel}\todo{bez cisel se neda odkazovat na sekce!!!}). 
 The definition of temporal tunnel ensures that each its sphere corresponds exactly to a single time step and the ligand lies inside it. 
 Since each such sphere also corresponds to the empty space in that part of protein in given time step, we can directly use its radius to define this "amount of free space" attribute. \todo{ta poslední věta je na dvě věci, ale nenapadá mě jak jinak}
