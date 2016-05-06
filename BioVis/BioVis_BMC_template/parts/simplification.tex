@@ -11,9 +11,10 @@ The trajectory is colored by time from beginning (gray) towards its end (orange)
 \label{fig:crowded}
 \end{figure}
 
-Our tool enables for two types of ligand trajectory simplification: i) automatic and ii) manual.
-The automatic simplification is supposed to be applied to whole original trajectory, while the manual one enables users to fine control the level of simplification of parts of the trajectory that are of their interest.
-In fact, the automatic simplification can be viewed as an iterative application of the manual simplification, since its design was aligned with the workflow of a biochemist.
+We propose two types of ligand trajectory simplification: i) automatic and ii) manual.
+The automatic simplification is applied to the whole original trajectory, while the manual one enables fine user regulated control over the level of simplification of individual parts of the trajectory.
+In fact, the automatic simplification can be viewed as an iterative application of the manual simplification.
+%, since its design was aligned with the workflow of a biochemist. - dala by som prec, postradam logicku navaznost
 
 \begin{algorithm}
   \begin{algorithmic}[1]
@@ -44,17 +45,16 @@ In fact, the automatic simplification can be viewed as an iterative application 
 \end{algorithm}
 
 First, we will describe the algorithm of the manual trajectory simplification (see Algorithm~\ref{alg:simplify}).
-The input of the algorithm consist of a trajectory ($T_{in}$) and a data structure describing the simplification ($S$). \textcolor[rgb]{1,0,0}{What about interval we update -- that should also be an input.}
 More precisely, $S$ is a list of consecutive intervals that span the whole trajectory.
 Each interval in $S$ is assigned with a simplification level and as such describes amount of simplification of a respective part of $T_{in}$.
-Such representation of $S$ was chosen in order to enable simplification of different parts of $T_{in}$ using different magnitude.
+This representation enables simplification of different parts of $T_{in}$ using different level of detail.
 As a first step, the algorithm retrieves from a cache the current visualized trajectory ($T'$) together with its simplification ($S'$).
-Then, it is decided whether $T'$ can be incrementally updated to obtain $T_{out}$. \textcolor{red}{How is the decision made? is the following correct?}
+Then, it is decided whether $T'$ can be incrementally updated to obtain $T_{out}$.
 %If so, an interval $\Delta I$ which updates $S'$ to $S$ is obtained and the current visualized trajectory $T'$ is simplified on $\Delta I$ resulting in $T_{out}$.
 If the level of simplification of $T'$ at the updated interval $\Delta I$ is lower than the desired level of simplification, the current visualized trajectory $T'$ is simplified on $\Delta I$ resulting in $T_{out}$.
-Otherwise, the visualized trajectory $T'$ cannot be employed and the simplified trajectory has to be computed from scratch using $T_{in}$.
-For example, this case emerges when a user decides to lower the amount of simplification of some part of the trajectory.
-In such case, the computation proceeds as follows.
+Otherwise, the visualized trajectory $T'$ cannot be used and the simplified trajectory has to be computed from scratch using $T_{in}$.
+This case typically emerges when a user decides to lower the amount of simplification of some part of the trajectory.
+The computation then proceeds as follows.
 A set $\mathcal{L}$ containing sets of intervals with same simplification level is computed.
 Then, we iterate through $\mathcal{L}$ in ascending order by level of simplification.
 In each iteration, we have a set of intervals $L \in \mathcal{L}$ and we apply the simplification on all $\Delta I \in L$ to $T_{out}$.
@@ -98,7 +98,7 @@ Moreover, the performance of manual simplification is also enhanced, for example
 
 The automatic algorithm (see Algorithm~\ref{alg:auto-simplify}) is iterative and it employs the manual simplification in its iterations.
 Furthermore, it is based on an idea to simplify only parts of the trajectory that are still complex.
-The algorithm starts with considering the whole trajectory as complex, i.e., set of complex intervals $C$ is set to the interval spanning $T_{in}$.
+The algorithm starts with considering the whole trajectory as complex -- the set of complex intervals $C$ is filled with all intervals of $T_{in}$.
 Then, the complexity ($c$) of $T_{in}$ is evaluated in all points of $T_{in}$.
 The complexity $c(x)$ in point $x$ is defined as (see Figure~\ref{fig:complexity}):
 \begin{equation}
@@ -107,20 +107,20 @@ The complexity $c(x)$ in point $x$ is defined as (see Figure~\ref{fig:complexity
 \end{equation}
 where $N(T, x, \nu)$ is a set of consecutive tuples of segments of a trajectory $T$ lying in the neighborhood of $x$ and $\alpha(u, v)$ is angle between segments $u$ and $v$.
 The neighborhood of $x$ contains all points $y \in T$ such that $d(x, y) < \nu$ where $d(x, y)$ is distance along $T$.
-We evaluate the complexity of $T$ in a neighborhood of $x$ instead of in a single point in order to take into account more global shape of the trajectory.
-Our typical setting for $\nu$ is 2 \angstrom\ and it was obtained experimentally.
+We evaluate the complexity of $T$ in a neighborhood of $x$ in order to take into account local shape of the trajectory in the vicinity of $x$.
+Our typical setting for $\nu$ is 2 \angstrom\, an experimentally obtained value.
 
 \begin{figure}
 	\includegraphics[width=0.95\linewidth]{img/complexity.pdf}
 \caption{Evaluation of complexity of a trajectory $T$ in point $x$.
-The complexity $c(x)$ is contributed to by tupples $(u, v)$, \ie their angles ($\alpha$), and $(v, w)$ as the segments $u$, $v$ and $w$ lie in the neighborhood of $x$ (red).
+The complexity $c(x)$ is contributed to by tuples $(u, v)$, \ie their angles ($\alpha$), and $(v, w)$ as the segments $u$, $v$ and $w$ lie in the neighborhood of $x$ (red).
 The neighborhood of $x$ contains all points that are closer (along $T$) to $x$ then $\nu$.}
 \label{fig:complexity}
 \end{figure}
 
 Further, simplification $S$ is set to empty at the beginning and the resulting trajectory $T_{out}$ is set to $T_{in}$.
 The iterative simplification then proceeds as follows.
-First, a set of simple point $P$ is found by thresholding $c(x)$ by $\tau$.
+First, a set of simple points $P$ is found by thresholding $c(x)$ by $\tau$.
 All points $p \in P$ are then removed from $C$ which prevents further simplification of parts of the trajectory that are already simple.
 Then, $T_{out}$ is simplified in all complex intervals that remained in $C$.
 After the simplification, the complexity is evaluated again and the improvement to previous complexity is computed.
