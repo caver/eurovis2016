@@ -49,7 +49,7 @@ More precisely, $S$ is a list of consecutive intervals that span the whole traje
 Each interval in $S$ is assigned with a simplification level and as such describes amount of simplification of a respective part of $T_{in}$.
 Such representation of $S$ was chosen in order to enable simplification of different parts of $T_{in}$ using different magnitude.
 As a first step, the algorithm retrieves from a cache the current visualized trajectory ($T'$) together with its simplification ($S'$).
-Then, it is decided whether $T'$ can be incrementally updated to obtain $T_{out}$. \TODO{How is the decision made? is the following correct?}
+Then, it is decided whether $T'$ can be incrementally updated to obtain $T_{out}$. \textcolor{red}{How is the decision made? is the following correct?}
 %If so, an interval $\Delta I$ which updates $S'$ to $S$ is obtained and the current visualized trajectory $T'$ is simplified on $\Delta I$ resulting in $T_{out}$.
 If the level of simplification of $T'$ at the updated interval $\Delta I$ is lower than the desired level of simplification, the current visualized trajectory $T'$ is simplified on $\Delta I$ resulting in $T_{out}$.
 Otherwise, the visualized trajectory $T'$ cannot be employed and the simplified trajectory has to be computed from scratch using $T_{in}$.
