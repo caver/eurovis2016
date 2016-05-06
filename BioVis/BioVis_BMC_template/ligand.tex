@@ -407,6 +407,12 @@ This simple 1D representation encodes different routes of the ligand -- green co
 Blue color shows the time portions when the ligand was close to the active site.
 By selecting a part of the trajectory using this representation, the user is automatically navigated to this selected part and all following representations show only this part.
 
+\begin{figure*}[thb]
+	\centering
+  \includegraphics[width=0.95\textwidth]{img/overview.png}
+  \caption{\label{fig:overview} Overview of the proposed system. 1 -- overview of the whole loaded trajectory, 2 -- scatterplot matrix plotting different attributes of the ligand trajectory, 3 -- bar charts and line representation showing ligand-lining amino acids, 4 -- spatial representation of the trajectory.}
+\end{figure*}
+
 Among these views belong the scatterplot matrix (Figure~\ref{fig:overview} 2) enabling to explore different attributes of the ligand and its trajectory.
 These attributes are described in detail in section Derivation of Attributes.
 By interactive manipulation with these matrices the user can select a subset of time steps in which the ligand behaved in a desired way.
@@ -425,14 +431,17 @@ These views are linked with the three-dimensional view (Figure~\ref{fig:overview
 As the original trajectory is highly scattered, we propose a simplification algorithm which aims to reveal the trends in the ligand movement and suppress small insignificant movements.
 The algorithm is described in detail in the Trajectory Simplification section.
 
-\subsection*{Derivation of Attributes - JB}
 
-In previous section we described the simplification of the ligand trajectory. 
-On one hand, such approximation helps to easily understand the overall ligand movements. 
-On the other hand, it also suppresses vast amount of details that are important for a complete understanding of the ligand movements inside protein.
+\subsection*{Trajectory Simplification}
+\input{parts/simplification}
 
-In order to preserve this information and hence allow the biochemist to explore the ligand behavior in detail we evaluate various geometrical and chemico-physical attributes of the ligand trajectory on multiple levels. 
-These attributes are then communicated to the user in various ways (for more details {\color{red}see Section~\ref{XYZ}}).
+\subsection*{Derivation of Attributes}
+In the previous section we described the simplification of the ligand trajectory. 
+On one hand, such approximation helps to understand the overall ligand movements. 
+On the other hand, it also suppresses vast amount of details that are important for complete understanding of the ligand movements inside protein.
+
+In order to preserve this information and hence allow the biochemist to explore the ligand behavior in detail we evaluate interesting geometric and physico-chemical attributes of the ligand trajectory on multiple levels. 
+These attributes are then communicated to the user in several ways (using the scatterplot matrix, the bar charts, and different coloring of the trajectory in the 3D view).
 
 We arrange the attributes into a table, $T$, where each row represents a time step of the simulation data and columns represent the derived attributes. \todo{Kazdy attribut by mal dostat nejake pismenko}
 
@@ -509,9 +518,6 @@ In the second case, foe each time-step we firstly retrieve the 10 closest protei
 
 {\color{red} Už nestíhám, ale ta druhá metoda byla popsána v předchozím článku, takže jí z tama můžeme vytáhnout - možná to ještě udělám později, zatím teda takto.}
 
-
-\subsection*{Trajectory Simplification - AJ}
-\input{parts/simplification}
 
 
 \section*{Visual Exploration}
