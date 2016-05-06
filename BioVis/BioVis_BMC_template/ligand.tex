@@ -404,7 +404,7 @@ Therefore, only a fraction of the trajectory captures its transportation to the 
 
 \section*{System Overview}
 Our proposed solution consists of several linked views covering individual steps of the exploration workflow (see Figure~\ref{fig:overview}). 
-In the first part, the user is provided with the overview representation of the whole loaded trajectory (Figure~\ref{fig:overview} 1). 
+In the first part, the user is provided with the overview representation of the whole loaded trajectory (Figure~\ref{fig:overview} -- 1). 
 This simple 1D representation encodes different routes of the ligand -- green color highlights the parts of the trajectory where the ligand is inside the protein, white and yellow colors encode the situation when the ligand is outside the protein or on it surface respectively.
 Blue color shows the time portions when the ligand was close to the active site.
 By selecting a part of the trajectory using this representation, the user is automatically navigated to this selected part and all following representations show only this part.
@@ -415,13 +415,13 @@ By selecting a part of the trajectory using this representation, the user is aut
   \caption{\label{fig:overview} Overview of the proposed system. 1 -- overview of the whole loaded trajectory, 2 -- scatterplot matrix plotting different attributes of the ligand trajectory, 3 -- bar charts and line representation showing ligand-lining amino acids, 4 -- spatial representation of the trajectory.}
 \end{figure*}
 
-Among these views belong the scatterplot matrix (Figure~\ref{fig:overview} 2) enabling to explore different attributes of the ligand and its trajectory.
+Among the other supported views belong the scatterplot matrix (Figure~\ref{fig:overview} -- 2) enabling to explore different attributes of the ligand and its trajectory.
 These attributes are described in detail in section Derivation of Attributes.
 By interactive manipulation with these matrices the user can select a subset of time steps in which the ligand behaved in a desired way.
 The selection is highly dependent on the current tasks the user aims to perform.
 For example, when the user searches for the parts of the simulation where the ligand got stuck for a certain amount of time steps and at the same time was close to the active site, he or she plots and interacts with the matrix showing the relationship between the ligand stuckness and its distance from the active site.
 
-The selected time steps can be further explored using the combination of bar chart and line representations (Figure~\ref{fig:overview} 3). 
+The selected time steps can be further explored using the combination of bar chart and line representations (Figure~\ref{fig:overview} -- 3). 
 The bar chart enables to follow a selected attribute over time.
 Furthermore, individual bars can represent an aggregated information for selected portions of time steps.
 The aggregation is performed on uniformly divided time intervals.
@@ -429,7 +429,7 @@ Then they show the average values of selected attributes.
 The line representation informs about the amino acids closest to the ligand along its path.
 This information helps to determine those amino acids which play a substantial role in the ligand transportation.
 
-These views are linked with the three-dimensional view (Figure~\ref{fig:overview} 4) where the user can observe the ligand trajectory in the context of the protein structure.
+These views are linked with the three-dimensional view (Figure~\ref{fig:overview} -- 4) where the user can observe the ligand trajectory in the context of the protein structure.
 As the original trajectory is highly scattered, we propose a simplification algorithm which aims to reveal the trends in the ligand movement and suppress small insignificant movements.
 The algorithm is described in detail in the Trajectory Simplification section.
 
@@ -705,7 +705,7 @@ This was also confirmed by the bar chart representation in Figure~\ref{fig:case_
 
 
 \section*{Conclusions - All}
-and future work 
+\input{parts/conclusion.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %%                                          %%
