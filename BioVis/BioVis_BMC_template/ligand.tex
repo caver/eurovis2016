@@ -445,10 +445,15 @@ In order to preserve this information and hence allow the biochemist to explore 
 These attributes are then communicated to the user in several ways (using the scatterplot matrix, the bar charts, and different coloring of the trajectory in the 3D view).
 
 Based on several discussions with the domain experts, we detected the following attributes as the most significant: "stuckness" of the ligand in one place, its distance from the active site, the direction of its movement, the amount of surrounding free space, changes of surrounding amino acids and their properties, the hydrophobicity and charge profiles of amino acids and atoms around the ligand, and trajectory straightness. 
+Figure~\ref{fig:attributes} aims to illustrate the individual attributes.
 
 The remaining part of this section describes these attributes in detail, along with the process of deriving these attributes from the original data, and rationalizes their usefulness.
     
-\todo{Obrazok kde je nakresleny ligand, tunel a ilustrovane attributy by bol super!!}
+\begin{figure*}[thb]
+	\centering
+  \includegraphics[width=0.95\textwidth]{img/attributes.png}
+  \caption{\label{fig:attributes} Illustration of the attributes derived for the ligand and its trajectory. AA1-AA4 denote amino acids lining the ligand in a specific position.}
+\end{figure*}
 
 \begin{itemize}
 
@@ -501,7 +506,7 @@ This attribute is calculated as the average value from all ligand-lining amino a
 \item{\textbf{Charge profile}} has a very similar purpose as the hydrophobicity profile.
 It conveys the information about another significant physico-chemical parameter, atom charge, calculated for each atom in the distance of 2 \AA from the ligand and averaged.
 
-\item \textbf{Straightness} describes whether the movement of a ligand was straight, \ie the ligand moved significantly in some direction, or its movement was rather random.
+\item \textbf{Straightness} describes whether the movement of the ligand was straight, i.e., it moved significantly in some direction, or if its movement was rather random.
 The straightness is a continuous measure and we use a neighborhood of size $2n + 1$ to compute it.
 For a set of ligand positions $P$ we define the straightness as:
 \begin{equation}
