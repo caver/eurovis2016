@@ -44,6 +44,7 @@
 \usepackage{algorithmicx}
 \usepackage{algpseudocode}
 \usepackage{xspace}
+\usepackage{amsfonts}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                             %%
@@ -450,6 +451,7 @@ The remaining part of this section describes these attributes in detail, along w
 \todo{Obrazok kde je nakresleny ligand, tunel a ilustrovane attributy by bol super!!}
 
 \begin{itemize}
+
 \item \textbf{Stuckness} is one of the most abstract attributes. 
 It can be easily described and estimated in relative terms. 
 We consider the ligand to be stuck if it oscillates around a specific place in the protein (w.r.t. the active site).  
@@ -471,7 +473,6 @@ Once the position of active site is determined, we compute its distance from the
 During the molecular dynamics simulation the ligand can enter and exit the protein tunnel repeatedly. 
 Therefore, biochemists want to distinguish between intervals where the ligand was traveling towards the active site or in the opposite direction (i.e., towards the outer solvent). 
 To compute the direction we use the \textbf{distance} attribute and in addition we evaluate whether the distance gets higher between two subsequent time steps (when moving towards the active site) or lower (when moving in the opposite direction). 
-   
 
 \item \textbf{Amount of free space} surrounding the ligand can help the biochemists to understand why the ligand in some places got stuck.
 In such cases there was not enough free space for the passage of the ligand or the ligand was repelled by some amino acid with incompatible physico-chemical properties.
@@ -500,7 +501,18 @@ This attribute is calculated as the average value from all ligand-lining amino a
 \item{\textbf{Charge profile}} has a very similar purpose as the hydrophobicity profile.
 It conveys the information about another significant physico-chemical parameter, atom charge, calculated for each atom in the distance of 2 \AA from the ligand and averaged.
 
-\item \textbf{Straightness} \todo{Adame?}
+\item \textbf{Straightness} describes whether the movement of a ligand was straight, \ie the ligand moved significantly in some direction, or its movement was rather random.
+The straightness is a continuous measure and we use a neighborhood of size $2n + 1$ to compute it.
+For a set of ligand positions $P$ we define the straightness as:
+\begin{equation}
+  s(x) = \frac{\max_{\,-n \le i, j \le n} \{ d(P(x + i), P(x + j)) \}}{\sum_{-n \le i < n}{d(P(x + i), P(x + i + 1))}},
+  \label{eq:straightness}
+\end{equation}
+where $P(x)$ is a position of the ligand in snapshot $x$ and $d(x, y)$ is euclidean distance of $x, y \in \mathbb{R}^3$.
+The size of the neighborhood $n$ can specified by the user and furthermore we set $n = 9$ by default.
+The default value was obtained experimentally.
+To be complete, in the beginning (or in the end) of the trajectory, we shrink the neighborhood from left (or right).
+
 \end{itemize}
 
 \section*{Visual Exploration}
