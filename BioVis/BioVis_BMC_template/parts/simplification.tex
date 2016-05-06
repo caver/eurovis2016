@@ -1,6 +1,6 @@
 When visualizing the ligand trajectory as is, e.g., using line strip of consecutive ligand positions, the visualization becomes crowded even when analyzing only hundreds of snapshots (see Figure~\ref{fig:crowded}).
 Therefore, we decided to simplify the original trajectory data and to visualize the simplified trajectory.
-In this manner, we enable the user to deduce information about ligand movement directly from 3D visualization.
+In this manner, we enable the user to deduce information about significant ligand movement directly from its 3D visualization.
 
 \begin{figure}
 	\includegraphics[width=0.95\linewidth]{img/crowded-combined.png}
@@ -47,23 +47,21 @@ First, we will describe the algorithm of the manual trajectory simplification (s
 The input of the algorithm consist of a trajectory ($T_{in}$) and a data structure describing the simplification ($S$). \textcolor[rgb]{1,0,0}{What about interval we update -- that should also be an input.}
 More precisely, $S$ is a list of consecutive intervals that span the whole trajectory.
 Each interval in $S$ is assigned with a simplification level and as such describes amount of simplification of a respective part of $T_{in}$.
-Such representation of $S$ was chosen in order to enable simplification of different parts of $T_{in}$ using different simplification levels.
-In the beginning, the algorithm retrieves from a cache the current visualized trajectory ($T'$) together with its simplification ($S'$).
+Such representation of $S$ was chosen in order to enable simplification of different parts of $T_{in}$ using different magnitude.
+As a first step, the algorithm retrieves from a cache the current visualized trajectory ($T'$) together with its simplification ($S'$).
 Then, it is decided whether $T'$ can be incrementally updated to obtain $T_{out}$. \TODO{How is the decision made? is the following correct?}
 %If so, an interval $\Delta I$ which updates $S'$ to $S$ is obtained and the current visualized trajectory $T'$ is simplified on $\Delta I$ resulting in $T_{out}$.
-If if the level of simplification of $T'$ at the updated interval $\Delta I$ is lower than the desired level of simplification, the current visualized trajectory $T'$ is simplified on $\Delta I$ resulting in $T_{out}$.
+If the level of simplification of $T'$ at the updated interval $\Delta I$ is lower than the desired level of simplification, the current visualized trajectory $T'$ is simplified on $\Delta I$ resulting in $T_{out}$.
 Otherwise, the visualized trajectory $T'$ cannot be employed and the simplified trajectory has to be computed from scratch using $T_{in}$.
 For example, this case emerges when a user decides to lower the amount of simplification of some part of the trajectory.
 In such case, the computation proceeds as follows.
 A set $\mathcal{L}$ containing sets of intervals with same simplification level is computed.
-Then, we iterate through $\mathcal{L}$ in ascending order.
-In each iteration we get a set of intervals $L \in \mathcal{L}$ and we apply the simplification on these intervals to $T_{out}$.
+Then, we iterate through $\mathcal{L}$ in ascending order by level of simplification.
+In each iteration, we have a set of intervals $L \in \mathcal{L}$ and we apply the simplification on all $\Delta I \in L$ to $T_{out}$.
 In both cases, we employ Savitzky-Golay smoothing method~\cite{savitzky1964smoothing} to simplify the trajectory.
 As a last step, we store the simplified trajectory to a cache.
 The caching is employed to primarily improve performance of automatic simplification.
 Moreover, the performance of manual simplification is also enhanced, for example, when the user iteratively simplifies the same part of the trajectory until he/she is satisfied with the result.
-
-%Including mathematical model.
 
 \begin{algorithm}
   \begin{algorithmic}[1]
@@ -100,8 +98,8 @@ Moreover, the performance of manual simplification is also enhanced, for example
 
 The automatic algorithm (see Algorithm~\ref{alg:auto-simplify}) is iterative and it employs the manual simplification in its iterations.
 Furthermore, it is based on an idea to simplify only parts of the trajectory that are still complex.
-The algorithm starts with considering the whole trajectory as complex, i.e., set of complex intervals $C$ is set to the interval spanning the $T_{in}$.
-Then, complexity of $T_{in}$ is evaluated in all of its points.
+The algorithm starts with considering the whole trajectory as complex, i.e., set of complex intervals $C$ is set to the interval spanning $T_{in}$.
+Then, the complexity ($c$) of $T_{in}$ is evaluated in all points of $T_{in}$.
 The complexity $c(x)$ in point $x$ is defined as (see Figure~\ref{fig:complexity}):
 \begin{equation}
   c(x) = \sum_{(u, v) \in N(T, x, \nu)}{(|u| + |v|)^2 \alpha(u, v)}, % \mathrm{acos}(\frac{u \cdot v}{|u| \cdot |v|})
@@ -109,7 +107,8 @@ The complexity $c(x)$ in point $x$ is defined as (see Figure~\ref{fig:complexity
 \end{equation}
 where $N(T, x, \nu)$ is a set of consecutive tuples of segments of a trajectory $T$ lying in the neighborhood of $x$ and $\alpha(u, v)$ is angle between segments $u$ and $v$.
 The neighborhood of $x$ contains all points $y \in T$ such that $d(x, y) < \nu$ where $d(x, y)$ is distance along $T$.
-We evaluate the complexity in a neighborhood in order to take into account more global shape of the trajectory.
+We evaluate the complexity of $T$ in a neighborhood of $x$ instead of in a single point in order to take into account more global shape of the trajectory.
+Our typical setting for $\nu$ is 2 \angstrom\ and it was obtained experimentally.
 
 \begin{figure}
 	\includegraphics[width=0.95\linewidth]{img/complexity.pdf}
@@ -121,8 +120,8 @@ The neighborhood of $x$ contains all points that are closer (along $T$) to $x$ t
 
 Further, simplification $S$ is set to empty at the beginning and the resulting trajectory $T_{out}$ is set to $T_{in}$.
 The iterative simplification then proceeds as follows.
-First, simple points $P$ are found by thresholding $c(x)$ by $\tau$.
-Points in $P$ are then removed from $C$ which prevents further simplification of parts of the trajectory that are simple already.
+First, a set of simple point $P$ is found by thresholding $c(x)$ by $\tau$.
+All points $p \in P$ are then removed from $C$ which prevents further simplification of parts of the trajectory that are already simple.
 Then, $T_{out}$ is simplified in all complex intervals that remained in $C$.
 After the simplification, the complexity is evaluated again and the improvement to previous complexity is computed.
-The iterative simplification ends when the improvement after an iteration ($\Delta c$) drops below a user defined threshold $\epsilon$.
+The iterative simplification ends when the improvement after an iteration ($\Delta c$) drops below a user specified threshold $\epsilon$.
