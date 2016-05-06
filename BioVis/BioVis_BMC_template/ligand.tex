@@ -590,25 +590,23 @@ Using this function the whole trajectory can be automatically simplified.
 If the automatic simplification does not lead to satisfactory results, selected parts of the trajectory can be further simplified manually.
 The trajectory is colored according to one of the geometric and physico-chemical attributes. 
 
-\subsection*{Analysis Procedure - BK, JP, JB}
+\section*{Analysis Procedure}
 
 \begin{figure*}[htb]
 	\centering
   \includegraphics[width=0.95\textwidth]{img/case_overview.pdf}
-  \caption{\label{fig:case_overview} {\color{red}TODO}}
+  \caption{\label{fig:case_overview} {Overview of the simulation consisting of $50.000$ time steps. Selected part was explored in detail in our case study.}
 \end{figure*}
 
 In this section we will describe one of case studies which we have performed using our novel exploration tool.
-In this particular study biochemists explored molecular simulation of Haloalkane dehalogenase protein together with its ligand. 
-Since the simulation consists of 50000 time steps, it would take an enormous amount of time to analyze it using only common techniques such as plain 3D animation.
+In this particular study the biochemists explored molecular simulation of Haloalkane dehalogenase together with the ligand. 
+Since the simulation consists of $50.000$ time steps, it would take enormous amount of time to analyze it using only common techniques such as 3D animation.
 In this section we will show how this can be significantly improved using our exploration tool.
 After the precomputation stage the user can immediately start to explore individual views described in the previous sections.
-\todo{Chcelo by to obrazok na styl comics kde by sa ukazali najdolezitejsie kroky, napr. 1) overview 2) selection 3) 3D view 4) scatterplot selections}
-
 
 We start with the rough analysis of the overall behavior of the ligand using our simulation overview (see Figure~\ref{fig:case_overview}).
-Utilizing this view the biochemist can immediately see that the whole simulation consist from three main (two long and one relatively short) parts where ligand was inside the protein (blue, and green colors).
-These parts are divided by two orange and white blocks signalizing that ligand was moving near the protein surface (orange) or even entirely left the protein (white).
+Utilizing this view the biochemist can immediately see that the whole simulation contains three main (two long and one relatively short) parts where the ligand was inside the protein (blue and green colors).
+These parts are divided by two orange and white blocks signalizing that the ligand was moving near to the protein surface (orange) or even entirely left the protein (white).
  
 The mentioned color mapping on the simulation overview suggests that in this particular simulation the ligand started in the active site, then traveled towards the protein surface and finally left the molecule.
 After spending some time outside it found again its way into a protein tunnel and traveled back to the active side.
