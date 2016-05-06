@@ -66,7 +66,8 @@ In this case, the current visualized trajectory $T'$ is simplified on $I$ result
 Otherwise, the visualized trajectory $T'$ cannot be used and the simplified trajectory has to be computed from scratch using $T_{in}$.
 This case typically emerges when a user decides to lower the amount of simplification of some part of the trajectory.
 The computation then proceeds as follows.
-A set $\mathcal{L}$ containing sets of intervals with same simplification level is computed.
+A list $\mathcal{L}$ is computed from $S$.
+For each simplification level in $S$, we extract from $S$ a set of all intervals on that level, $L$, and we add $L$ to $\mathcal{L}$.
 Then, we iterate through $\mathcal{L}$ in ascending order by level of simplification.
 In each iteration, we have a set of intervals $L \in \mathcal{L}$ and we apply the simplification on all $I_L \in L$ to $T_{out}$.
 In both cases, we employ Savitzky-Golay smoothing method~\cite{savitzky1964smoothing} to simplify the trajectory.
