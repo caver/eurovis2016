@@ -621,18 +621,12 @@ Exploration of these two parts of the simulation allows the biochemist to closel
 \subsubsection{Case 1 - ligand traveling from the active site to the protein surface}
 \label{sec:case1}
 For the first case the biochemist selected the first part of the simulation consisting from circa 17000 time steps (see Figure~\ref{fig:case_overview} -- Case~1). 
-From this point the biochemist can continue in more detailed exploration using bruising and linking techniques inside other three views -- namely using the 3D, scatter plot, and bar chart views (see Figure~\ref{fig:case_example1}).
+From this point the biochemist can continue in more detailed exploration using bruising and linking techniques inside other three views -- namely using the 3D, scatter plot, and bar chart views (see Figure~\ref{fig:case_hydro_distance} -- top).
 Each of this view provides slightly different representation of the data and allows the biochemist to perform different operations.
 
-For instance, using the scatter plot set to show distance from active site over time (see Figure~\ref{fig:case_example1}--2) immediately revealed that the ligand was actually near the protein surface (represented by high peaks) few additional times during this part of the simulation.
+For instance, using the scatter plot set to show distance from active site over time (see Figure~\ref{fig:case_example1} -- top) immediately revealed that the ligand was actually near the protein surface (represented by high peaks) few additional times during this part of the simulation.
 The same behavior can be actually seen also in the simulation overview (see Figure~\ref{fig:case_overview} -- Case~1) as slim orange lines. 
 But it is much more obvious in this scatter plot view.
-
-\begin{figure}[htb]
-	\centering
-  \includegraphics[width=0.95\linewidth]{img/case_example_1.pdf}
-  \caption{\label{fig:case_example1} {\color{red}TODO} {\color{red} tady dám nakonec asi jen ten scatter plot ne?} ... 2] scatterplot set to show distance from the active site (vertical axis) over time (horizontal asix)}
-\end{figure}
 
 Another interesting behavior which can be seen with this setup is that ligand is repeatedly traveling back and forward from the active site (lower values) to the surface (higher values) in the first (and again in the last) part of the selected interval.
 This behavior could suggests that ligand had actually problems to bind itself to the active site.
@@ -658,7 +652,7 @@ Since both scatter plots are interactively connected in real-time, the biochemis
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=0.95\linewidth]{img/case_hydro_distance.png}
-  \caption{\label{fig:case_hydro_distance} {\color{red}TODO} Top -- Hydrophobicity profile of the trajectory. Bottom -- the distance from the active site over time. As can be seen the most hydrophilic amino acids are surrounding the most distant parts of the trajectory.}
+  \caption{\label{fig:case_hydro_distance} {\color{red}TODO} Bottom -- Hydrophobicity profile of the trajectory. Top -- the distance from the active site over time. As can be seen the most hydrophilic amino acids are surrounding the most distant parts of the trajectory.}
 \end{figure} 
 
 The results among others confirmed the behavior common for most of the proteins.
