@@ -616,10 +616,10 @@ They focused on the part where the ligand traveled from the active site to the p
 The exploration of this part of the simulation allows the biochemists to closely evaluate the influence of the protein tunnel and its properties to the ligand movements.
 
 The biochemists selected the first part of the simulation consisting from circa $17.000$ time steps (see Figure~\ref{fig:case_overview}). 
-From this point the biochemists continued to more detailed exploration using brushing and linking in other three views -- namely using the 3D, scatterplot, and bar chart views (see Figure~\ref{fig:case_hydro_distance} -- top).
+From this point the biochemists continued to more detailed exploration using brushing and linking in other three views -- namely using the 3D, scatterplot, and bar chart views.
 Each of these views provides slightly different representation of the data thus allowed the biochemist to perform different operations.
 
-For instance, by using the scatterplot set to show the ligand distance from the active site over time (see Figure~\ref{fig:case_hydro_distance} -- top) we immediately revealed that the ligand was actually near to the protein surface (represented by high peaks) in few additional times during this part of the simulation.
+For instance, by using the scatterplot set to show the ligand distance from the active site over time (see Figure~\ref{fig:case_a}) we immediately revealed that the ligand was actually near to the protein surface (represented by high peaks) in few additional times during this part of the simulation.
 The same behavior can be actually observed also in the simulation overview (see Figure~\ref{fig:case_overview}) where these cases are highlighted by slim orange lines. 
 But these cases are much better visible in the scatterplot view.
 
@@ -641,36 +641,36 @@ The polarity of amino acids is closely related to their hydrophobicity -- hydrop
 The desired information can be retrieved using our exploration tool in many ways.
 Here we show one of the possible solutions used by our domain experts in the real test scenario.
 
-The biochemists first added another scatterplot showing the hydrophobicity profile along the ligand trajectory (see Figure~\ref{fig:case_hydro_distance}).
-Since both scatterplots are interactively connected in real-time, the biochemists could select the low hydrophobicity values and immediately observed at which distance they are positioned with respect to the ligand trajectory. 
+The biochemists first added another scatterplot showing the hydrophobicity profile along the ligand trajectory (see Figure~\ref{fig:case_b}).
+Since both scatterplots are interactively connected in real-time, the biochemists could select the low hydrophobicity values and immediately observe at which distance they are positioned with respect to the ligand trajectory over time  (see Figure~\ref{fig:case_a}). 
 
 \begin{figure}[htb]
 	\centering
-  \includegraphics[width=0.95\linewidth]{img/case_hydro_distance.png}
-  \caption{\label{fig:case_hydro_distance} {Top -- the distance from the active site over time. Bottom -- hydrophobicity profile of the trajectory.}}
+	\subfigure[]{\label{fig:case_a}\includegraphics[width=0.95\linewidth]{img/case_a.pdf}}
+	\subfigure[]{\label{fig:case_b}\includegraphics[width=0.95\linewidth]{img/case_b.pdf}}
+	\subfigure[]{\label{fig:case_c}\includegraphics[width=0.95\linewidth]{img/case_c.pdf}}
+	\subfigure[]{\label{fig:case_d}\includegraphics[width=0.95\linewidth]{img/case_d.pdf}}
+	\subfigure[]{\label{fig:case_e}\includegraphics[width=0.95\linewidth]{img/case_e.pdf}}
+  
+  
+  
+  \caption{
+  {\color{red} TODO}
+  \subref{fig:case_a},\subref{fig:case_e}~Distance from the active site over time. 
+  \subref{fig:case_b}~Hydrophobicity profile of the trajectory over time.
+  \subref{fig:case_c},\subref{fig:case_d}~Hydrophobicity profile of the trajectory with respect to the distance.
+  }
 \end{figure} 
 
 The results confirmed the behavior common for most of the proteins, namely the fact that the part of the trajectory in greater distance from the active site (i.e., nearby the surface) is surrounded mostly by hydrophilic amino acids.
 On the other hand, when the ligand reaches the inner part of the protein, it is surrounded by highly hydrophobic amino acids.
 
-However, as can be seen in the bottom part of Figure~\ref{fig:case_hydro_distance}, there are few amino acids that are actually hydrophilic but located in the close vicinity to the active site. 
-In order to easily pinpoint these specific amino acids, the biochemists set the scatterplot to visualize the exact relationship between the distance and hydrophobicity (see Figure~\ref{fig:case_hydro_distance_2} -- bottom).
-By creating the selection in this view, the biochemists were able to easily pinpoint the part of the simulation closer to the active site which contained the hydrophilic amino acids (see Figure~\ref{fig:case_hydro_distance_2} -- top).
-
-\begin{figure}[htb]
-	\centering
-  \includegraphics[width=0.95\linewidth]{img/case_hydro_distance_2.png}
-  \caption{\label{fig:case_hydro_distance_2} {\color{red}TODO}}
-\end{figure}
-
-\begin{figure}[htb]
-	\centering
-  \includegraphics[width=0.95\linewidth]{img/case_hydro_distance_2_orig.png}
-  \caption{\label{fig:case_hydro_distance_3} {\color{red}TODO} mam ještě aj tenhle ale nevím zda ho použít -- to je ta prvni selekce?}
-\end{figure}
+However, as can be seen in Figure~\ref{fig:case_a}, there are few amino acids that are actually hydrophilic but located in the close vicinity to the active site. 
+In order to easily pinpoint these specific amino acids, the biochemists set the scatterplot to visualize the exact relationship between the distance and hydrophobicity (see Figure~\ref{fig:case_c}).
+By creating the selection in this view, the biochemists were able to easily pinpoint the part of the simulation closer to the active site which contained the hydrophilic amino acids (see Figure~\ref{fig:case_d}).
 
 As the next step, the biochemists were interested in seeing which amino acids are actually responsible for the described behavior.
-For this reason they utilized the bar chart view containing the amino acid graph (see Figure~\ref{case_hydro_vs_dist_bar}).
+For this reason they utilized the bar chart view containing the amino acid graph (see Figure~\ref{fig:case_hydro_vs_dist_bar}).
 
 \begin{figure}[htb]
 	\centering
@@ -684,21 +684,15 @@ Even though the amino acid view contained the list of all amino acids surroundin
 This was enabled thanks to the ability of the view to color individual amino acids based on their properties. 
 Here the biochemists selected the green amino acids (asparagine with ID 38 and aspartic acid with ID 103). 
 As can be seen in Figure~\ref{fig:case_hydro_vs_dist_3d} the selected amino acids exactly correspond to the estimated active site in the protein.
+This was also confirmed by the bar chart representation in Figure~\ref{fig:case_hydro_vs_dist_bar} where the majority of bars have blue color which corresponds to the closeness of the ligand to the active site.
+
 
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=0.95\linewidth]{img/case_hydro_vs_dist_3d.png}
-  \caption{\label{fig:case_hydro_vs_dist_3d} {\color{red}TODO} než se zeptaš, SS jsou dodrbané, musím opravit :D}
-\end{figure}
+  \caption{\label{fig:case_hydro_vs_dist_3d} {\color{red}TODO}}
+\end{figure} 
 
-In the last step the biochemists went back to the bar chart, lowered the aggregation level and selected all bar charts containing the two hydrophobic amino acids (see Figure~\ref{fig:case_hydro_vs_dist_residues_selected}). 
-{\color{red}} I thought/hoped, that this would clearly show, that these two AA are involved in the "not being able to bind" section (\ie where the high peaks are) and hence prove my theory stated at the begining, but this clearly have not  happen so, what next?.
-
-\begin{figure}[htb]
-	\centering
-  \includegraphics[width=0.95\linewidth]{img/case_hydro_vs_dist_residues_selected.png}
-  \caption{\label{fig:case_hydro_vs_dist_residues_selected} {\color{red}TODO}}
-\end{figure}
 
 
 %This allows them to closely evaluate the influence of the protein tunnel and its properties to the ligand movements. 
