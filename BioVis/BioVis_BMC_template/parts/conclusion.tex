@@ -8,3 +8,7 @@ The biochemist is further enabled to explore the spacial information contained w
 The user can study the whole portion of the trajectory as well as only its important spots by visualizing selections made in 2D views.
 Further, the visual analysis of a ligand movement in 3D view is enhanced by employing automatic and/or manual simplification of the trajectory.
 Finally, the selection and brushing of the ligand attributes is linked among barchart view and all scatter plot views which allows detailed control over explored data including taking into account surrounding amino acids.
+
+As a future work, we plan to extend the trajectory simplification method to employ caching of simplified trajectory also when the user decreases the simplicity of some part of the simplified trajectory.
+Although, we did not observe in our experiments any chemically irrelevant behaviour when simplifying the trajectory, we plan to employ the information about void space described by tunnels to ensure that the simplified trajectory passes through the void space.
+Last but not least, we plan to redesign the distance ligand attribute such that the ligand distance to the active is computed along the void path to the active site.
