@@ -44,6 +44,7 @@
 \usepackage{algorithmicx}
 \usepackage{algpseudocode}
 \usepackage{xspace}
+\usepackage{subfigure}
 \usepackage{amsfonts}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -593,6 +594,8 @@ Figure \ref{fig:scatterplot} shows Scatterplot Matrix for a sequence of $500$ ti
 
 \subsection*{Analysis Procedure - BK, JP, JB}
 
+{\color{red}\textbf{Odtud na to nešahej :D}}
+
 \begin{figure*}[htb]
 	\centering
   \includegraphics[width=0.95\textwidth]{img/case_overview.pdf}
@@ -622,23 +625,15 @@ Exploration of these two parts of the simulation allows the biochemist to closel
 
 \todo{tohle možná patří spíš do popsiu toho overview jako takového v předchozích sekcích - až to tam teda  někdo dopíše :D}In order to explore the individual parts of the simulation in more details our tool provides a brushing tool that allows to draw a rectangle over the desired part of the simulation in simulation overview and the corresponding time steps are then selected and used for further exploration.
 
-
-
 \subsubsection{Case 1 - ligand traveling from the active site to the protein surface}
 \label{sec:case1}
-For the first case the biochemist selected the first part of the simulation consisting from circa 18ca000 time steps (see Figure~\ref{fig:case_overview} -- Case~1). 
+For the first case the biochemist selected the first part of the simulation consisting from circa 17000 time steps (see Figure~\ref{fig:case_overview} -- Case~1). 
 From this point the biochemist can continue in more detailed exploration using bruising and linking technique inside other three views -- namely using the 3D, scatter plot and bar chart views (see Figure~\ref{fig:case_example1}).
-Each of this view provides slightly different representation of the data and allows the biochemist to perform different operations. 
+Each of this view provides slightly different representation of the data and allows the biochemist to perform different operations.
 
 For instance, using the scatter plot set to show distance from active site over time (see Figure~\ref{fig:case_example1}--2) immediately revealed that the ligand was actually near the protein surface (represented by high peaks) few additional times during this part of the simulation.
-
-
 The same behavior can be actually seen also in the simulation overview (see Figure~\ref{fig:case_overview} -- Case~1) as slim orange lines. 
-But it is much more obvious in the scatter plot view.
-Moreover, the scatter plot view enables also to select these time steps (or the opposite) for future exploration in much more convenient way. 
-
-Another interesting behavior can be seen with the same setup (see Figure~\ref{fig:case_example1}--2) is that the movement of the ligand from active site (lower values -- valleys) to the surface (higher values -- peaks) and back always happens in relatively short period of time. 
-{\color{red}While there is a huge part (in the middle) where the ligand is actually stuck oscillating nearby the active site.}
+But it is much more obvious in this scatter plot view.
 
 \begin{figure}[htb]
 	\centering
@@ -646,16 +641,87 @@ Another interesting behavior can be seen with the same setup (see Figure~\ref{fi
   \caption{\label{fig:case_example1} {\color{red}TODO} ... 2] scatterplot set to show distance from the active site (vertical axis) over time (horizontal asix)}
 \end{figure}
 
-Another information can be obtained when we add additional scatter plot with information about hydrophobicity profile along the ligand trajectory (see Figure~\ref{fig:case_hydro_distance}). 
-Since both scatter plots are interactively connected, the biochemist could select the low hydrophobicity values and immediately observed at which distance they are presented with respect to the ligand trajectory. 
-The results confirmed the behavior common for most of the proteins.
-Namely the fact that the part of the trajectory in greater distance from the active site (\ie nearby surface) is surrounded by hydrofilic amino acids while when the ligand reaches the core of the protein it is surrounded by highly hydrophobic amino acid.
+Another interesting behavior which can be seen with this setup is that ligand is repeatedly traveling back and forward from the active site (lower values) to the surface (higher values) in the first (and again in the last) part of the selected interval.
+This behavior could suggests that ligand had actually problems to bind itself to the active site.
+
+ 
+ 
+%{\color{red}While there is a huge part (in the middle) where the ligand is actually stuck oscillating nearby the active site.}
+
+%Moreover, the scatter plot view enables also to select these time steps (or the opposite) for future exploration in much more convenient way. 
+
+When evaluating the reactivity between the ligand and protein active site it is important to determine the exact amino acids that interact with the ligand. 
+\todo{{\color{black}tohle mám z nějaké stránky - je to třeba přepsat bo copy paste http://ibguides.com/biology/notes/proteins-hl}}{\color{green}If the amino acids in the active site of the protein are non-polar then it makes this active site specific to a non-polar substance. 
+On the other hand, if the active site is made up of polar amino acids then the active site is specific to a polar substance.} 
+Therefore, the biochemist were interested in seeing whether there are some polar amino acids inside the active site.
+The polarity of amino acids is closely related to the hydrophobicity -- hydrophobic amino acids are non-polar while hydrophilic amino acids are polar. 
+
+The desired information can be retrieved using our exploration tool in many ways.
+Here we show one of the possible solutions used by our domain experts in the real test scenario \todo{já skončím v pekle}.
+
+The biochemist first added another scatter plot showing the hydrophobicity profile along the ligand trajectory (see Figure~\ref{fig:case_hydro_distance}).
+Since both scatter plots are interactively connected in real-time, the biochemist could select the low hydrophobicity values and immediately observed at which distance they are presented with respect to the ligand trajectory. 
 
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=0.95\linewidth]{img/case_hydro_distance.png}
   \caption{\label{fig:case_hydro_distance} {\color{red}TODO} Top -- Hydrophobicity profile of the trajectory. Bottom -- the distance from the active site over time. As can be seen the most hydrophilic amino acids are surrounding the most distant parts of the trajectory.}
+\end{figure} 
+
+The results among others confirmed the behavior common for most of the proteins.
+Namely the fact that the part of the trajectory in greater distance from the active site (\ie nearby surface) is surrounded mostly by hydrofilic amino acids while when the ligand reaches the core of the protein it is surrounded by highly hydrophobic amino acid.
+
+However, as can be seen in the bottom part of Figure~\ref{fig:case_hydro_distance} there are few amino acids that are actually hydrophilic but located in the close vicinity to the active site. 
+In order to easily exactly pinpoint these specific amino acids  the biochemist set the scatter plot to visualize the exact relation ship between the distance and hydrophobicity (see Figure~\ref{fig:case_hydro_distance_2} -- bottom).
+By creating selection in this view, the biochemist were able to easily pinpoint the part of the simulation closer to the active site while containing the hydrophilic amino acids (see Figure~\ref{fig:case_hydro_distance_2} -- top).
+
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=0.95\linewidth]{img/case_hydro_distance_2.png}
+  \caption{\label{fig:case_hydro_distance_2} {\color{red}TODO} možná přehodit top - bottom ne?}
 \end{figure}
+
+As the next step, the biochemist were interested in seeing what amino acids are actually responsible for the described behavior.
+For this reason they utilized the bar chart view containing the amino acid graph (see Figure~\ref{case_hydro_vs_dist_bar}).
+
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=0.95\linewidth]{img/case_hydro_vs_dist_bar.png}
+  \caption{\label{fig:case_hydro_vs_dist_bar} {\color{red}TODO}}
+\end{figure}
+
+
+
+
+In order to easily see required data they confine the view only to selected time steps and set high level of aggregation (each bar contains about 20 time steps).
+Even though the amino acids view contains list of all amino acids surrounding the ligand in given time steps it was relatively easy to spot the hydrophobic ones due to the ability of the view to color individual amino acids based on their properties. \todo{moc dlouha věta, ale Bára to určitě poladí, viď :)}
+Here the biochemist simply selected the green amino acids (N38 and D103). \todo{tady mě ještě napadlo, protože to vypadá, blbě, když tam není žádná zelená AA v části rozsahu, že bych to nemazal, ale spíš popsal, že ty dvě další jsou tam způsobené nepřesností výběru na scatterplotu, kde mám 17000 bodů a můžu to ještě upravit tady v barchartech - další plus pro ně} 
+As can be seen in Figure~\ref{fig:case_hydro_vs_dist_3d} the selected amino acids exactly corresponds to the estimated active site in the protein.\todo{tenhle zavěr bude chtít taky asi tady polatid}
+
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=0.95\linewidth]{img/case_hydro_vs_dist_3d.png}
+  \caption{\label{fig:case_hydro_vs_dist_3d} {\color{red}TODO} 3d dodam}
+\end{figure}
+
+ 
+
+
+\vspace{5mm}\noindent\textbf{Detailed evaluation of the overall movements}
+
+
+
+
+
+
+
+
+
+\vspace{5mm}\noindent\textbf{Hydrophobicity profile evaluation}
+
+
+
+
 
 
 
