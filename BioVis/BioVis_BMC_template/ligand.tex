@@ -505,7 +505,7 @@ This is very useful in cases when the ligand got stuck and this was not caused b
 This attribute is calculated as the average value from all ligand-lining amino acids when the lining distance is taken as 2 \AA.
 
 \item{\textbf{Charge profile}} has a very similar purpose as the hydrophobicity profile.
-It conveys the information about another significant physico-chemical parameter, atom charge, calculated for each atom in the distance of 2 \AA from the ligand and averaged.
+It conveys the information about another significant physico-chemical parameter, atom partial \todo{pridal jsem partial} charge, calculated for each atom in the distance of 2 \AA from the ligand and averaged.
 
 \item \textbf{Straightness} describes whether the movement of the ligand was straight, i.e., it moved significantly in some direction, or if its movement was rather random.
 The straightness is a continuous measure and we use a neighborhood of size $2n + 1$ to compute it.
@@ -623,7 +623,7 @@ Exploration of these two parts of the simulation allows the biochemist to closel
 \subsubsection{Case 1 - ligand traveling from the active site to the protein surface}
 \label{sec:case1}
 For the first case the biochemist selected the first part of the simulation consisting from circa 17000 time steps (see Figure~\ref{fig:case_overview} -- Case~1). 
-From this point the biochemist can continue in more detailed exploration using bruising and linking technique inside other three views -- namely using the 3D, scatter plot and bar chart views (see Figure~\ref{fig:case_example1}).
+From this point the biochemist can continue in more detailed exploration using bruising and linking techniques inside other three views -- namely using the 3D, scatter plot, and bar chart views (see Figure~\ref{fig:case_example1}).
 Each of this view provides slightly different representation of the data and allows the biochemist to perform different operations.
 
 For instance, using the scatter plot set to show distance from active site over time (see Figure~\ref{fig:case_example1}--2) immediately revealed that the ligand was actually near the protein surface (represented by high peaks) few additional times during this part of the simulation.
@@ -633,7 +633,7 @@ But it is much more obvious in this scatter plot view.
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=0.95\linewidth]{img/case_example_1.pdf}
-  \caption{\label{fig:case_example1} {\color{red}TODO} ... 2] scatterplot set to show distance from the active site (vertical axis) over time (horizontal asix)}
+  \caption{\label{fig:case_example1} {\color{red}TODO} {\color{red} tady dám nakonec asi jen ten scatter plot ne?} ... 2] scatterplot set to show distance from the active site (vertical axis) over time (horizontal asix)}
 \end{figure}
 
 Another interesting behavior which can be seen with this setup is that ligand is repeatedly traveling back and forward from the active site (lower values) to the surface (higher values) in the first (and again in the last) part of the selected interval.
@@ -649,7 +649,7 @@ When evaluating the reactivity between the ligand and protein active site it is 
 \todo{{\color{black}tohle mám z nějaké stránky - je to třeba přepsat bo copy paste http://ibguides.com/biology/notes/proteins-hl}}{\color{green}If the amino acids in the active site of the protein are non-polar then it makes this active site specific to a non-polar substance. 
 On the other hand, if the active site is made up of polar amino acids then the active site is specific to a polar substance.} 
 Therefore, the biochemist were interested in seeing whether there are some polar amino acids inside the active site.
-The polarity of amino acids is closely related to the hydrophobicity -- hydrophobic amino acids are non-polar while hydrophilic amino acids are polar. 
+Note that the polarity of amino acids is closely related to their hydrophobicity -- hydrophobic amino acids are non-polar while hydrophilic amino acids are polar. 
 
 The desired information can be retrieved using our exploration tool in many ways.
 Here we show one of the possible solutions used by our domain experts in the real test scenario \todo{já skončím v pekle}.
