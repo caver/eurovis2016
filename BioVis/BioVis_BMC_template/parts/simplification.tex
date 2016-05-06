@@ -18,20 +18,21 @@ In fact, the automatic simplification can be viewed as an iterative application 
 
 \begin{algorithm}
   \begin{algorithmic}[1]
-	  \Require $T_{in}$ --- trajectory, $S$ --- simplification
+	  \Require $T_{in}$ --- trajectory, $I$ --- simplification interval
 	  \Ensure $T_{out}$ --- simplified trajectory
-		\Procedure{Simplify}{$T_{in}, S$}
+		\Procedure{Simplify}{$T_{in}, I$}
 			\State $(T', S') \gets$ \Call{CacheLoad}{$ $} \Comment{$S'$ --- previous simplification}
+			\State $S \gets$ \Call{Update}{$S', I$}
 			\State
-			\If{\Call{IsDiffIncremental}{$S, S'$}}
-			  \State $\Delta I \gets$ \Call{Diff}{$S, S'$}
-				\State $T_{out} \gets$ \Call{SavitzkyGolay}{$T', \Delta I$}
+			\If{\Call{IsIncremental}{$S, S'$}}
+			  %\State $\Delta I \gets$ \Call{Diff}{$S, S'$}
+				\State $T_{out} \gets$ \Call{SavitzkyGolay}{$T', I$}
 			\Else %\Comment{compute from scratch}
 			  \State $\mathcal{L} \gets$ \Call{ByLevels}{$S$} \Comment{$\mathcal{L}$ --- sets of complex intervals}
 				\State $T_{out} \gets T_{in}$
-				\ForAll {$L \in \mathcal{L}$} \Comment{in asc. order by $level(L)$}
-				  \ForAll {$\Delta I \in L$}
-					  \State $T_{out} \gets$ \Call{SavitzkyGolay}{$T_{out}, \Delta I$}
+				\ForAll{$L \in \mathcal{L}$} \Comment{in asc. order by $level(L)$}
+				  \ForAll{$I_L \in L$}
+					  \State $T_{out} \gets$ \Call{SavitzkyGolay}{$T_{out}, I_L$}
 					\EndFor
 				\EndFor
 			\EndIf
@@ -44,20 +45,30 @@ In fact, the automatic simplification can be viewed as an iterative application 
   \label{alg:simplify}
 \end{algorithm}
 
+\subsubsection*{Manual Simplification}
+
 First, we will describe the algorithm of the manual trajectory simplification (see Algorithm~\ref{alg:simplify}).
-More precisely, $S$ is a list of consecutive intervals that span the whole trajectory.
-Each interval in $S$ is assigned with a simplification level and as such describes amount of simplification of a respective part of $T_{in}$.
+The input of the algorithm consist of a trajectory $T_{in}$ and an interval $I$ which denotes a part where the trajectory will be simplified.
+%a data structure describing the simplification ($S$).
+%More precisely, $S$ is a list of consecutive intervals that span the whole trajectory.
+%Each interval in $S$ is assigned with a simplification level and as such describes amount of simplification of a respective part of $T_{in}$.
+%This representation enables simplification of different parts of $T_{in}$ using different level of detail.
+As a first step, the algorithm retrieves from a cache the current visualized trajectory $T'$ together with its simplification $S'$.
+Structure $S'$ is a list of consecutive intervals that span the whole trajectory.
+Each interval in $S'$ is assigned with a simplification level and as such describes the amount of simplification of a respective part of $T_{in}$.
 This representation enables simplification of different parts of $T_{in}$ using different level of detail.
-As a first step, the algorithm retrieves from a cache the current visualized trajectory ($T'$) together with its simplification ($S'$).
+In the next step, updated simplification $S$ is obtained by applying $I$ to $S'$.
 Then, it is decided whether $T'$ can be incrementally updated to obtain $T_{out}$.
 %If so, an interval $\Delta I$ which updates $S'$ to $S$ is obtained and the current visualized trajectory $T'$ is simplified on $\Delta I$ resulting in $T_{out}$.
-If the level of simplification of $T'$ at the updated interval $\Delta I$ is lower than the desired level of simplification, the current visualized trajectory $T'$ is simplified on $\Delta I$ resulting in $T_{out}$.
+This is true when the level of simplification of $T'$ at the updated interval $I$ is lower than the desired level of simplification.
+In this case, the current visualized trajectory $T'$ is simplified on $I$ resulting in $T_{out}$.
+%a difference of $S$ and $S'$ results in a single interval
 Otherwise, the visualized trajectory $T'$ cannot be used and the simplified trajectory has to be computed from scratch using $T_{in}$.
 This case typically emerges when a user decides to lower the amount of simplification of some part of the trajectory.
 The computation then proceeds as follows.
 A set $\mathcal{L}$ containing sets of intervals with same simplification level is computed.
 Then, we iterate through $\mathcal{L}$ in ascending order by level of simplification.
-In each iteration, we have a set of intervals $L \in \mathcal{L}$ and we apply the simplification on all $\Delta I \in L$ to $T_{out}$.
+In each iteration, we have a set of intervals $L \in \mathcal{L}$ and we apply the simplification on all $I_L \in L$ to $T_{out}$.
 In both cases, we employ Savitzky-Golay smoothing method~\cite{savitzky1964smoothing} to simplify the trajectory.
 As a last step, we store the simplified trajectory to a cache.
 The caching is employed to primarily improve performance of automatic simplification.
@@ -67,19 +78,18 @@ Moreover, the performance of manual simplification is also enhanced, for example
   \begin{algorithmic}[1]
 	  \Require $T_{in}$ --- trajectory, $\nu$ --- complexity neighborhood, $\tau$ --- complexity threshold, $\epsilon$ --- improvement threshold
 	  \Ensure $T_{out}$ --- simplified trajectory
-		\Procedure{AutoSimplify}{$T, \nu, \tau, \epsilon$}
+		\Procedure{AutoSimplify}{$T_{in}, \nu, \tau, \epsilon$}
 			\State $C \gets$ \Call{Interval}{$T_{in}$} \Comment{$C$ --- complex intervals}
 			\State $c(x) \gets$ \Call{Complexity}{$T_{in}, \nu$}
 			\State
-			\State $S \gets$ \Call{Empty}{$T_{in}$} \Comment{$S$ --- simplification}
+			%\State $S \gets$ \Call{Empty}{$T_{in}$} \Comment{$S$ --- simplification}
 			\State $T_{out} \gets T_{in}$
 			\Repeat
 			  \State $P \gets$ \Call{FindSimplePoints}{$c, \tau$}
 				\State $C \gets$ \Call{RemoveSimplePoints}{$C, P$}
 			  \State
 			  \ForAll{$I \in C$} %\Comment{$I$ --- complex interval}
-				  \State $S \gets$ \Call{Update}{$S, I$}
-					\State $T_{out} \gets$ \Call{Simplify}{$T_{out}, S$}
+					\State $T_{out} \gets$ \Call{Simplify}{$T_{out}, I$}
 			  \EndFor
 				\State
 				\State $c'(x) \gets c(x)$ %\Comment{$c'(x)$ --- previous complexity}
@@ -95,6 +105,8 @@ Moreover, the performance of manual simplification is also enhanced, for example
 	\caption{Automatic trajectory simplification}
   \label{alg:auto-simplify}
 \end{algorithm}
+
+\subsubsection*{Automatic Simplification}
 
 The automatic algorithm (see Algorithm~\ref{alg:auto-simplify}) is iterative and it employs the manual simplification in its iterations.
 Furthermore, it is based on an idea to simplify only parts of the trajectory that are still complex.
