@@ -460,7 +460,7 @@ The remaining part of this section describes these attributes in detail, along w
 It comes from the fact that if the ligand got stuck in some place, it means that there was some obstacle (geometric, physico-chemical, or combined) which prevented the ligand to pass towards the active site.
 The biochemists are highly interested in these obstacles and want to explore them in more detail in order to reveal the reason of this problem and possibly propose a replacement (mutation) of some amino acids surrounding this problematic spot.
 We consider the ligand to be stuck if it oscillates around a specific place in the protein. %(w.r.t. the active site)
-To estimate the stuckness, we measure how much was the movement of the ligand straight, i.e., whether it moved significantly in some direction or its movement was rather random.
+To estimate the stuckness, we measure how straight the movement of the ligand was, i.e., whether it moved significantly in some direction or its movement was rather random.
 The stuckness is estimated in a neighborhood of $2n + 1$ consecutive ligand positions (w.r.t. time).
 The size of the neighborhood $n$ can specified by the user.
 For a set of ligand positions $P$ we define the stuckness as:
@@ -470,9 +470,10 @@ For a set of ligand positions $P$ we define the stuckness as:
 \end{equation}
 where $P(x)$ is the position of the ligand in snapshot $x$ and $d(x, y)$ is the Euclidean distance of $x, y \in \mathbb{R}^3$.
 To be precise, at the beginning (or at the end) of the trajectory, we shrink the neighborhood from the left (or right) side.
-Furthermore, we set $n = 4$ by default as this value was obtained experimentally.
+Furthermore, we set $n = 4$ by default.
+This value was obtained experimentally.
 
-\paragraph{\textbf{Distance}} of the ligand from the active site provides the biochemists with the information whether some observed behavior occurred in a vicinity of the active site, the surface, or somewhere between. 
+\paragraph{\textbf{Distance}} of the ligand from the active site provides the biochemists with the information whether some observed behavior occurred in a vicinity of the active site, the surface, or somewhere in between. 
 This can be very helpful for instance when we want to mutate some amino acids along the trajectory in order to remove the stuckness of the ligand in that area. 
 Therefore, this attribute is naturally connected with the ligand stuckness.
 In these cases it is essential to see also where exactly the unwanted behavior of ligand happened.
@@ -486,8 +487,8 @@ Therefore, biochemists want to distinguish between intervals where the ligand wa
 To compute the direction we employ the \textit{distance} attribute such that we evaluate whether the distance increases between two subsequent time steps, when moving towards the active site, or decreases, when moving in the opposite direction.
 
 \paragraph{\textbf{Amount of free space}} surrounding the ligand can help the biochemists to understand why the ligand in some places got stuck.
-In such cases there was not enough free space for the passage of the ligand or the ligand was repelled by some amino acid with incompatible physico-chemical properties.
-the amount of free space around the ligand can be obtained in two ways.
+In such cases there was not enough free space for the passage of the ligand or the ligand was repelled by some amino acid due to incompatible physico-chemical properties.
+The amount of free space around the ligand can be obtained in two ways.
 When the user has the information about tunnels (e.g., calculated by CAVER tool~\cite{Chovancova2012}), we can use it for the assessment of the free space around the ligand.
 We take the tunnel in the corresponding time step and search for its sphere in which the ligand is positioned. 
 The radius of this sphere is then taken as the descriptor of the free space.
@@ -659,7 +660,7 @@ Since both scatterplots are interactively connected in real-time, the biochemist
   }
 \end{figure} 
 
-The results confirmed the behavior common for most of the proteins, namely the fact that the part of the trajectory in greater distance from the active site (i.e., nearby the surface) is surrounded mostly by hydrophilic amino acids.
+The results confirmed the behavior common for most of the proteins, namely the fact that the part of the trajectory in greater distance from the active site (i.e., near to the surface) is surrounded mostly by hydrophilic amino acids.
 On the other hand, when the ligand reaches the inner part of the protein, it is surrounded by highly hydrophobic amino acids.
 
 However, as can be seen in Figure~\ref{fig:case_a}, there are few amino acids that are actually hydrophilic but located in the close vicinity to the active site. 
