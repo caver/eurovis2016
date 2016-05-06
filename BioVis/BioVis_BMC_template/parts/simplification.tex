@@ -1,11 +1,19 @@
-Visualization of ligand movement in 3D space can provide useful information to the biochemists.
-However, when displaying the ligand trajectory as is, e.g., using line strip of consecutive ligand positions, the visualization becomes crowded even when analyzing only hundreds of snapshots (see Figure \textcolor{red}{???}).
-Therefore, we decided to provide an option to simplify the original trajectory data and to visualize the simplified trajectory.
-In this manner, we enable the users to deduce the information about ligand movement directly from 3D visualization.
+When visualizing the ligand trajectory as is, e.g., using line strip of consecutive ligand positions, the visualization becomes crowded even when analyzing only hundreds of snapshots (see Figure~\ref{fig:crowded}).
+Therefore, we decided to simplify the original trajectory data and to visualize the simplified trajectory.
+In this manner, we enable the user to deduce information about ligand movement directly from 3D visualization.
 
-Our tool enables two types of ligand trajectory simplification: i) automatic and ii) manual.
-The automatic simplification is applied to the whole original trajectory, while the manual one enables fine control over the level of simplification of parts of the trajectory that are of their interest.
-In fact, the automatic simplification can be viewed as an iterative application of the manual simplification\textcolor[rgb]{1,0,0}{, since its design was aligned with the workflow of a biochemist.}
+\begin{figure}
+	\includegraphics[width=0.95\linewidth]{img/crowded-combined.png}
+\caption{Visualization of 800 snapshots of a ligand trajectory using line strip.
+Visualization of the original trajectory is crowded (left).
+On the other hand, visualization of the simplified trajectory clearly reveals its possible important parts (right).
+The trajectory is colored by time from beginning (gray) towards its end (orange).}
+\label{fig:crowded}
+\end{figure}
+
+Our tool enables for two types of ligand trajectory simplification: i) automatic and ii) manual.
+The automatic simplification is supposed to be applied to whole original trajectory, while the manual one enables users to fine control the level of simplification of parts of the trajectory that are of their interest.
+In fact, the automatic simplification can be viewed as an iterative application of the manual simplification, since its design was aligned with the workflow of a biochemist.
 
 \begin{algorithm}
   \begin{algorithmic}[1]
@@ -94,13 +102,23 @@ The automatic algorithm (see Algorithm~\ref{alg:auto-simplify}) is iterative and
 Furthermore, it is based on an idea to simplify only parts of the trajectory that are still complex.
 The algorithm starts with considering the whole trajectory as complex, i.e., set of complex intervals $C$ is set to the interval spanning the $T_{in}$.
 Then, complexity of $T_{in}$ is evaluated in all of its points.
-The complexity $c(x)$ is defined as (see Figure~\ref{fig:complexity}):
+The complexity $c(x)$ in point $x$ is defined as (see Figure~\ref{fig:complexity}):
 \begin{equation}
-  c(x) = \sum_{(u, v) \in loc(T, x, \nu)}{(|u| + |v|)^2 \mathrm{acos}(\frac{u \cdot v}{|u| \cdot |v|})},
+  c(x) = \sum_{(u, v) \in N(T, x, \nu)}{(|u| + |v|)^2 \alpha(u, v)}, % \mathrm{acos}(\frac{u \cdot v}{|u| \cdot |v|})
 \label{eq:complexity}
 \end{equation}
-where $loc(T, x, \nu)$ is a set of tuples of consecutive segments of trajectory $T$ lying in the neighborhood of $x$.
+where $N(T, x, \nu)$ is a set of consecutive tuples of segments of a trajectory $T$ lying in the neighborhood of $x$ and $\alpha(u, v)$ is angle between segments $u$ and $v$.
 The neighborhood of $x$ contains all points $y \in T$ such that $d(x, y) < \nu$ where $d(x, y)$ is distance along $T$.
+We evaluate the complexity in a neighborhood in order to take into account more global shape of the trajectory.
+
+\begin{figure}
+	\includegraphics[width=0.95\linewidth]{img/complexity.pdf}
+\caption{Evaluation of complexity of a trajectory $T$ in point $x$.
+The complexity $c(x)$ is contributed to by tupples $(u, v)$, \ie their angles ($\alpha$), and $(v, w)$ as the segments $u$, $v$ and $w$ lie in the neighborhood of $x$ (red).
+The neighborhood of $x$ contains all points that are closer (along $T$) to $x$ then $\nu$.}
+\label{fig:complexity}
+\end{figure}
+
 Further, simplification $S$ is set to empty at the beginning and the resulting trajectory $T_{out}$ is set to $T_{in}$.
 The iterative simplification then proceeds as follows.
 First, simple points $P$ are found by thresholding $c(x)$ by $\tau$.
