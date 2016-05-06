@@ -445,7 +445,7 @@ On the other hand, it also suppresses vast amount of details that are important 
 In order to preserve this information and hence allow the biochemist to explore the ligand behavior in detail we evaluate interesting geometric and physico-chemical attributes of the ligand trajectory on multiple levels. 
 These attributes are then communicated to the user in several ways (using the scatterplot matrix, the bar charts, and different coloring of the trajectory in the 3D view).
 
-Based on several discussions with the domain experts, we detected the following attributes as the most significant: "stuckness" of the ligand in one place, its distance from the active site, the direction of its movement, the amount of surrounding free space, changes of surrounding amino acids and their properties, the hydrophobicity and charge profiles of amino acids and atoms around the ligand, and trajectory straightness. 
+Based on several discussions with the domain experts, we detected the following attributes as the most significant: "stuckness" of the ligand in one place, its distance from the active site, the direction of its movement, the amount of surrounding free space, changes of surrounding amino acids and their properties, the hydrophobicity and charge profiles of amino acids and atoms around the ligand, and the speed of the ligand along the trajectory. 
 Figure~\ref{fig:attributes} aims to illustrate the individual attributes.
 
 The remaining part of this section describes these attributes in detail, along with the process of deriving these attributes from the original data, and rationalizes their usefulness.
@@ -456,31 +456,35 @@ The remaining part of this section describes these attributes in detail, along w
   \caption{\label{fig:attributes} Illustration of the attributes derived for the ligand and its trajectory. AA1-AA4 denote amino acids lining the ligand in a specific position.}
 \end{figure*}
 
-\begin{itemize}
-
-\item \textbf{Stuckness} is one of the most abstract attributes. 
-It can be easily described and estimated in relative terms. 
-We consider the ligand to be stuck if it oscillates around a specific place in the protein (w.r.t. the active site).  
-In other words, we evaluate the time for which the ligand remained close to a single spot inside the protein. 
-Since the original data are uniformly sampled (i.e., we have the information about the exact ligand position in every two femtoseconds), we can measure the distance between two subsequent time steps and thus obtain the speed of the ligand in that particular area. 
-The higher the speed, the higher the distance the ligand can travel and the less it got stuck.
-The importance of the attribute comes from the fact that if the ligand got stuck in some place, it signifies that there was some obstacle (geometric, physico-chemical, or combined) which prevented the ligand to pass towards the active site.
+\paragraph{\textbf{Stuckness}} is important attribute which comes from the fact that if the ligand got stuck in some place, it means that there was some obstacle (geometric, physico-chemical, or combined) which prevented the ligand to pass towards the active site.
 The biochemists are highly interested in these obstacles and want to explore them in more detail in order to reveal the reason of this problem and possibly propose a replacement (mutation) of some amino acids surrounding this problematic spot.
+We consider the ligand to be stuck if it oscillates around a specific place in the protein. %(w.r.t. the active site)
+To estimate the stuckness, we measure how much was the movement of the ligand straight, i.e., whether it moved significantly in some direction or its movement was rather random.
+The stuckness is estimated in a neighborhood of $2n + 1$ consecutive ligand positions (w.r.t. time).
+The size of the neighborhood $n$ can specified by the user.
+For a set of ligand positions $P$ we define the stuckness as:
+\begin{equation}
+  s(x) = \frac{\max_{\,-n \le i, j \le n} \{ d(P(x + i), P(x + j)) \}}{\sum_{-n \le i < n}{d(P(x + i), P(x + i + 1))}},
+  \label{eq:straightness}
+\end{equation}
+where $P(x)$ is position of the ligand in snapshot $x$ and $d(x, y)$ is euclidean distance of $x, y \in \mathbb{R}^3$.
+To be complete, in the beginning (or in the end) of the trajectory, we shrink the neighborhood from left (or right).
+Furthermore, we set $n = 4$ by default as this value was obtained experimentally.
 
-\item \textbf{Distance} of the ligand from the active site provides the biochemists with the information whether some observed behavior occurred in a vicinity of the active site, the surface, or somewhere between. 
+\paragraph{\textbf{Distance}} of the ligand from the active site provides the biochemists with the information whether some observed behavior occurred in a vicinity of the active site, the surface, or somewhere between. 
 This can be very helpful for instance when we want to mutate some amino acids along the trajectory in order to remove the stuckness of the ligand in that area. 
 Therefore, this attribute is naturally connected with the ligand stuckness.
 In these cases it is essential to see also where exactly the unwanted behavior of ligand happened.
-In order to evaluate the current distance of the ligand from the active site, we first extract the position of the active site in each time step. 
-Here the active site is defined by a set of surrounding amino acids and we compute the position of the active site as the center of mass of these amino acids. 
-Once the position of active site is determined, we compute its distance from the center of mass of the ligand by simple distance measurement between two points in 3D space.
-      
-\item \textbf{Direction} of the ligand movement with respect to the active site is another essential attribute. 
-During the molecular dynamics simulation the ligand can enter and exit the protein tunnel repeatedly. 
-Therefore, biochemists want to distinguish between intervals where the ligand was traveling towards the active site or in the opposite direction (i.e., towards the outer solvent). 
-To compute the direction we use the \textbf{distance} attribute and in addition we evaluate whether the distance gets higher between two subsequent time steps (when moving towards the active site) or lower (when moving in the opposite direction). 
+In order to evaluate the current distance of the ligand from the active site, we first extract the position of the active site $A(x)$ in each time step $x$. 
+Here the active site is defined by a set of surrounding amino acids and we compute the position of the active site as the center of mass of these amino acids, \ie their atoms. 
+Once $A(x)$ is determined, we compute distance of the ligand position $P(x)$ to the active site as $d_{AS}(x) = d(P(x), A(x))$ where $d(x, y)$ is again euclidean distance of $x, y \in \mathbb{R}^3$.
 
-\item \textbf{Amount of free space} surrounding the ligand can help the biochemists to understand why the ligand in some places got stuck.
+\paragraph{\textbf{Direction}} of the ligand movement with respect to the active site is another essential attribute. 
+During the MD simulation the ligand can enter and exit the protein tunnel repeatedly. 
+Therefore, biochemists want to distinguish between intervals where the ligand was traveling towards the active site or in the opposite direction (i.e., towards the outer solvent). 
+To compute the direction we employ the \textbf{distance} attribute such that we evaluate whether the distance increases between two subsequent time steps, when moving towards the active site, or decreases, when moving in the opposite direction.
+
+\paragraph{\textbf{Amount of free space}} surrounding the ligand can help the biochemists to understand why the ligand in some places got stuck.
 In such cases there was not enough free space for the passage of the ligand or the ligand was repelled by some amino acid with incompatible physico-chemical properties.
 the amount of free space around the ligand can be obtained in two ways.
 When the user has the information about tunnels (e.g., calculated by CAVER tool~\cite{Chovancova2012}), we can use it for the assessment of the free space around the ligand.
@@ -493,33 +497,26 @@ Each sphere is taken from one time step and it defines the maximum empty space s
 For each time-step we firstly retrieve ten protein atoms closest to the ligand. 
 Their mean position defines the center of the temporal tunnel sphere while the radius is determined as the minimum distance from this center to the closest protein atom.
 
-\item \textbf{Changes of amino acids and their properties} help to understand when the ligand was in contact with a specific set of amino acids and when this set changed.
+\paragraph{\textbf{Changes of amino acids and their properties}} help to understand when the ligand was in contact with a specific set of amino acids and when this set changed.
 In other words, the changes of amino acids can reveal those parts of the trajectory where the ligand significantly changed its position with respect to the protein. 
 The higher number of different amino acids surrounding the ligand between two consecutive time steps corresponds to variations inside the protein tunnel as well.
 Moreover, whether the ligand will be able to pass through the tunnel and reach the active site is highly dependent not only on the geometric properties of the tunnel but also on the physico-chemical properties of the surrounding amino acids and their atoms (e.g., hydrophobicity or electric charge).
 This attribute is tightly connected with the ligand stuckness and subsequent proposal of candidates for amino acid mutations.
 
-\item{\textbf{Hydrophobicity profile}} is related to the amino acids surrounding the ligand trajectory.
+\paragraph{\textbf{Hydrophobicity profile}} is related to the amino acids surrounding the ligand trajectory.
 It aims to add the user the information about physico-chemical property -- hydrophobicity -- of these amino acids. 
 This is very useful in cases when the ligand got stuck and this was not caused by any geometric obstacle.
 This attribute is calculated as the average value from all ligand-lining amino acids when the lining distance is taken as 2 \AA.
 
-\item{\textbf{Charge profile}} has a very similar purpose as the hydrophobicity profile.
-It conveys the information about another significant physico-chemical parameter, atom partial \todo{pridal jsem partial} charge, calculated for each atom in the distance of 2 \AA from the ligand and averaged.
+\paragraph{\textbf{Charge profile}} has a very similar purpose as the hydrophobicity profile.
+It conveys the information about another significant physico-chemical parameter, atom partial \todo{pridal jsem partial} charge, calculated for each atom in the distance of 2 \AA\ from the ligand and averaged.
 
-\item \textbf{Straightness} describes whether the movement of the ligand was straight, i.e., it moved significantly in some direction, or if its movement was rather random.
-The straightness is a continuous measure and we use a neighborhood of size $2n + 1$ to compute it.
-For a set of ligand positions $P$ we define the straightness as:
-\begin{equation}
-  s(x) = \frac{\max_{\,-n \le i, j \le n} \{ d(P(x + i), P(x + j)) \}}{\sum_{-n \le i < n}{d(P(x + i), P(x + i + 1))}},
-  \label{eq:straightness}
-\end{equation}
-where $P(x)$ is a position of the ligand in snapshot $x$ and $d(x, y)$ is euclidean distance of $x, y \in \mathbb{R}^3$.
-The size of the neighborhood $n$ can specified by the user and furthermore we set $n = 9$ by default.
-The default value was obtained experimentally.
-To be complete, in the beginning (or in the end) of the trajectory, we shrink the neighborhood from left (or right).
-
-\end{itemize}
+\paragraph{\textbf{Speed}} can be easily described and estimated in relative terms.
+%is one of the most abstract attributes. 
+%We consider the ligand to be stuck if it oscillates around a specific place in the protein (w.r.t. the active site).  
+%In other words, we evaluate the time for which the ligand remained close to a single spot inside the protein. 
+Since the original data are uniformly sampled (i.e., we have the information about the exact ligand position in every two femtoseconds), we can measure the distance between two subsequent time steps and thus obtain the speed of the ligand in that particular area.
+%The higher the speed, the higher the distance the ligand can travel and the less it got stuck.
 
 \section*{Visual Exploration}
 In this section we describe the individual views supported by our system.
