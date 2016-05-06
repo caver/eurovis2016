@@ -288,9 +288,9 @@ Using our proposed solution the users are able to distinguish between the parts 
 
 {\color{red} CHANGE
 We introduce a dedicated method for simplification of the original trajectory.
-The methods can simplify the ligand path hierarchically, thus providing several levels of detail (LOD), which can be interactively examined.
-In the most abstracted view, represented as the top-most LOD, the temporal tunnel shows only the significant shifts of the ligand towards the active site. 
-Here, the user can interactively brush time intervals, which automatically reveals and adopts the temporal tunnel to the selected interval.
+The method can simplify the ligand path hierarchically, thus providing several levels of detail (LOD), which can be interactively examined.
+\textbf{In the most abstracted view, represented as the top-most LOD, the temporal tunnel shows only the significant shifts of the ligand towards the active site. 
+Here, the user can interactively brush time intervals, which automatically reveals and adopts the temporal tunnel to the selected interval.}
 This abstracted representation, providing the brushing capabilities, is interactively linked with the 3D visualization where the 3D shape of the temporal tunnel for the given temporal window is displayed.
 Further, our tool enables to explore the amino acids surrounding the ligand along its path to the active site as well.
 
@@ -304,7 +304,7 @@ Studying the ligand transport path is tightly related to the analysis of its tra
 Thus, the first part will cover the topic related to the trajectory analysis, simplification, and visualization.
 Then the existing representations of tunnels and their surrounding amino acids will be addressed.
 
-\subsection{Trajectory Analysis, Simplification, and Visualization}
+\subsection*{Trajectory Analysis, Simplification, and Visualization}
 When searching for the most appropriate trajectory simplification method, the taxonomy of different movement patterns introduced by Dodge et al.~\cite{Dodge2008} can help to categorize the type of motion and to propose an appropriate solution for the analysis and simplification.
 Then, Andrienko et al.~\cite{andrienko2013} describe a legacy of tools and approaches to analyze trajectory data.
 With respect to the trajectory simplification, they introduce two approaches to data abstraction representing a necessary step to achieve the reduction of the data in order to achieve informative visualizations.
@@ -338,7 +338,7 @@ Kozlikova et al.~\cite{kozlikova2014vcbm} propose a way to seamlessly visualize 
 Byska et al.~\cite{byska2016} introduce an approach to interactively explore the tunnel objects in MD simulations. Similarly to our approach they visualize the time-varying tunnel as a profile graph that includes information on surrounding amino acids. Nevertheless, they focus on a single tunnel instance and do not provide the means to explore the ligand-protein interaction.
 
 %-------------------------------------------------------------------------
-\section{Problem Description and Input Data}
+\section*{Problem Description and Input Data}
 When studying long molecular dynamics simulations, the researchers have to face namely the following high-level tasks:
 \begin{itemize}
 \item Detect the part of the simulation where the ligand enters the protein and finally reaches the active site.
@@ -478,32 +478,38 @@ motivation, design
 3D, bar charts, scatterplot
 
 \subsubsection*{3D View}
+This view provides an overview of ligand trajectory in 3D.
+However, as was shown in Figure \ref{fig:lig_movement}, the ligand trajectory contains a lot of noise, due to jittery movement of ligand.
+Therefore we introduce trajectory simplification, that was described in previous chapter.
+With this function, the whole trajectory can be automatically simplified to user defined level.
+If the automatic simplification does not lead to satisfactory result, parts of the trajectory can be manually selected and further simplified.
+The trajectory is colored according to one of the geometrical and chemico-physical attributes we have described. 
 
 \subsubsection*{Barchart View}
 The Barchart View provides closer look at the ligand movement with respect to the properties of temporal tunnel.
 It consists of three parts -- Simulation Overview, The Barchart and Amino Acid Plot.
 
 The Simulation Overview is a temporal overview of the whole simulation, that serves as a navigation for closer exploration.
-It is depicted as a bar colored according to the ligand position and movement with respect to the protein surface and active site.
+It is depicted as a bar colored according to the ligand position with respect to the protein surface and active site.
 We assort the ligand movement into four categories: 
 \begin{itemize}
 \item \textbf{Outside} The ligand is moving outside of protein.
 \item \textbf{Surface} The ligand is moving alongside the protein surface.
-\item \textbf{Forward Inside} The ligand is moving within the protein, heading towards the active site.
-\item \textbf{Backward Inside} The ligand is moving within the protein, retreating from the active site.
+\item \textbf{Inside} The ligand is moving within the protein.
+\item \textbf{Active Site} The ligand is moving in close proximity to the active site.
 \end{itemize}
 This enables quick filtering of irrelevant data (e.g. part of the simulation when the ligand is moving outside the protein), as well as navigation to the potentially important parts.
 The navigation is done via selection of area of interest in the Overview Bar.
 
-The time interval selected in Simulation Overview is then displayed in The Barchart as well as Scatterplot Matrix.
-By default, each bar in The Barchart represents one time step of the simulation, though if needed (e.g. long time sequence is selected) the neighboring bars can be aggregated.
+The time interval selected in Simulation Overview is then displayed in The Barchart as well as in Scatterplot Matrix.
+By default, each bar in The Barchart represents one time step of the simulation, though if needed (e.g. if long time sequence is selected) the neighboring bars can be aggregated.
 The bars are selectable, where the selected time steps are highlighted in Scatterplot Matrix as well as in 3D View.
 The height of the bar is set to represent one of the geometrical and chemico-physical attributes described in previous section.
-The color of selected bars corresponds to the coloring of Simulation Overview, indicating the ligand movement at given time step.
+The color of selected bars corresponds to the coloring of Simulation Overview, indicating the ligand position at given time step.
 
 The information about the surrounding acids is also very crucial when exploring the ligand bottlenecks. 
 For each time step within the temporal block we compute the three closest amino acids from the ligand. 
-We provide the visual representation of this list (Fig.~\ref{fig:aacids}), where each amino acid defines one line in the list. 
+We provide the visual representation of this list (Figure ~\ref{fig:aacids}), where each amino acid defines one line in the list. 
 The line is colored with respect to a selected chemico-physical property~---~our representation supports switching between hydrophobicity, partial charges, and donors and acceptors.
 The interruption in some of these lines is caused by the fact that the given amino acid is not present around the ligand in the corresponding temporal block.
 
@@ -515,7 +521,7 @@ The interruption in some of these lines is caused by the fact that the given ami
 
 
 \subsubsection*{Scatterplot Matrix}
-For detailed analysis of geometrical and chemico-physical attributes of the ligand trajectory at given time steps, we propose Scatterplot Matrix.
+For detailed analysis of geometrical and chemico-physical attributes of the ligand trajectory at given time steps, we propose the Scatterplot Matrix.
 The axes of one scatterplot represent a pair user-selected attributes.
 Each point in the scatterplot then represents the values of these attributes at one time step.
 As a result the scatterplot can easily reveal trends and relationships between attributes.
@@ -525,8 +531,7 @@ The Sliding Window function assigns to each time step averaged value of its neig
 The size of the neighborhood is user regulated. 
 
 The plots can further be stacked, forming a matrix and thus showing relationship between multiple attributes at once.
-The stacked plots are also interactively interconnected.
-The selection in Scatterplot Matrix is interactively linked with Barchart View.
+The stacked plots are also interactively interconnected and the selection in Scatterplot Matrix is interactively linked with Barchart View and 3D View.
 
 Figure \ref{fig:scatterplot} shows Scatterplot Matrix for a sequence of $500$ time steps.
 
