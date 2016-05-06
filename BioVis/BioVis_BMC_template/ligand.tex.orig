@@ -44,8 +44,11 @@
 \usepackage{algorithmicx}
 \usepackage{algpseudocode}
 \usepackage{xspace}
+<<<<<<< HEAD
 \usepackage{subfigure}
+=======
 \usepackage{amsfonts}
+>>>>>>> 889a2abcbb045b23fcd0faf6c7a647bed60dbdeb
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                             %%
@@ -446,15 +449,10 @@ In order to preserve this information and hence allow the biochemist to explore 
 These attributes are then communicated to the user in several ways (using the scatterplot matrix, the bar charts, and different coloring of the trajectory in the 3D view).
 
 Based on several discussions with the domain experts, we detected the following attributes as the most significant: "stuckness" of the ligand in one place, its distance from the active site, the direction of its movement, the amount of surrounding free space, changes of surrounding amino acids and their properties, the hydrophobicity and charge profiles of amino acids and atoms around the ligand, and trajectory straightness. 
-Figure~\ref{fig:attributes} aims to illustrate the individual attributes.
 
 The remaining part of this section describes these attributes in detail, along with the process of deriving these attributes from the original data, and rationalizes their usefulness.
     
-\begin{figure*}[thb]
-	\centering
-  \includegraphics[width=0.95\textwidth]{img/attributes.png}
-  \caption{\label{fig:attributes} Illustration of the attributes derived for the ligand and its trajectory. AA1-AA4 denote amino acids lining the ligand in a specific position.}
-\end{figure*}
+\todo{Obrazok kde je nakresleny ligand, tunel a ilustrovane attributy by bol super!!}
 
 \begin{itemize}
 
@@ -505,9 +503,9 @@ This is very useful in cases when the ligand got stuck and this was not caused b
 This attribute is calculated as the average value from all ligand-lining amino acids when the lining distance is taken as 2 \AA.
 
 \item{\textbf{Charge profile}} has a very similar purpose as the hydrophobicity profile.
-It conveys the information about another significant physico-chemical parameter, atom partial \todo{pridal jsem partial} charge, calculated for each atom in the distance of 2 \AA from the ligand and averaged.
+It conveys the information about another significant physico-chemical parameter, atom charge, calculated for each atom in the distance of 2 \AA from the ligand and averaged.
 
-\item \textbf{Straightness} describes whether the movement of the ligand was straight, i.e., it moved significantly in some direction, or if its movement was rather random.
+\item \textbf{Straightness} describes whether the movement of a ligand was straight, \ie the ligand moved significantly in some direction, or its movement was rather random.
 The straightness is a continuous measure and we use a neighborhood of size $2n + 1$ to compute it.
 For a set of ligand positions $P$ we define the straightness as:
 \begin{equation}
@@ -522,37 +520,46 @@ To be complete, in the beginning (or in the end) of the trajectory, we shrink th
 \end{itemize}
 
 \section*{Visual Exploration}
-In this section we describe the individual views supported by our system.
-All views are interactively linked, i.e., the user can select a specific parts of the ligand trajectory and these parts are highlighted also in the remaining views.
+\todo{treba tiez popisat interakciu s kazdym view}
+\subsection*{Data Views - BK + ladies}
+motivation, design
 
-\subsubsection*{Trajectory Overview}
-This simple 1D representation helps to navigate the user to the interesting parts of the simulation.
+3D, bar charts, scatterplot
+
+\subsubsection*{3D View}
+This view provides an overview of ligand trajectory in 3D.
+However, as was shown in Figure \ref{fig:lig_movement}, the ligand trajectory contains a lot of noise, due to jittery movement of ligand.
+Therefore we introduce trajectory simplification, that was described in previous chapter.
+With this function, the whole trajectory can be automatically simplified to user defined level.
+If the automatic simplification does not lead to satisfactory result, parts of the trajectory can be manually selected and further simplified.
+The trajectory is colored according to one of the geometrical and chemico-physical attributes we have described. 
+
+\subsubsection*{Barchart View}
+The Barchart View provides closer look at the ligand movement with respect to the properties of temporal tunnel.
+It consists of three parts -- Simulation Overview, The Barchart and Amino Acid Plot.
+
+The Simulation Overview is a temporal overview of the whole simulation, that serves as a navigation for closer exploration.
 It is depicted as a bar colored according to the ligand position with respect to the protein surface and active site.
 We assort the ligand movement into four categories: 
 \begin{itemize}
-\item \textbf{Outside} -- the ligand is moving outside of protein.
-\item \textbf{Surface} -- the ligand is moving alongside the protein surface.
-\item \textbf{Inside} -- the ligand is moving within the protein.
-\item \textbf{Active Site} -- the ligand is moving in close proximity to the active site.
+\item \textbf{Outside} The ligand is moving outside of protein.
+\item \textbf{Surface} The ligand is moving alongside the protein surface.
+\item \textbf{Inside} The ligand is moving within the protein.
+\item \textbf{Active Site} The ligand is moving in close proximity to the active site.
 \end{itemize}
-This representation enables quick filtering of irrelevant data (e.g., parts of the simulation when the ligand is moving outside the protein), as well as navigation to the potentially important parts.
-The selected time interval is then displayed in the bar chart as well as in the scatterplot matrix.
+This enables quick filtering of irrelevant data (e.g. part of the simulation when the ligand is moving outside the protein), as well as navigation to the potentially important parts.
+The navigation is done via selection of area of interest in the Overview Bar.
 
-\subsubsection*{Bar Chart and Line View}
-This view provides a closer look at the ligand movement with respect to the properties of the temporal tunnel.
-It consists of two parts -- the bar chart and line representation of all amino acids lining the ligand trajectory.
+The time interval selected in Simulation Overview is then displayed in The Barchart as well as in Scatterplot Matrix.
+By default, each bar in The Barchart represents one time step of the simulation, though if needed (e.g. if long time sequence is selected) the neighboring bars can be aggregated.
+The bars are selectable, where the selected time steps are highlighted in Scatterplot Matrix as well as in 3D View.
+The height of the bar is set to represent one of the geometrical and chemico-physical attributes described in previous section.
+The color of selected bars corresponds to the coloring of Simulation Overview, indicating the ligand position at given time step.
 
-By default, each bar in the bar chart represents one time step of the simulation, though if needed (e.g., if we select long time sequence) the neighboring bars can be uniformly aggregated.
-The bars are selectable and the selected time steps are highlighted in the scatterplot matrix as well as in the 3D View.
-The height of the bar is set to represent one of the geometric or physico-chemical attributes described previously.
-The color of selected bars corresponds to the coloring of the trajectory overview, indicating the ligand position at a given time step.
-The user can visualize only the selected bars.
-When the set of selected bars is not continuous, the user is informed about it by a small wave inserted between the bars.
-
-The information about the surrounding acids is also very crucial when exploring the sites when the ligand got stuck. 
+The information about the surrounding acids is also very crucial when exploring the ligand bottlenecks. 
 For each time step within the temporal block we compute the three closest amino acids from the ligand. 
 We provide the visual representation of this list (Figure ~\ref{fig:aacids}), where each amino acid defines one line in the list. 
-The line is colored with respect to a selected physico-chemical property -- our representation supports switching between hydrophobicity, partial charges, and donors and acceptors.
+The line is colored with respect to a selected chemico-physical property~---~our representation supports switching between hydrophobicity, partial charges, and donors and acceptors.
 The interruption in some of these lines is caused by the fact that the given amino acid is not present around the ligand in the corresponding temporal block.
 
 \begin{figure}[htb]
@@ -561,36 +568,31 @@ The interruption in some of these lines is caused by the fact that the given ami
   \caption{\label{fig:aacids} Representation of amino acids surrounding the temporal tunnel and their physico-chemical properties. Coloring corresponds to a selected property, the line interruption means that this amino acid was not detected around the ligand in the corresponding temporal block.}
 \end{figure}
 
+
 \subsubsection*{Scatterplot Matrix}
-For detailed analysis of geometric and physico-chemical attributes of the ligand trajectory at given time steps we propose the scatterplot matrix.
-The axes of one scatterplot represent a pair of user-selected attributes.
+For detailed analysis of geometrical and chemico-physical attributes of the ligand trajectory at given time steps, we propose the Scatterplot Matrix.
+The axes of one scatterplot represent a pair user-selected attributes.
 Each point in the scatterplot then represents the values of these attributes at one time step.
-As a result, the scatterplot can easily reveal trends and relationships between attributes.
-Interactive manipulation with the scatterplot, such as selection, zooming, and change of displayed attributes provides an easy way for manual data filtering. 
-To eliminate the noise in the data caused by ligand jittering, we propose the \textit{sliding window} smoothing function.
-The sliding window function assigns to each time step the averaged value from its neighborhood.
-The size of the neighborhood is again regulated by the user. 
+As a result the scatterplot can easily reveal trends and relationships between attributes.
+Interactive manipulation with scatterplot, such as selection, zooming and change of displayed attributes provides easy way of manual data filtering. 
+To eliminate the noise in the data caused by ligand jittering, we propose the Sliding Window smoothing function.
+The Sliding Window function assigns to each time step averaged value of its neighborhood.
+The size of the neighborhood is user regulated. 
 
 The plots can further be stacked, forming a matrix and thus showing relationship between multiple attributes at once.
 The stacked plots are also interactively interconnected and the selection in Scatterplot Matrix is interactively linked with Barchart View and 3D View.
 
-Figure \ref{fig:scatterplot} shows the scatterplot matrix for a sequence of $500$ time steps.
+Figure \ref{fig:scatterplot} shows Scatterplot Matrix for a sequence of $500$ time steps.
 
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=0.95\linewidth]{img/scatterplot.png}
-  \caption{\label{fig:scatterplot} Scatterplot matrix depicting time vs. distance and time vs speed property before (up) and after (down) smoothing by the sliding window function.}
+  \caption{\label{fig:scatterplot} CHANGE!!! Scatterplot Matrix depicting Time vs. Distance and Time vs Speed property before (up) and after (down) smoothing by Sliding Window function.}
 \end{figure}
 
-\subsubsection*{3D View}
-This view provides an overview of the ligand trajectory in 3D.
-However, as was shown in Figure \ref{fig:lig_movement}, the ligand trajectory contains a lot of noise, due to the jittery movement of the ligand.
-Therefore, we introduced the previously described trajectory simplification.
-Using this function the whole trajectory can be automatically simplified.
-If the automatic simplification does not lead to satisfactory results, selected parts of the trajectory can be further simplified manually.
-The trajectory is colored according to one of the geometric and physico-chemical attributes. 
-
 \subsection*{Analysis Procedure - BK, JP, JB}
+
+{\color{red}\textbf{Odtud na to nešahej :D}}
 
 \begin{figure*}[htb]
 	\centering
@@ -624,12 +626,18 @@ Exploration of these two parts of the simulation allows the biochemist to closel
 \subsubsection{Case 1 - ligand traveling from the active site to the protein surface}
 \label{sec:case1}
 For the first case the biochemist selected the first part of the simulation consisting from circa 17000 time steps (see Figure~\ref{fig:case_overview} -- Case~1). 
-From this point the biochemist can continue in more detailed exploration using bruising and linking techniques inside other three views -- namely using the 3D, scatter plot, and bar chart views (see Figure~\ref{fig:case_hydro_distance} -- top).
+From this point the biochemist can continue in more detailed exploration using bruising and linking technique inside other three views -- namely using the 3D, scatter plot and bar chart views (see Figure~\ref{fig:case_example1}).
 Each of this view provides slightly different representation of the data and allows the biochemist to perform different operations.
 
-For instance, using the scatter plot set to show distance from active site over time (see Figure~\ref{fig:case_example1} -- top) immediately revealed that the ligand was actually near the protein surface (represented by high peaks) few additional times during this part of the simulation.
+For instance, using the scatter plot set to show distance from active site over time (see Figure~\ref{fig:case_example1}--2) immediately revealed that the ligand was actually near the protein surface (represented by high peaks) few additional times during this part of the simulation.
 The same behavior can be actually seen also in the simulation overview (see Figure~\ref{fig:case_overview} -- Case~1) as slim orange lines. 
 But it is much more obvious in this scatter plot view.
+
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=0.95\linewidth]{img/case_example_1.pdf}
+  \caption{\label{fig:case_example1} {\color{red}TODO} ... 2] scatterplot set to show distance from the active site (vertical axis) over time (horizontal asix)}
+\end{figure}
 
 Another interesting behavior which can be seen with this setup is that ligand is repeatedly traveling back and forward from the active site (lower values) to the surface (higher values) in the first (and again in the last) part of the selected interval.
 This behavior could suggests that ligand had actually problems to bind itself to the active site.
@@ -644,7 +652,7 @@ When evaluating the reactivity between the ligand and protein active site it is 
 \todo{{\color{black}tohle mám z nějaké stránky - je to třeba přepsat bo copy paste http://ibguides.com/biology/notes/proteins-hl}}{\color{green}If the amino acids in the active site of the protein are non-polar then it makes this active site specific to a non-polar substance. 
 On the other hand, if the active site is made up of polar amino acids then the active site is specific to a polar substance.} 
 Therefore, the biochemist were interested in seeing whether there are some polar amino acids inside the active site.
-Note that the polarity of amino acids is closely related to their hydrophobicity -- hydrophobic amino acids are non-polar while hydrophilic amino acids are polar. 
+The polarity of amino acids is closely related to the hydrophobicity -- hydrophobic amino acids are non-polar while hydrophilic amino acids are polar. 
 
 The desired information can be retrieved using our exploration tool in many ways.
 Here we show one of the possible solutions used by our domain experts in the real test scenario \todo{já skončím v pekle}.
@@ -655,7 +663,7 @@ Since both scatter plots are interactively connected in real-time, the biochemis
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=0.95\linewidth]{img/case_hydro_distance.png}
-  \caption{\label{fig:case_hydro_distance} {\color{red}TODO} Bottom -- Hydrophobicity profile of the trajectory. Top -- the distance from the active site over time. As can be seen the most hydrophilic amino acids are surrounding the most distant parts of the trajectory.}
+  \caption{\label{fig:case_hydro_distance} {\color{red}TODO} Top -- Hydrophobicity profile of the trajectory. Bottom -- the distance from the active site over time. As can be seen the most hydrophilic amino acids are surrounding the most distant parts of the trajectory.}
 \end{figure} 
 
 The results among others confirmed the behavior common for most of the proteins.
@@ -668,13 +676,7 @@ By creating selection in this view, the biochemist were able to easily pinpoint 
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=0.95\linewidth]{img/case_hydro_distance_2.png}
-  \caption{\label{fig:case_hydro_distance_2} {\color{red}TODO}}
-\end{figure}
-
-\begin{figure}[htb]
-	\centering
-  \includegraphics[width=0.95\linewidth]{img/case_hydro_distance_2_orig.png}
-  \caption{\label{fig:case_hydro_distance_2} {\color{red}TODO} mam ještě aj tenhle ale nevím zda ho použít -- to je ta prvni selekce?}
+  \caption{\label{fig:case_hydro_distance_2} {\color{red}TODO} možná přehodit top - bottom ne?}
 \end{figure}
 
 As the next step, the biochemist were interested in seeing what amino acids are actually responsible for the described behavior.
@@ -691,19 +693,30 @@ For this reason they utilized the bar chart view containing the amino acid graph
 
 In order to easily see required data they confine the view only to selected time steps and set high level of aggregation (each bar contains about 20 time steps).
 Even though the amino acids view contains list of all amino acids surrounding the ligand in given time steps it was relatively easy to spot the hydrophobic ones due to the ability of the view to color individual amino acids based on their properties. \todo{moc dlouha věta, ale Bára to určitě poladí, viď :)}
-Here the biochemist simply selected the green amino acids (N38 and D103). 
+Here the biochemist simply selected the green amino acids (N38 and D103). \todo{tady mě ještě napadlo, protože to vypadá, blbě, když tam není žádná zelená AA v části rozsahu, že bych to nemazal, ale spíš popsal, že ty dvě další jsou tam způsobené nepřesností výběru na scatterplotu, kde mám 17000 bodů a můžu to ještě upravit tady v barchartech - další plus pro ně} 
 As can be seen in Figure~\ref{fig:case_hydro_vs_dist_3d} the selected amino acids exactly corresponds to the estimated active site in the protein.\todo{tenhle zavěr bude chtít taky asi tady polatid}
 
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=0.95\linewidth]{img/case_hydro_vs_dist_3d.png}
-  \caption{\label{fig:case_hydro_vs_dist_3d} {\color{red}TODO} než se zeptaš, SS jsou dodrbané, musím opravit :D}
+  \caption{\label{fig:case_hydro_vs_dist_3d} {\color{red}TODO} 3d dodam}
 \end{figure}
 
  
-{\color{red}\textbf{Odtud na to nešahej :D}}
 
-tady bude nějaká kravina ohledně selekce AA - zatím makám na datech
+
+\vspace{5mm}\noindent\textbf{Detailed evaluation of the overall movements}
+
+
+
+
+
+
+
+
+
+\vspace{5mm}\noindent\textbf{Hydrophobicity profile evaluation}
+
 
 
 
@@ -724,7 +737,7 @@ tady bude nějaká kravina ohledně selekce AA - zatím makám na datech
 
 \subsubsection{Case 2 - ligand accessing the protein}
 \label{sec:case2}
-{\color{red} na to asi kašlu, není místo co?}
+  
 
 
 
