@@ -262,8 +262,6 @@ The process is supported by three linked views -- 3D representation of the simpl
 %% Background %%
 %%
 \section*{Background}
-TODO BK + JP (Intro + RW)
-
 The study of reaction processes between different types of molecules has been an important research problem already for decades.
 A proper understanding of the processes occurring when two or more molecules react helps in the design of new chemical matters, e.g., in drug design or protein engineering.
 Here, the researchers aim to combine a protein with a given ligand in order to design a new drug or to change protein properties and their function.
@@ -276,11 +274,20 @@ As the active site is usually buried deeply in the protein structure and thus in
 This process, called molecular docking, is very complex, lengthy, and its analysis is heavy on computational resources. 
 Therefore, researchers aim at solutions that simplify and ease the analysis for proper ligand binding.
 Currently available solutions often focus on detection of possible ligand transportation paths through the protein, called tunnels.
-These solutions are mostly based on the geometric analysis, which lead to the tunnel detection in the end, e.g., CAVER~\cite{Chovancova2012}, MOLE~\cite{Sehnal2013}, or MolAxis~\cite{Yaffe2008}.
+These solutions are mostly based on the geometric analysis, e.g., CAVER~\cite{Chovancova2012}, MOLE~\cite{Sehnal2013}, or MolAxis~\cite{Yaffe2008}.
+Figure~\ref{fig:tunnel} shows an example of small ligand passing through a tunnel computed by CAVER algorithm and visualized using CAVER Analyst~\cite{Kozlikova2014}. 
+The tunnel is colored with respect to the hydrophobicity of the surrounding amino acids and the geometric bottleneck of the tunnel is clearly visible.
+
+\begin{figure}[htb]
+	\centering
+  \includegraphics[width=1\linewidth]{img/tunnel.png}
+  \caption{\label{fig:tunnel} Small ligand (green) passing through a tunnel represented by the transparent surface. The surface encloses the available empty space along the tunnel centerline and is colored with respect to the hydrophobicity of the surrounding amino acids (hydrophobic -- red, hydrophylic -- blue, neutral -- violet). The active site is located in the left ending of the tunnel.}
+\end{figure}
+
 Other approaches, such as MoMA-LigPath~\cite{Devaurs}, aim at simulating the ligand transportation itself.
 Nevertheless, simulating the ligand docking using current computational approaches is still a challenging problem.
 There are several available variants of molecular simulation methods devised specifically to this problem. 
-Among these Steered Molecular Dynamics~\cite{Isralewitz} and Random Acceleration Molecular Dynamics~\cite{Ludemann} are able to simulate the ligand binding. 
+Among these, Steered Molecular Dynamics~\cite{Isralewitz} and Random Acceleration Molecular Dynamics~\cite{Ludemann} are able to simulate the ligand binding. 
 Such simulations produce a large amount of data containing the ligand movements that are to be explored by the domain expert.
 As the length of these simulations reaches often hundreds of thousands of time steps, it becomes impossible for the domain experts to visualize and observe the ligand movement in a frame-by-frame manner.
 Moreover, the simulation often contains movements that are irrelevant to the ligand binding.
@@ -288,29 +295,32 @@ For example, a significant portion of the simulation the ligand usually spends o
 It also often happens that the ligand enters the molecule via a wrong tunnel and is then evicted from the molecule and searches for the entrance repeatedly.
 Therefore, the "true" active site entering can be in fact captured in a smaller subset of the original sequence.
 
-In this paper, we propose a new visual analysis system that addresses the aforementioned challenges, i.e.,  the transportation of a ligand to the active site. 
+In this paper, we propose a new visual analysis system that addresses the aforementioned challenges, i.e., the transportation of a ligand to the active site. 
 We aim to provide the domain experts with a tool for intuitive and interactive exploration of already captured molecular dynamics simulation containing the process of ligand binding. 
 Using our proposed solution the users are able to distinguish between the parts of the simulation where the ligand searches for the proper path to the active site (searches the tunnel gorge or enters the wrong tunnel) and the part where the ligand finally leads to and reaches the active site.
+Furthermore, our solution introduces a method for simplification of the original scattered ligand trajectory.
+We suggest the automatic simplification of the trajectory which can be further manually adjusted, i.e., selected parts of the trajectory can be further simplified.
+So the trajectory can be simplified in a hierarchical manner and further interactively explored using the other proposed views.
+One of these views is the 3D visualization where the simplified trajectory can be displayed in the spatial context of the whole molecule.
+The trajectory can be color-coded according to different criteria and selections performed in the other views are highlighted by a thick tube.
+Another available view is the scatterplot matrix which helps to explore different properties of the ligand along its trajectory, e.g., its speed or distance to the active site. 
+Selections performed in these scatterplots are highlighted not only in the 3D view but also in another proposed view, the bar chart representing the temporal changes of selected ligand properties. 
+This view enables to aggregate the time steps to better reveal the trends in ligand behavior.
+The bar chart is equipped with the line representation of amino acids lining the ligand along its trajectory. 
+This helps the user to reveal the closest amino acids directly influencing the ligand behavior in different time steps.
 
-{\color{red} CHANGE
-We introduce a dedicated method for simplification of the original trajectory.
-The method can simplify the ligand path hierarchically, thus providing several levels of detail (LOD), which can be interactively examined.
-\textbf{In the most abstracted view, represented as the top-most LOD, the temporal tunnel shows only the significant shifts of the ligand towards the active site. 
-Here, the user can interactively brush time intervals, which automatically reveals and adopts the temporal tunnel to the selected interval.}
-This abstracted representation, providing the brushing capabilities, is interactively linked with the 3D visualization where the 3D shape of the temporal tunnel for the given temporal window is displayed.
-Further, our tool enables to explore the amino acids surrounding the ligand along its path to the active site as well.
+Our proposed solution was thoroughly tested and evaluated by the domain experts from protein engineering area.
+The evaluation was performed on several simulations captured and analyzed before using the traditional approach (manual exploration of ligand in individual time steps). 
+Therefore, we also describe the process of using our solution when exploring these molecular dynamics simulations and summarize the feedback from the domain experts.
 
-Our proposed solution was thoroughly tested and evaluated by the domain experts from protein engineering.
-They performed the evaluation on their own simulations and their feedback is described in....}
-
-\section{Related Work}
-The interactive exploration of ligand paths through protein structures is a complex problem that requires an elaborate analysis of existing and convenient approaches.
-As our system addresses several areas, this section will be divided with respect to these areas as well. 
-Studying the ligand transport path is tightly related to the analysis of its trajectory.
+\subsection*{Related Work}
+The interactive exploration of ligand paths leading through protein structures is a complex problem that requires an elaborate analysis of existing and convenient approaches.
+As our system addresses different areas, this section will be divided with respect to these areas as well. 
+Studying the ligand transportation path is tightly related to the analysis of its trajectory.
 Thus, the first part will cover the topic related to the trajectory analysis, simplification, and visualization.
 Then the existing representations of tunnels and their surrounding amino acids will be addressed.
 
-\subsection*{Trajectory Analysis, Simplification, and Visualization}
+\subsubsection*{Trajectory Analysis, Simplification, and Visualization}
 When searching for the most appropriate trajectory simplification method, the taxonomy of different movement patterns introduced by Dodge et al.~\cite{Dodge2008} can help to categorize the type of motion and to propose an appropriate solution for the analysis and simplification.
 Then, Andrienko et al.~\cite{andrienko2013} describe a legacy of tools and approaches to analyze trajectory data.
 With respect to the trajectory simplification, they introduce two approaches to data abstraction representing a necessary step to achieve the reduction of the data in order to achieve informative visualizations.
@@ -322,14 +332,15 @@ Even though they primarily developed the tool to analyze three dimensional traje
 
 In the field of molecular biology as well as systems biology, there are several examples of methods focusing on trajectory analysis.
 Bidmon et al.~\cite{bidmon2008} present an abstract way of identification and visualization of solvent molecules' pathways within molecular dynamics. 
-In comparison to previous solutions, their approach preserves valuable information on the directions and velocities of water molecules routing along these paths. 
+In comparison with the previous solutions, their approach preserves valuable information on the directions and velocities of water molecules routing along these paths. 
 Another approach that describes a guidance through a complex simulation trajectories in systems biology is presented by Luboschik et al.~\cite{Luboschik2012}. 
 The method addresses biochemical reaction networks and aims to provide the users with a tool for investigating the overall behavior of a modeled system and detailed behavior at the same time.
 
-\subsection{Visualization of Cavity and Tunnel Features}
-Phillips et al.~\cite{phillips2010} propose a method to quantitatively estimate molecular features, e.g., volume and surface areas, via ray-casting technique. This involves computation of cavities.
+\subsubsection*{Visualization of Cavity and Tunnel Features}
+Phillips et al.~\cite{phillips2010} propose a method to quantitatively estimate molecular features, e.g., volume and surface areas, via a ray-casting technique. 
+This involves the computation of cavities.
 Lindow et al.~\cite{LindowBH11} introduce a technique that allows to extract significant paths from the molecules. 
-In their approach the authors utilize Voronoi diagram of spheres. 
+In their approach the authors utilize a Voronoi diagram of spheres. 
 Their final visualization is achieved by means of placing light sources on the extracted paths to enhance the presence of tunnels.
 Parulek et al.~\cite{parulek2012} exploit scatterplots to communicate the evolution of protein voids. 
 In their later study~\cite{parulek2013} they also suggest to utilize amino acids physico-chemical properties related to cavities to help users to navigate through their occurrences. 
@@ -339,9 +350,15 @@ In this work they focus on the interactive exploration of the dynamics of protei
 They calculate and visualize the cavity volume and analyze the time-dependent changes of the cavity structure.
 The cavity dynamics is captured by rendering the cavities in a single image. 
 The final visualization is achieved through the molecular surface representation colored according to time. 
-Krone et al.~\cite{krone2013features} present a similar approach, where they extract and track tunnels in MD simulations. They exploit temporal graphs to communicate the evolution of surface areas of tunnels. In our technique, we go one step further, where in addition, we incorporate the ligand-protein interaction information and provide users with the means to navigate through details of this interaction. Moreover, we analyze sequences of several thousands of frames, which is not the case in aforementioned approaches.
-Kozlikova et al.~\cite{kozlikova2014vcbm} propose a way to seamlessly visualize the geometry and shape of tunnels across MD simulation. Here, they aim at 3D visualization solely, which is not suitable way of exploring and understanding of thousands of simulation time-steps.
-Byska et al.~\cite{byska2016} introduce an approach to interactively explore the tunnel objects in MD simulations. Similarly to our approach they visualize the time-varying tunnel as a profile graph that includes information on surrounding amino acids. Nevertheless, they focus on a single tunnel instance and do not provide the means to explore the ligand-protein interaction.
+Krone et al.~\cite{krone2013features} present a similar approach where they extract and track tunnels in MD simulations. 
+They exploit temporal graphs to communicate the evolution of surface areas of tunnels. 
+In our technique, we go one step further, where in addition, we incorporate the ligand-protein interaction information and provide users with the means to navigate through details of this interaction. 
+Moreover, we analyze sequences of several thousands of frames, which is not the case in aforementioned approaches.
+Kozl\'{i}kov\'{a} et al.~\cite{kozlikova2014vcbm} propose a way to seamlessly visualize the geometry and shape of tunnels across MD simulation. 
+Here, they aim at 3D visualization solely, which is not suitable way of exploring and understanding of thousands of simulation time-steps.
+By\v{s}ka et al.~\cite{byska2016} introduce an approach to interactively explore the tunnel objects in MD simulations. 
+Similarly to our proposed approach, they visualize the time-varying tunnel as a profile graph that includes information on surrounding amino acids. 
+Nevertheless, they focus on a single tunnel instance and do not provide the means to explore the ligand-protein interaction.
 
 %-------------------------------------------------------------------------
 \section*{Problem Description and Input Data}
@@ -355,14 +372,6 @@ It means that in such parts there are some obstacles made by the surrounding ami
 These obstacles can be geometric (the empty space between these amino acids is too narrow) or physico-chemical (the properties of the amino acids are incompatible with the ligand properties), or their combination.
 The geometric obstacles can be detected by using an algorithm for tunnel computation in molecular dynamics (e.g., CAVER~\cite{Chovancova2012} or MOLE~\cite{Sehnal2013}).
 These tools are able to produce the information about time evolution of individual tunnels and for each tunnel detect its bottleneck -- the narrowest part limiting the size of the ligand aiming to pass through this tunnel.
-Figure~\ref{fig:tunnel} shows an example of small ligand passing through a tunnel computed by CAVER algorithm and visualized using CAVER Analyst~\cite{Kozlikova2014}. 
-The tunnel is colored with respect to the hydrophobicity of the surrounding amino acids and the geometric bottleneck of the tunnel is clearly visible.
-
-\begin{figure}[htb]
-	\centering
-  \includegraphics[width=1\linewidth]{img/tunnel.png}
-  \caption{\label{fig:tunnel} Small ligand (green) passing through a tunnel represented by the transparent surface. The surface encloses the available empty space along the tunnel centerline and is colored with respect to the hydrophobicity of the surrounding amino acids (hydrophobic -- red, hydrophylic -- blue, neutral -- violet). The active site is located in the left ending of the tunnel.}
-\end{figure}
 
 However, this bottleneck can be to some extent influenced by the passing ligand and this influence is also determined by the physico-chemical properties of the ligand and the bottleneck-lining amino acids (e.g., hydrophobicity or partial charges of individual atoms).
 To reveal such dependencies, it requires the involvement and experience of the domain expert who has to study the ligand trajectory captured in the molecular dynamics simulation.
