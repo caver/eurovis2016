@@ -456,7 +456,8 @@ The remaining part of this section describes these attributes in detail, along w
   \caption{\label{fig:attributes} Illustration of the attributes derived for the ligand and its trajectory. AA1-AA4 denote amino acids lining the ligand in a specific position.}
 \end{figure*}
 
-\paragraph{\textbf{Stuckness}} is important attribute which comes from the fact that if the ligand got stuck in some place, it means that there was some obstacle (geometric, physico-chemical, or combined) which prevented the ligand to pass towards the active site.
+\paragraph{\textbf{Stuckness}} is one of the most interesting attributes.
+It comes from the fact that if the ligand got stuck in some place, it means that there was some obstacle (geometric, physico-chemical, or combined) which prevented the ligand to pass towards the active site.
 The biochemists are highly interested in these obstacles and want to explore them in more detail in order to reveal the reason of this problem and possibly propose a replacement (mutation) of some amino acids surrounding this problematic spot.
 We consider the ligand to be stuck if it oscillates around a specific place in the protein. %(w.r.t. the active site)
 To estimate the stuckness, we measure how much was the movement of the ligand straight, i.e., whether it moved significantly in some direction or its movement was rather random.
@@ -467,8 +468,8 @@ For a set of ligand positions $P$ we define the stuckness as:
   s(x) = \frac{\max_{\,-n \le i, j \le n} \{ d(P(x + i), P(x + j)) \}}{\sum_{-n \le i < n}{d(P(x + i), P(x + i + 1))}},
   \label{eq:straightness}
 \end{equation}
-where $P(x)$ is position of the ligand in snapshot $x$ and $d(x, y)$ is euclidean distance of $x, y \in \mathbb{R}^3$.
-To be complete, in the beginning (or in the end) of the trajectory, we shrink the neighborhood from left (or right).
+where $P(x)$ is the position of the ligand in snapshot $x$ and $d(x, y)$ is the Euclidean distance of $x, y \in \mathbb{R}^3$.
+To be precise, at the beginning (or at the end) of the trajectory, we shrink the neighborhood from the left (or right) side.
 Furthermore, we set $n = 4$ by default as this value was obtained experimentally.
 
 \paragraph{\textbf{Distance}} of the ligand from the active site provides the biochemists with the information whether some observed behavior occurred in a vicinity of the active site, the surface, or somewhere between. 
@@ -477,12 +478,12 @@ Therefore, this attribute is naturally connected with the ligand stuckness.
 In these cases it is essential to see also where exactly the unwanted behavior of ligand happened.
 In order to evaluate the current distance of the ligand from the active site, we first extract the position of the active site $A(x)$ in each time step $x$. 
 Here the active site is defined by a set of surrounding amino acids and we compute the position of the active site as the center of mass of these amino acids, i.e., their atoms. 
-Once $A(x)$ is determined, we compute distance of the ligand position $P(x)$ to the active site as $d_{AS}(x) = d(P(x), A(x))$ where $d(x, y)$ is again euclidean distance of $x, y \in \mathbb{R}^3$.
+Once $A(x)$ is determined, we compute the distance of the ligand position $P(x)$ to the active site as $d_{AS}(x) = d(P(x), A(x))$ where $d(x, y)$ is again the Euclidean distance of $x, y \in \mathbb{R}^3$.
 
 \paragraph{\textbf{Direction}} of the ligand movement with respect to the active site is another essential attribute. 
 During the MD simulation the ligand can enter and exit the protein tunnel repeatedly. 
 Therefore, biochemists want to distinguish between intervals where the ligand was traveling towards the active site or in the opposite direction (i.e., towards the outer solvent). 
-To compute the direction we employ the \textbf{distance} attribute such that we evaluate whether the distance increases between two subsequent time steps, when moving towards the active site, or decreases, when moving in the opposite direction.
+To compute the direction we employ the \textit{distance} attribute such that we evaluate whether the distance increases between two subsequent time steps, when moving towards the active site, or decreases, when moving in the opposite direction.
 
 \paragraph{\textbf{Amount of free space}} surrounding the ligand can help the biochemists to understand why the ligand in some places got stuck.
 In such cases there was not enough free space for the passage of the ligand or the ligand was repelled by some amino acid with incompatible physico-chemical properties.
@@ -659,6 +660,19 @@ Here we show one of the possible solutions used by our domain experts in the rea
 The biochemists first added another scatterplot showing the hydrophobicity profile along the ligand trajectory (see Figure~\ref{fig:case_b}).
 Since both scatterplots are interactively connected in real-time, the biochemists could select the low hydrophobicity values and immediately observe at which distance they are positioned with respect to the ligand trajectory over time  (see Figure~\ref{fig:case_a}). 
 
+\begin{figure}[htb]
+	\centering
+	\subfigure[]{\label{fig:case_a}\includegraphics[width=0.95\linewidth]{img/case_a.pdf}}
+	\subfigure[]{\label{fig:case_b}\includegraphics[width=0.95\linewidth]{img/case_b.pdf}}
+	\subfigure[]{\label{fig:case_c}\includegraphics[width=0.95\linewidth]{img/case_c.pdf}}
+	\subfigure[]{\label{fig:case_d}\includegraphics[width=0.95\linewidth]{img/case_d.pdf}}
+	\subfigure[]{\label{fig:case_e}\includegraphics[width=0.95\linewidth]{img/case_e.pdf}}
+  \caption{
+  \subref{fig:case_a},\subref{fig:case_e}~Distance of the ligand from the active site over time. 
+  \subref{fig:case_b}~Hydrophobicity profile of the trajectory over time.
+  \subref{fig:case_c},\subref{fig:case_d}~Hydrophobicity profile of the trajectory with respect to the distance.
+  }
+\end{figure} 
 
 
 The results confirmed the behavior common for most of the proteins, namely the fact that the part of the trajectory in greater distance from the active site (i.e., nearby the surface) is surrounded mostly by hydrophilic amino acids.
@@ -674,7 +688,7 @@ For this reason they utilized the bar chart view containing the amino acid graph
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=0.95\linewidth]{img/case_hydro_vs_dist_bar.png}
-  \caption{\label{fig:case_hydro_vs_dist_bar} {\color{red}TODO - fix} Bar chart view showing the time steps when the ligand is in the vicinity of the hydrophilic amino acids.}
+  \caption{\label{fig:case_hydro_vs_dist_bar} Bar chart view showing the time steps when the ligand is in the vicinity of the hydrophilic amino acids (blue bars).}
 \end{figure}
 
 
@@ -689,7 +703,7 @@ This was also confirmed by the bar chart representation in Figure~\ref{fig:case_
 \begin{figure}[htb]
 	\centering
   \includegraphics[width=0.95\linewidth]{img/case_hydro_vs_dist_3d.jpg}
-  \caption{\label{fig:case_hydro_vs_dist_3d} {\color{red}TODO - fix} 3D view showing the selected hydrophilic amino acids and their spatial position to the ligand trajectory.}
+  \caption{\label{fig:case_hydro_vs_dist_3d} 3D view showing the selected hydrophilic amino acids and their spatial position to the ligand trajectory.}
 \end{figure} 
 
 
