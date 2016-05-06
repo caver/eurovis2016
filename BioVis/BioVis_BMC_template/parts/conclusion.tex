@@ -1,14 +1,11 @@
-We presented a visualization system which supports biochemists to explore the ligand movement over long trajectories (\eg 50.000 snapshots) of MD simulations of the ligand binding process.
-The system enhances the workflow of a biochemist in the following ways.
-First, the overview visualization together with the barchart view helps the user to navigate to the most interesting parts of
-the ligand trajectory.
-Then, the process of understanding the ligand behaviour over important part of the trajectory in details is supported by scatter plot views.
-The scatter plot views enable interactive visual analysis of ligand movement by selecting and brushing of attributes that were derived from the ligand trajectory and describe it.
-The biochemist is further enabled to explore the spacial information contained within the ligand trajectory in 3D view.
-The user can study the whole portion of the trajectory as well as only its important spots by visualizing selections made in 2D views.
-Further, the visual analysis of a ligand movement in 3D view is enhanced by employing automatic and/or manual simplification of the trajectory.
-Finally, the selection and brushing of the ligand attributes is linked among barchart view and all scatter plot views which allows detailed control over explored data including taking into account surrounding amino acids.
+In this paper we presented a novel visualization system which helps the biochemists to explore long trajectories of the ligand movements.
+The system enhances the workflow of the biochemists namely in the following ways.
+First, the overview visualization along with the bar chart view helps to navigate the user to the most interesting parts of the ligand trajectory.
+Second, the process of understanding the ligand behavior is further supported by the scatterplot matrix.
+The scatterplot matrix enables to explore different attributes of the ligand trajectory.
+Additionally, the biochemists can further explore the spatial representation of the ligand trajectory using the 3D view.
+The visual analysis of the ligand movement in the 3D view is enhanced by employing automatic and/or manual simplifications of the trajectory.
 
-As a future work, we plan to extend the trajectory simplification method to employ caching of simplified trajectory also when the user decreases the simplicity of some part of the simplified trajectory.
-Although, we did not observe in our experiments any chemically irrelevant behaviour when simplifying the trajectory, we plan to employ the information about void space described by tunnels to ensure that the simplified trajectory passes through the void space.
-Last but not least, we plan to redesign the distance ligand attribute such that the ligand distance to the active is computed along the void path to the active site.
+In the future we plan to extend the trajectory simplification method and employ a caching of the simplified trajectory also when the user decreases the level of simplicity of a selected part of the already simplified trajectory.
+Although we did not observe in our experiments any chemically irrelevant behavior when simplifying the trajectory, we plan to employ the information about computed tunnels to ensure that the simplified trajectory still passes through the void space.
+%Our plan is also to redesign the distance ligand attribute such that the ligand distance to the active is computed along the void path to the active site.
