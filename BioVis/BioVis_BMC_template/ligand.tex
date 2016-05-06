@@ -399,28 +399,31 @@ Figure \ref{fig:lig_movement} shows such example when the ligand trajectory cons
 It is visible that in most of the time the ligand travels around the protein chain (depicted in blue).
 Therefore, only a fraction of the trajectory captures its transportation to the active site.
 
-\section*{Method}
-\subsection*{Overview + workflow - BK}
 
-\subsection*{Temporal Tunnel - JB}
-\label{Sec:TemporalTunnel}
-\todo{přehodil jsem sekci, sem, bo si myslím, že ji chceme použít aj v simplifikaci ne? + minimálně bude třeba o ní vědět při definování empy space atributu}
+\section*{System Overview}
+Our proposed solution consists of several linked views covering individual steps of the exploration workflow (see Figure~\ref{fig:overview}). 
+In the first part, the user is provided with the overview representation of the whole loaded trajectory (Figure~\ref{fig:overview} 1). 
+This simple 1D representation encodes different routes of the ligand -- green color highlights the parts of the trajectory where the ligand is inside the protein, white and yellow colors encode the situation when the ligand is outside the protein or on it surface respectively.
+Blue color shows the time portions when the ligand was close to the active site.
+By selecting a part of the trajectory using this representation, the user is automatically navigated to this selected part and all following representations show only this part.
 
-\todo{Nevím jak začít .... chce to asi nějakou motivaci proč vůbec temporal tunnel} 
+Among these views belong the scatterplot matrix (Figure~\ref{fig:overview} 2) enabling to explore different attributes of the ligand and its trajectory.
+These attributes are described in detail in section Derivation of Attributes.
+By interactive manipulation with these matrices the user can select a subset of time steps in which the ligand behaved in a desired way.
+The selection is highly dependent on the current tasks the user aims to perform.
+For example, when the user searches for the parts of the simulation where the ligand got stuck for a certain amount of time steps and at the same time was close to the active site, he or she plots and interacts with the matrix showing the relationship between the ligand stuckness and its distance from the active site.
 
-We define the temporal tunnel as a set of spheres where the number of spheres corresponds to the number of time steps in the simulation.
-Additionally, each sphere defines the maximum empty space surrounding the ligand, and as the consequence also contains the ligand, in the given time step {\color{red}(see Figure~\ref{XY})}.
+The selected time steps can be further explored using the combination of bar chart and line representations (Figure~\ref{fig:overview} 3). 
+The bar chart enables to follow a selected attribute over time.
+Furthermore, individual bars can represent an aggregated information for selected portions of time steps.
+The aggregation is performed on uniformly divided time intervals.
+Then they show the average values of selected attributes.
+The line representation informs about the amino acids closest to the ligand along its path.
+This information helps to determine those amino acids which play a substantial role in the ligand transportation.
 
-In order to compute such temporal tunnel we can either utilize the pre-computed information about protein tunnels (\eg using CAVER~3.0) or approximate information about the empty space surrounding the ligand. Such approximation is possible since ligand positions over time are included in the data.
-The first method is more precise but computationally more expensive, while the second approach is faster but {\color{red}can be highly inaccurate} {\color{red}see Section~\ref{XYZ} for experimental comparison)}. 
-Nevertheless, in both cases we need to determine a single sphere, being a part of the temporal tunnel, for each time step.
-In the first case, we obtain a set of spheres defining the shape of the tunnel in each time step ({\color{red} see Section/Paper about CAVER}). Then the entire temporal tunnel is formed by the closest sphere to the ligand, which is also wide enough \todo{wide enough není zprogramováné} to fully enclose the ligand in a given time step.
-
-In the second case, foe each time-step we firstly retrieve the 10 closest protein atoms to the ligand. Their mean position defines the center of the tunnel sphere while the radius is represented as the minimum distance from the center to the closest atom.
-
-%The closest sphere can be find simply by measuring the distance between the center of mass of ligand and center of each sphere.  
-
-{\color{red} Už nestíhám, ale ta druhá metoda byla popsána v předchozím článku, takže jí z tama můžeme vytáhnout - možná to ještě udělám později, zatím teda takto.}
+These views are linked with the three-dimensional view (Figure~\ref{fig:overview} 4) where the user can observe the ligand trajectory in the context of the protein structure.
+As the original trajectory is highly scattered, we propose a simplification algorithm which aims to reveal the trends in the ligand movement and suppress small insignificant movements.
+The algorithm is described in detail in the Trajectory Simplification section.
 
 
 \subsection*{Trajectory Simplification - AJ}
@@ -489,6 +492,28 @@ Moreover, whether the ligand will be able to pass through the tunnel and reach t
 
 
 time evolution, "stuckness" (speed, distance), direction, amount of free space around (radius), AA changes + properties, vorticity, ligand deformation (dihedral angles)
+
+
+\subsection*{Temporal Tunnel - JB}
+\label{Sec:TemporalTunnel}
+\todo{přehodil jsem sekci, sem, bo si myslím, že ji chceme použít aj v simplifikaci ne? + minimálně bude třeba o ní vědět při definování empy space atributu}
+
+
+We define the temporal tunnel as a set of spheres where the number of spheres corresponds to the number of time steps in the simulation.
+Additionally, each sphere defines the maximum empty space surrounding the ligand, and as the consequence also contains the ligand, in the given time step {\color{red}(see Figure~\ref{XY})}.
+
+In order to compute such temporal tunnel we can either utilize the pre-computed information about protein tunnels (\eg using CAVER~3.0) or approximate information about the empty space surrounding the ligand. Such approximation is possible since ligand positions over time are included in the data.
+The first method is more precise but computationally more expensive, while the second approach is faster but {\color{red}can be highly inaccurate} {\color{red}see Section~\ref{XYZ} for experimental comparison)}. 
+Nevertheless, in both cases we need to determine a single sphere, being a part of the temporal tunnel, for each time step.
+In the first case, we obtain a set of spheres defining the shape of the tunnel in each time step ({\color{red} see Section/Paper about CAVER}). Then the entire temporal tunnel is formed by the closest sphere to the ligand, which is also wide enough \todo{wide enough není zprogramováné} to fully enclose the ligand in a given time step.
+
+In the second case, foe each time-step we firstly retrieve the 10 closest protein atoms to the ligand. Their mean position defines the center of the tunnel sphere while the radius is represented as the minimum distance from the center to the closest atom.
+
+%The closest sphere can be find simply by measuring the distance between the center of mass of ligand and center of each sphere.  
+
+{\color{red} Už nestíhám, ale ta druhá metoda byla popsána v předchozím článku, takže jí z tama můžeme vytáhnout - možná to ještě udělám později, zatím teda takto.}
+
+
 
 \section*{Visual Exploration}
 \todo{treba tiez popisat interakciu s kazdym view}
