@@ -15,7 +15,7 @@
    id="svg3119"
    version="1.1"
    inkscape:version="0.48.5 r10040"
-   sodipodi:docname="case_overview.svg">
+   sodipodi:docname="case_overview.pdf">
   <defs
      id="defs3121" />
   <sodipodi:namedview
@@ -59,7 +59,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
