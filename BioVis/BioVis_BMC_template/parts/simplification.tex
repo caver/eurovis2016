@@ -79,7 +79,7 @@ Moreover, the performance of manual simplification is also enhanced, for example
 The automatic algorithm (see Algorithm~\ref{alg:auto-simplify}) is iterative and in its iterations employs the manual simplification.
 Furthermore, it is based on an idea to simplify only parts of the trajectory that are still too complex.
 The algorithm starts with considering the whole trajectory as complex -- the set of complex intervals $C$ is set to the interval spanning $T_{in}$.
-Then, the complexity ($c$) of $T_{in}$ is evaluated in all points of $T_{in}$.
+Then, the complexity $c$ of $T_{in}$ is evaluated in all points of $T_{in}$.
 The complexity $c(x)$ in point $x$ is defined as (see Figure~\ref{fig:complexity}):
 \begin{equation}
   c(x) = \sum_{(u, v) \in N(T, x, \nu)}{(|u| + |v|)^2 \alpha(u, v)}, % \mathrm{acos}(\frac{u \cdot v}{|u| \cdot |v|})
@@ -136,4 +136,4 @@ First, a set of simple points $P$ is found by thresholding $c(x)$ by $\tau$.
 All points $p \in P$ are then removed from $C$ which prevents further simplification of parts of the trajectory that are already simple.
 Then, $T_{out}$ is simplified in all complex intervals that remained in $C$.
 After the simplification, the complexity is evaluated again and the improvement in comparison with the previous complexity is computed.
-The iterative simplification ends when the improvement after an iteration ($\Delta c$) drops below a user-specified threshold $\epsilon$.
+The iterative simplification ends when the improvement after an iteration $\Delta c$ drops below a user-specified threshold $\epsilon$.
