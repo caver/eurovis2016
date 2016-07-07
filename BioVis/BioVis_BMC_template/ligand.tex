@@ -702,6 +702,100 @@ This was also confirmed by the bar chart representation in Figure~\ref{fig:case_
 %{\color{red}Note that the biochemists can also estimate that the provided data were probably computed using Steered molecular dynamics (SMD) \todo{popsat co je SMD in RW?} simulation since the simulation starts with ligand in the active site (signalized by red color.)}
 
 
+
+\section*{Case Study 2}
+In the second case study we demonstrate the usefulness of our approach when studying more complex cases.
+For this purpose we are going to use a simulation of Haloalkane dehalogenase together with three 1,2,3-Trichloropropane (TCP) ligands (referred in following text as TCP--294, TCP--295, and TCP--296 based on their IDs in simulation).
+
+The hypothesis stated by biochemists at the beginning was that all three ligands should bind to the same pocket surrounded by following amino acids {\color{red}TODO add IDs}.
+\todo{Another possible goal can be evaluation how many ligands can fit the given pocket - \ie evaluate reactiveness of given protein?}
+Hence, attributes such as \textit{distance} or \textit{direction} were computed in relation to the active site defined by these amino acids. 
+
+Our tool allows to select the reference{\color{red}/observed?} ligand and thus easily compare their individual trajectories.
+%In the first stage of analysis biochemists again used overview of the overall simulation behavior.
+Using the simulation overview (see Figure~\ref{fig:tcp3_overview}) it is obvious that only TCP--296 evidently entered the protein -- green (and canyan) color depicts the state when ligand is inside of protein while orange indicates closeness to the surface. 
+After more detailed observation it can be also seen that the TCP--294 also entered the protein in the last part of the simulation, but it probably did not enter deep since there is just small amount of green color. 
+Finally, the overview of trajectory of TCP--295 suggests that the ligand was scratching the protein surface but never get deeper into the structure - there is no green color at all.
+
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.95\linewidth]{img/tcp3_overview.pdf}
+  \caption{
+  \label{fig:tcp3_overview}
+  \subref{fig:tcp3_overview_294}~TODO - caption
+  }
+\end{figure}   
+
+The simulation overview, however, provides only general information about ligand position with respect to the protein surface.
+The interesting behavior can be revealed after depicting the distances from the active site using scatter plots.
+Here biochemists immediately spotted that both TCP--294 and TCP--296 were evidently in close vicinity of active site during the last part of the simulation (see Figure~\ref{fig:tcp3_dist_time_average_294}~and~\ref{fig:tcp3_dist_time_average_296}) while TCP--295 does not exhibits any significant affinity towards the active site.
+
+\begin{figure}[htb]
+	\centering
+	\subfigure[]{\label{fig:tcp3_dist_time_average_294}\includegraphics[width=0.95\linewidth]{img/tcp3_dist_time_average_294.png}}
+	\subfigure[]{\label{fig:tcp3_dist_time_average_295}\includegraphics[width=0.95\linewidth]{img/tcp3_dist_time_average_295.png}}
+	\subfigure[]{\label{fig:tcp3_dist_time_average_296}\includegraphics[width=0.95\linewidth]{img/tcp3_dist_time_average_296.png}}
+  \caption{
+  \label{fig:tcp3_distances}
+  \subref{fig:tcp3_dist_time_average_294}~TCP--294: caption
+  \subref{fig:tcp3_dist_time_average_295}~TCP--295: caption, better resolution
+  \subref{fig:tcp3_dist_time_average_296}~TCP--296: caption
+  }
+\end{figure} 
+
+In case of the TCP--294, the overview is mostly orange (indicating closeness to the surface) due to the fact that the explored pocket is relatively shallow.
+Moreover, TCP--295 reached the active site first and hence filled the empty space deeper in protein.
+This can be seen either from distance scatter plots (see Figure~\ref{fig:tcp3_dist_time_average_294}~and~\ref{fig:tcp3_dist_time_average_296}) or directly from 3D (see Figure~\ref{fig:tcp3_3D}).
+%First, obviously distance of TCP--295 from active site dropped much sooner. 
+%Second, in closeup (see Figure~\ref{fig:tcp3_distance_comparison}) we can see that the real distance are  different.  
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.95\linewidth]{img/tcp3_3D.pdf}
+  \caption{
+  \label{fig:tcp3_3D}
+  TODO - caption
+  }
+\end{figure} 
+
+At this point the biochemists were already able to conclude that only two of the ligands did enter the binding site of the protein and not all of them as expected.
+Nevertheless, some additional observations can be done afterwards as well.  
+For instance, there is obviously a spike in distance of TCP--296 from active site around time step 30,000. 
+This corresponds to the time when the TCP--294 begun its own approach towards the active site.
+Hence, we can speculate that these two ligans did interacted in some way.
+
+Another example is using scatter plot showing relation ship between distance from active site and stuckness of the ligand (see Figure~\ref{fig:tcp3_dist_stuckness_295}).
+Here we can see that the ligand was highly oscillating in close vicinity of the active site.
+This can suggests that the active site is stable place regarding the ligand binding ability.
+%This is even more obvious when showing both attributes in single plot.
+
+
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.95\linewidth]{img/tcp3_dist_stuckness_295.png}
+  \caption{
+  \label{fig:tcp3_dist_stuckness_295}
+  TODO - caption
+  }
+\end{figure}
+
+Additionally, user can select just a small portion of the simulation in order to evaluate the ligand transportation into the protein molecule (see Figure~\ref{fig:path}).
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.95\linewidth]{img/path.png}
+  \caption{
+  \label{fig:path}
+  TODO - caption
+  }
+\end{figure}  
+
+\todo[inline]{replace straightness for stuckness}
+
+
+
 \section*{Conclusions}
 \input{parts/conclusion.tex}
 
