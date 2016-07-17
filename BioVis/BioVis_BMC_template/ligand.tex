@@ -200,10 +200,10 @@ research for decades. The transportation of ligand into the protein active site 
 geometric and physico-chemical properties, which renders the ligand path full of jitter and impasses. 
 This prevents understanding of the ligand transportation and reasoning behind its behavior along the path.
 
-\parttitle{Results} To address needs of the domain experts we design an explorative visualization solution based on a multi-scale simplification model. It helps to navigate the user to the most interesting parts of the ligand trajectory by exploring different attributes of the ligand and its movement, such as its distance to the active site, changes of amino acids lining the ligand, or ligand "stuckness".
+\parttitle{Results} To address the needs of the domain experts we design an explorative visualization solution based on a multi-scale simplification model. It helps to navigate the user to the most interesting parts of the ligand trajectory by exploring different attributes of the ligand and its movement, such as its distance to the active site, changes of amino acids lining the ligand, or ligand "stuckness".
 The process is supported by three linked views -- 3D representation of the simplified trajectory, scatterplot matrix, and bar charts with line representation of ligand-lining amino acids.
 
-\parttitle{Conclusions}  The usage of our tool is demonstrated on molecular dynamics simulation provided by the domain experts. The tool was tested by the domain experts from protein engineering and the results confirm that it helps to navigate the user to the most interesting parts of the ligand trajectory and to understand the ligand behavior. 
+\parttitle{Conclusions}  The usage of our tool is demonstrated on molecular dynamics simulations provided by the domain experts. The tool was tested by the domain experts from protein engineering and the results confirm that it helps to navigate the user to the most interesting parts of the ligand trajectory and to understand the ligand behavior. 
 
 
 %\parttitle{Second part title} %if any
@@ -389,11 +389,6 @@ Ligands can follow different routes -- they can be transported from the outside 
 The length of the simulations may vary from few hundreds to hundreds of thousands of time steps.  
 This depends namely on the ligand velocity and its ability to find the proper path to the active site.
 
-\begin{figure}[b!]
-	\centering
-  \includegraphics[width=0.95\linewidth]{img/lig_movement.png}
-  \caption{\label{fig:lig_movement} Ligand trajectory (gray) for a simulation containing $50.000$ time steps. The protein chain is depicted in blue.}
-\end{figure}
 
 Long simulations can often contain many time steps when the ligand followed an impasse -- it tried to find the proper entrance point to the protein (tunnel gorge) or entered a wrong tunnel and had to return.
 Such parts of the simulation could be of less interest so that the user should be provided with a possibility to filter them out and focus only on the interesting parts.
@@ -401,12 +396,18 @@ Figure \ref{fig:lig_movement} shows such example when the ligand trajectory cons
 It is visible that in most of the time the ligand travels around the protein chain (depicted in blue).
 Therefore, only a fraction of the trajectory captures its transportation to the active site.
 
+\begin{figure}[t!]
+	\centering
+  \includegraphics[width=0.95\linewidth]{img/lig_movement.png}
+  \caption{\label{fig:lig_movement} Ligand trajectory (gray) for a simulation containing $50.000$ time steps. The protein chain is depicted in blue.}
+\end{figure}
+
 
 \section*{System Overview}
 Our proposed solution consists of several linked views covering individual steps of the exploration workflow (see Figure~\ref{fig:overview}). 
 In the first part, the user is provided with the overview representation of the whole loaded trajectory (Figure~\ref{fig:overview} -- 1). 
-This simple 1D representation encodes different routes of the ligand -- green color highlights the parts of the trajectory where the ligand is inside the protein, white and yellow colors encode the situation when the ligand is outside the protein or on it surface respectively.
-Blue color shows the time portions when the ligand was close to the active site.
+This simple 1D representation encodes different routes of the ligand -- red color highlights the parts of the trajectory where the ligand is inside the protein, white color encodes the situation when the ligand is outside the protein, blue denotes for the situation when the ligand is close to the protein surface.
+Orange color shows the time portions when the ligand was close to the active site.
 By selecting a part of the trajectory using this representation, the user is automatically navigated to this selected part and all following representations show only this part.
 
 \begin{figure*}[thb]
@@ -576,7 +577,7 @@ The stacked plots are also interactively interconnected and the selection in Sca
 
 Figure \ref{fig:scatterplot} shows the scatterplot matrix for a sequence of $500$ time steps.
 
-\begin{figure}[htb]
+\begin{figure}[tb]
 	\centering
   \includegraphics[width=0.95\linewidth]{img/scatterplot.png}
   \caption{\label{fig:scatterplot} Scatterplot matrix depicting time vs. distance and time vs speed property before (up) and after (down) smoothing by the sliding window function.}
@@ -598,15 +599,21 @@ The trajectory is colored according to one of the geometric and physico-chemical
 
 \section*{Analysis Procedure and Discussion}
 
-In this section we will describe one of case studies which we have performed using our novel exploration tool.
-In this particular study the biochemists explored molecular simulation of Haloalkane dehalogenase together with the ligand. 
+In this section we will describe two scenarios which we have performed using our novel exploration tool.
+These scenarios were selected and conducted by the domain experts from our cooperating group of protein engineers.
+The group involved into the design of our proposed tool as well as the selection of interesting case studies and evaluation of the final visualization consisted of seven researchers -- 
+one professor (head of the protein engineering group), two post-docs, and four PhD students.
+They were asked to use our tool to explore their datasets and to evaluate the intuitiveness, understandability, benefits, and drawbacks of the proposed tool. 
+
+\section*{First Scenario}
+In the first scenario the biochemists explored the trajectory capturing molecular simulation of Haloalkane dehalogenase together with one ligand. 
 Since the simulation consists of $50.000$ time steps, it would take enormous amount of time to analyze it using only common techniques such as 3D animation.
-In this section we will show how this can be significantly improved using our exploration tool.
+Here we will show how this can be significantly improved using our exploration tool.
 After the precomputation stage the user can immediately start to explore individual views described in the previous sections.
 
 We start with the rough analysis of the overall behavior of the ligand using our simulation overview (see Figure~\ref{fig:case_overview}).
-Utilizing this view the biochemist can immediately see that the whole simulation contains three main (two long and one relatively short) parts where the ligand was inside the protein (blue and green colors).
-These parts are divided by two orange and white blocks signalizing that the ligand was moving near to the protein surface (orange) or even entirely left the protein (white).
+Utilizing this view the biochemist can immediately see that the whole simulation contains three main (two long and one relatively short) parts where the ligand was inside the protein (orange and red colors).
+These parts are divided by two blue and white blocks signalizing that the ligand was moving near to the protein surface (blue) or even entirely left the protein (white).
  
 The mentioned color mapping on the simulation overview suggests that in this particular simulation the ligand started in the active site, then traveled towards the protein surface, and finally left the molecule.
 After spending some time outside it found again its way into a protein tunnel and traveled back to the active side.
@@ -619,10 +626,10 @@ The exploration of this part of the simulation allows the biochemists to closely
 
 The biochemists selected the first part of the simulation consisting from circa $17.000$ time steps (see Figure~\ref{fig:case_overview}). 
 From this point the biochemists continued to more detailed exploration using brushing and linking in other three views -- namely using the 3D, scatterplot, and bar chart views.
-Each of these views provides slightly different representation of the data thus allowed the biochemist to perform different operations.
+Each of these views provides slightly different representation of the data thus allowed the biochemists to perform different operations.
 
 For instance, by using the scatterplot set to show the ligand distance from the active site over time (see Figure~\ref{fig:case_a}) we immediately revealed that the ligand was actually near to the protein surface (represented by high peaks) in few additional times during this part of the simulation.
-The same behavior can be actually observed also in the simulation overview (see Figure~\ref{fig:case_overview}) where these cases are highlighted by slim orange lines. 
+The same behavior can be actually observed also in the simulation overview (see Figure~\ref{fig:case_overview}) where these cases are highlighted by slim blue lines. 
 But these cases are much better visible in the scatterplot view.
 
 Another interesting behavior which can be seen with this setup is that the ligand repeatedly traveled back and forward from the active site (lower values) to the surface (higher values) in the first (and again in the last) part of the selected interval.
@@ -637,14 +644,14 @@ This behavior can suggests that the ligand had actually problems to bind with th
 When evaluating the reactivity between the ligand and protein active site it is important to determine the amino acids that interact with the ligand. 
 When these amino acids are non-polar then the ligand has to be non-polar as well.
 Similarly, polar amino acids attract the polar ligand.
-Therefore, the biochemist were interested in seeing whether there are some polar amino acids inside the active site.
+Therefore, the biochemists were interested in seeing whether there are some polar amino acids inside the active site.
 The polarity of amino acids is closely related to their hydrophobicity -- hydrophobic amino acids are non-polar while hydrophilic amino acids are polar. 
 
 The desired information can be retrieved using our exploration tool in many ways.
 Here we show one of the possible solutions used by our domain experts in the real test scenario.
 
 The biochemists first added another scatterplot showing the hydrophobicity profile along the ligand trajectory (see Figure~\ref{fig:case_b}).
-Since both scatterplots are interactively connected in real-time, the biochemists could select the low hydrophobicity values and immediately observe at which distance they are positioned with respect to the ligand trajectory over time  (see Figure~\ref{fig:case_a}). 
+Since both scatterplots are interactively connected in real-time, the biochemists could select the low hydrophobicity values and immediately observe at which distance they are positioned with respect to the ligand trajectory over time (see Figure~\ref{fig:case_a}). 
 
 \begin{figure}[htb]
 	\centering
@@ -680,9 +687,9 @@ For this reason they utilized the bar chart view containing the amino acid graph
 In order to easily see the required data they limited the view only to selected time steps and set high level of aggregation (each bar contained about 20 time steps).
 Even though the amino acid view contained the list of all amino acids surrounding the ligand in given time steps, it was relatively easy to spot the hydrophobic ones.
 This was enabled thanks to the ability of the view to color individual amino acids based on their properties. 
-Here the biochemists selected the green amino acids (asparagine with ID 38 and aspartic acid with ID 103). 
+Here the biochemists selected the TODO green amino acids (asparagine with ID 38 and aspartic acid with ID 103). 
 As can be seen in Figure~\ref{fig:case_hydro_vs_dist_3d} the selected amino acids exactly correspond to the estimated active site in the protein.
-This was also confirmed by the bar chart representation in Figure~\ref{fig:case_hydro_vs_dist_bar} where the majority of bars have blue color which corresponds to the closeness of the ligand to the active site.
+This was also confirmed by the bar chart representation in Figure~\ref{fig:case_hydro_vs_dist_bar} where the majority of bars have TODO red color which corresponds to the closeness of the ligand to the active site.
 
 
 \begin{figure}[htb]
@@ -703,9 +710,9 @@ This was also confirmed by the bar chart representation in Figure~\ref{fig:case_
 
 
 
-\section*{Case Study 2}
-In the second case study we demonstrate the usefulness of our approach when studying more complex cases.
-For this purpose we are going to use a simulation of Haloalkane dehalogenase together with three 1,2,3-Trichloropropane (TCP) ligands (referred in following text as TCP--294, TCP--295, and TCP--296 based on their IDs in simulation).
+\section*{Second Scenario}
+In the second scenario we demonstrate the usefulness of our approach when studying more complex cases.
+For this purpose we used a simulation of Haloalkane dehalogenase together with three 1,2,3-Trichloropropane (TCP) ligands (referred in the following text as TCP--294, TCP--295, and TCP--296 based on their IDs in the simulation).
 
 \begin{figure}[htb]
 	\centering
@@ -716,7 +723,7 @@ For this purpose we are going to use a simulation of Haloalkane dehalogenase tog
   }
 \end{figure}  
 
-The hypothesis stated by biochemists at the beginning was that all three ligands should bind to the same pocket surrounded by following amino acids {\color{red}TODO add IDs}.
+The hypothesis stated by the biochemists at the beginning was that all three ligands should bind to the same pocket surrounded by the following amino acids {\color{red}TODO add IDs}.
 \todo{Another possible goal can be evaluation how many ligands can fit the given pocket - \ie evaluate reactiveness of given protein?}
 Hence, attributes such as \textit{distance} or \textit{direction} were computed in relation to the active site defined by these amino acids. 
 
