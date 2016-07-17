@@ -724,12 +724,12 @@ The original trajectories of these ligands are very complex, as can be seen in F
   }
 \end{figure}  
 
-The hypothesis stated by the biochemists at the beginning was that all three ligands should bind to the same pocket surrounded by the following amino acids {\color{red} H--269, L--243, L--206}.
+The hypothesis stated by the biochemists at the beginning was that all three ligands should bind to the same pocket surrounded by the following amino acids H--269, L--243, L--206.
 %, P203, V242, F165, W138, F146, A169áln
 %\todo{Another possible goal can be evaluation how many ligands can fit the given pocket - \ie evaluate reactiveness of given protein?}
 Hence, attributes such as \textit{distance} or \textit{direction} were computed in relation to the active site defined by these amino acids. 
 
-First, the user can select a desired ligand to be observed and thus easily compare their individual trajectories.
+First, the user can select one of the ligands to be observed and thus easily compare their individual trajectories.
 %In the first stage of analysis biochemists again used overview of the overall simulation behavior.
 Using the simulation overview (see Figure~\ref{fig:tcp3_overview}) it is obvious that only TCP--296 evidently entered the protein -- orange and red colors depict the state when the ligand is inside of protein while blue color indicates the ligand closeness to the protein surface. 
 After more detailed observation it can be also seen that the TCP--294 also entered the protein in the last part of the simulation, but it probably did not enter deeply. 
@@ -764,8 +764,8 @@ Here the biochemists immediately spotted that both TCP--294 and TCP--296 were ev
 \end{figure} 
 
 In case of the TCP--294, the overview is mostly blue (indicating closeness to the surface) due to the fact that the site where this ligand binds is relatively shallow and close to the surface.
-TCP--295 reached the deeply buried active site first and hence filled the empty space around this active site.
-This can be seen either from the distance scatterplots (see Figure~\ref{fig:tcp3_dist_time_average_294}~and~\ref{fig:tcp3_dist_time_average_296}) or directly from the 3D  view (see Figure~\ref{fig:tcp3_3D}).
+TCP--295 reached the deeply buried active site first and hence filled the empty space around  {\color{red}this active site} \todo{I would suggest to replace this by "it"}.
+This can be seen either from the distance scatterplots (see Figure~\ref{fig:tcp3_dist_time_average_294}~and~\ref{fig:tcp3_dist_time_average_296}) or directly from the 3D view (see Figure~\ref{fig:tcp3_3D}).
 %First, obviously distance of TCP--295 from active site dropped much sooner. 
 %Second, in closeup (see Figure~\ref{fig:tcp3_distance_comparison}) we can see that the real distance are  different.  
 
@@ -774,32 +774,39 @@ This can be seen either from the distance scatterplots (see Figure~\ref{fig:tcp3
 \includegraphics[width=0.95\linewidth]{img/tcp3_3D.pdf}
   \caption{
   \label{fig:tcp3_3D}
-	3D view showing the mutual position of two ligand TCP-294 and TCP-296 inside the binding site.
+	3D view showing the mutual position of two ligand TCP-294 and TCP-296 inside the binding site at the end of simulation.
   }
 \end{figure} 
 
 At this point the biochemists were already able to conclude that only two of the ligands entered the binding site of the protein and only one of them entered the deeply buried active site.
-Nevertheless, some additional observations revealing more details about the simulation can be done afterwards as well.  
-Among others, there is obviously a spike in the distance of TCP--296 from the active site around time step 30.000. 
-This corresponds to the time when the TCP--294 started to head towards the active site (see Figure~\ref{}).
+Nevertheless, some additional observations revealing more details about the simulation can be done as well.  
 
-Another example is using the scatterplot showing the relationship between the distance from the active site and the stuckness of the ligand (see Figure~\ref{fig:tcp3_dist_stuckness_295}).
-From this scatterplot we can see that the ligand was highly oscillating in a close vicinity of the active site.
-This can suggest that the active site is very stable with respect to its ability to bind a ligand.
+
+%Among others, there is obviously a spike in the distance of TCP--296 from the active site around time step 30.000 (see Figure~\ref{fig:tcp3_dist_time_average_296}). 
+%This corresponds to the time when the TCP--294 started to head towards the active site (see Figure~\ref{fig:tcp3_dist_time_average_294}).
+
+When exploring molecular simulations containing a ligand, one of the most important tasks is to determine ability of protein active site to bind the given ligand.
+In this particular case the biochemist were able to easily estimate ability of the active site to bind TCP--296 and TCP--294 directly from distance scatter plots (see Figure~\ref{fig:tcp3_distances}).
+It can be clearly seen that both ligands were presented in vicinity of the active site for long time and they both never left the binding site after accessing it.  
+Nevertheless, in more complicated cases the biochemist can use scatter plot showing the relationship between the distance from the active site and the stuckness of the ligand.
+For instance, in case of TCP--296 (see Figure~\ref{fig:tcp3_dist_stuckness_295}) it is easy to confirm that the ligand was highly oscillating (was stuck) in a close vicinity of the active site.
+On the other hand, it can be also seen that with the growing distance from active site the stuckenss is getting lower.
+This suggests that the active site is highly suitable for the given ligand and there is no other place towards which the ligand would exhibit any significant affinity.
 %This is even more obvious when showing both attributes in single plot.
-
-
 
 \begin{figure}[tb]
 	\centering
 	\includegraphics[width=0.95\linewidth]{img/tcp3_dist_stuckness_295.png}
   \caption{
   \label{fig:tcp3_dist_stuckness_295}
-  Scatterplot showing the relationship between the distance from the active site and the stuckness of ligand TCP-296.
+  Scatterplot showing the relationship between the distance from the active site and the stuckness of ligand TCP-296. {\color{red} what about merging Fig15 and this one?}
   }
 \end{figure}
 
-Finally, the user can select just a small portion of the simulation in order to evaluate the ligand transportation through the protein molecule (see Figure~\ref{fig:path}).
+Finally, as can be seen from distance scatter plot (see Figure~\ref{fig:tcp3_distances}) both TCP--294 and TCP--296 entered the protein active site during short period of time and never left it afterwards.
+At this point the biochemist wanted to explore this particular moments in more details.
+Our tool is highly suitable for such use case since all views are interactively lined together.
+Therefore, the biochemist can, for instance, easily select the given part of simulation in scatter plot and immediately observe the ligand transportation through the protein molecule in 3D (see Figure~\ref{fig:path}).
 
 \begin{figure}[tb]
 	\centering
@@ -809,7 +816,6 @@ Finally, the user can select just a small portion of the simulation in order to 
   Small part of the molecular simulation showing the exact time span when the TCP-296 was penetrating the protein.  
   }
 \end{figure}  
-
 
 \section*{Conclusions}
 \input{parts/conclusion.tex}
