@@ -724,11 +724,12 @@ The original trajectories of these ligands are very complex, as can be seen in F
   }
 \end{figure}  
 
-The hypothesis stated by the biochemists at the beginning was that all three ligands should bind to the same pocket surrounded by the following amino acids {\color{red}TODO add IDs}.
+The hypothesis stated by the biochemists at the beginning was that all three ligands should bind to the same pocket surrounded by the following amino acids {\color{red} H--269, L--243, L--206}.
+%, P203, V242, F165, W138, F146, A169áln
 %\todo{Another possible goal can be evaluation how many ligands can fit the given pocket - \ie evaluate reactiveness of given protein?}
 Hence, attributes such as \textit{distance} or \textit{direction} were computed in relation to the active site defined by these amino acids. 
 
-First, our tool allows to select the reference{\color{red}/observed?} ligand and thus easily compare their individual trajectories.
+First, the user can select a desired ligand to be observed and thus easily compare their individual trajectories.
 %In the first stage of analysis biochemists again used overview of the overall simulation behavior.
 Using the simulation overview (see Figure~\ref{fig:tcp3_overview}) it is obvious that only TCP--296 evidently entered the protein -- orange and red colors depict the state when the ligand is inside of protein while blue color indicates the ligand closeness to the protein surface. 
 After more detailed observation it can be also seen that the TCP--294 also entered the protein in the last part of the simulation, but it probably did not enter deeply. 
@@ -755,9 +756,10 @@ Here the biochemists immediately spotted that both TCP--294 and TCP--296 were ev
 	\subfigure[]{\label{fig:tcp3_dist_time_average_296}\includegraphics[width=0.95\linewidth]{img/tcp3_dist_time_average_296.png}}
   \caption{
   \label{fig:tcp3_distances}
-  \subref{fig:tcp3_dist_time_average_294}~TCP--294: caption
-  \subref{fig:tcp3_dist_time_average_295}~TCP--295: caption, better resolution
-  \subref{fig:tcp3_dist_time_average_296}~TCP--296: caption
+  The scatterplots showing the evolution of the distance from the active site for all three ligands over time:
+  \subref{fig:tcp3_dist_time_average_294}~TCP--294,
+  \subref{fig:tcp3_dist_time_average_295}~TCP--295, and
+  \subref{fig:tcp3_dist_time_average_296}~TCP--296.
   }
 \end{figure} 
 
@@ -772,7 +774,7 @@ This can be seen either from the distance scatterplots (see Figure~\ref{fig:tcp3
 \includegraphics[width=0.95\linewidth]{img/tcp3_3D.pdf}
   \caption{
   \label{fig:tcp3_3D}
-  TODO - caption
+	3D view showing the mutual position of two ligand TCP-294 and TCP-296 inside the binding site.
   }
 \end{figure} 
 
@@ -793,23 +795,20 @@ This can suggest that the active site is very stable with respect to its ability
 	\includegraphics[width=0.95\linewidth]{img/tcp3_dist_stuckness_295.png}
   \caption{
   \label{fig:tcp3_dist_stuckness_295}
-  TODO - caption
+  Scatterplot showing the relationship between the distance from the active site and the stuckness of ligand TCP-296.
   }
 \end{figure}
 
-Additionally, the user can select just a small portion of the simulation in order to evaluate the ligand transportation through the protein molecule (see Figure~\ref{fig:path}).
+Finally, the user can select just a small portion of the simulation in order to evaluate the ligand transportation through the protein molecule (see Figure~\ref{fig:path}).
 
 \begin{figure}[tb]
 	\centering
 	\includegraphics[width=0.95\linewidth]{img/path.png}
   \caption{
   \label{fig:path}
-  TODO - caption
+  Small part of the molecular simulation showing the exact time span when the TCP-296 was penetrating the protein.  
   }
 \end{figure}  
-
-\todo[inline]{replace straightness for stuckness}
-
 
 
 \section*{Conclusions}
