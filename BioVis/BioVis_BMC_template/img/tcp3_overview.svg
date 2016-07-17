@@ -14,8 +14,8 @@
    height="284.211"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.5 r10040"
-   sodipodi:docname="New document 1">
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="tcp3_overview2.svg">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -26,10 +26,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.84300387"
-     inkscape:cx="1025.8121"
-     inkscape:cy="-91.409979"
+     inkscape:cx="465.22903"
+     inkscape:cy="84.733191"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      showgrid="false"
      showguides="true"
      inkscape:guide-bbox="true"
@@ -48,7 +48,7 @@
        id="guide3072" />
     <sodipodi:guide
        orientation="1,0"
-       position="0.4996,378.58102"
+       position="0,399.76092"
        id="guide3074" />
   </sodipodi:namedview>
   <metadata
@@ -81,17 +81,6 @@
          style="font-size:30px"
          id="tspan3039">Outside</tspan>
     </text>
-    <rect
-       style="fill:#ffffff;stroke:#000000;stroke-miterlimit:10"
-       x="8.1391954"
-       y="396.20691"
-       stroke-miterlimit="10"
-       width="19.333"
-       height="15.771"
-       id="rect98"
-       inkscape:export-filename="C:\Users\Omikron\AppData\Roaming\Skype\My Skype Received Files\legenda.png"
-       inkscape:export-xdpi="213"
-       inkscape:export-ydpi="213" />
     <text
        y="415.0726"
        x="-101.79617"
@@ -105,17 +94,6 @@
          style="font-size:30px"
          id="tspan3037">Surface</tspan>
     </text>
-    <rect
-       style="fill:#ffdb7a;stroke:#000000;stroke-miterlimit:10"
-       x="-127.78304"
-       y="396.20691"
-       stroke-miterlimit="10"
-       width="19.333"
-       height="15.771"
-       id="rect106"
-       inkscape:export-filename="C:\Users\Omikron\AppData\Roaming\Skype\My Skype Received Files\legenda.png"
-       inkscape:export-xdpi="213"
-       inkscape:export-ydpi="213" />
     <text
        y="414.99832"
        x="-282.13345"
@@ -129,17 +107,6 @@
          style="font-size:30px"
          id="tspan3035">Active Site</tspan>
     </text>
-    <rect
-       style="fill:#86d3e5;stroke:#000000;stroke-miterlimit:10"
-       x="-311.47873"
-       y="396.20691"
-       stroke-miterlimit="10"
-       width="19.333"
-       height="15.771"
-       id="rect112"
-       inkscape:export-filename="C:\Users\Omikron\AppData\Roaming\Skype\My Skype Received Files\legenda.png"
-       inkscape:export-xdpi="213"
-       inkscape:export-ydpi="213" />
     <text
        y="414.87076"
        x="-412.05432"
@@ -153,73 +120,6 @@
          id="tspan3022"
          style="font-size:30px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Tahoma;-inkscape-font-specification:Tahoma">Inside</tspan>
     </text>
-    <rect
-       style="fill:#99cc62;stroke:#000000;stroke-miterlimit:10"
-       x="-438.90665"
-       y="396.20691"
-       stroke-miterlimit="10"
-       width="19.333"
-       height="15.771"
-       id="rect118"
-       inkscape:export-filename="C:\Users\Omikron\AppData\Roaming\Skype\My Skype Received Files\legenda.png"
-       inkscape:export-xdpi="213"
-       inkscape:export-ydpi="213" />
-    <image
-       y="167.29288"
-       x="-438.90665"
-       id="image3022"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABzEAAAAhCAIAAADWE8FTAAAAA3NCSVQICAjb4U/gAAADt0lEQVR4
-nO3cPW7cRhQA4FnBnWMYCIQ4hdQEvgGPkyPsGVzpDDmCD+ID7BXSJE0aQ85PzRQEaIKcGVJc8lGQ
-vq9akcPHN78EXqHT4+NjAgAAAAAgxKlt2+r9U6o3AAAAAABgsZujEwAAAAAAeEXUZAEAAAAA4qjJ
-AgAAAADEUZMFAAAAAIijJgsAAAAAEOfUtm3l9uVyCUsl/fFbuj/Hva57Y0rbvLQLdaX78/c4fVYL
-I5d6MXx8GH95SntYMdelR0o9mg7mcLpLU3/lIhyF7f/ccKVtouvmdEDWObBfo/nKjnNl5dQzH01f
-Z/PO9nMxG3n14cDI89mJs7ILY7rsp7tgK3ss+FLY7ImU7f4e6T1pD3KU0pdrv0197Od7+ZI7JMPh
-V3L4YQremM9TaXE6Rg7y+e3XX//78fpnS7/rHj6cf/n3YXUCMRZ2rbs1apxSGrWfNsuG6n4M26yb
-qdJTDx/On/7KbLps+8rFaaqVyH2zhX3pg6fJMNafqrylT6+7O8r2mu0wm88L9vnt199/+JRSyk59
-dpA3OXm2GtvD52j2YFkRMD1l1ywPOzqUNnvL/blpmunlN7MPZh/bxfuf08eod/VvTGmbl3ahrvSx
-+R6nz2ph5FIvho8P4y9PaQ8r5rr0SKlH08EcTndp6q9chKOw/Z8brrRNdN2cDsg6B/ZrNF/Zca6s
-nHrmo+nrbN7Zfi5mI68+HBh5PjtxVnZhTJf9dBdsZY8FXwqbPZGy3d8jvSftQY5S+nLtt6mP/Xwv
-X3KHZDj8Sg4/TMEb83kqLU7HyEG+vLtp/vnp+mdLv+tu75q7b7erE4ixsGvdrVHjlNKo/bRZNlT3
-Y9hm3UyVnrq9a5o/M5su275ycZpqJXLfbGFf+uBpMoz1pypv6dPr7o6yvWY7zObzgn15d/P3+yal
-lJ367CBvcvJsNbaHz9HswbIiYHrKrlkednQobfWWy7f8df+7AAAAAAAgjposAAAAAEAcNVkAAAAA
-gDhqsgAAAAAAcdRkAQAAAADiqMkCAAAAAMRRkwUAAAAAiKMmCwAAAAAQR00WAAAAACCOmiwAAAAA
-QBw1WQAAAACAOGqyAAAAAABx1GQBAAAAAOKoyQIAAAAAxFGTBQAAAACIoyYLAAAAABDn1LZt5fbl
-cglLBQAAAADgJWmaZnpxpiabTqdUbwAAAAAAwGL+dwEAAAAAQBw1WQAAAACAOGqyAAAAAABx1GQB
-AAAAAOJUa7KnU1QaAAAAAACvwpvazbaNSgMAAAAA4FX4H7F+dS4/J4KmAAAAAElFTkSuQmCC
-"
-       height="33"
-       width="1841" />
-    <image
-       y="338.13797"
-       x="-438.90665"
-       id="image3044"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABzYAAAAgCAYAAABw8Z7YAAAABHNCSVQICAgIfAhkiAAABO1JREFU
-eJzt3DuO3DYYAGCOYaRxjAWMwNgiaYKU6eY47tLmDK5yBh/Bfa7gA2yZNo17A4njWikmAmguX9JK
-I+7m+xovONTPnw9RBAj4NE3TFHqcTiF0VgUAAAAAAADY0rOjEwAAAAAAAABocbEJAAAAAAAADM/F
-JgAAAAAAADA8F5sAAAAAAADA8FxsAgAAAAAAAMM7TdM09VS8+/2XvXO574dfL/9+fHe/7ChxLj1y
-+X58dylfGmtrcw7XziU3r09V79imYxLPTU5c7yFGnoNa3/bOuzVvR+9DNek7XduDcuXzM0v23XSs
-auNXWttr53TtXNTeLy62HqPWmtjCQ9ZD5P2LTxsks9yf374NP/7z2yFts85ec9YTN65T+vsaec1l
-6W+9ebRyz8UNIXzV5lw2l7faS59v5TWinvzefHnVtZ/FY7KnnvldEzOE+7mX1uOefd2jf1vF4OLN
-l1dHp3CI9y8+de8HsfmZNc+2Yj526bcrhPZ35Zp5lb6dIeT3v1IfSt/cnr7HbaZy3+40Vi7X2hlg
-yTkod34oxS3lXjsPxXV7bbl2Suugt+2euU7/jpXGNo4Tl/Xk3pqzXMzSPKX5rFm/LWvnc+neUjvf
-5GK1+rH0farllWujdq7P9Wf+rTbHcZ3auT59vjZmtXdoydos5VF7r9IYpWdqcWq5t3LMKY1VLtee
-PaOnbqm9rb61veslzSN9trWHtPqcxl/yztXWQil2rn7tnazVSfvXo5bz229COJ/PXXFmz5dUPv98
-uyj4g/30X2dubu+XHeVm4Rjk8r25vZQvjbW1OYdr55Kb16eqd2zTMYnnJieu9xAjz0Gtb3vn3Zq3
-o/ehmvSdru1BufL5mSX7bjpWtfErre21c7p2LmrvFxdbj1FrTWzhIesh8uHlMf+hxd835/D9X98d
-0jbr7DVnPXHjOqW/r5HXXJb+1ptHK/dc3BDCV23OZXN5q730+VZeI+rJ7/z5ddd+Fo/Jnnrmd03M
-EO7nXlqPe/Z1j/5tFYOL8+fXR6dwiA8vn3XvB7H5mTXPtmI+dum3K4T2d+WaeZW+nSHk979SH0rf
-3J6+x22mct/uNFYu19oZYMk5KHd+KMUt5V47D8V1e225dkrroLftnrlO/46VxjaOE5f15N6as1zM
-0jyl+axZvy1r53Pp3lI73+Ritfqx9H2q5ZVro3auz/Vn/q02x3Gd2rk+fb42ZrV3aMnaLOVRe6/S
-GKVnanFqubdyzCmNVS7Xnj2jp26pva2+tb3rJc0jfba1h7T6nMZf8s7V1kIpdq5+7Z2s1Un716Oa
-8x93XTFij/9ECQAAAAAAADx5LjYBAAAAAACA4bnYBAAAAAAAAIbnYhMAAAAAAAAYnotNAAAAAAAA
-YHguNgEAAAAAAIDhudgEAAAAAAAAhudiEwAAAAAAABiei00AAAAAAABgeC42AQAAAAAAgOG52AQA
-AAAAAACG52ITAAAAAAAAGJ6LTQAAAAAAAGB4LjYBAAAAAACA4bnYBAAAAAAAAIbnYhMAAAAAAAAY
-3mmapqmn4t3d3d65AAAAAAAAAP8T5/N5Uf3ui81wOoXQWRUAAAAAAABgS/4rWgAAAAAAAGB4LjYB
-AAAAAACA4bnYBAAAAAAAAIbnYhMAAAAAAAAYXt/F5um0cxoAAAAAAAAAZc+7ak3TzmkAAAAAAAAA
-lP0L3AySBWZqQEsAAAAASUVORK5CYII=
-"
-       height="32"
-       width="1846" />
     <text
        xml:space="preserve"
        style="font-size:36px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times New Roman"
@@ -244,29 +144,6 @@ lP0L3AySBWZqQEsAAAAASUVORK5CYII=
          x="-438.90665"
          y="330.0015"
          style="font-size:30px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Tahoma;-inkscape-font-specification:Tahoma">TCP - 296</tspan></text>
-    <image
-       y="254.94762"
-       x="-438.90665"
-       id="image3084"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABy8AAAAdCAYAAAATriCJAAAABHNCSVQICAgIfAhkiAAAA0RJREFU
-eJzt3D1ynDAUAGCRSe/WTTqX6bhR2pzH98hFOIUPQopkY4IRQvztW/x9jVlAQgjxpOHNuOn7vk9T
-mialzCEAAAAAAACAvX25dwMAAAAAAAAAUpK8BAAAAAAAAIKQvAQAAAAAAABCkLwEAAAAAAAAQmj6
-vu+nDnS/fpzbkm8///x9e33f3mpY12377XX62lP7c22MYmtf3e55qo4l/bHUEc92zp5tH1s6Vo6u
-c1wm16+lcb9VzTOdG2+5uobtrxlHpWtFsCbmlMpEud+z3vXh9VKq66+auD+sf+u7OnfeWmv6u1Sm
-5j6H7+bw973NxcjamLKlDXvM0zdHrI/2ctT67ZGMx1XJmeujI9dG0dTG3SVz673mNYAzjde9KX2M
-f6VvCFPn5s7PlSvtL9VRG7P3iLlb54i911FDj7imuiJz+3I16+mrKX2/m4sV0b5rz8Wiz/hs4UrW
-fh9N6b841rZtsdjXuYPt9+e6Rmzx8rexT8/v21sN67ptP03cU25/ro1RbO2r2z1P1bGkP5Y64tnO
-2bPtY0vHytF1jsvk+rU07reqeaZz4y1X17D9NeOodK0I1sScUpko93vWuz68Xkp1/VUT94f1b31X
-585ba01/l8rU3Ofw3Rz+vre5GFkbU7a0YY95+uaI9dFejlq/PZLxuCo5c3105Noomtq4u2Ruvde8
-BnCm8bo3pY/xr/QNYerc3Pm5cqX9pTpqY/YeMXfrHLH3OmroEddUV2RuX65mPX01pe93c7Ei2nft
-uVj0GZ8tXMna76Mp/YtjXdctKubfxgIAAAAAAAAhSF4CAAAAAAAAIUheAgAAAAAAACFIXgIAAAAA
-AAAhSF4CAAAAAAAAIUheAgAAAAAAACFIXgIAAAAAAAAhSF4CAAAAAAAAIUheAgAAAAAAACFIXgIA
-AAAAAAAhSF4CAAAAAAAAIUheAgAAAAAAACFIXgIAAAAAAAAhSF4CAAAAAAAAIUheAgAAAAAAACFI
-XgIAAAAAAAAhNH3f91MHuq47uy0AAAAAAADARbVtWzwnm7xMTZNS5hAAAAAAAADA3vzbWAAAAAAA
-ACAEyUsAAAAAAAAgBMlLAAAAAAAAIATJSwAAAAAAACCE3xLo0M7b0rLOAAAAAElFTkSuQmCC
-"
-       height="29"
-       width="1839" />
     <text
        xml:space="preserve"
        style="font-size:36px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times New Roman"
@@ -279,5 +156,122 @@ ACAEyUsAAAAAAAAgBMlLAAAAAAAAIATJSwAAAAAAACCE3xLo0M7b0rLOAAAAAElFTkSuQmCC
          x="-438.90665"
          y="244.59261"
          style="font-size:30px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Tahoma;-inkscape-font-specification:Tahoma">TCP - 295</tspan></text>
+    <image
+       y="168.89725"
+       x="-438.90665"
+       id="image4251"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABzEAAAAhCAYAAABZcVYEAAAABHNCSVQICAgIfAhkiAAAAvZJREFU
+eJzt3C1u3EAUAOBxlSP0AkUhZWa9QFBBUUEPEak4MLhSD5FKwUG5QJlZSFCPMgHRSq7rn4njcd52
+v4/tejxvZvxm1tKTtsk55wQAAAAAAAAQxLvilk1TcRgAAAAAAAAAz8qLmAAAAAAAAAA7UMQEAAAA
+AAAAQlHEBAAAAAAAAEJRxAQAAAAAAABCUcQEAAAAAAAAQmlyzrmkYdd1tccCAAAAAAAAnIi2bSev
+nW3V0d7Or+7T4/XFWw/jH+dX9ymlVHVshxg1PF5f/NV/fx5r4i6tw7DPYfw13iIvtsjHpT6W1mXq
+2Q1zcilHa+ytsZj97/bYNzUd1mxqrbdyDOszlj9zz7ck70vnPZZTB3uuXT8fXhJ3y7OX/RzDvnyt
+uVye2vNT50Bte+/1pZhzvwtza9q3x5xec15xmpbee97qbDyWd8q1eyjyvIbvYcN3mYhn2f9iae85
+s0/TQ3ubPnZfq/W39LnU3c1l+vDj06ZjjWLNGh3ajN2bUhq9f+qeuRgHw/Zb5c1SP3c3l+nzt5+r
+7i+5NjXHkrj9e9asRz/2MP5L+ykZR39Oh3Zj89z6TFiyd7xj99Depj/ff6eU0myOzj3bmud+7ed5
+TPnykrN8i1gprT9H1sYc+22oPY5fX97PXvd3sgAAAAAAAEAoipgAAAAAAABAKIqYAAAAAAAAQCiK
+mAAAAAAAAEAoipgAAAAAAABAKIqYAAAAAAAAQCiKmAAAAAAAAEAoipgAAAAAAABAKIqYAAAAAAAA
+QCiKmAAAAAAAAEAoipgAAAAAAABAKIqYAAAAAAAAQCiKmAAAAAAAAEAoipgAAAAAAABAKIqYAAAA
+AAAAQCiKmAAAAAAAAEAoTc45lzTsuq72WAAAAAAAAIAT0bbt5LXiImZqmpQKmwIAAAAAAACs5e9k
+AQAAAAAAgFAUMQEAAAAAAIBQFDEBAAAAAACAUBQxAQAAAAAAgFDKiphNU3kYAAAAAAAAAM/Oilrl
+XHkYAAAAAAAAAM+eAC7PNEStHqUgAAAAAElFTkSuQmCC
+"
+       preserveAspectRatio="none"
+       height="33"
+       width="1841" />
+    <image
+       y="257.97595"
+       x="-434.90665"
+       id="image4316"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABy8AAAAdCAYAAAATriCJAAAABHNCSVQICAgIfAhkiAAAAnBJREFU
+eJzt3M11nDAUBtBHjntxARSRHlKLl+knaxdBAekhPcircTgTQGj4mWdy72o8AiEESDp8x9OVUkpM
+6bqImSIAAAAAAACAvX17dgMAAAAAAAAAIoSXAAAAAAAAQBLCSwAAAAAAACAF4SUAAAAAAACQQldK
+KVMFwzCc3RYAAAAAAADgovq+r27zslT449ef3RpT8/vn94iIeH17//y81biu2+fXt/fJY099P9fG
+LLb21e2cp+pY0x9rHXFtl+zZ9ntr75Wj67zfZ65fa/f9Vi3XdOl+m6tr3P6W+6h2rAweGXNq+2Q5
+37Oe9fHxItr6q2XcH9e/9Vld2u5Rj/R3bZ+W8xw/m+O/n21pjGwdU7a0YY95+uaI9dFejlq/fSX3
+91XNmeujI9dG2bSOu2vm1mfNawBnul/3Rvw7R9XeIUxtO7f93H6172t1tI7Ze4y5W+eIvddRY19x
+TXVF5vb1WtbTV1N7f7c0VmR7r700Fv2P1xau5NH3oxF/x7G1/zjpZ2MBAAAAAACAFISXAAAAAAAA
+QArCSwAAAAAAACAF4SUAAAAAAACQgvASAAAAAAAASEF4CQAAAAAAAKQgvAQAAAAAAABSEF4CAAAA
+AAAAKQgvAQAAAAAAgBSElwAAAAAAAEAKwksAAAAAAAAgBeElAAAAAAAAkILwEgAAAAAAAEhBeAkA
+AAAAAACkILwEAAAAAAAAUhBeAgAAAAAAACl0pZQyVTAMw9ltAQAAAAAAAC6q7/vqNrPhZXRdxEwR
+AAAAAAAAwN78bCwAAAAAAACQgvASAAAAAAAASEF4CQAAAAAAAKQgvAQAAAAAAABS+AAWYPgpX9lO
+4AAAAABJRU5ErkJggg==
+"
+       preserveAspectRatio="none"
+       height="29"
+       width="1839" />
+    <image
+       y="342.58743"
+       x="-438.90665"
+       id="image4372"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABzYAAAAgCAYAAABw8Z7YAAAABHNCSVQICAgIfAhkiAAAA19JREFU
+eJzt3Dtu1UAUANAxykao0tC5YwNZQiSWQZ0yNbugiIREnQ3QuUuTig3QsQBTRJbMZH5+sfMGck4V
+OeM7dz4eW7rSG+Z5nkOLYQihsSkAAAAAAADAnt6dOwEAAAAAAACAGoVNAAAAAAAAoHsKmwAAAAAA
+AED3FDYBAAAAAACA7ilsAgAAAAAAAN0b5nmeWxpO03R0LgAAAAAAAMAbMY7jpvYXWxp/+v5rU/CX
+ery9CiGEcHlz/+zauaxzaZHK9/LmPjzeXm2Otbclh9fOJbWu/6vWuY3nZL02Ket2L9HzGpTGdnTe
+tXU79zlUEj/TpTModX25Z8u5G89Vaf5ye/vUNT11LUrPF0/2nqPantjDS/bD2sN4t0c6m/38/CO8
+//LxLH1zmqPWrCXuuk3u79fIa7kW/681j1ruqbghhL/6XK4t12v9xffX8upRS34fpuum82w9J0dq
+Wd9TYobwPPfcfjxyrEeMb68YPPkwXZ87hbN4GO+az4O15Z5T7q3F/NfF764Q6u+V18wr9+4MIX3+
+5caQe+e2jH3dZyz17o5jpXItfQNs+Q5KfT/k4uZyL30Prdu22nPv5PZBa98tax3/vZab23Wc9bWW
+3GtrloqZW6c4n1P2b82p67n1bCl936Ri1cax9Xkq5ZXqo/RdnxrP8r/SGq/blL7r4/tLc1Z6hrbs
+zVwepecqjpG7pxSnlHstx5TcXKVybTkzWtrm+tvrXdu6X+I84ntrZ0htzHH8Lc9caS/kYqfal57J
+Upt4fC1KOf/+9rUpxpqfogUAAAAAAAC6p7AJAAAAAAAAdE9hEwAAAAAAAOiewiYAAAAAAADQPYVN
+AAAAAAAAoHsKmwAAAAAAAED3FDYBAAAAAACA7ilsAgAAAAAAAN1T2AQAAAAAAAC6p7AJAAAAAAAA
+dE9hEwAAAAAAAOiewiYAAAAAAADQPYVNAAAAAAAAoHsKmwAAAAAAAED3FDYBAAAAAACA7ilsAgAA
+AAAAAN0b5nmeWxpO03R0LgAAAAAAAMAbMY7jpvbNhc0wDCE0NgUAAAAAAADYk5+iBQAAAAAAALqn
+sAkAAAAAAAB0T2ETAAAAAAAA6J7CJgAAAAAAANC9tsLmMBycBgAAAAAAAEDeRVOreT44DQAAAAAA
+AIC8P3eIQE8z6Nn9AAAAAElFTkSuQmCC
+"
+       preserveAspectRatio="none"
+       height="32"
+       width="1846" />
+    <rect
+       inkscape:export-ydpi="213"
+       inkscape:export-xdpi="213"
+       inkscape:export-filename="C:\Users\Omikron\AppData\Roaming\Skype\My Skype Received Files\legenda.png"
+       id="rect98-2-1"
+       height="15.771"
+       width="19.333"
+       stroke-miterlimit="10"
+       y="395.77887"
+       x="9.3245258"
+       style="fill:#ffffff;stroke:#000000;stroke-miterlimit:10" />
+    <rect
+       inkscape:export-ydpi="213"
+       inkscape:export-xdpi="213"
+       inkscape:export-filename="C:\Users\Omikron\AppData\Roaming\Skype\My Skype Received Files\legenda.png"
+       id="rect106-9-0"
+       height="15.771"
+       width="19.333"
+       stroke-miterlimit="10"
+       y="395.77887"
+       x="-126.59769"
+       style="fill:#267bb8;fill-opacity:1;stroke:#000000;stroke-miterlimit:10" />
+    <rect
+       inkscape:export-ydpi="213"
+       inkscape:export-xdpi="213"
+       inkscape:export-filename="C:\Users\Omikron\AppData\Roaming\Skype\My Skype Received Files\legenda.png"
+       id="rect112-7-5"
+       height="15.771"
+       width="19.333"
+       stroke-miterlimit="10"
+       y="395.77887"
+       x="-310.29337"
+       style="fill:#d92027;fill-opacity:1;stroke:#000000;stroke-miterlimit:10" />
+    <rect
+       inkscape:export-ydpi="213"
+       inkscape:export-xdpi="213"
+       inkscape:export-filename="C:\Users\Omikron\AppData\Roaming\Skype\My Skype Received Files\legenda.png"
+       id="rect118-3-6"
+       height="15.771"
+       width="19.333"
+       stroke-miterlimit="10"
+       y="395.77887"
+       x="-437.72128"
+       style="fill:#faae61;fill-opacity:1;stroke:#000000;stroke-miterlimit:10" />
   </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer 2" />
 </svg>
