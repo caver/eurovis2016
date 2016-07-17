@@ -485,7 +485,8 @@ Once $A(x)$ is determined, we compute the distance of the ligand position $P(x)$
 \paragraph{\textbf{Direction}} of the ligand movement with respect to the active site is another essential attribute. 
 During the MD simulation the ligand can enter and exit the protein tunnel repeatedly. 
 Therefore, biochemists want to distinguish between intervals where the ligand was traveling towards the active site or in the opposite direction (i.e., towards the outer solvent). 
-To compute the direction we employ the \textit{distance} attribute such that we evaluate whether the distance increases between two subsequent time steps, when moving towards the active site, or decreases, when moving in the opposite direction.
+The direction parameter is a binary value computed as the derivative of the \textit{distance} attribute. 
+In other words, we simply evaluate the ligand distance from the active site in two subsequent time steps and if the difference of the obtained values is positive we claim that ligand is moving towards active site and vice versa.
 
 \paragraph{\textbf{Amount of free space}} surrounding the ligand can help the biochemists to understand why the ligand in some places got stuck.
 In such cases there was not enough free space for the passage of the ligand or the ligand was repelled by some amino acid due to incompatible physico-chemical properties.
@@ -594,7 +595,7 @@ This view provides an overview of the ligand trajectory in 3D.
 However, as was shown in Figure \ref{fig:lig_movement}, the ligand trajectory contains a lot of noise, due to the jittery movement of the ligand.
 Therefore, we introduced the previously described trajectory simplification.
 Using this function the whole trajectory can be automatically simplified.
-If the automatic simplification does not lead to satisfactory results, selected parts of the trajectory can be further simplified manually.
+If the automatic simplification does not lead to satisfactory results, selected parts of the trajectory can be further simplified interactively by the user.
 The trajectory is colored according to one of the geometric and physico-chemical attributes. 
 
 \section*{Analysis Procedure and Discussion}
