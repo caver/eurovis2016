@@ -406,8 +406,8 @@ Therefore, only a fraction of the trajectory captures its transportation to the 
 \section*{System Overview}
 Our proposed solution consists of several linked views covering individual steps of the exploration workflow (see Figure~\ref{fig:overview}). 
 In the first part, the user is provided with the overview representation of the whole loaded trajectory (Figure~\ref{fig:overview} -- 1). 
-This simple 1D representation encodes different routes of the ligand -- red color highlights the parts of the trajectory where the ligand is inside the protein, white color encodes the situation when the ligand is outside the protein, blue denotes for the situation when the ligand is close to the protein surface.
-Orange color shows the time portions when the ligand was close to the active site.
+This simple 1D representation encodes different routes of the ligand -- orange color highlights the parts of the trajectory where the ligand is inside the protein, white color encodes the situation when the ligand is outside the protein, and blue denotes for the situation when the ligand is close to the protein surface.
+Red color shows the time portions when the ligand was close to the active site.
 By selecting a part of the trajectory using this representation, the user is automatically navigated to this selected part and all following representations show only this part.
 
 \begin{figure*}[thb]
@@ -653,7 +653,7 @@ Here we show one of the possible solutions used by our domain experts in the rea
 The biochemists first added another scatterplot showing the hydrophobicity profile along the ligand trajectory (see Figure~\ref{fig:case_b}).
 Since both scatterplots are interactively connected in real-time, the biochemists could select the low hydrophobicity values and immediately observe at which distance they are positioned with respect to the ligand trajectory over time (see Figure~\ref{fig:case_a}). 
 
-\begin{figure}[htb]
+\begin{figure}[tb]
 	\centering
 	\subfigure[]{\label{fig:case_a}\includegraphics[width=0.95\linewidth]{img/case_a.pdf}}
 	\subfigure[]{\label{fig:case_b}\includegraphics[width=0.95\linewidth]{img/case_b.pdf}}
@@ -677,7 +677,7 @@ By creating the selection in this view, the biochemists were able to easily pinp
 As the next step, the biochemists were interested in seeing which amino acids are actually responsible for the described behavior.
 For this reason they utilized the bar chart view containing the amino acid graph (see Figure~\ref{fig:case_hydro_vs_dist_bar}).
 
-\begin{figure}[htb]
+\begin{figure}[tb]
 	\centering
   \includegraphics[width=0.95\linewidth]{img/case_hydro_vs_dist_bar.png}
   \caption{\label{fig:case_hydro_vs_dist_bar} Bar chart view showing the time steps when the ligand is in the vicinity of the hydrophilic amino acids (blue bars).}
@@ -692,7 +692,7 @@ As can be seen in Figure~\ref{fig:case_hydro_vs_dist_3d} the selected amino acid
 This was also confirmed by the bar chart representation in Figure~\ref{fig:case_hydro_vs_dist_bar} where the majority of bars have TODO red color which corresponds to the closeness of the ligand to the active site.
 
 
-\begin{figure}[htb]
+\begin{figure}[tb]
 	\centering
   \includegraphics[width=0.95\linewidth]{img/case_hydro_vs_dist_3d.jpg}
   \caption{\label{fig:case_hydro_vs_dist_3d} 3D view showing the selected hydrophilic amino acids and their spatial position to the ligand trajectory.}
@@ -713,41 +713,42 @@ This was also confirmed by the bar chart representation in Figure~\ref{fig:case_
 \section*{Second Scenario}
 In the second scenario we demonstrate the usefulness of our approach when studying more complex cases.
 For this purpose we used a simulation of Haloalkane dehalogenase together with three 1,2,3-Trichloropropane (TCP) ligands (referred in the following text as TCP--294, TCP--295, and TCP--296 based on their IDs in the simulation).
+The original trajectories of these ligands are very complex, as can be seen in Figure~\ref{fig:tcp3_paths}.
 
-\begin{figure}[htb]
+\begin{figure}[tb]
 	\centering
 	\includegraphics[width=0.95\linewidth]{img/tcp3_paths.png}
   \caption{
   \label{fig:tcp3_paths}
-  TODO
+  Haloalkane dehalogenase (blue) with the original trajectories of three ligands, TCP--294, TCP--295, and TCP--296 (grey, orange, and red).
   }
 \end{figure}  
 
 The hypothesis stated by the biochemists at the beginning was that all three ligands should bind to the same pocket surrounded by the following amino acids {\color{red}TODO add IDs}.
-\todo{Another possible goal can be evaluation how many ligands can fit the given pocket - \ie evaluate reactiveness of given protein?}
+%\todo{Another possible goal can be evaluation how many ligands can fit the given pocket - \ie evaluate reactiveness of given protein?}
 Hence, attributes such as \textit{distance} or \textit{direction} were computed in relation to the active site defined by these amino acids. 
 
-Our tool allows to select the reference{\color{red}/observed?} ligand and thus easily compare their individual trajectories.
+First, our tool allows to select the reference{\color{red}/observed?} ligand and thus easily compare their individual trajectories.
 %In the first stage of analysis biochemists again used overview of the overall simulation behavior.
-Using the simulation overview (see Figure~\ref{fig:tcp3_overview}) it is obvious that only TCP--296 evidently entered the protein -- green (and canyan) color depicts the state when ligand is inside of protein while orange indicates closeness to the surface. 
-After more detailed observation it can be also seen that the TCP--294 also entered the protein in the last part of the simulation, but it probably did not enter deep since there is just small amount of green color. 
-Finally, the overview of trajectory of TCP--295 suggests that the ligand was scratching the protein surface but never get deeper into the structure - there is no green color at all.
+Using the simulation overview (see Figure~\ref{fig:tcp3_overview}) it is obvious that only TCP--296 evidently entered the protein -- orange and red colors depict the state when the ligand is inside of protein while blue color indicates the ligand closeness to the protein surface. 
+After more detailed observation it can be also seen that the TCP--294 also entered the protein in the last part of the simulation, but it probably did not enter deeply. 
+Finally, the overview of the trajectory of TCP--295 suggests that the ligand was rolling around the protein surface but never got deeper into the structure.
 
 
-\begin{figure}[htb]
+\begin{figure}[tb]
 	\centering
 	\includegraphics[width=0.95\linewidth]{img/tcp3_overview.pdf}
   \caption{
   \label{fig:tcp3_overview}
-  TODO - caption
+  Overview representation of the trajectories of three ligands entering the Haloalkane dehalogenase. TCP--294 entered the protein just partially at the end of the simulation. TCP--295 rolled over the protein surface. TCP--296 entered the protein and headed towards the active site.
   }
 \end{figure}   
 
-The simulation overview, however, provides only general information about ligand position with respect to the protein surface.
-The interesting behavior can be revealed after depicting the distances from the active site using scatter plots.
-Here biochemists immediately spotted that both TCP--294 and TCP--296 were evidently in close vicinity of active site during the last part of the simulation (see Figure~\ref{fig:tcp3_dist_time_average_294}~and~\ref{fig:tcp3_dist_time_average_296}) while TCP--295 does not exhibits any significant affinity towards the active site.
+The simulation overview, however, provides only general information about ligand positions with respect to the protein surface.
+The interesting behavior can be revealed after depicting the distances from the active site using scatterplots.
+Here the biochemists immediately spotted that both TCP--294 and TCP--296 were evidently in a close vicinity to the active site during the last part of the simulation (see Figure~\ref{fig:tcp3_dist_time_average_294}~and~\ref{fig:tcp3_dist_time_average_296}), while TCP--295 does not exhibit any significant affinity towards the active site.
 
-\begin{figure}[htb]
+\begin{figure}[tb]
 	\centering
 	\subfigure[]{\label{fig:tcp3_dist_time_average_294}\includegraphics[width=0.95\linewidth]{img/tcp3_dist_time_average_294.png}}
 	\subfigure[]{\label{fig:tcp3_dist_time_average_295}\includegraphics[width=0.95\linewidth]{img/tcp3_dist_time_average_295.png}}
@@ -760,13 +761,13 @@ Here biochemists immediately spotted that both TCP--294 and TCP--296 were eviden
   }
 \end{figure} 
 
-In case of the TCP--294, the overview is mostly orange (indicating closeness to the surface) due to the fact that the explored pocket is relatively shallow.
-Moreover, TCP--295 reached the active site first and hence filled the empty space deeper in protein.
-This can be seen either from distance scatter plots (see Figure~\ref{fig:tcp3_dist_time_average_294}~and~\ref{fig:tcp3_dist_time_average_296}) or directly from 3D (see Figure~\ref{fig:tcp3_3D}).
+In case of the TCP--294, the overview is mostly blue (indicating closeness to the surface) due to the fact that the site where this ligand binds is relatively shallow and close to the surface.
+TCP--295 reached the deeply buried active site first and hence filled the empty space around this active site.
+This can be seen either from the distance scatterplots (see Figure~\ref{fig:tcp3_dist_time_average_294}~and~\ref{fig:tcp3_dist_time_average_296}) or directly from the 3D  view (see Figure~\ref{fig:tcp3_3D}).
 %First, obviously distance of TCP--295 from active site dropped much sooner. 
 %Second, in closeup (see Figure~\ref{fig:tcp3_distance_comparison}) we can see that the real distance are  different.  
 
-\begin{figure}[htb]
+\begin{figure}[tb]
 \centering
 \includegraphics[width=0.95\linewidth]{img/tcp3_3D.pdf}
   \caption{
@@ -775,20 +776,19 @@ This can be seen either from distance scatter plots (see Figure~\ref{fig:tcp3_di
   }
 \end{figure} 
 
-At this point the biochemists were already able to conclude that only two of the ligands did enter the binding site of the protein and not all of them as expected.
+At this point the biochemists were already able to conclude that only two of the ligands entered the binding site of the protein and only one of them entered the deeply buried active site.
 Nevertheless, some additional observations can be done afterwards as well.  
-For instance, there is obviously a spike in distance of TCP--296 from active site around time step 30,000. 
-This corresponds to the time when the TCP--294 begun its own approach towards the active site.
-Hence, we can speculate that these two ligans did interacted in some way.
+For instance, obviously there is a spike in the distance of TCP--296 from the active site around time step 30.000. 
+This corresponds to the time when the TCP--294 started to head towards the active site.
 
-Another example is using scatter plot showing relation ship between distance from active site and stuckness of the ligand (see Figure~\ref{fig:tcp3_dist_stuckness_295}).
-Here we can see that the ligand was highly oscillating in close vicinity of the active site.
-This can suggests that the active site is stable place regarding the ligand binding ability.
+Another example is using the scatterplot showing the relationship between the distance from the active site and the stuckness of the ligand (see Figure~\ref{fig:tcp3_dist_stuckness_295}).
+From this scatterplot we can see that the ligand was highly oscillating in a close vicinity of the active site.
+This can suggest that the active site is very stable with respect to its ability to bind a ligand.
 %This is even more obvious when showing both attributes in single plot.
 
 
 
-\begin{figure}[htb]
+\begin{figure}[tb]
 	\centering
 	\includegraphics[width=0.95\linewidth]{img/tcp3_dist_stuckness_295.png}
   \caption{
@@ -797,9 +797,9 @@ This can suggests that the active site is stable place regarding the ligand bind
   }
 \end{figure}
 
-Additionally, user can select just a small portion of the simulation in order to evaluate the ligand transportation into the protein molecule (see Figure~\ref{fig:path}).
+Additionally, the user can select just a small portion of the simulation in order to evaluate the ligand transportation through the protein molecule (see Figure~\ref{fig:path}).
 
-\begin{figure}[htb]
+\begin{figure}[tb]
 	\centering
 	\includegraphics[width=0.95\linewidth]{img/path.png}
   \caption{
