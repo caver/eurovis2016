@@ -11,13 +11,13 @@ The trajectory is colored by time from beginning (gray) towards its end (orange)
 \label{fig:crowded}
 \end{figure}
 
-We propose two types of ligand trajectory simplification: i) automatic and ii) manual.
-The automatic simplification is applied to the whole original trajectory, while the manual one enables fine user-regulated control over the level of simplification of individual parts of the trajectory.
+We propose two types of ligand trajectory simplification: i) automatic and ii) interactive.
+The automatic simplification is applied to the whole original trajectory, while the interactive one enables fine user-regulated control over the level of simplification of individual parts of the trajectory.
 %In fact, the automatic simplification can be viewed as an iterative application of the manual simplification.
 %, since its design was aligned with the workflow of a biochemist. - dala by som prec, postradam logicku navaznost
-\subsubsection*{Manual Simplification}
+\subsubsection*{Interactive Simplification}
 
-First, we will describe the algorithm for the manual trajectory simplification (see Algorithm~\ref{alg:simplify}).
+First, we will describe the algorithm for the interactive trajectory simplification (see Algorithm~\ref{alg:simplify}).
 The input of the algorithm consist of trajectory $T_{in}$ and interval $I$ which denotes a part where the trajectory should be simplified.
 %a data structure describing the simplification ($S$).
 %More precisely, $S$ is a list of consecutive intervals that span the whole trajectory.
@@ -43,7 +43,7 @@ In each iteration, we have a set of intervals $L \in \mathcal{L}$ and we apply t
 In both cases, we employ Savitzky-Golay smoothing method~\cite{savitzky1964smoothing} to simplify the trajectory.
 As the last step we store the simplified trajectory to a cache.
 The caching is employed to primarily improve the performance of automatic simplification.
-Moreover, the performance of manual simplification is also enhanced, for example, when the user iteratively simplifies the same part of the trajectory until reaching satisfiable results.
+Moreover, the performance of interactive simplification is also enhanced, for example, when the user iteratively simplifies the same part of the trajectory until reaching satisfiable results.
 
 \begin{algorithm}
   \begin{algorithmic}[1]
@@ -76,16 +76,16 @@ Moreover, the performance of manual simplification is also enhanced, for example
 
 \subsubsection*{Automatic Simplification}
 
-The automatic algorithm (see Algorithm~\ref{alg:auto-simplify}) is iterative and in its iterations employs the manual simplification.
+The automatic algorithm (see Algorithm~\ref{alg:auto-simplify}) is iterative and in its iterations employs Algorithm~\ref{alg:simplify}.
 Furthermore, it is based on an idea to simplify only parts of the trajectory that are still too complex.
 The algorithm starts with considering the whole trajectory as complex -- the set of complex intervals $C$ is set to the interval spanning $T_{in}$.
 Then, the complexity $c$ of $T_{in}$ is evaluated in all points of $T_{in}$.
 The complexity $c(x)$ in point $x$ is defined as (see Figure~\ref{fig:complexity}):
 \begin{equation}
-  c(x) = \sum_{(u, v) \in N(T, x, \nu)}{(|u| + |v|)^2 \alpha(u, v)}, % \mathrm{acos}(\frac{u \cdot v}{|u| \cdot |v|})
+  c(x) = \sum_{(u, v) \in N(T, x, \nu)}{(|u| + |v|)^2 \alpha(\vec{u}, \vec{v})}, % \mathrm{acos}(\frac{u \cdot v}{|u| \cdot |v|})
 \label{eq:complexity}
 \end{equation}
-where $N(T, x, \nu)$ is a set of consecutive tuples of segments of a trajectory $T$ lying in the neighborhood of $x$ and $\alpha(u, v)$ is an angle between segments $u$ and $v$.
+where $N(T, x, \nu)$ is a set of consecutive tuples of segments of a trajectory $T$ lying in the neighborhood of $x$ and $\alpha(u, v)$ is an angle between directions of $u$ and $v$.
 The neighborhood of $x$ contains all points $y \in T$ such that $d(x, y) < \nu$ where $d(x, y)$ is the distance along $T$.
 We evaluate the complexity of $T$ in the neighborhood of $x$ in order to take into account the local shape of the trajectory in the vicinity of $x$.
 Our typical setting for $\nu$ is 2~\angstrom\ which is an experimentally obtained value.

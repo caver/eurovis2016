@@ -301,7 +301,7 @@ In this paper we propose a new visual analysis system that addresses the aforeme
 We aim to provide the domain experts with a tool for intuitive and interactive exploration of already captured molecular dynamics (MD) simulation containing the process of ligand binding. 
 Using our proposed solution the users are able to distinguish between the parts of the simulation where the ligand searches for the proper path to the active site (searches the tunnel gorge or enters the wrong tunnel) and the part where the ligand finally leads to and reaches the active site.
 Furthermore, our solution introduces a method for simplification of the original scattered ligand trajectory.
-We suggest the automatic simplification of the trajectory which can be further manually adjusted, i.e., selected parts of the trajectory can be further simplified.
+We suggest the automatic simplification of the trajectory which can be further interactively adjusted, i.e., selected parts of the trajectory can be further simplified.
 So the trajectory can be simplified in a hierarchical manner and further interactively explored using the other proposed views.
 One of these views is the 3D visualization where the simplified trajectory can be displayed in the spatial context of the whole molecule.
 The trajectory can be color-coded according to different criteria and selections performed in the other views are highlighted by a thick tube.
@@ -553,7 +553,7 @@ When the set of selected bars is not continuous, the user is informed about it b
 
 The information about the surrounding acids is also very crucial when exploring the sites when the ligand got stuck. 
 For each time step within the temporal block we compute the three closest amino acids from the ligand. 
-We provide the visual representation of this list (Figure ~\ref{fig:aacids}), where each amino acid defines one line in the list. 
+We provide the visual representation of this list (Figure~\ref{fig:aacids}), where each amino acid defines one line in the list. 
 The line is colored with respect to a selected physico-chemical property -- our representation supports switching between hydrophobicity, partial charges, and donors and acceptors.
 The interruption in some of these lines is caused by the fact that the given amino acid is not present around the ligand in the corresponding temporal block.
 
@@ -805,7 +805,7 @@ Therefore, the biochemists can, for instance, easily select a given part of simu
 
 \begin{figure}[tb]
 	\centering
-	\includegraphics[width=0.95\linewidth]{img/path.png}
+	\includegraphics[width=0.95\linewidth]{img/path2.png}
   \caption{
   \label{fig:path}
   Small part of the molecular simulation showing the exact time span when the TCP--296 was penetrating the protein.  
