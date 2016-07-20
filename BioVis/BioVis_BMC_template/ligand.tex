@@ -559,8 +559,9 @@ The interruption in some of these lines is caused by the fact that the given ami
 
 \begin{figure}[htb]
 	\centering
-  \includegraphics[width=0.95\linewidth]{img/aacids.png}
-  \caption{\label{fig:aacids} Representation of amino acids surrounding the temporal tunnel and their physico-chemical properties. Coloring corresponds to a selected property, the line interruption means that this amino acid was not detected around the ligand in the corresponding temporal block.}
+  \includegraphics[width=0.95\linewidth]{img/aacids.pdf}
+  \caption{\label{fig:aacids} Representation of amino acids surrounding the temporal tunnel and their physico-chemical properties.
+	Coloring corresponds to hydrophobicity, the line interruption means that this amino acid was not detected around the ligand in the corresponding temporal block.}
 \end{figure}
 
 \subsubsection*{Scatterplot Matrix}
@@ -569,19 +570,19 @@ The axes of one scatterplot represent a pair of user-selected attributes.
 Each point in the scatterplot then represents the values of these attributes at one time step.
 As a result, the scatterplot can easily reveal trends and relationships between attributes.
 Interactive manipulation with the scatterplot, such as selection, zooming, and change of displayed attributes provides an easy way for manual data filtering. 
-To eliminate the noise in the data caused by ligand jittering, we propose the \textit{sliding window} smoothing function.
+To eliminate the noise in the data caused by ligand jittering, we propose the \textit{sliding window} smoothing function (see Figure~\ref{fig:scatterplot}).
 The sliding window function assigns to each time step the averaged value from its neighborhood.
 The size of the neighborhood is again regulated by the user. 
 
 The plots can further be stacked, forming a matrix and thus showing relationship between multiple attributes at once.
 The stacked plots are also interactively interconnected and the selection in Scatterplot Matrix is interactively linked with Barchart View and 3D View.
 
-Figure \ref{fig:scatterplot} shows the scatterplot matrix for a sequence of $500$ time steps.
+%Figure \ref{fig:scatterplot} shows the scatterplot matrix for a sequence of $500$ time steps.
 
 \begin{figure}[tb]
 	\centering
   \includegraphics[width=0.95\linewidth]{img/scatterplot.png}
-  \caption{\label{fig:scatterplot} Scatterplot matrix depicting time vs. distance and time vs speed property before (up) and after (down) smoothing by the sliding window function.}
+  \caption{\label{fig:scatterplot} Scatterplot matrix depicting time vs. distance and time vs. speed properties for a sequence of 500 time steps before (up) and after (down) smoothing \textcolor{blue}{by the sliding window function}.}
 \end{figure}
 
 \begin{figure*}[htb]
