@@ -137,3 +137,16 @@ All points $p \in P$ are then removed from $C$ which prevents further simplifica
 Then, $T_{out}$ is simplified in all complex intervals that remained in $C$.
 After the simplification, the complexity is evaluated again and the improvement in comparison with the previous complexity is computed.
 The iterative simplification ends when the improvement after an iteration $\Delta c$ drops below a user-specified threshold $\epsilon$.
+
+To address the correctness issue, which is raised by the smoothing simplification, we provide the user also with non-smoothing simplification using Douglas-Peucker algorithm~\cite{visvalingam1990douglas} which preserves original positions.
+Generally, the non-smoothing simplification employs schemes presented in Algorithm~\ref{alg:simplify} and Algorithm~\ref{alg:auto-simplify}.
+Only small modifications to the simplification data structure ($S$) and new complexity measure $c_{DP}(x)$ were needed due to the nature of the Douglas-Peucker algorithm which keeps only a subset of its input positions.
+We present only the new complexity measure since the other changes are trivial.
+The complexity $c_{DP}(x)$ is defined as:
+\begin{equation}
+  c_{DP}(x) = \sum_{s \in N_{DP}(T, x, \nu)}{\frac{|s|}{|P_e - P_s|}},
+\label{eq:complexity-dp}
+\end{equation}
+where $N_{DP}(T, x, \nu)$ is a set of trajectory segments in the neighborhood of $x$ (see Equation~\ref{eq:complexity}), and $P_s$ and $P_e$ are start and end points in that neighborhood.
+Both simplification approaches were evaluated by the domain experts.
+They concluded that, although the smoothing simplification is superior in the ability to provide results that are easy to understand using visualization, it is necessary for them to use the non-smoothing simplification to confirm their assumptions that were made using the smoothing variant.

@@ -282,8 +282,8 @@ The tunnel is colored with respect to the hydrophobicity of the surrounding amin
 
 \begin{figure}[htb]
 	\centering
-  \includegraphics[width=1\linewidth]{img/tunnel.png}
-  \caption{\label{fig:tunnel} Small ligand (green) passing through a tunnel represented by the transparent surface. The surface encloses the available empty space along the tunnel centerline and is colored with respect to the hydrophobicity of the surrounding amino acids (hydrophobic -- red, hydrophylic -- blue, neutral -- violet). The active site is located in the left ending of the tunnel.}
+  \includegraphics[width=1\linewidth]{img/tunnel2.png}
+  \caption{\label{fig:tunnel} Small ligand (green) passing through a tunnel represented by the transparent surface. The surface encloses the  empty space along the tunnel centerline and is colored with respect to the hydrophobicity of the surrounding amino acids (hydrophobic -- red, hydrophylic -- blue, neutral -- violet). The active site is located in the left ending of the tunnel.}
 \end{figure}
 
 Other approaches, such as MoMA-LigPath~\cite{Devaurs}, aim at simulating the ligand transportation itself.
@@ -366,7 +366,9 @@ Nevertheless, they focus on a single tunnel instance and do not provide the mean
 \section*{Problem Description and Input Data}
 When studying long molecular dynamics simulations, the researchers have to face namely the following high-level tasks:
 \begin{itemize}
-\item Detect the part of the simulation where the ligand enters the protein and finally reaches the active site.
+\item Detect the part of the simulation where the ligand enters the protein and
+%finally
+reaches the active site.
 \item Explore this route in detail and detect its bottlenecks.
 \end{itemize}
 In consequence, these steps are performed in order to reveal the parts of the trajectory where the ligand gets stuck.
@@ -398,7 +400,7 @@ Therefore, only a fraction of the trajectory captures its transportation to the 
 
 \begin{figure}[t!]
 	\centering
-  \includegraphics[width=0.95\linewidth]{img/lig_movement.png}
+  \includegraphics[width=0.925\linewidth]{img/lig_movement.png}
   \caption{\label{fig:lig_movement} Ligand trajectory (gray) for a simulation containing $50.000$ time steps. The protein chain is depicted in blue.}
 \end{figure}
 
@@ -582,7 +584,7 @@ The stacked plots are also interactively interconnected and the selection in Sca
 \begin{figure}[tb]
 	\centering
   \includegraphics[width=0.95\linewidth]{img/scatterplot.png}
-  \caption{\label{fig:scatterplot} Scatterplot matrix depicting time vs. distance and time vs. speed properties for a sequence of 500 time steps before (up) and after (down) smoothing \textcolor{blue}{by the sliding window function}.}
+  \caption{\label{fig:scatterplot} Scatterplot matrix depicting time vs. distance and time vs. speed properties for a sequence of 500 time steps before (up) and after (down) smoothing.}
 \end{figure}
 
 \begin{figure*}[htb]
@@ -630,7 +632,7 @@ The biochemists selected the first part of the simulation consisting from circa 
 From this point the biochemists continued to more detailed exploration using brushing and linking in other three views -- namely using the 3D, scatterplot, and bar chart views.
 Each of these views provides slightly different representation of the data thus allowed the biochemists to perform different operations.
 
-For instance, by using the scatterplot set to show the ligand distance from the active site over time (see Figure~\ref{fig:case_a}) we immediately revealed that the ligand was actually near to the protein surface (represented by high peaks) in few additional times during this part of the simulation.
+For instance, by using the scatterplot set to show the ligand distance from the active site over time (see Figure~\ref{fig:case_all}(a)) we immediately revealed that the ligand was actually near to the protein surface (represented by high peaks) in few additional times during this part of the simulation.
 The same behavior can be actually observed also in the simulation overview (see Figure~\ref{fig:case_overview}) where these cases are highlighted by slim blue lines. 
 But these cases are much better visible in the scatterplot view.
 
@@ -652,29 +654,40 @@ The polarity of amino acids is closely related to their hydrophobicity -- hydrop
 The desired information can be retrieved using our exploration tool in many ways.
 Here we show one of the possible solutions used by our domain experts in the real test scenario.
 
-The biochemists first added another scatterplot showing the hydrophobicity profile along the ligand trajectory (see Figure~\ref{fig:case_b}).
-Since both scatterplots are interactively connected in real-time, the biochemists could select the low hydrophobicity values and immediately observe at which distance they are positioned with respect to the ligand trajectory over time (see Figure~\ref{fig:case_a}). 
+The biochemists first added another scatterplot showing the hydrophobicity profile along the ligand trajectory (see Figure~\ref{fig:case_all}(b)).
+Since both scatterplots are interactively connected in real-time, the biochemists could select the low hydrophobicity values and immediately observe at which distance they are positioned with respect to the ligand trajectory over time (see Figure~\ref{fig:case_all}(a)). 
+
+%\begin{figure}[tb]
+	%\centering
+	%\subfigure[]{\label{fig:case_a}\includegraphics[width=0.95\linewidth]{img/case_a.pdf}}
+	%\subfigure[]{\label{fig:case_b}\includegraphics[width=0.95\linewidth]{img/case_b.pdf}}
+	%\subfigure[]{\label{fig:case_c}\includegraphics[width=0.95\linewidth]{img/case_c.pdf}}
+	%\subfigure[]{\label{fig:case_d}\includegraphics[width=0.95\linewidth]{img/case_d.pdf}}
+	%\subfigure[]{\label{fig:case_e}\includegraphics[width=0.95\linewidth]{img/case_e.pdf}}
+  %\caption{
+  %\subref{fig:case_a},\subref{fig:case_e}~Distance of the ligand from the active site over time. 
+  %\subref{fig:case_b}~Hydrophobicity profile of the trajectory over time.
+  %\subref{fig:case_c},\subref{fig:case_d}~Hydrophobicity profile of the trajectory with respect to the distance.
+  %}
+%\end{figure}
 
 \begin{figure}[tb]
 	\centering
-	\subfigure[]{\label{fig:case_a}\includegraphics[width=0.95\linewidth]{img/case_a.pdf}}
-	\subfigure[]{\label{fig:case_b}\includegraphics[width=0.95\linewidth]{img/case_b.pdf}}
-	\subfigure[]{\label{fig:case_c}\includegraphics[width=0.95\linewidth]{img/case_c.pdf}}
-	\subfigure[]{\label{fig:case_d}\includegraphics[width=0.95\linewidth]{img/case_d.pdf}}
-	\subfigure[]{\label{fig:case_e}\includegraphics[width=0.95\linewidth]{img/case_e.pdf}}
+	\includegraphics[width=0.95\linewidth]{img/case_all.pdf}
   \caption{
-  \subref{fig:case_a},\subref{fig:case_e}~Distance of the ligand from the active site over time. 
-  \subref{fig:case_b}~Hydrophobicity profile of the trajectory over time.
-  \subref{fig:case_c},\subref{fig:case_d}~Hydrophobicity profile of the trajectory with respect to the distance.
+  (a), (e)~Distance of the ligand from the active site over time. 
+  (b)~Hydrophobicity profile of the trajectory over time.
+  (c), (d)~Hydrophobicity profile of the trajectory with respect to the distance.
   }
+	\label{fig:case_all}
 \end{figure} 
 
 The results confirmed the behavior common for most of the proteins, namely the fact that the part of the trajectory in greater distance from the active site (i.e., near to the surface) is surrounded mostly by hydrophilic amino acids.
 On the other hand, when the ligand reaches the inner part of the protein, it is surrounded by highly hydrophobic amino acids.
 
-However, as can be seen in Figure~\ref{fig:case_a}, there are few amino acids that are actually hydrophilic but located in the close vicinity to the active site. 
-In order to easily pinpoint these specific amino acids, the biochemists set the scatterplot to visualize the exact relationship between the distance and hydrophobicity (see Figure~\ref{fig:case_c}).
-By creating the selection in this view, the biochemists were able to easily pinpoint the part of the simulation closer to the active site which contained the hydrophilic amino acids (see Figure~\ref{fig:case_d}).
+However, as can be seen in Figure~\ref{fig:case_all}(a), there are few amino acids that are actually hydrophilic but located in the close vicinity to the active site. 
+In order to easily pinpoint these specific amino acids, the biochemists set the scatterplot to visualize the exact relationship between the distance and hydrophobicity (see Figure~\ref{fig:case_all}(c)).
+By creating the selection in this view, the biochemists were able to easily pinpoint the part of the simulation closer to the active site which contained the hydrophilic amino acids (see Figure~\ref{fig:case_all}(d)).
 
 As the next step, the biochemists were interested in seeing which amino acids are actually responsible for the described behavior.
 For this reason they utilized the bar chart view containing the amino acid graph (see Figure~\ref{fig:case_hydro_vs_dist_bar}).
@@ -749,28 +762,41 @@ Finally, the overview of the trajectory of TCP--295 suggests that the ligand was
 
 The simulation overview, however, provides only general information about ligand positions with respect to the protein surface.
 The interesting behavior can be revealed after depicting the distances from the active site using scatterplots.
-Here the biochemists immediately spotted that both TCP--294 and TCP--296 were evidently in a close vicinity to the active site during the last part of the simulation (see Figure~\ref{fig:tcp3_dist_time_average_294}~and~\ref{fig:tcp3_dist_time_average_296}), while TCP--295 does not exhibit any significant affinity towards the active site.
+Here the biochemists immediately spotted that both TCP--294 and TCP--296 were evidently in a close vicinity to the active site during the last part of the simulation (see Figures~\ref{fig:tcp3_distances}(a)~and~\ref{fig:tcp3_distances}(c)), while TCP--295 does not exhibit any significant affinity towards the active site.
+
+%\begin{figure}[tb]
+	%\centering
+	%\subfigure[]{\label{fig:tcp3_dist_time_average_294}\includegraphics[width=0.95\linewidth]{img/tcp3_dist_time_average_294.png}}
+	%\subfigure[]{\label{fig:tcp3_dist_time_average_295}\includegraphics[width=0.95\linewidth]{img/tcp3_dist_time_average_295.png}}
+	%\subfigure[]{\label{fig:tcp3_dist_time_average_296}\includegraphics[width=0.95\linewidth]{img/tcp3_dist_time_average_296.png}}
+  %\subfigure[]{\label{fig:tcp3_dist_stuckness_295}\includegraphics[width=0.95\linewidth]{img/tcp3_dist_stuckness_295.png}}
+	%
+  %\caption{
+  %\label{fig:tcp3_distances}
+  %Scatter plots showing the evolution of the distance from the active site for all three ligands over time:
+  %\subref{fig:tcp3_dist_time_average_294}~TCP--294,
+  %\subref{fig:tcp3_dist_time_average_295}~TCP--295, and
+  %\subref{fig:tcp3_dist_time_average_296}~TCP--296.
+  %\subref{fig:tcp3_dist_stuckness_295}~Scatterplot showing the relationship between the distance from the active site and the stuckness of the TCP--296 ligand.
+  %}
+%\end{figure}
 
 \begin{figure}[tb]
 	\centering
-	\subfigure[]{\label{fig:tcp3_dist_time_average_294}\includegraphics[width=0.95\linewidth]{img/tcp3_dist_time_average_294.png}}
-	\subfigure[]{\label{fig:tcp3_dist_time_average_295}\includegraphics[width=0.95\linewidth]{img/tcp3_dist_time_average_295.png}}
-	\subfigure[]{\label{fig:tcp3_dist_time_average_296}\includegraphics[width=0.95\linewidth]{img/tcp3_dist_time_average_296.png}}
-    \subfigure[]{\label{fig:tcp3_dist_stuckness_295}\includegraphics[width=0.95\linewidth]{img/tcp3_dist_stuckness_295.png}}
-	
+	\includegraphics[width=0.95\linewidth]{img/tcp3_case_all.pdf}
   \caption{
   \label{fig:tcp3_distances}
   Scatter plots showing the evolution of the distance from the active site for all three ligands over time:
-  \subref{fig:tcp3_dist_time_average_294}~TCP--294,
-  \subref{fig:tcp3_dist_time_average_295}~TCP--295, and
-  \subref{fig:tcp3_dist_time_average_296}~TCP--296.
-  \subref{fig:tcp3_dist_stuckness_295}~Scatterplot showing the relationship between the distance from the active site and the stuckness of the TCP--296 ligand.
+  (a)~TCP--294,
+  (b)~TCP--295, and
+  (c)~TCP--296.
+  (d)~Scatterplot showing the relationship between the distance from the active site and the stuckness of the TCP--296 ligand.
   }
-\end{figure} 
+\end{figure}
 
 In case of the TCP--294, the overview is mostly blue (indicating the ligand closeness to the surface) due to the fact that the site where this ligand binds is relatively shallow and close to the surface.
 TCP--295 reached the deeply buried active site first and hence filled the empty space around it.
-This can be seen either from the distance scatterplots (see Figure~\ref{fig:tcp3_dist_time_average_294}~and~\ref{fig:tcp3_dist_time_average_296}) or directly from the 3D view (see Figure~\ref{fig:tcp3_3D}).
+This can be seen either from the distance scatterplots (see Figures~\ref{fig:tcp3_distances}(a)~and~\ref{fig:tcp3_distances}(c)) or directly from the 3D view (see Figure~\ref{fig:tcp3_3D}).
 %First, obviously distance of TCP--295 from active site dropped much sooner. 
 %Second, in closeup (see Figure~\ref{fig:tcp3_distance_comparison}) we can see that the real distance are  different.  
 
@@ -791,15 +817,15 @@ Nevertheless, some additional observations revealing more details about the simu
 %This corresponds to the time when the TCP--294 started to head towards the active site (see Figure~\ref{fig:tcp3_dist_time_average_294}).
 
 When exploring molecular simulations containing a ligand, one of the most important tasks is to determine the ability of protein active site to bind the given ligand.
-In this particular case the biochemists were able to easily estimate the ability of the active site to bind TCP--296 and TCP--294 directly from the distance scatterplots (see Figure~\ref{fig:tcp3_dist_time_average_294}~and~\ref{fig:tcp3_dist_time_average_296}).
+In this particular case the biochemists were able to easily estimate the ability of the active site to bind TCP--296 and TCP--294 directly from the distance scatterplots (see Figures~\ref{fig:tcp3_distances}(a)~and~\ref{fig:tcp3_distances}(c)).
 It is clearly visible that both ligands were in the vicinity of the active site for a long time and they did not left the site anymore.  
 Nevertheless, in more complicated cases the biochemists can use a scatterplot showing the relationship between the distance from the active site and the stuckness of the ligand.
-For instance, in case of TCP--296 (see Figure~\ref{fig:tcp3_dist_stuckness_295}) it is easy to confirm that the ligand was highly oscillating (got stuck) in a close vicinity of the active site.
+For instance, in case of TCP--296 (see Figure~\ref{fig:tcp3_distances}(d)) it is easy to confirm that the ligand was highly oscillating (got stuck) in a close vicinity of the active site.
 On the other hand, it can be also seen that with the growing distance from the active site the stuckness ratio is lower.
 This suggests that the active site is highly suitable for the given ligand and there is no other place towards which the ligand would exhibit any significant affinity.
 %This is even more obvious when showing both attributes in single plot.
 
-Finally, as can be seen in the distance scatterplot (see Figure~\ref{fig:tcp3_dist_time_average_294}~and~\ref{fig:tcp3_dist_time_average_296}), both TCP--294 and TCP--296 entered the protein active site during a short period of time and never left it afterwards.
+Finally, as can be seen in the distance scatterplot (see Figures~\ref{fig:tcp3_distances}(a)~and~\ref{fig:tcp3_distances}(c)), both TCP--294 and TCP--296 entered the protein active site during a short period of time and never left it afterwards.
 At this point the biochemists wanted to explore this particular moment in more detail.
 Our tool proved to be highly suitable for such use case since all views are interactively linked together.
 Therefore, the biochemists can, for instance, easily select a given part of simulation in the scatterplot and immediately observe the ligand transportation through the protein molecule in 3D (see Figure~\ref{fig:path}).
