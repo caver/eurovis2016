@@ -139,9 +139,10 @@ Then, $T_{out}$ is simplified in all complex intervals that remained in $C$.
 After the simplification, the complexity is evaluated again and the improvement in comparison with the previous complexity is computed.
 The iterative simplification ends when the improvement after an iteration $\Delta c$ drops below a user-specified threshold $\epsilon$.
 
+
 To address the correctness issue, which may be raised by the smoothing simplification, we provide also non-smoothing simplification employing Douglas-Peucker algorithm~\cite{visvalingam1990douglas} which preserves original positions of trajectory vertices.
-Generally, the non-smoothing simplification employs schemes presented in Algorithms~\ref{alg:simplify}~and~\ref{alg:auto-simplify}.
-Only small modifications to the simplification data structure ($S$) and a new complexity measure $c_{DP}(x)$ were needed due to the nature of the Douglas-Peucker algorithm which keeps only a subset of its input positions.
+Generally, the non-smoothing simplification utilizes schemes presented in Algorithm~\ref{alg:simplify} and Algorithm~\ref{alg:auto-simplify}.
+Only small modifications to the simplification data structure ($S$) and new complexity measure $c_{DP}(x)$ were needed due to the nature of the Douglas-Peucker algorithm which keeps only a subset of the input positions.
 We present only the new complexity measure since the other changes are trivial.
 The complexity $c_{DP}(x)$ is defined as:
 \begin{equation}
