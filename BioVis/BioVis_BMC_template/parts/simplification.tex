@@ -123,7 +123,8 @@ Our typical setting for $\nu$ is 2~\angstrom\ which is an experimentally obtaine
 \end{algorithm}
 
 \begin{figure}
-	\includegraphics[width=0.95\linewidth]{img/complexity.png}
+	%\includegraphics[width=0.95\linewidth]{img/complexity.png}
+	\includegraphics[width=0.95\linewidth]{img/complexity.pdf}
 \caption{Evaluation of the complexity of a trajectory $T$ in point $x$.
 The complexity $c(x)$ is determined by tuples $(u, v)$ and $(v, w)$, \ie their angles $\alpha$ and $\beta$, as the segments $u$, $v$, and $w$ lie in the neighborhood of $x$ (red).
 The neighborhood of $x$ contains all points that are closer (along $T$) to $x$ than to $\nu$.}
@@ -138,9 +139,10 @@ Then, $T_{out}$ is simplified in all complex intervals that remained in $C$.
 After the simplification, the complexity is evaluated again and the improvement in comparison with the previous complexity is computed.
 The iterative simplification ends when the improvement after an iteration $\Delta c$ drops below a user-specified threshold $\epsilon$.
 
-To address the correctness issue, which is raised by the smoothing simplification, we provide the user also with non-smoothing simplification using Douglas-Peucker algorithm~\cite{visvalingam1990douglas} which preserves original positions.
-Generally, the non-smoothing simplification employs schemes presented in Algorithm~\ref{alg:simplify} and Algorithm~\ref{alg:auto-simplify}.
-Only small modifications to the simplification data structure ($S$) and new complexity measure $c_{DP}(x)$ were needed due to the nature of the Douglas-Peucker algorithm which keeps only a subset of its input positions.
+
+To address the correctness issue, which may be raised by the smoothing simplification, we provide also non-smoothing simplification employing Douglas-Peucker algorithm~\cite{visvalingam1990douglas} which preserves original positions of trajectory vertices.
+Generally, the non-smoothing simplification utilizes schemes presented in Algorithm~\ref{alg:simplify} and Algorithm~\ref{alg:auto-simplify}.
+Only small modifications to the simplification data structure ($S$) and new complexity measure $c_{DP}(x)$ were needed due to the nature of the Douglas-Peucker algorithm which keeps only a subset of the input positions.
 We present only the new complexity measure since the other changes are trivial.
 The complexity $c_{DP}(x)$ is defined as:
 \begin{equation}
@@ -149,4 +151,4 @@ The complexity $c_{DP}(x)$ is defined as:
 \end{equation}
 where $N_{DP}(T, x, \nu)$ is a set of trajectory segments in the neighborhood of $x$ (see Equation~\ref{eq:complexity}), and $P_s$ and $P_e$ are start and end points in that neighborhood.
 Both simplification approaches were evaluated by the domain experts.
-They concluded that, although the smoothing simplification is superior in the ability to provide results that are easy to understand using visualization, it is necessary for them to use the non-smoothing simplification to confirm their assumptions that were made using the smoothing variant.
+They concluded that, although the smoothing simplification is superior thanks to the ability to provide results that are easy to understand using visualization, it is also important for them to use the non-smoothing simplification to confirm their assumptions that were made when visualizing the smoothed variant.
